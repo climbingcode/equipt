@@ -1,11 +1,8 @@
 var Route = ReactRouter.Route;
 
 this.Routes = (
-	<Route name="home" handler={App} path="/">
-		<Route/>
+	<Route name="app" handler={App} path="/">
+		<Route name="login" handler={Login} path="login"/>
+		<Route name="signup" handler={Signup} path="signup"/>
 	</Route>
 ), document.getElementById('root');
-
-ReactRouter.run(Routes, function (Handler) {
-  ReactDOM.render(<Handler/>, document.getElementById('app'));
-});
