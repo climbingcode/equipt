@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705035134) do
+ActiveRecord::Schema.define(version: 20160706031147) do
 
   create_table "availiabilities", force: :cascade do |t|
     t.integer "user_id"
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20160705035134) do
     t.integer  "years_old"
     t.float    "price_per_day"
     t.float    "price_per_week"
-    t.float    "desposit_amount"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.float    "desposit_amount", default: 0.0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["user_id"], name: "index_equipment_on_user_id"
   end
 
@@ -39,9 +39,18 @@ ActiveRecord::Schema.define(version: 20160705035134) do
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.string   "file"
-    t.boolean  "primary"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "primary",        default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  create_table "owners_usages", force: :cascade do |t|
+    t.integer  "equipment_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["equipment_id"], name: "index_owners_usages_on_equipment_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -60,10 +69,11 @@ ActiveRecord::Schema.define(version: 20160705035134) do
     t.date     "dropoff_date"
     t.float    "pick_up_time"
     t.float    "rental_total"
-    t.float    "rental_deposit"
-    t.boolean  "rental_returned"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.float    "rental_deposit",   default: 0.0
+    t.boolean  "rental_completed", default: false
+    t.boolean  "rental_comfirmed", default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["equipment_id"], name: "index_rentals_on_equipment_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end

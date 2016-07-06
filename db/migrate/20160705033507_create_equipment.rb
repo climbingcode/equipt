@@ -10,7 +10,7 @@ class CreateEquipment < ActiveRecord::Migration[5.0]
       t.integer :years_old
       t.float :price_per_day
       t.float :price_per_week
-      t.float :desposit_amount
+      t.float :desposit_amount, default: 0
       t.timestamps
     end
   end

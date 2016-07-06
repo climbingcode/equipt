@@ -98,7 +98,7 @@ def create_rentals(equipment, user)
 			pick_up_time: (6..22).to_a.sample,
 			rental_total: (20..500).to_a.sample,
 			rental_deposit: (10..100).to_a.sample,
-			rental_returned: [true, false].sample
+			rental_completed: [true, false].sample
 		)
 
 	end

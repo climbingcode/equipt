@@ -7,8 +7,9 @@ class CreateRentals < ActiveRecord::Migration[5.0]
       t.date :dropoff_date
       t.float :pick_up_time
       t.float :rental_total
-      t.float :rental_deposit
-      t.boolean :rental_returned
+      t.float :rental_deposit, default: 0 
+      t.boolean :rental_completed, default: false
+      t.boolean :rental_comfirmed, default: false
       t.timestamps
     end
   end

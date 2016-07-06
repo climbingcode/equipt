@@ -4,7 +4,7 @@ class CreateImages < ActiveRecord::Migration[5.0]
       t.integer :imageable_id
       t.string :imageable_type
       t.string :file
-      t.boolean :primary
+      t.boolean :primary, default: true
       t.timestamps
     end
   end
