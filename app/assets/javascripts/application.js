@@ -20,5 +20,4 @@
 //= require flux
 //= require eventemitter
 //= require components
-//= require react-rails-hot-loader
 //= require_tree .

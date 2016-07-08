@@ -6,14 +6,12 @@ class Login extends React.Component {
 
 	login(e) {
 		e.preventDefault();
-
-		var user = {
+		
+		newSession({
 			email: this.refs.email.value,
 			password: this.refs.password.value,
 			passwordConfirmation: this.refs.passwordConfirmation.value
-		};
-
-		newCurrentUser(user);
+		});
 	}
 
 	render() {

@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   match '/', to: 'home#index', via: 'GET'
   match '/:path', to: 'home#index', via: 'GET'
 
+  resources :session, only: ['create', 'destroy']
+
 end

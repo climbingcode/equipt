@@ -1,3 +1,4 @@
+//= require ./config/Utils
 //= require ./config/Api
 //= require ./config/Dispatcher
 //= require_tree ./stores

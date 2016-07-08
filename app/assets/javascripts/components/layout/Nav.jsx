@@ -3,7 +3,7 @@ const Link = ReactRouter.Link;
 class Nav extends React.Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 	}
 
 	render() {

@@ -1,10 +1,10 @@
-function newCurrentUser(newUser) {
+function newSession(userData) {
 
-	API.get('/session/new').then(
-		(newUser) => {
+	API.post('/session', userData).then(
+		(user) => {
 			AppDispatcher.handleViewAction({
 				type: 'UPDATE_CURRENT_USER',
-				newUser: newUser
+				newUser: user
 			});
 		}, 
 		(err) => {
