@@ -31,7 +31,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'react-rails', '~>1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'flux-rails-assets'
 gem 'autoprefixer-rails'
+gem 'browserify-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -41,6 +43,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'faker'
+  gem 'react-rails-hot-loader'
 end
 
 group :development do

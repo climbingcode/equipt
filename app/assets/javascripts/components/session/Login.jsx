@@ -4,14 +4,32 @@ class Login extends React.Component {
 		super(props);
 	}
 
+	login(e) {
+		e.preventDefault();
+
+		var user = {
+			email: this.refs.email.value,
+			password: this.refs.password.value,
+			passwordConfirmation: this.refs.passwordConfirmation.value
+		};
+
+		newCurrentUser(user);
+	}
+
 	render() {
 		return (
-			<h1>
-				Login<br/>
-				Login<br/>
-				Login<br/>
-				Login<br/>
-			</h1>
+			<form onSubmit={this.login.bind(this)}>
+				<label htmlFor="email">Email</label>
+				<input type="text" ref="email" className="form-control"/>
+				<br/>
+				<label htmlFor="password">Password</label>
+				<input type="password" ref="password" className="form-control"/>
+				<br/>
+				<label htmlFor="password">Password</label>
+				<input type="password" ref="passwordConfirmation" className="form-control"/>
+				<br/>
+				<button className="btn btn-success pull-right" type="submit">Login</button>
+			</form>
 		)
 	}
 

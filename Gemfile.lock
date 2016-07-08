@@ -45,12 +45,15 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    browserify-rails (3.1.0)
+      railties (>= 4.0.0, < 5.1)
+      sprockets (>= 3.5.2)
     builder (3.2.2)
     byebug (9.0.5)
-    coderay (1.1.0)
+    coderay (1.1.1)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -61,13 +64,20 @@ GEM
     concurrent-ruby (1.0.2)
     connection_pool (2.2.0)
     debug_inspector (0.0.2)
+    em-websocket (0.5.1)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
+    eventmachine (1.2.0.1)
     execjs (2.7.0)
-    faker (1.6.3)
+    faker (1.6.4)
       i18n (~> 0.5)
-    ffi (1.9.10)
+    ffi (1.9.13)
+    flux-rails-assets (2.1.0)
+      railties (>= 3.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    http_parser.rb (0.6.0)
     i18n (0.7.0)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -95,7 +105,7 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     pkg-config (1.1.7)
-    pry (0.10.1)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
@@ -137,6 +147,10 @@ GEM
       execjs
       rails (>= 3.2)
       tilt
+    react-rails-hot-loader (0.6.0)
+      em-websocket
+      rails
+      react-rails
     react-router-rails (0.13.3.2)
       rails (>= 3.1)
       react-rails (~> 1.4.0)
@@ -167,10 +181,11 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
-    web-console (3.3.0)
-      activemodel (>= 4.2)
+    web-console (3.3.1)
+      actionview (>= 5.0)
+      activemodel (>= 5.0)
       debug_inspector
-      railties (>= 4.2)
+      railties (>= 5.0)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -182,9 +197,11 @@ DEPENDENCIES
   autoprefixer-rails
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
+  browserify-rails
   byebug
   coffee-rails (~> 4.2)
   faker
+  flux-rails-assets
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -192,6 +209,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0)
   react-rails (~> 1.4.0)
+  react-rails-hot-loader
   react-router-rails (~> 0.13.3.2)
   sass-rails (~> 5.0)
   spring

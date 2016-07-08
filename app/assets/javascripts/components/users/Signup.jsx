@@ -6,12 +6,10 @@ class Signup extends React.Component {
 
 	render() {
 		return (
-			<h1>
-				signup<br/>
-				signup<br/>
-				signup<br/>
-				signup<br/>
-			</h1>
+			<form>
+				<label for="email">Email</label>
+				<input className="form-control" name="email"/>
+			</form>
 		)
 	}
 	
