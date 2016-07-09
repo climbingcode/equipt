@@ -1,11 +1,11 @@
-const NEW_SESSION = 'UPDATE_CURRENT_USER';
+const CREATE_USER = 'CREATE_USER';
 
-function newSession(userData) {
-
-	API.post('/session', userData).then(
+function createUser(userData) {
+	
+	API.post('/users', userData).then(
 		(user) => {
 			AppDispatcher.handleViewAction({
-				type: NEW_SESSION,
+				type: CREATE_USER,
 				newUser: user
 			});
 		}, 
@@ -14,4 +14,4 @@ function newSession(userData) {
 		}
 	);
 
-}
+};

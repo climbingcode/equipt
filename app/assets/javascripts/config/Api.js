@@ -2,7 +2,7 @@ const API = {
 
 	get: function(url) {
 		return new Promise((resolve, reject) => {
-			$.get(url).complete((res) => {
+			this.call(url, 'GET', data).then((res) => {
 				this.handleRequest(res, resolve, reject);
 			});
 		});
@@ -10,7 +10,7 @@ const API = {
 
 	post: function(url, data) {
 		return new Promise((resolve, reject) => {
-			$.post(url, data).complete((res) => {
+			this.call(url, 'POST', data).then((res) => {
 				this.handleRequest(res, resolve, reject);
 			});
 		});
@@ -18,11 +18,7 @@ const API = {
 
 	put: function(url, data) {
 		return new Promise((resolve, reject) => {
-			$.ajax({
-				url: url,
-				data: data,
-				type: 'PUT'
-			}).complete((res) => {
+			this.call(url, 'PUT', data).then((res) => {
 				this.handleRequest(res, resolve, reject);
 			});
 		});
@@ -30,12 +26,28 @@ const API = {
 
 	delete: function(url) {
 		return new Promise((resolve, reject) => {
-			$.ajax({
-				url: url,
-				type: 'DELETE'
-			}).complete((res) => {
+			this.call(url, 'DELETE', data)((res) => {
 				this.handleRequest(res, resolve, reject);
 			});
+		});
+	},
+
+	call: function(url, method, data) {
+		return new Promise((resolve) => {
+			
+			var ajaxObj = {
+				url: url,
+				type: 'POST',
+				dataType: 'json',
+  				contentType: 'application/json'
+			};
+
+			if (data) ajaxObj.data = JSON.stringify(data);
+
+			$.ajax(ajaxObj).complete((res) => {
+				resolve(res);
+			});
+
 		});
 	},
 
@@ -43,7 +55,7 @@ const API = {
 		if (res.status === 404 || res.status === 400) {
 			reject(res);
 		} else {
-			resolve(formatKeys(res.responseJSON, 'CAMEL_CASE'));
+			resolve(formatKeys(res, 'CAMEL_CASE'));
 		}
 	}
 

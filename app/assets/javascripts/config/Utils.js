@@ -9,7 +9,7 @@ String.prototype.toCamelCase = function(){
 };
 
 // to underCase
- function formatKeys(oldObj, changeTo) {
+function formatKeys(oldObj, changeTo) {
 
 	var newObj = {};
 		

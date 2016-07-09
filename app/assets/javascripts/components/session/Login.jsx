@@ -1,22 +1,17 @@
-class Login extends React.Component {
+class Login extends FormComponent {
 
 	constructor(props) {
 		super(props);
 	}
 
-	login(e) {
-		e.preventDefault();
-		
-		newSession({
-			email: this.refs.email.value,
-			password: this.refs.password.value,
-			passwordConfirmation: this.refs.passwordConfirmation.value
-		});
+	submit(formData) {
+		// submit functionality handled in FormComponent.submit
+		newSession(formData);
 	}
 
 	render() {
 		return (
-			<form onSubmit={this.login.bind(this)}>
+			<form onSubmit={this.submit.bind(this)}>
 				<label htmlFor="email">Email</label>
 				<input type="text" ref="email" className="form-control"/>
 				<br/>
