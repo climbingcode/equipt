@@ -55,7 +55,11 @@ const API = {
 		if (res.status === 404 || res.status === 400) {
 			reject(res);
 		} else {
-			resolve(formatKeys(res, 'CAMEL_CASE'));
+			if (res.errors) {
+				hasErrors(formatKeys(res.errors, 'CAMEL_CASE'));
+			} else {
+				resolve(formatKeys(res, 'CAMEL_CASE'));
+			}
 		}
 	}
 
@@ -63,9 +67,18 @@ const API = {
 
 // Convert data to under case before send
 
+function getHeader() {
+	if (window.FB && window.FB.getAccessToken()) {
+		return window.FB.getAccessToken();
+	} else {
+		return '123';
+	}
+};
+
 $.ajaxSetup({
 	beforeSend: (res, xhr) => {
-		return xhr.data = xhr.data.toUnderCase();
+		// set Auth Header
+		res.setRequestHeader('Authenticate', getHeader());
 	}
 });
 

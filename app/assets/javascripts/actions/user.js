@@ -1,13 +1,12 @@
-const CREATE_USER = 'CREATE_USER';
-
 function createUser(userData) {
 	
 	API.post('/users', userData).then(
 		(user) => {
 			AppDispatcher.handleViewAction({
-				type: CREATE_USER,
+				type: Constants.NEW_SESSION,
 				newUser: user
 			});
+			hasErrors(null);
 		}, 
 		(err) => {
 			console.log(err.responseText);

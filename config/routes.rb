@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	
+	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  match '/', to: 'home#index', via: 'GET'
-  match '/:path', to: 'home#index', via: 'GET'
+	match '/', to: 'home#index', via: 'GET'
+	match '/:path', to: 'home#index', via: 'GET'
 
-  resources :users
-  resources :session, only: ['create', 'destroy']
+	match '/auth/facebook', to: 'session#facebook_auth', via: 'POST'
+
+	resources :users
+	resources :session, only: ['create', 'destroy']
 
 end

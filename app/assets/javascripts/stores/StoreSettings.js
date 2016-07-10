@@ -1,3 +1,5 @@
+const CHANGE_EVENT = 'change';
+
 const StoreSettings = {
 
 	emitChange() {

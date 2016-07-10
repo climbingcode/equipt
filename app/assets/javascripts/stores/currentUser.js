@@ -1,5 +1,3 @@
-const CHANGE_EVENT = 'change';
-
 var _currentUser = {};
 
 const CurrentUserStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
@@ -12,10 +10,10 @@ const CurrentUserStore = Object.assign({}, EventEmitter.prototype, StoreSettings
 
 AppDispatcher.register(function(action) {
   
-  var {type, newUser} = action.payload;
+  	var {type, newUser} = action.payload;
   
-  switch(type) {
-		case 'UPDATE_CURRENT_USER':
+ 	switch(type) {
+		case Constants.NEW_SESSION:
 			_currentUser = newUser;
             CurrentUserStore.emitChange();
 		break; 
