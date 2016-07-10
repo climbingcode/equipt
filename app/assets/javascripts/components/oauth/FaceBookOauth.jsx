@@ -8,11 +8,14 @@ class FaceBookOauth extends React.Component {
 	      		cookie  : true
 	    	} 
 		}
+		this.disabled = true;
 	}
 
 	componentWillMount() {
 		window.fbAsyncInit = () => {
     		FB.init(this.state.FB);
+    		this.disabled = false;
+    		this.forceUpdate();
   		};
 	}
 
@@ -20,14 +23,13 @@ class FaceBookOauth extends React.Component {
 		if (FB.getAuthResponse()) return;
 		FB.login(function(res) {
 			faceBookLogin();
-			console.log(res);
 		});	
 	}
 
 	render() {
 		return(
 			<div className="oauth-container">
-				<button className="btn btn-success" onClick={this.login}>Login With Facebook</button>
+				<button className="btn btn-success" disabled={this.disabled} onClick={this.login}>Login With Facebook</button>
 				<hr/>
 			</div>
 		)
