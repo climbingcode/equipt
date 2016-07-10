@@ -4,9 +4,8 @@ class FaceBookOauth extends React.Component {
 		super(props);
 		this.state = {
 			FB: {
-	      		appId      : '734059966732084',
-	      		xfbml      : true,
-	      		version    : 'v2.6'
+	      		appId 	: Keys.FACEBOOK_APP_ID,
+	      		cookie  : true
 	    	} 
 		}
 	}

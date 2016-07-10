@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706031147) do
+ActiveRecord::Schema.define(version: 20160710010633) do
 
   create_table "availiabilities", force: :cascade do |t|
     t.integer "user_id"
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20160706031147) do
     t.string   "state"
     t.string   "zip"
     t.string   "country"
+    t.integer  "home_phone"
+    t.integer  "cell_phone"
     t.float    "lng"
     t.float    "lat"
     t.string   "password"
@@ -95,6 +97,10 @@ ActiveRecord::Schema.define(version: 20160706031147) do
     t.boolean  "restricted_availiability"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end

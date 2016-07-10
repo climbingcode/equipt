@@ -37,10 +37,13 @@ def create_users
 	5.times do |i|
 
 		# Create Users
+		email = Faker::Internet.email
+
 		user = 	User.create(
 			firstname: Faker::Name.first_name,
 			lastname: Faker::Name.last_name,
-			email: Faker::Internet.email,
+			email: email,
+			email_confirmation: email,
 			username: Faker::Internet.user_name,
 			street_address: Faker::Address.street_address,
 			city: Faker::Address.city,
@@ -54,13 +57,13 @@ def create_users
 			password_confirmation: 'password'
 		)
 
-		create_equipments(user)
+		create_equipment(user) if user.save!
 
 	end
 
 end
 
-def create_equipments(user)
+def create_equipment(user)
 
 	@rentable_equipment_amount.sample.times do |i|
 
@@ -79,7 +82,7 @@ def create_equipments(user)
 			desposit_amount: (10..100).to_a.sample
 		)
 
-		create_rentals(equipment, user)
+		create_rentals(equipment, user) if equipment.save!
 
 	end
 
