@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
 	has_many :equipments
 	has_many :rentals
+  has_many :api_keys
 
 	# oAuth
 	def self.from_omniauth(auth)
@@ -22,5 +23,8 @@ class User < ActiveRecord::Base
 		end
 	end
 
+  def session_api_key
+    api_keys.first_or_create
+  end
 
 end

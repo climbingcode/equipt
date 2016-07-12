@@ -3,7 +3,8 @@ function faceBookLogin() {
 	.then(function(user) {
 		AppDispatcher.handleViewAction({
 			type: Constants.NEW_SESSION,
-			newUser: user
+			user: user
 		});
+		hasErrors(null);
 	});
 };

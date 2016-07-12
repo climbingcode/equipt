@@ -3,9 +3,9 @@ class SessionController < ApplicationController
 	protect_from_forgery with: :exception
 
 	def create 
-		user = User.find_by_username(params[:email])
+		user = User.find_by_email(params[:email])
 		if user && user.authenticate(params[:password])
-			render json: user, status: 200
+			render json: { user: user, api_key: user.session_api_key }, status: 200
 		else 
 			render json: { errors: 
 							{ notice: "Incorrect credentials, try again!" } 
@@ -15,7 +15,7 @@ class SessionController < ApplicationController
 
 	def facebook_auth 
 		user = User.from_omniauth(env["omniauth.auth"])
-    	render json: user, status: 200
+    	render json: { user: user, api_key: user.session_api_key }, status: 200
 	end
 
 end

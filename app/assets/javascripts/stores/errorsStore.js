@@ -1,4 +1,4 @@
-var _errors = {};
+var _errors = null;
 
 const ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 

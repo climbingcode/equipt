@@ -2,7 +2,7 @@ const API = {
 
 	get: function(url) {
 		return new Promise((resolve, reject) => {
-			this.call(url, 'GET', data).then((res) => {
+			this.call(url, 'GET').then((res) => {
 				this.handleRequest(res, resolve, reject);
 			});
 		});
@@ -26,20 +26,24 @@ const API = {
 
 	delete: function(url) {
 		return new Promise((resolve, reject) => {
-			this.call(url, 'DELETE', data)((res) => {
+			this.call(url, 'DELETE')((res) => {
 				this.handleRequest(res, resolve, reject);
 			});
 		});
 	},
 
 	call: function(url, method, data) {
+		
 		return new Promise((resolve) => {
-			
+		
 			var ajaxObj = {
 				url: url,
-				type: 'POST',
+				type: method,
 				dataType: 'json',
-  				contentType: 'application/json'
+  				contentType: 'application/json',
+				beforeSend: (request) => {
+                	request.setRequestHeader('AUTHORIZATION', AuthStore.getApiKey());
+            	}
 			};
 
 			if (data) ajaxObj.data = JSON.stringify(data);
@@ -49,6 +53,7 @@ const API = {
 			});
 
 		});
+
 	},
 
 	handleRequest: function(res, resolve, reject) {
@@ -64,21 +69,4 @@ const API = {
 	}
 
 };
-
-// Convert data to under case before send
-
-function getHeader() {
-	if (window.FB && window.FB.getAccessToken()) {
-		return window.FB.getAccessToken();
-	} else {
-		return '123';
-	}
-};
-
-$.ajaxSetup({
-	beforeSend: (res, xhr) => {
-		// set Auth Header
-		res.setRequestHeader('Authenticate', getHeader());
-	}
-});
 
