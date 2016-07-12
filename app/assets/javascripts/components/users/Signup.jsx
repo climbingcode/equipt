@@ -31,16 +31,16 @@ class Signup extends FormComponent {
 					{ this.renderError.call(this, 'email') }
 					<br/>
 					<label htmlFor="email-confirmation">Email Confirmation</label>
-					<input className="form-control" ref="emailConfirmation"/>
-					{ this.renderError.call(this, 'emailConfirmation') }
+					<input className="form-control" ref="email_confirmation"/>
+					{ this.renderError.call(this, 'email_confirmation') }
 					<br/>
 					<label htmlFor="password">Password</label>
 					<input type="password" ref="password" className="form-control"/>
 					{ this.renderError.call(this, 'password') }
 					<br/>
 					<label htmlFor="password">Password</label>
-					<input type="password" ref="passwordConfirmation" className="form-control"/>
-					{ this.renderError.call(this, 'passwordConfirmation') }
+					<input type="password" ref="password_confirmation" className="form-control"/>
+					{ this.renderError.call(this, 'password_confirmation') }
 					<br/>
 					<button className="btn btn-success pull-right" type="submit">Sign up</button>
 				</form>

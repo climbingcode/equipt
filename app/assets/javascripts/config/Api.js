@@ -60,11 +60,7 @@ const API = {
 		if (res.status === 404 || res.status === 400) {
 			reject(res);
 		} else {
-			if (res.errors) {
-				hasErrors(formatKeys(res.errors, 'CAMEL_CASE'));
-			} else {
-				resolve(formatKeys(res, 'CAMEL_CASE'));
-			}
+			res.errors ? hasErrors(res.errors) : resolve(res);
 		}
 	}
 

@@ -8,6 +8,11 @@ String.prototype.toCamelCase = function(){
 	return this.replace(/(\_\w)/g, function(m){return m[1].toUpperCase();});
 };
 
+// capitalize 
+String.prototype.capitalize = function(){
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+	
 // to underCase
 function formatKeys(oldObj, changeTo) {
 
@@ -30,4 +35,4 @@ function formatKeys(oldObj, changeTo) {
 
 	return newObj;
 
-}
+};

@@ -23,8 +23,8 @@ class Login extends FormComponent {
 					{ this.renderError.call(this, 'password') }
 					<br/>
 					<label htmlFor="password">Password</label>
-					<input type="password" ref="passwordConfirmation" className="form-control"/>
-					{ this.renderError.call(this, 'passwordConfirmation') }
+					<input type="password" ref="password_confirmation" className="form-control"/>
+					{ this.renderError.call(this, 'password_confirmation') }
 					<br/>
 					<button className="btn btn-success pull-right" type="submit">Login</button>
 				</form>

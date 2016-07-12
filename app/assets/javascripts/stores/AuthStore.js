@@ -40,7 +40,7 @@ AppDispatcher.register(function(action) {
  	switch(type) {
 		case Constants.NEW_SESSION:
 			_currentUser = data.user;
-			AuthStore.setSession(data.apiKey);
+			AuthStore.setSession(data.api_key);
 			AuthStore.emitChange();
 		break;
 		case Constants.END_SESSION:
