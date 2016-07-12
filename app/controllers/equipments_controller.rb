@@ -1,6 +1,6 @@
-class EquipmentsController < ActionController::Base
+class EquipmentsController < ApplicationController
 
-	before_filter :restrict_access 
+	protect_from_forgery with: :exception
 
 	before_filter :ensure_authenticated_user
 

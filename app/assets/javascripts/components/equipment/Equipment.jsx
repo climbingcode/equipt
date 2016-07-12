@@ -4,6 +4,10 @@ class Equipment extends React.Component {
 		super(props);
 	}
 
+	componentWillMount() {
+		getEquipment();
+	}
+
 	render() {
 		return (
 			<div className="equiptment-wrapper">

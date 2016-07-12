@@ -1,10 +1,10 @@
 function createUser(userData) {
 	
 	API.post('/users', userData).then(
-		(user) => {
+		(data) => {
 			AppDispatcher.handleViewAction({
 				type: Constants.NEW_SESSION,
-				user: user
+				data: data
 			});
 			hasErrors(null);
 		}, 
