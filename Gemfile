@@ -40,6 +40,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'flux-rails-assets'
 gem 'autoprefixer-rails'
 gem 'browserify-rails'
+gem "font-awesome-rails"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

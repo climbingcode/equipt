@@ -1,9 +1,14 @@
-var _equipment = [];
+var _equipments = [];
+var	_equipment = {};
 
 const EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
+	getEquipments() {
+        return _equipments;
+	},
+
 	getEquipment() {
-        return _equipment;
+		return _equipment;	
 	}
 
 });
@@ -14,9 +19,13 @@ AppDispatcher.register(function(action) {
   	
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:
-			_equipment = data;
+			_equipments = data;
             EquipmentStore.emitChange();
 		break; 
+		case Constants.EQUIPMENT_SHOW:
+			_equipment = data;
+			EquipmentStore.emitChange();
+		break;
 	}
 
 });

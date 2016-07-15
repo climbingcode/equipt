@@ -11,15 +11,15 @@ const AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 	},
 
 	setSession(apiKey) {
-		sessionStorage['equiptSession'] = JSON.stringify(apiKey);
+		localStorage['equiptSession'] = JSON.stringify(apiKey);
 	},
 
 	getSession() {
-		return sessionStorage['equiptSession'];
+		return localStorage['equiptSession'];
 	},
 
 	deleteSession() {
-		sessionStorage['equiptSession'] = '';
+		localStorage['equiptSession'] = '';
 		_currentUser = null;
 	},
 

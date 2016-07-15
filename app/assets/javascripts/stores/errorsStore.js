@@ -1,20 +1,19 @@
-var _errors = null;
+var _errors = {};
 
 const ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
-	getData() {
+	getErrors() {
         return _errors;
-	}
+	},
 
 });
 
 AppDispatcher.register(function(action) {
   
-  	var {type, errors} = action.payload;
-  	
+  	var {type, data} = action.payload;
   	switch(type) {
 		case Constants.HAS_ERRORS:
-			_errors = errors || {};
+			_errors = data || {};
             ErrorsStore.emitChange();
 		break; 
 	}

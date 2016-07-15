@@ -1,4 +1,4 @@
-class EquipmentIndex extends React.Component {
+class EquipmentIndexView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -10,8 +10,9 @@ class EquipmentIndex extends React.Component {
 
 		for (var i = 0; i < this.props.equipment.length; i++) {
 			let equipment 	  = this.props.equipment[i];
-			let equipmentItem = <EquipmentItem 	key={`equipment_${equipment.id}`} 
-												equipment={equipment}/>;
+			let equipmentItem = <EquipmentItemPartial 
+									key={`equipment_${equipment.id}`} 
+									equipment={equipment}/>;
 			equipmentListing.push(equipmentItem);
 		}
 
@@ -20,6 +21,7 @@ class EquipmentIndex extends React.Component {
 				{equipmentListing}
 			</div>
 		)
+		
 	}
 
 

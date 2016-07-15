@@ -1,68 +1,74 @@
 const API = {
 
+	path: '/api',
+
 	get: function(url) {
 		return new Promise((resolve, reject) => {
-			this.call(url, 'GET').then((res) => {
-				this.handleRequest(res, resolve, reject);
+			this.send(url, 'GET')
+			.then((res) => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
 			});
 		});
 	},
 
 	post: function(url, data) {
 		return new Promise((resolve, reject) => {
-			this.call(url, 'POST', data).then((res) => {
-				this.handleRequest(res, resolve, reject);
+			this.send(url, 'POST', data)
+			.then((res) => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
 			});
 		});
 	},
 
 	put: function(url, data) {
 		return new Promise((resolve, reject) => {
-			this.call(url, 'PUT', data).then((res) => {
-				this.handleRequest(res, resolve, reject);
+			this.send(url, 'PUT', data).then((res) => {
+				
 			});
 		});
 	},
 
 	delete: function(url) {
 		return new Promise((resolve, reject) => {
-			this.call(url, 'DELETE')((res) => {
-				this.handleRequest(res, resolve, reject);
+			this.send(url, 'DELETE')((res) => {
+				
 			});
 		});
 	},
 
-	call: function(url, method, data) {
-		
-		return new Promise((resolve) => {
+	send: function(url, method, data) {
+
+		return new Promise((resolve, reject) => {
 		
 			var ajaxObj = {
-				url: url,
+				url: API.path + url,
 				type: method,
 				dataType: 'json',
-  				contentType: 'application/json',
+					contentType: 'application/json',
 				beforeSend: (request) => {
-                	request.setRequestHeader('AUTHORIZATION', AuthStore.getApiKey());
-            	}
+	            	request.setRequestHeader('AUTHORIZATION', AuthStore.getApiKey());
+	        	}
 			};
 
 			if (data) ajaxObj.data = JSON.stringify(data);
 
-			$.ajax(ajaxObj).complete((res) => {
-				resolve(res);
+			$.ajax(ajaxObj)
+			.success((res) => {
+				if (res.errors) hasErrors(res.errors);
+				else resolve(res);
+			})
+			.error((err) => {
+				if (err.status === 500) unauthorizedUser();
+				reject(err);
 			});
 
 		});
 
-	},
-
-	handleRequest: function(res, resolve, reject) {
-		if (res.status === 404 || res.status === 400) {
-			reject(res);
-		} else {
-			res.errors ? hasErrors(res.errors) : resolve(res);
-		}
 	}
 
-};
+}
 

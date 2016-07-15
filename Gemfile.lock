@@ -79,6 +79,8 @@ GEM
       thor (~> 0.14)
     flux-rails-assets (2.1.0)
       railties (>= 3.1)
+    font-awesome-rails (4.6.3.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
@@ -225,6 +227,7 @@ DEPENDENCIES
   faker
   figaro
   flux-rails-assets
+  font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

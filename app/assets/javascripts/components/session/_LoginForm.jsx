@@ -1,18 +1,13 @@
-class Login extends FormComponent {
+class LoginForm extends LoginController {
 
 	constructor(props) {
 		super(props);
 	}
 
-	submit(formData) {
-		// submit functionality handled in FormComponent.submit
-		createSession(formData);
-	}
-
 	render() {
 		return (
 			<div className="login-wrapper">
-				<FaceBookOauth/>
+				<FaceBookController/>
 				<form onSubmit={this.submit.bind(this)}>
 					<label htmlFor="email">Email</label>
 					<input type="text" ref="email" className="form-control"/>
@@ -21,10 +16,6 @@ class Login extends FormComponent {
 					<label htmlFor="password">Password</label>
 					<input type="password" ref="password" className="form-control"/>
 					{ this.renderError.call(this, 'password') }
-					<br/>
-					<label htmlFor="password">Password</label>
-					<input type="password" ref="password_confirmation" className="form-control"/>
-					{ this.renderError.call(this, 'password_confirmation') }
 					<br/>
 					<button className="btn btn-success pull-right" type="submit">Login</button>
 				</form>

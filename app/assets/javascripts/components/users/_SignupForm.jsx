@@ -1,18 +1,13 @@
-class Signup extends FormComponent {
+class SignupForm extends SignupController {
 
 	constructor(props) {
 		super(props);
 	}
 
-	submit(formData) {
-		// submit functionality handled in mixins/FormComponent.submit
-		createUser({user: formData});
-	}
-
 	render() {
 		return (
 			<div className="signup-wrapper">
-				<FaceBookOauth/>
+				<FaceBookController/>
 				<form onSubmit={this.submit.bind(this)}>
 					<label htmlFor="firstname">First Name</label>
 					<input className="form-control" ref="firstname"/>
@@ -47,5 +42,5 @@ class Signup extends FormComponent {
 			</div>
 		)
 	}
-	
+
 }

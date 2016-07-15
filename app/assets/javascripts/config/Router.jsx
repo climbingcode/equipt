@@ -10,23 +10,27 @@ this.Routes = (
 				handler={Home} 
 				path="home"/>
 		<Route 	name="login" 
-				handler={Login} 
+				handler={LoginController} 
 				path="login"/>
 		<Route 	name="signup" 
-				handler={Signup} 
+				handler={SignupController} 
 				path="signup"/>
-		<Route 	name="equipment" 
-				handler={Equipment} 
-				path="equipment"/>
+		<Route 	name="equipmentIndex" 
+				handler={EquipmentIndexController} 
+				path="equipment">
+				<Route 	name="equipmentShow"
+						handler={EquipmentShowController}
+						path=":id"/>
+		</Route>
 		<DefaultRoute handler={Home}/>
 	</Route>
 ), document.getElementById('root');
 
-// Location listerner
+// // Location listerner
 Location.addChangeListener(function(location) {
 	hasErrors(null);
 });
 
-Equipment.willTransitionTo = function(transition) {
+EquipmentIndexController.willTransitionTo = function(transition) {
 	if (!AuthStore.authenticated()) transition.redirect('/home');
 }

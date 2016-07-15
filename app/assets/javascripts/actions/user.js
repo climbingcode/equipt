@@ -2,11 +2,7 @@ function createUser(userData) {
 	
 	API.post('/users', userData).then(
 		(data) => {
-			AppDispatcher.handleViewAction({
-				type: Constants.NEW_SESSION,
-				data: data
-			});
-			hasErrors(null);
+			dispatchAction(Constants.NEW_SESSION, data);
 		}, 
 		(err) => {
 			console.log(err.responseText);

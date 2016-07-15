@@ -1,4 +1,4 @@
-class FormComponent extends React.Component {
+class FormComponent extends MainComponent {
 
 	constructor(props) {
 		super(props);

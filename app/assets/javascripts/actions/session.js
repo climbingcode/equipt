@@ -6,11 +6,7 @@ function createSession(userData) {
 
 	API.post('/session', userData).then(
 		(data) => {
-			AppDispatcher.handleViewAction({
-				type: Constants.NEW_SESSION,
-				data: data
-			});
-			hasErrors(null);
+			dispatchAction(Constants.NEW_SESSION, data);
 		}, 
 		(err) => {
 			console.log(err.responseText);
@@ -24,31 +20,30 @@ function createSession(userData) {
 // ===============
 
 function endSession() {
-
-	AppDispatcher.handleViewAction({
-		type: Constants.END_SESSION,
-		user: null
-	});
-
+	dispatchAction(Constants.END_SESSION, null);
 }
 
 // =====================
-// IF SESSSION, GET USER
+// IF SESSION, GET USER
 // =====================
 
 function appInit() {
 
 	API.get('/users/' + AuthStore.getUserId()).then(
 		(data) => {
-			AppDispatcher.handleViewAction({
-				type: Constants.NEW_SESSION,
-				data: data
-			});
-			hasErrors(null);
+			dispatchAction(Constants.NEW_SESSION, data);
 		}, 
 		(err) => {
 			console.log(err.responseText);
 		}
 	);
 
+}
+
+// ======================
+// IF 500 UNAUTH RESPONSE
+// ======================
+
+function unauthorizedUser() {
+	dispatchAction(Constants.END_SESSION, null);
 }
