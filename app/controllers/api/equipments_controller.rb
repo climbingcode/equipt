@@ -5,12 +5,17 @@ class Api::EquipmentsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		# head :unauthorized
-		render json: Equipment.all, status: 200
+		render json: Equipment.search(params[:query]), status: 200
 	end
 
 	def show
-		render json: Equipment.find(params[:id]), :include => [:rentals], status: 200
+		render json: Equipment.find(params[:id]), 
+									include: 	[
+													:rentals, 
+													:ratings,
+													user: { include: :ratings }
+												], 
+									status: 200
 	end
 
 end

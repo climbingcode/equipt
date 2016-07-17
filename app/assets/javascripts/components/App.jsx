@@ -29,7 +29,12 @@ class App extends React.Component {
 
 		if (AuthStore.authenticated()) {
 			setTimeout(() => {
-				this.context.router.transitionTo(Constants.links.equipmentIndex);
+				var path = this.context.router.getCurrentPathname();
+				if (path.indexOf('/equipment') > -1) {
+					this.context.router.transitionTo(path);
+				} else {
+					this.context.router.transitionTo(Constants.links.equipmentIndex);
+				}
 			});
 		} else {			
 			setTimeout(() => {

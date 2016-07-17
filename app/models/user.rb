@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 	has_many :equipments
 	has_many :rentals
   has_many :api_keys
+  has_many :ratings, :as => :rateable
 
 	# oAuth
 	def self.from_omniauth(auth)

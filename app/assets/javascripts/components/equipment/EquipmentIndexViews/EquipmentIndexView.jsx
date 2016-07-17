@@ -8,9 +8,9 @@ class EquipmentIndexView extends React.Component {
 
 		var equipmentListing = [];
 
-		for (var i = 0; i < this.props.equipment.length; i++) {
-			let equipment 	  = this.props.equipment[i];
-			let equipmentItem = <EquipmentItemPartial 
+		for (var i = 0; i < this.props.equipments.length; i++) {
+			let equipment 	  = this.props.equipments[i];
+			let equipmentItem = <EquipmentItemView 
 									key={`equipment_${equipment.id}`} 
 									equipment={equipment}/>;
 			equipmentListing.push(equipmentItem);
@@ -18,6 +18,7 @@ class EquipmentIndexView extends React.Component {
 
 		return (
 			<div className="equipment-wrapper">
+				<EquipmentSearchView/>
 				{equipmentListing}
 			</div>
 		)

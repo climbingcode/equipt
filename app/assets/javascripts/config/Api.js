@@ -48,7 +48,7 @@ const API = {
 				url: API.path + url,
 				type: method,
 				dataType: 'json',
-					contentType: 'application/json',
+				contentType: 'application/json',
 				beforeSend: (request) => {
 	            	request.setRequestHeader('AUTHORIZATION', AuthStore.getApiKey());
 	        	}
@@ -62,7 +62,9 @@ const API = {
 				else resolve(res);
 			})
 			.error((err) => {
-				if (err.status === 500) unauthorizedUser();
+				if (err.status === 500 || err.status === 401) {
+					unauthorizedUser();
+				}
 				reject(err);
 			});
 

@@ -14,7 +14,7 @@ class Api::SessionController < ApplicationController
 	end
 
 	def facebook_auth
-		user = User.from_omniauth(env["omniauth.auth"])
+		user = User.from_omniauth(request.env["omniauth.auth"])
     	render json: { user: user, api_key: user.session_api_key }, status: 200
 	end
 

@@ -4,7 +4,7 @@ class EquipmentShowController extends MainComponent {
 		super(props);
 		this.store = EquipmentStore;
 		this.state = {
-			equipment: EquipmentStore.getEquipment()
+			equipment: {}
 		}
 	}
 

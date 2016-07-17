@@ -20,7 +20,17 @@ this.Routes = (
 				path="equipment">
 				<Route 	name="equipmentShow"
 						handler={EquipmentShowController}
-						path=":id"/>
+						path=":id">
+					<Route 	name="equipmentAvailability"
+							handler={EquipmentAvailabilityView}
+							path="availability"/>
+					<Route 	name="equipmentInfo"
+							handler={EquipmentInfoView}
+							path="info"/>
+					<Route 	name="equipmentOwner"
+							handler={EquipmentOwnerView}
+							path="owner"/>
+				</Route>
 		</Route>
 		<DefaultRoute handler={Home}/>
 	</Route>

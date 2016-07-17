@@ -1,41 +1,39 @@
-class FaceBookController extends React.Component {
+class FaceBookController extends MainComponent {
 
 	constructor(props) {
 		super(props);
+		this.store = AuthStore;
 		this.state = {
-			FB: {
-	      		appId 	: Keys.FACEBOOK_APP_ID,
-	      		cookie  : true,
-	      		status  : true,
-	      		xfbml   : true
-	    	},
-	    	loggedIn: false,
-	    	disabled: true 
+			logginIn: AuthStore.isFacebookLogin(),
+			facebookLoaded: false
 		}
+		this.loadFacebook();
 	}
 
-	componentWillMount() {
+	loadFacebook() {
 		window.fbAsyncInit = () => {
-			window.FB.init(this.state.FB);	
-			this.updateStatus();
+			window.FB.init({
+	      		appId: Keys.FACEBOOK_APP_ID,
+	      		cookie: true
+	    	});		
+	    	window.FB.getLoginStatus((response) => {
+	    		let loggedIn = response.status === 'connected' ? true : false;
+	    		facebookStatusChanged(loggedIn);			
+	    	});
 		}
 	}
 
-	updateStatus() {			
-		window.FB.getLoginStatus((response) => {
-			let connected = response.status === 'connected' ? true : false
-			this.setState({
-				loggedIn: connected,
-				disabled: false
-			});
+	dataChanged() {
+		this.setState({
+			loggedIn: AuthStore.isFacebookLogin(),
+			facebookLoaded: true
 		});
 	}
 
 	render() {
 		return (
-			<FaceBookView 	updateStatus={this.updateStatus} 
-							loggedIn={this.state.loggedIn}
-							disabled={this.state.disabled}/>
+			<FaceBookView 	facebookLoaded={this.state.facebookLoaded}
+							loggedIn={this.state.loggedIn}/>
 		)
 	}
 

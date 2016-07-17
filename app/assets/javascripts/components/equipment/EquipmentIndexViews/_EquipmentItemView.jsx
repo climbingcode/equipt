@@ -1,12 +1,7 @@
-class EquipmentItemPartial extends React.Component {
+class EquipmentItemView extends React.Component {
 
 	constructor(props) {
 		super(props);
-	}
-
-	selectedEquipment(equipment) {
-		let path = Constants.links.equipmentShow;
-		this.context.router.transitionTo(path, {id: equipment.id});
 	}
 
 	render() {
@@ -31,6 +26,6 @@ class EquipmentItemPartial extends React.Component {
 
 }
 
-EquipmentItemPartial.contextTypes = {
+EquipmentItemView.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };

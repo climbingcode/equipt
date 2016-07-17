@@ -5,31 +5,28 @@ class FaceBookView extends React.Component {
 	}
 
 	login() {
-		if (!this.props.loggedIn) return;
-		FB.login((res) =>	 {
-			faceBookLogin();
-			this.props.updateStatus();
+		FB.login((res) => {
+			facebookStatusChanged(true);
 		});	
 	}
 
-	logout() {
-		if (this.props.loggedIn) return;
+	logout() {		
 		FB.logout((res) => {
-			this.props.updateStatus();
+			facebookStatusChanged(false);
 		});
 	}
 
 	render() {
-
+		
 		if (this.props.loggedIn) {
 			var btn = 	<button className="btn btn-success" 
-								disabled={this.props.disabled} 
+								disabled={!this.props.facebookLoaded} 
 								onClick={this.logout.bind(this)}>
 								Logout
 					    </button>
 		} else {
 			var btn = 	<button className="btn btn-success" 
-								disabled={this.props.disabled} 
+								disabled={!this.props.facebookLoaded} 
 								onClick={this.login.bind(this)}>
 								Login With Facebook
 						</button>

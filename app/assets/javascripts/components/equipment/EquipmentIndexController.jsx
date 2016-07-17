@@ -4,7 +4,7 @@ class EquipmentIndexController extends MainComponent {
 		super(props);
 		this.store = EquipmentStore;
 		this.state = {
-			equipment: EquipmentStore.getEquipments()
+			equipments: EquipmentStore.getEquipments()
 		}
 	}
 
@@ -14,7 +14,7 @@ class EquipmentIndexController extends MainComponent {
 
   	dataChanged() {
   		return {
-  			equipment: EquipmentStore.getEquipments()
+  			equipments: EquipmentStore.getEquipments()
   		};
   	}
 
@@ -22,7 +22,7 @@ class EquipmentIndexController extends MainComponent {
 		return (
 			<div className="equiptment-wrapper">
 				<RouteHandler/>
-				<EquipmentIndexView equipment={this.state.equipment}/>
+				<EquipmentIndexView equipments={this.state.equipments}/>
 			</div>
 		)
 	}

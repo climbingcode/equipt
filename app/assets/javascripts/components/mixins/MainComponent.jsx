@@ -2,21 +2,22 @@ class MainComponent extends React.Component {
 
 	constructor(props) {
 		super(props);
-        this.rendered = false;
+        this.mounted = false;
 	}
 
 	componentDidMount() {
-        this.rendered = true;
+        this.mounted = true;
 		this.store.addChangeListener(this._onChange.bind(this));
 	}
   	
   	componentWillUnmount() {
-        this.rendered = false;
+        this.mounted = false;
     	this.store.removeChangeListener(this._onChange.bind(this));
   	}
 
   	_onChange() {
-  		this.rendered && this.setState(this.dataChanged());
+      if (!this.dataChanged) return;
+  		this.mounted && this.setState(this.dataChanged());
   	}
 
 }

@@ -2,9 +2,11 @@
 // GET ALL EQUIPMENT
 // =================
 
-function getEquipment() {
+function getEquipment(query) {
 
-	API.get('/equipments').then(
+	var params = query ? serialize({query: query}) : '';
+
+	API.get(`/equipments?${params}`).then(
 		(data) => {
 			dispatchAction(Constants.EQUIPMENT_INDEX, data);
 		},
@@ -29,6 +31,5 @@ function showEquipment(id) {
 			console.log('Error Getting Equipment');
 		}
 	);
-
-
+		
 }

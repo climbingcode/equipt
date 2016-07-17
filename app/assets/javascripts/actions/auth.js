@@ -47,3 +47,25 @@ function appInit() {
 function unauthorizedUser() {
 	dispatchAction(Constants.END_SESSION, null);
 }
+
+// ======================
+// FACEBOOK LOGIN
+// ======================
+
+function facebookStatusChanged(isLoggedIn) {
+	// Must be sent to exact path below to work
+	if (isLoggedIn) {	
+		$.post('/auth/facebook/callback').then(function(data) {
+			dispatchAction(Constants.FACEBOOK_STATUS_CHANGED, {
+				isLoggedIn: true,
+				user: data.user,
+				api_key: data.api_key
+			});
+		});
+	} else {
+		dispatchAction(Constants.FACEBOOK_STATUS_CHANGED, {
+			isLoggedIn: false,
+			user: null
+		});
+	}
+};

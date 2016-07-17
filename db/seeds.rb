@@ -79,7 +79,10 @@ def create_users
 			password_confirmation: 'password'
 		)
 
-		create_equipment(user) if user.save!
+		5.times do |i|
+			create_equipment(user) if user.save!
+			create_ratings(user) if user.save!
+		end
 
 	end
 
@@ -104,7 +107,10 @@ def create_equipment(user)
 			desposit_amount: (10..100).to_a.sample
 		)
 
-		create_rentals(equipment, user) if equipment.save!
+		5.times do |i|
+			create_rentals(equipment, user) if equipment.save!
+			create_ratings(equipment) if equipment.save!
+		end
 
 	end
 
@@ -116,7 +122,7 @@ def create_rentals(equipment, user)
 
 	rentals_amount.times do |i|
 
-		equipment.rentals.create(
+		rental = equipment.rentals.create(
 			user_id: user.id,
 			pickup_date: Faker::Date.backward(20),
 			dropoff_date: Faker::Date.forward(20),
@@ -128,6 +134,13 @@ def create_rentals(equipment, user)
 
 	end
 
+end
+
+def create_ratings(model)
+	model.ratings.create(
+		score: (1..5).to_a.sample,
+		comment: Faker::Lorem.sentence(3)
+	)
 end
 
 create_users
