@@ -13,11 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require moment
 //= require react
 //= require react_ujs
 //= require react_router
 //= require react_router_ujs
 //= require flux
 //= require eventemitter
+//= require_tree ./plugins
 //= require components
 //= require_tree .
