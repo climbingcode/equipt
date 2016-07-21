@@ -4,14 +4,20 @@ class EquipmentAvailabilityView extends React.Component {
 		super(props);
 	}
 
+	selectedDates(start, end) {
+		selectedRentalDates(start, end);
+	}
+
 	render() {
-
-		var rentals = this.props.equipment.rentals;
-
+		const rentals = this.props.equipment.rentals;
 		return (
 			<div className="equipment-availability-container">
-				<Calendar rentals={rentals}/>				
+				<Calendar selectedDates={this.selectedDates.bind(this)} 
+						  rentals={rentals}
+						  dates={this.props.rentalDates}
+				/>
 			</div>
 		)
 	}
+
 }

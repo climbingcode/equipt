@@ -2,7 +2,7 @@ class FaceBookController extends MainComponent {
 
 	constructor(props) {
 		super(props);
-		this.store = AuthStore;
+		this.stores = [AuthStore];
 		this.state = {
 			logginIn: AuthStore.isFacebookLogin(),
 			facebookLoaded: false

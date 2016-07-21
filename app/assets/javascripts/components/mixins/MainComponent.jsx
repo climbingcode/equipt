@@ -7,12 +7,16 @@ class MainComponent extends React.Component {
 
 	componentDidMount() {
         this.mounted = true;
-		this.store.addChangeListener(this._onChange.bind(this));
+        this.stores.forEach((store) => {
+            store.addChangeListener(this._onChange.bind(this));
+        });
 	}
   	
   	componentWillUnmount() {
         this.mounted = false;
-    	this.store.removeChangeListener(this._onChange.bind(this));
+    	this.stores.forEach((store) => {
+            store.removeChangeListener(this._onChange.bind(this));
+        });
   	}
 
   	_onChange() {

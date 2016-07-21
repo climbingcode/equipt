@@ -2,9 +2,10 @@ class EquipmentShowController extends MainComponent {
 
 	constructor(props) {
 		super(props);
-		this.store = EquipmentStore;
+		this.stores = [EquipmentStore, RentalStore];
 		this.state = {
-			equipment: {}
+			equipment: {},
+			rentalDates: {}
 		}
 	}
 
@@ -15,13 +16,16 @@ class EquipmentShowController extends MainComponent {
 
   	dataChanged() {
   		return {
-  			equipment: EquipmentStore.getEquipment()
+  			equipment: EquipmentStore.getEquipment(),
+  			rentalDates: RentalStore.getRentalDates()
   		}
   	}
 
 	render() {
 		return (
-			<EquipmentShowView equipment={this.state.equipment}/>
+			<EquipmentShowView  equipment={this.state.equipment}
+								rentalDates={this.state.rentalDates}
+			/>
 		)
 	}
 

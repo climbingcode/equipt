@@ -2,8 +2,8 @@ class EquipmentIndexController extends MainComponent {
 
 	constructor(props) {
 		super(props);
-		this.store = EquipmentStore;
-		this.state = {
+		this.stores = [EquipmentStore];
+		this.state  = {
 			equipments: EquipmentStore.getEquipments()
 		}
 	}

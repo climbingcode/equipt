@@ -124,8 +124,8 @@ def create_rentals(equipment, user)
 
 		rental = equipment.rentals.create(
 			user_id: user.id,
-			pickup_date: Faker::Date.backward(20),
-			dropoff_date: Faker::Date.forward(20),
+			pickup_date: Faker::Date.backward(10),
+			dropoff_date: Faker::Date.forward(5),
 			pick_up_time: (6..22).to_a.sample,
 			rental_total: (20..500).to_a.sample,
 			rental_deposit: (10..100).to_a.sample,

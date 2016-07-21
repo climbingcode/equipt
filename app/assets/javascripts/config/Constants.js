@@ -6,6 +6,7 @@ const Constants = {
 	CREATE_USER: 'CREATE_USER',
 	EQUIPMENT_INDEX: 'EQUIPMENT_INDEX',
 	EQUIPMENT_SHOW: 'EQUIPMENT_SHOW',
+	CHANGED_RENTAL_DATES: 'CHANGED_RENTAL_DATES',
 	links: {
 		login: 'login',
 		equipmentIndex: 'equipmentIndex',

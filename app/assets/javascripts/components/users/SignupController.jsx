@@ -2,7 +2,7 @@ class SignupController extends FormComponent {
 
 	constructor(props) {
 		super(props);
-		this.store = ErrorsStore;
+		this.stores = [ErrorsStore];
 		this.state = {
 			errors: ErrorsStore.getErrors()
 		}
