@@ -7,10 +7,11 @@ const Constants = {
 	EQUIPMENT_INDEX: 'EQUIPMENT_INDEX',
 	EQUIPMENT_SHOW: 'EQUIPMENT_SHOW',
 	CHANGED_RENTAL_DATES: 'CHANGED_RENTAL_DATES',
+	RENTED_EQUIPMENT: 'RENTED_EQUIPMENT',
+	CHANGED_PICKUP_TIME: 'CHANGED_PICKUP_TIME',
 	links: {
 		login: 'login',
 		equipmentIndex: 'equipmentIndex',
-		equipmentShow: 'equipmentShow',
-
+		equipmentShow: 'equipmentShow'
 	}
 };

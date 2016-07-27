@@ -22,6 +22,7 @@ class Calendar extends React.Component {
         // Unavailiable Dates
         var events = rentals.map(function(rental, i) {
             return {
+                id: rental.id,
                 title: 'rented',
                 start: rental.pickup_date,
                 end: rental.dropoff_date,
@@ -30,15 +31,16 @@ class Calendar extends React.Component {
         });
 
         // Selected Dates
-        if (this.props.dates.start) {
+        if (RentalStore.getRentalDates()) {
             events.push({
                 title: 'selected',
                 start: RentalStore.getRentalDates().start,
                 end: RentalStore.getRentalDates().end,
-                color: 'green'
+                color: '#8FC485'
             });
         }
 
+        // Full Calendar settings
         var fullCalendarSettings = {
             events: events,
             select: (start, end, allDay) => {
@@ -46,7 +48,9 @@ class Calendar extends React.Component {
             }, 
             eventLimit: true, // for all non-agenda views
             selectable: true,
+            selectOverlap: false,
             selectHelper: true,
+            contentHeight: 200,
             views: {
                 agenda: {
                     eventLimit: 1 // adjust to 6 only for agendaWeek/agendaDay
@@ -54,9 +58,14 @@ class Calendar extends React.Component {
             }
         };
 
+        // eventTrackers
         $(calendar).fullCalendar('destroy');
         $(calendar).fullCalendar(fullCalendarSettings); 
-        if (this.props.dates.start) $(calendar).fullCalendar('gotoDate', this.props.dates.start);
+
+        // Move calendar to selected month
+        if (this.props.rentalDates) {
+            $(calendar).fullCalendar('gotoDate', RentalStore.getRentalDates().start);
+        }
 
     }
 

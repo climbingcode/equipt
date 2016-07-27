@@ -76,12 +76,14 @@ ActiveRecord::Schema.define(version: 20160710033156) do
     t.date     "pickup_date"
     t.date     "dropoff_date"
     t.float    "pick_up_time"
+    t.float    "sub_total"
+    t.float    "rental_deposit",    default: 0.0
     t.float    "rental_total"
-    t.float    "rental_deposit",   default: 0.0
-    t.boolean  "rental_completed", default: false
-    t.boolean  "rental_comfirmed", default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "total_rental_days"
+    t.boolean  "rental_completed",  default: false
+    t.boolean  "rental_comfirmed",  default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["equipment_id"], name: "index_rentals_on_equipment_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end

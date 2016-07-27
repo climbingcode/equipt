@@ -18,8 +18,22 @@ class FaceBookController extends MainComponent {
 	    	});		
 	    	window.FB.getLoginStatus((response) => {
 	    		let loggedIn = response.status === 'connected' ? true : false;
-	    		facebookStatusChanged(loggedIn);			
+	    		this.setState({
+	    			logginIn: AuthStore.isFacebookLogin(),
+					facebookLoaded: true
+	    		});
+	    		this.forceUpdate();
 	    	});
+		}
+	}
+
+	componentWillMount() {
+		if (window.FB && window.FB.getAuthResponse()) {
+			this.setState({
+	    		logginIn: AuthStore.isFacebookLogin(),
+				facebookLoaded: true
+	    	});	
+	    	this.forceUpdate();			
 		}
 	}
 

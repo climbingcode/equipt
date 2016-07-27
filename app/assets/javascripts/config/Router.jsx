@@ -30,6 +30,9 @@ this.Routes = (
 					<Route 	name="equipmentOwner"
 							handler={EquipmentOwnerView}
 							path="owner"/>
+					<Route  name="equipmentConfirmation"
+							handler={EquipmentConfirmation}
+							path="confirmation"/>
 				</Route>
 		</Route>
 		<DefaultRoute handler={Home}/>

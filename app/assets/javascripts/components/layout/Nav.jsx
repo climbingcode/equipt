@@ -8,6 +8,11 @@ class Nav extends React.Component {
 
 	logout() {
 		endSession();
+		if (FB.getAuthResponse()) {		
+			FB.logout((res) => {
+				facebookStatusChanged(false);
+			});
+		}
 	}
 
 	render() {
@@ -15,10 +20,10 @@ class Nav extends React.Component {
 		if (this.props.currentUser) {
 			var sessionBtns = 	<div className="col-sm-3 pull-right"
 									 key="currentUser.email">
-									<span className="col-sm-5">
-										<h3>{this.props.currentUser.email.capitalize()}</h3>
+									<span className="col-sm-8">
+										<h3 className="nav-title">{this.props.currentUser.firstname.capitalize()}</h3>
 									</span>
-									<button className="pull-right btn btn-success"
+									<button className="logout-btn pull-right btn btn-success"
 											onClick={this.logout.bind(this)}>
 											logout
 									</button>
@@ -39,9 +44,11 @@ class Nav extends React.Component {
 		}
 
 		return (
-			<nav className="navbar navbar-default">
+			<nav className="navbar">
 				<div className="container-fluid col-sm-10 col-sm-offset-1">
-					<div className="nav-logo"></div>
+					<Link to="equipmentIndex">
+						<div className="nav-logo"></div>
+					</Link>
 					{sessionBtns}
 				</div>
 			</nav>

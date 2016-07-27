@@ -16,15 +16,29 @@ class EquipmentShowView extends React.Component {
         if (loader) loader.parentNode.removeChild(loader);
     }
 
+    rentEquipment() {
+    	let equipmentId = this.props.equipment.id;
+    	rentEquipment(equipmentId, {
+    		rental: {			
+	    		pickup_date: RentalStore.getRentalDates().start.format(),
+				dropoff_date: RentalStore.getRentalDates().end.format(),
+				pick_up_time: RentalStore.getRentalTime(),
+				rental: RentalStore.getRental()
+    		}
+    	});
+    	this.context.router.transitionTo('equipmentConfirmation', {
+    		id: equipmentId
+    	});
+    }
+
 	render() {
 
-		let equipment   = this.props.equipment;
-		let equipmentId = equipment.id ? equipment.id : 0;
-		let tabOptions  = ['Availability', 'Info', 'Owner'];
 		
-		if (this.props.rentalDates.start) {
-			let datesObj 	=  this.props.rentalDates;
-			var rentalDates = `Rent from ${datesObj.start.format()} till ${datesObj.end.add('day', -1).format()}`;
+		let equipment   = EquipmentStore.getEquipment();
+		
+		if (this.props.rentalDates) {
+			let datesObj 	=  RentalStore.getRentalDates();
+			var rentalDates = `Rent from ${datesObj.start.format()} till ${datesObj.end.format()}`;
 		}
 
 		return (
@@ -34,14 +48,15 @@ class EquipmentShowView extends React.Component {
 				</Link>
 				<div className="modal">
 					<div className="modal-top-container col-sm-12">
-						<div className="col-sm-4">
+						<div className="col-sm-2">
 							<button className="btn btn-success" 
-									disabled={rentalDates ? false : true}>
+									disabled={rentalDates ? false : true}
+									onClick={this.rentEquipment.bind(this)}>
 									Rent
 							</button>
 						</div>
-						<h4 className="col-sm-4">{rentalDates}</h4>
-						<div className="close col-sm-4">
+						<h4 className="rental-dates-header col-sm-8">{rentalDates}</h4>
+						<div className="close col-sm-2">
 							<Link to="equipmentIndex">
 								<i className="fa fa-times-circle pull-right" 
 								   aria-hidden="true">
@@ -50,25 +65,20 @@ class EquipmentShowView extends React.Component {
 						</div>
 					</div>
 					<div className="modal-dialog">						
-						<div className="equipment-info-tabs tabs">
-							{tabOptions.map(function(tabName, i) {
-								return 	<Link to={`equipment${tabName}`}
-											  params={{ id: equipmentId }}
-											  key={`equipment-tab-${i}`}>
-											<div className="col-sm-4 tab">
-												{tabName}
-											</div>
-										</Link>
-							})}
-						</div>
+						<EquipmentTabsView equipment={equipment}/>
 						<div className="container col-sm-12">
 							<RouteHandler equipment={equipment} 
-										  rentalDates={this.props.rentalDates}/>
+										  rentalDates={this.props.rentalDates}
+										  rentalTime={this.props.rentalTime}
+										  rental={this.props.rental}/>
 						</div>
 					</div>
 				</div>
 			</div>
 		)
 	}
-
 }
+
+EquipmentShowView.contextTypes = {
+	router: React.PropTypes.func.isRequired
+};

@@ -10,7 +10,7 @@ class FaceBookView extends React.Component {
 		});	
 	}
 
-	logout() {		
+	logout() {
 		FB.logout((res) => {
 			facebookStatusChanged(false);
 		});
