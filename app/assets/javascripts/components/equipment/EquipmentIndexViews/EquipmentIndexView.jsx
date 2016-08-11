@@ -1,10 +1,13 @@
-class EquipmentIndexView extends React.Component {
+Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
+
+		let EquipmentItemView   = Equipt.views.EquipmentItemView;
+		let EquipmentSearchView = Equipt.views.EquipmentSearchView;
 
 		var equipmentListing = [];
 
@@ -17,6 +20,7 @@ class EquipmentIndexView extends React.Component {
 		}
 
 		return (
+
 			<div className="equipment-wrapper">
 				<EquipmentSearchView/>
 				{equipmentListing}
@@ -24,6 +28,5 @@ class EquipmentIndexView extends React.Component {
 		)
 		
 	}
-
 
 }

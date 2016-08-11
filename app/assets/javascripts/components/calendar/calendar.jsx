@@ -10,7 +10,7 @@ class Calendar extends React.Component {
 	}
 
   	componentWillReceiveProps() {
-  		var equipment = EquipmentStore.getEquipment() ? EquipmentStore.getEquipment() : [];
+  		var equipment = Equipt.stores.EquipmentStore.getEquipment() ? Equipt.stores.EquipmentStore.getEquipment() : [];
         this.buildCalendar(equipment.rentals);
   	}
 
@@ -34,8 +34,8 @@ class Calendar extends React.Component {
         if (RentalStore.getRentalDates()) {
             events.push({
                 title: 'selected',
-                start: RentalStore.getRentalDates().start,
-                end: RentalStore.getRentalDates().end,
+                start: Equipt.stores.RentalStore.getRentalDates().start,
+                end: Equipt.stores.RentalStore.getRentalDates().end,
                 color: '#8FC485'
             });
         }
@@ -64,7 +64,7 @@ class Calendar extends React.Component {
 
         // Move calendar to selected month
         if (this.props.rentalDates) {
-            $(calendar).fullCalendar('gotoDate', RentalStore.getRentalDates().start);
+            $(calendar).fullCalendar('gotoDate', Equipt.stores.RentalStore.getRentalDates().start);
         }
 
     }

@@ -1,4 +1,4 @@
-class EquipmentSearchView extends React.Component {
+Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Component {
 
 	constructor(props) {
 		super(props);

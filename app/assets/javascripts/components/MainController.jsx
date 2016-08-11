@@ -1,4 +1,4 @@
-class MainComponent extends React.Component {
+Equipt.controllers.MainController = class MainController extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -17,11 +17,11 @@ class MainComponent extends React.Component {
     	this.stores.forEach((store) => {
             store.removeChangeListener(this._onChange.bind(this));
         });
-        ErrorsStore.clearErrors();
+        Equipt.stores.ErrorsStore.clearErrors();
   	}
 
   	_onChange() {
-      if (!this.dataChanged) return;
+        if (!this.dataChanged) return;
   		this.mounted && this.setState(this.dataChanged());
   	}
 

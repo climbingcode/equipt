@@ -1,4 +1,4 @@
-class EquipmentShowView extends React.Component {
+Equipt.views.EquipmentShowView = class EquipmentShowView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -29,6 +29,8 @@ class EquipmentShowView extends React.Component {
     }
 
 	render() {
+
+		let EquipmentTabsView = Equipt.views.EquipmentTabsView;
 
 		let equipment   = EquipmentStore.getEquipment();
 		let takenNotice = null;
@@ -83,6 +85,6 @@ class EquipmentShowView extends React.Component {
 	}
 }
 
-EquipmentShowView.contextTypes = {
+Equipt.views.EquipmentShowView.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };

@@ -1,11 +1,11 @@
-class EquipmentConfirmation extends React.Component {
+Equipt.views.EquipmentConfirmationView = class EquipmentConfirmationView extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 
 	componentWillUnmount() {
-		RentalStore.clearRental();
+		Equipt.stores.RentalStore.clearRental();
 	}
 
 	render() {

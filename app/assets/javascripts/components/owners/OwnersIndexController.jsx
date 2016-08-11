@@ -1,8 +1,8 @@
-class OwnersIndexController extends MainComponent {
+class OwnersIndexController extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [EquipmentStore];
+		this.stores = [Equipt.stores.EquipmentStore];
 		this.state = this.dataChanged();
 	}
 

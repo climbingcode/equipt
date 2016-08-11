@@ -1,6 +1,6 @@
 var _errors = {};
 
-const ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+Equipt.stores.ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	getErrors() {
         return _errors;

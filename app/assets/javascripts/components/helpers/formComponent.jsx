@@ -1,18 +1,8 @@
-class FormComponent extends MainComponent {
+Equipt.helpers.FormHelper = class FormHelper extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
 		this.formData = {};
-		this.submitHandler();
-	}
-
-	submitHandler() {
-		var _submit = this.submit;
-		this.submit = function(e) {
-			e.preventDefault();
-			this.serializeForm();
-			_submit(this.formData);
-		};
 	}
 
 	serializeForm() {

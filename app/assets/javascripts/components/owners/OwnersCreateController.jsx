@@ -1,8 +1,8 @@
-class OwnersCreateController extends MainComponent {
+class OwnersCreateController extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [EquipmentStore]
+		this.stores = [Equipt.stores.EquipmentStore]
 	}
 
 	render() {

@@ -1,14 +1,14 @@
 var _currentUser = null;
 var _facebookLogin = false;
 
-const AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	currentUser() {
         return _currentUser;
 	},
 
 	authenticated() {
-		return this.getSession() && AuthStore.getSession().length;
+		return this.getSession() && this.getSession().length;
 	},
 
 	setSession(apiKey) {
@@ -25,11 +25,11 @@ const AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 	},
 
 	getApiKey() {
-		return this.getSession() && JSON.parse(AuthStore.getSession()).access_token;
+		return this.getSession() && JSON.parse(this.getSession()).access_token;
 	},
 
 	getUserId() {
-		return this.getSession() && JSON.parse(AuthStore.getSession()).id;
+		return this.getSession() && JSON.parse(this.getSession()).id;
 	},
 
 	isFacebookLogin() {
@@ -41,6 +41,8 @@ const AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+
+  	let AuthStore = Equipt.stores.AuthStore;
   	
  	switch(type) {
 		case Constants.NEW_SESSION:
