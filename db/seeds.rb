@@ -5,28 +5,6 @@ ActiveRecord::Base.connection.tables.each do |table|
    ActiveRecord::Base.connection.execute("DELETE FROM #{table}") unless table == "schema_migrations"
 end
 
-# admin account
-
-User.create(
-	firstname: 'tom',
-	lastname: 'tom',
-	email: 'tom@tom.com',
-	email_confirmation: 'tom@tom.com',
-	username: 'tommy',
-	street_address: '123 fake street',
-	city: 'Vancouver',
-	state: 'BC',
-	zip: '10002',
-	country: 'Canada',
-	lat: '11222',
-	lng: '12222',
-	restricted_availiability: [true, false].sample,
-	password: 'tom',
-	password_confirmation: 'tom'
-)
-
-
-
 @rentable_equipment_amount = (1..5).to_a
 @equipment_category = [
 	{camp: [
@@ -79,7 +57,10 @@ def create_users
 			password_confirmation: 'password'
 		)
 
-		create_equipment(user) if user.save!
+		5.times do |i|
+			create_equipment(user) if user.save!
+			create_ratings(user) if user.save!
+		end
 
 	end
 
@@ -104,7 +85,10 @@ def create_equipment(user)
 			desposit_amount: (10..100).to_a.sample
 		)
 
-		create_rentals(equipment, user) if equipment.save!
+		5.times do |i|
+			create_rentals(equipment, user) if equipment.save!
+			create_ratings(equipment) if equipment.save!
+		end
 
 	end
 
@@ -116,10 +100,10 @@ def create_rentals(equipment, user)
 
 	rentals_amount.times do |i|
 
-		equipment.rentals.create(
+		rental = equipment.rentals.create(
 			user_id: user.id,
-			pickup_date: Faker::Date.backward(20),
-			dropoff_date: Faker::Date.forward(20),
+			pickup_date: Faker::Date.backward(10),
+			dropoff_date: Faker::Date.forward(5),
 			pick_up_time: (6..22).to_a.sample,
 			rental_total: (20..500).to_a.sample,
 			rental_deposit: (10..100).to_a.sample,
@@ -130,5 +114,34 @@ def create_rentals(equipment, user)
 
 end
 
+def create_ratings(model)
+	model.ratings.create(
+		score: (1..5).to_a.sample,
+		comment: Faker::Lorem.sentence(3)
+	)
+end
+
 create_users
+
+admin = User.create(
+	firstname: 'tom',
+	lastname: 'tom',
+	email: 'tom@tom.com',
+	email_confirmation: 'tom@tom.com',
+	username: 'tommy',
+	street_address: '123 fake street',
+	city: 'Vancouver',
+	state: 'BC',
+	zip: '10002',
+	country: 'Canada',
+	lat: '-123.1280044',
+	lng: '49.2841339',
+	restricted_availiability: [true, false].sample,
+	password: 'tom',
+	password_confirmation: 'tom'
+)
+
+2.times do |i|
+	create_equipment(admin)
+end
 

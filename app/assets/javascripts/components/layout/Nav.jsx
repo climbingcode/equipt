@@ -8,27 +8,86 @@ class Nav extends React.Component {
 
 	logout() {
 		endSession();
+		if (FB.getAuthResponse()) {		
+			FB.logout((res) => {
+				facebookStatusChanged(false);
+			});
+		}
 	}
 
 	render() {
 
-		if (this.props.currentUser) {
-			var sessionBtns = [	<button className="pull-right" key="logout" onClick={this.logout.bind(this)}>logout</button>,
-								<span className="col-sm-5" key="currentUser.email"><h3>{this.props.currentUser.email}</h3></span>];
+		let currentUser = this.props.currentUser;
+		let pathname    = this.context.router.getCurrentPath();
+
+		if (currentUser) {
+
+			if (pathname.indexOf('/owner/') > -1) {
+				
+				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success"
+														to="equipmentIndex" 
+														ref="equipmentLink">
+														Rent Equipment
+												</Link>
+
+			} else {
+
+				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success"
+														to="ownersIndex" 
+														params={{ id: currentUser.id }}
+														ref="ownersLink">
+														Owned Equipment
+												</Link>
+
+			}
+
+			var sessionBtns = 	<div className="col-sm-6 pull-right"
+									key="currentUser.email">
+									<span className="col-sm-4">
+										{ownersAndEquipmentLink}
+									</span>
+									<span className="col-sm-6">
+										<h3 className="nav-title">{this.props.currentUser.firstname.capitalize()}</h3>
+									</span>
+									<button className="logout-btn pull-right btn btn-success"
+											onClick={this.logout.bind(this)}>
+											logout
+									</button>
+								</div>
+								
 		} else {
-			var sessionBtns = [	<li key="login" className="pull-right"><Link to="login">Login</Link></li>,
-								<li key="signup" className="pull-right"><Link to="signup">Signup</Link></li>];
+
+			var sessionBtns =   <ul className="navbar-right col-sm-2"
+									key="sessions">
+									<Link to="login">
+										<li key="login" 
+											className="btn btn-success">
+											Login
+										</li>
+									</Link>
+									<Link to="signup">
+										<li key="signup" 
+											className="btn btn-success">
+											Signup
+										</li>
+									</Link>
+								</ul>						
 		}
 
 		return (
-			<nav className="navbar navbar-default">
-				<div className="container-fluid">
-					<ul className="nav navbar-nav navbar-right col-sm-4">
-						{sessionBtns}
-					</ul>
+			<nav className="navbar">
+				<div className="container-fluid col-sm-10 col-sm-offset-1">
+					<Link to="equipmentIndex">
+						<div className="nav-logo"></div>
+					</Link>
+					{sessionBtns}
 				</div>
 			</nav>
 		)
 	}
 
 }
+
+Nav.contextTypes = {
+	router: React.PropTypes.func.isRequired
+};

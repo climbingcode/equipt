@@ -10,42 +10,35 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-    	ErrorsStore.addChangeListener(this._onChange.bind(this));
-		AuthStore.addChangeListener(this._onLoginChange.bind(this));
+		if (AuthStore.authenticated()) appInit();	
 	}
 
 	componentWillMount() {
-		if (AuthStore.authenticated()) {
-			appInit();
-		}
+		AuthStore.addChangeListener(this._onLoginChange.bind(this));
 	}
   	
-  	componentWillUnMount() {
-    	ErrorsStore.removeChangeListener(this._onChange.bind(this));
-    	AuthStore.addChangeListener(this._onLoginChange.bind(this));
-  	}
-
-  	_onChange() {
-    	this.setState({
-    		errors: ErrorsStore.getData()
-    	});
+  	componentWillUnmount() {
+    	AuthStore.removeChangeListener(this._onLoginChange.bind(this));
   	}
 
   	_onLoginChange() {
 
+  		this.setState({
+			currentUser: AuthStore.currentUser()
+		});
+
 		if (AuthStore.authenticated()) {
-			this.setState({
-				currentUser: AuthStore.currentUser()
-			});
 			setTimeout(() => {
-				this.context.router.transitionTo('equipment');
+				var path = this.context.router.getCurrentPathname();
+				if (path.indexOf('/equipment') > -1) {
+					this.context.router.transitionTo(path);
+				} else {
+					this.context.router.transitionTo(Constants.links.equipmentIndex);
+				}
 			});
-		} else {
-			this.setState({
-				currentUser: AuthStore.currentUser()
-			});
+		} else {			
 			setTimeout(() => {
-				this.context.router.transitionTo('login');
+				this.context.router.transitionTo(Constants.links.login);
 			});
 		}
 
@@ -56,10 +49,8 @@ class App extends React.Component {
 			<content>
 				<Nav currentUser={this.state.currentUser}/>
 				<div className="main-content col-xs-10 col-xs-offset-1">
-					<Notice errors={this.state.errors}/>
-					<RouteHandler 	currentUser={this.state.currentUser}
-								  	errors={this.state.errors}
-					/>
+					<NoticeController/>
+					<RouteHandler currentUser={this.state.currentUser}/>
 				</div>
 			</content>
 		)

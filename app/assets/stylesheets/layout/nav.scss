@@ -1,0 +1,20 @@
+$camping_green: #8FC485;
+
+nav {
+	background: $camping_green;
+	.nav-title {
+		color: #fff;
+		text-align: right;
+	}
+	.nav-logo {
+		width: 80px;
+	    height: 63px;
+	    margin: 2px 0;
+	    display: inline-block;
+	    background: url(logo.png) no-repeat;
+	    background-size: contain;
+	}
+	.logout-btn {
+		margin: 14px 0;
+	}
+}

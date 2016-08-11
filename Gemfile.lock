@@ -79,6 +79,8 @@ GEM
       thor (~> 0.14)
     flux-rails-assets (2.1.0)
       railties (>= 3.1)
+    font-awesome-rails (4.6.3.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
@@ -105,6 +107,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -225,9 +229,11 @@ DEPENDENCIES
   faker
   figaro
   flux-rails-assets
+  font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  momentjs-rails
   omniauth-facebook
   pry
   puma (~> 3.0)

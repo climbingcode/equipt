@@ -1,0 +1,25 @@
+.tabs {
+    clear: both;
+    padding: 0;
+    height: 55px;
+    border: 3px solid #000;
+}
+
+.tab {
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 2.3;
+    text-align: center;
+    list-style-type: none;
+    border-left: 1px solid #000;
+}
+
+.equipment-search-wrapper {
+	.equipment-category-container {
+		@extend .tabs;
+		li {
+			@extend .tab;
+		}
+	}
+}

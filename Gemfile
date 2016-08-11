@@ -37,9 +37,11 @@ gem 'omniauth-facebook'
 gem 'react-rails', '~>1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'momentjs-rails'
 gem 'flux-rails-assets'
 gem 'autoprefixer-rails'
 gem 'browserify-rails'
+gem "font-awesome-rails"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

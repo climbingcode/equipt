@@ -10,23 +10,44 @@ this.Routes = (
 				handler={Home} 
 				path="home"/>
 		<Route 	name="login" 
-				handler={Login} 
+				handler={LoginController} 
 				path="login"/>
 		<Route 	name="signup" 
-				handler={Signup} 
+				handler={SignupController} 
 				path="signup"/>
-		<Route 	name="equipment" 
-				handler={Equipment} 
-				path="equipment"/>
+		<Route 	name="equipmentIndex" 
+				handler={EquipmentIndexController} 
+				path="equipment">
+				<Route 	name="equipmentShow"
+						handler={EquipmentShowController}
+						path=":id">
+					<Route 	name="equipmentAvailability"
+							handler={EquipmentAvailabilityView}
+							path="availability"/>
+					<Route 	name="equipmentInfo"
+							handler={EquipmentInfoView}
+							path="info"/>
+					<Route 	name="equipmentOwner"
+							handler={EquipmentOwnerView}
+							path="owner"/>
+					<Route  name="equipmentConfirmation"
+							handler={EquipmentConfirmation}
+							path="confirmation"/>
+				</Route>
+		</Route>
+		<Route  name="ownersIndex"
+			    handler={OwnersIndexController}
+				path="owner/:id">
+
+		</Route>
+		<Route  name="equipmentCreate"
+				handler={OwnersCreateController}
+				path="owner/:id/equipment/new">
+		</Route>
 		<DefaultRoute handler={Home}/>
 	</Route>
 ), document.getElementById('root');
 
-// Location listerner
-Location.addChangeListener(function(location) {
-	hasErrors(null);
-});
-
-Equipment.willTransitionTo = function(transition) {
+EquipmentIndexController.willTransitionTo = function(transition) {
 	if (!AuthStore.authenticated()) transition.redirect('/home');
 }

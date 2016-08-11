@@ -1,18 +1,13 @@
-class Signup extends FormComponent {
+class SignupForm extends SignupController {
 
 	constructor(props) {
 		super(props);
 	}
 
-	submit(formData) {
-		// submit functionality handled in mixins/FormComponent.submit
-		createUser({user: formData});
-	}
-
 	render() {
 		return (
 			<div className="signup-wrapper">
-				<FaceBookOauth/>
+				<FaceBookController/>
 				<form onSubmit={this.submit.bind(this)}>
 					<label htmlFor="firstname">First Name</label>
 					<input className="form-control" ref="firstname"/>
@@ -31,21 +26,21 @@ class Signup extends FormComponent {
 					{ this.renderError.call(this, 'email') }
 					<br/>
 					<label htmlFor="email-confirmation">Email Confirmation</label>
-					<input className="form-control" ref="emailConfirmation"/>
-					{ this.renderError.call(this, 'emailConfirmation') }
+					<input className="form-control" ref="email_confirmation"/>
+					{ this.renderError.call(this, 'email_confirmation') }
 					<br/>
 					<label htmlFor="password">Password</label>
 					<input type="password" ref="password" className="form-control"/>
 					{ this.renderError.call(this, 'password') }
 					<br/>
-					<label htmlFor="password">Password</label>
-					<input type="password" ref="passwordConfirmation" className="form-control"/>
-					{ this.renderError.call(this, 'passwordConfirmation') }
+					<label htmlFor="password">Password Confirmation</label>
+					<input type="password" ref="password_confirmation" className="form-control"/>
+					{ this.renderError.call(this, 'password_confirmation') }
 					<br/>
 					<button className="btn btn-success pull-right" type="submit">Sign up</button>
 				</form>
 			</div>
 		)
 	}
-	
+
 }
