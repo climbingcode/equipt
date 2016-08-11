@@ -2,11 +2,13 @@ class EquipmentShowController extends MainComponent {
 
 	constructor(props) {
 		super(props);
-		this.stores = [EquipmentStore, RentalStore];
+		this.stores = [EquipmentStore, RentalStore, ErrorsStore];
 		this.state = {
-			equipment: EquipmentStore.getEquipment(),
+			equipment: 	 EquipmentStore.getEquipment(),
   			rentalDates: RentalStore.getRentalDates(),
-  			rentalTime: RentalStore.getRentalTime()
+  			rentalTime:  RentalStore.getRentalTime(),
+  			rental: 	 RentalStore.getRental(),
+  			errors: 	 ErrorsStore.getErrors()
 		}
 	}
 
@@ -16,11 +18,21 @@ class EquipmentShowController extends MainComponent {
 	}
 
   	dataChanged() {
+
+  		if (RentalStore.getRental()) {
+		    this.context.router.transitionTo('equipmentConfirmation', {
+		    	id: RentalStore.getRental().id
+		    });
+    	}
+  		
   		return {
-  			equipment: EquipmentStore.getEquipment(),
+  			equipment: 	 EquipmentStore.getEquipment(),
   			rentalDates: RentalStore.getRentalDates(),
-  			rentalTime: RentalStore.getRentalTime()
+  			rentalTime:  RentalStore.getRentalTime(),
+  			rental: 	 RentalStore.getRental(),
+  			errors: 	 ErrorsStore.getErrors()
   		}
+
   	}
 
 	render() {
@@ -28,6 +40,8 @@ class EquipmentShowController extends MainComponent {
 			<EquipmentShowView  equipment={this.state.equipment}
 								rentalDates={this.state.rentalDates}
 								rentalTimes={this.state.rentalTime}
+								rental={this.state.rental}
+								errors={this.state.errors}
 			/>
 		)
 	}

@@ -15,7 +15,7 @@ class EquipmentOwnerView extends React.Component {
 				<h6>Owners Reviews</h6>
 				{owner.ratings.map(function(rating, i) {
 					return <div className="rating" key={`owners_rating_${i}`}>
-								<p>{rating.score}</p>
+								<StarRating rating={rating.score}/>
 								<p>{rating.comment}</p>
 							</div>
 				})}

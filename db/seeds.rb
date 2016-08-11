@@ -5,28 +5,6 @@ ActiveRecord::Base.connection.tables.each do |table|
    ActiveRecord::Base.connection.execute("DELETE FROM #{table}") unless table == "schema_migrations"
 end
 
-# admin account
-
-User.create(
-	firstname: 'tom',
-	lastname: 'tom',
-	email: 'tom@tom.com',
-	email_confirmation: 'tom@tom.com',
-	username: 'tommy',
-	street_address: '123 fake street',
-	city: 'Vancouver',
-	state: 'BC',
-	zip: '10002',
-	country: 'Canada',
-	lat: '11222',
-	lng: '12222',
-	restricted_availiability: [true, false].sample,
-	password: 'tom',
-	password_confirmation: 'tom'
-)
-
-
-
 @rentable_equipment_amount = (1..5).to_a
 @equipment_category = [
 	{camp: [
@@ -144,4 +122,26 @@ def create_ratings(model)
 end
 
 create_users
+
+admin = User.create(
+	firstname: 'tom',
+	lastname: 'tom',
+	email: 'tom@tom.com',
+	email_confirmation: 'tom@tom.com',
+	username: 'tommy',
+	street_address: '123 fake street',
+	city: 'Vancouver',
+	state: 'BC',
+	zip: '10002',
+	country: 'Canada',
+	lat: '-123.1280044',
+	lng: '49.2841339',
+	restricted_availiability: [true, false].sample,
+	password: 'tom',
+	password_confirmation: 'tom'
+)
+
+2.times do |i|
+	create_equipment(admin)
+end
 

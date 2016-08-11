@@ -17,28 +17,31 @@ class EquipmentShowView extends React.Component {
     }
 
     rentEquipment() {
+    	
     	let equipmentId = this.props.equipment.id;
+
     	rentEquipment(equipmentId, {
-    		rental: {			
-	    		pickup_date: RentalStore.getRentalDates().start.format(),
-				dropoff_date: RentalStore.getRentalDates().end.format(),
-				pick_up_time: RentalStore.getRentalTime(),
-				rental: RentalStore.getRental()
-    		}
+    		pickup_date: this.props.rentalDates.start.format(), 
+    		dropoff_date: this.props.rentalDates.end.format(), 
+    		pick_up_time: this.props.rentalTimes
     	});
-    	this.context.router.transitionTo('equipmentConfirmation', {
-    		id: equipmentId
-    	});
+ 
     }
 
 	render() {
 
-		
 		let equipment   = EquipmentStore.getEquipment();
+		let takenNotice = null;
 		
 		if (this.props.rentalDates) {
 			let datesObj 	=  RentalStore.getRentalDates();
 			var rentalDates = `Rent from ${datesObj.start.format()} till ${datesObj.end.format()}`;
+		}
+
+		if (this.props.errors && this.props.errors.dates_are_taken) {
+			takenNotice = 	<div className="alert-danger">
+								<h2>{this.props.errors.dates_are_taken}</h2>
+							</div>
 		}
 
 		return (
@@ -66,6 +69,7 @@ class EquipmentShowView extends React.Component {
 					</div>
 					<div className="modal-dialog">						
 						<EquipmentTabsView equipment={equipment}/>
+						{takenNotice}
 						<div className="container col-sm-12">
 							<RouteHandler equipment={equipment} 
 										  rentalDates={this.props.rentalDates}

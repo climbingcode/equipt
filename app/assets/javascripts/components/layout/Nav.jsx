@@ -17,10 +17,36 @@ class Nav extends React.Component {
 
 	render() {
 
-		if (this.props.currentUser) {
-			var sessionBtns = 	<div className="col-sm-3 pull-right"
-									 key="currentUser.email">
-									<span className="col-sm-8">
+		let currentUser = this.props.currentUser;
+		let pathname    = this.context.router.getCurrentPath();
+
+		if (currentUser) {
+
+			if (pathname.indexOf('/owner/') > -1) {
+				
+				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success"
+														to="equipmentIndex" 
+														ref="equipmentLink">
+														Rent Equipment
+												</Link>
+
+			} else {
+
+				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success"
+														to="ownersIndex" 
+														params={{ id: currentUser.id }}
+														ref="ownersLink">
+														Owned Equipment
+												</Link>
+
+			}
+
+			var sessionBtns = 	<div className="col-sm-6 pull-right"
+									key="currentUser.email">
+									<span className="col-sm-4">
+										{ownersAndEquipmentLink}
+									</span>
+									<span className="col-sm-6">
 										<h3 className="nav-title">{this.props.currentUser.firstname.capitalize()}</h3>
 									</span>
 									<button className="logout-btn pull-right btn btn-success"
@@ -30,16 +56,21 @@ class Nav extends React.Component {
 								</div>
 								
 		} else {
+
 			var sessionBtns =   <ul className="navbar-right col-sm-2"
 									key="sessions">
-									<li key="login" 
-										className="btn btn-success">
-										<Link to="login">Login</Link>
-									</li>
-									<li key="signup" 
-										className="btn btn-success">
-										<Link to="signup">Signup</Link>
-									</li>
+									<Link to="login">
+										<li key="login" 
+											className="btn btn-success">
+											Login
+										</li>
+									</Link>
+									<Link to="signup">
+										<li key="signup" 
+											className="btn btn-success">
+											Signup
+										</li>
+									</Link>
 								</ul>						
 		}
 
@@ -56,3 +87,7 @@ class Nav extends React.Component {
 	}
 
 }
+
+Nav.contextTypes = {
+	router: React.PropTypes.func.isRequired
+};

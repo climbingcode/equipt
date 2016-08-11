@@ -48,7 +48,7 @@ class Calendar extends React.Component {
             }, 
             eventLimit: true, // for all non-agenda views
             selectable: true,
-            selectOverlap: false,
+            selectOverlap: true,
             selectHelper: true,
             contentHeight: 200,
             views: {

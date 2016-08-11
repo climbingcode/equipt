@@ -1,6 +1,7 @@
 var	_rentalDates 	 = null;
 var _rentalTime  	 = null;
 var _rentedEquipment = null;
+var _owner			 = null;
 
 const RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
@@ -16,6 +17,10 @@ const RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 		return _rentedEquipment;
 	},
 
+	getOwner() {
+		return _owner
+	},
+
 	setRentalDates(start, end) {
 		_rentalDates = {start: start, end: end};
 	},
@@ -26,6 +31,14 @@ const RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	setRental(rental) {
 		_rentedEquipment = rental;
+	},
+
+	setOwner(owner) {
+		_owner = owner;
+	},
+
+	clearRental() {
+		_rentedEquipment = null;
 	}
 
 });
@@ -45,6 +58,7 @@ AppDispatcher.register(function(action) {
 		break;
 		case Constants.RENTED_EQUIPMENT:
 			RentalStore.setRental(data.rental);
+			RentalStore.setOwner(data.owner);
 			RentalStore.emitChange();
 		break;
 	}

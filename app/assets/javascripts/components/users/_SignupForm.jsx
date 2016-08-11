@@ -33,7 +33,7 @@ class SignupForm extends SignupController {
 					<input type="password" ref="password" className="form-control"/>
 					{ this.renderError.call(this, 'password') }
 					<br/>
-					<label htmlFor="password">Password</label>
+					<label htmlFor="password">Password Confirmation</label>
 					<input type="password" ref="password_confirmation" className="form-control"/>
 					{ this.renderError.call(this, 'password_confirmation') }
 					<br/>

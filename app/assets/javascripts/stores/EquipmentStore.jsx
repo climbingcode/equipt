@@ -26,6 +26,10 @@ AppDispatcher.register(function(action) {
 			_equipment = data;
 			EquipmentStore.emitChange();
 		break;
+		case Constants.OWNERS_EQUIPMENT_INDEX:
+			_equipment = data;
+			EquipmentStore.emitChange();
+		break;
 	}
 
 });

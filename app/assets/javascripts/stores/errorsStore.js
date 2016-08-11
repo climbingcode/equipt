@@ -6,6 +6,10 @@ const ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
         return _errors;
 	},
 
+	clearErrors() {
+		_errors = {};
+	}
+
 });
 
 AppDispatcher.register(function(action) {

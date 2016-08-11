@@ -1,4 +1,4 @@
-const NOTICE_DURATION = 4000;
+const NOTICE_DURATION = 5000;
 
 class NoticeController extends MainComponent {
 
@@ -12,7 +12,7 @@ class NoticeController extends MainComponent {
 		this.timeout;
 	}
 
-	_onChange() {		
+	_onChange() {	
 	    this.setState({
 	    	errors: ErrorsStore.getErrors()
 	    });

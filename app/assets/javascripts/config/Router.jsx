@@ -35,14 +35,18 @@ this.Routes = (
 							path="confirmation"/>
 				</Route>
 		</Route>
+		<Route  name="ownersIndex"
+			    handler={OwnersIndexController}
+				path="owner/:id">
+
+		</Route>
+		<Route  name="equipmentCreate"
+				handler={OwnersCreateController}
+				path="owner/:id/equipment/new">
+		</Route>
 		<DefaultRoute handler={Home}/>
 	</Route>
 ), document.getElementById('root');
-
-// // Location listerner
-Location.addChangeListener(function(location) {
-	hasErrors(null);
-});
 
 EquipmentIndexController.willTransitionTo = function(transition) {
 	if (!AuthStore.authenticated()) transition.redirect('/home');

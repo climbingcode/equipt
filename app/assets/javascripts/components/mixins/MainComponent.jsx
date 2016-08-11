@@ -17,6 +17,7 @@ class MainComponent extends React.Component {
     	this.stores.forEach((store) => {
             store.removeChangeListener(this._onChange.bind(this));
         });
+        ErrorsStore.clearErrors();
   	}
 
   	_onChange() {
