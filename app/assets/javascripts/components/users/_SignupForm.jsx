@@ -1,4 +1,4 @@
-Equipt.controllers.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper {
+Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper {
 
 	constructor(props) {
 		super(props);
@@ -7,12 +7,12 @@ Equipt.controllers.SignupFormView = class SignupForm extends Equipt.helpers.Form
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		createUser({user: this.formData});
+		Equipt.actions.createUser({user: this.formData});
 	}
 
 	render() {
 
-		let FaceBookController = Equipt.stores.FaceBookController;
+		let FaceBookController = Equipt.controllers.FaceBookController;
 		
 		return (
 			<div className="signup-wrapper">

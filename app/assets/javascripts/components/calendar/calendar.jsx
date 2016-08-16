@@ -31,7 +31,7 @@ class Calendar extends React.Component {
         });
 
         // Selected Dates
-        if (RentalStore.getRentalDates()) {
+        if (Equipt.stores.RentalStore.getRentalDates()) {
             events.push({
                 title: 'selected',
                 start: Equipt.stores.RentalStore.getRentalDates().start,

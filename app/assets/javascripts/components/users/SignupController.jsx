@@ -16,7 +16,7 @@ Equipt.controllers.SignupController = class SignupController extends Equipt.cont
 
 	render() {
 
-		let SignupFormView = Equipt.controllers.SignupFormView;
+		let SignupFormView = Equipt.views.SignupFormView;
 
 		return (
 			<SignupFormView errors={this.state.errors} />

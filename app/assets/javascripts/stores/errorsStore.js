@@ -15,10 +15,13 @@ Equipt.stores.ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSetti
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+
+  	let ErrorsStore = Equipt.stores.ErrorsStore;
+
   	switch(type) {
 		case Constants.HAS_ERRORS:
 			_errors = data || {};
-            ErrorsStore.emitChange();
+           	ErrorsStore.emitChange();
 		break; 
 	}
 

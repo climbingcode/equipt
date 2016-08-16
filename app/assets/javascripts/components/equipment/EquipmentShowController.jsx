@@ -1,4 +1,4 @@
-Equipt.controllers.EquipmentShowController = class EquipmentShowController extends Equipt.controllers.MainController {
+Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
@@ -18,7 +18,7 @@ Equipt.controllers.EquipmentShowController = class EquipmentShowController exten
 
 	componentWillMount() {
 		let id = this.context.router.getCurrentParams().id;
-		showEquipment(id);
+		Equipt.actions.showEquipment(id);
 	}
 
   	dataChanged() {

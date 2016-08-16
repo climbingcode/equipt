@@ -1,4 +1,4 @@
-class OwnersIndexController extends Equipt.controllers.MainController {
+Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
@@ -7,16 +7,19 @@ class OwnersIndexController extends Equipt.controllers.MainController {
 	}
 
 	componentWillMount() {
-		getOwnersEquipment();
+		Equipt.actions.getOwnersEquipment();
 	}
 
 	dataChanged() {
 		return {
-			equipment: EquipmentStore.getEquipment()
+			equipment: Equipt.stores.EquipmentStore.getEquipment()
 		}
 	}
 
 	render() {
+
+		let OwnersIndexView = Equipt.views.OwnersIndexView;
+
 		return (
 			<OwnersIndexView equipment={this.state.equipment}/>
 		)

@@ -5,20 +5,21 @@ Equipt.views.EquipmentAvailabilityView = class EquipmentAvailabilityView extends
 	}
 
 	selectedDates(start, end) {
-		selectedRentalDates(start, end);
+		Equipt.actions.selectedRentalDates(start, end);
 	}
 
 	pickUpTimeSelected(time) {
-		selectedPickUpTime(time);
+		Equipt.actions.selectedPickUpTime(time);
 	}
 
 	render() {
 		const rentals = this.props.equipment.rentals;
+		const rentalTime = Equipt.stores.RentalStore.getRentalTime()
 		let pickUpTimes = [];
 
 		for (let i = 0; i <= 24; i++) {
 			let time = i.toFixed(2);
-			let klass = time == RentalStore.getRentalTime() ? 'col-sm-1 selected' : 'col-sm-1';
+			let klass = time == rentalTime ? 'col-sm-1 selected' : 'col-sm-1';
 			pickUpTimes.push(<div className={klass}
 								  key={`${time}_selected`}
 								  onClick={this.pickUpTimeSelected.bind(this, time)}>{time}</div>);

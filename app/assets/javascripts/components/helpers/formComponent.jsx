@@ -1,4 +1,4 @@
-Equipt.helpers.FormHelper = class FormHelper extends Equipt.controllers.MainController {
+Equipt.helpers.FormHelper = class FormHelper extends React.Component {
 
 	constructor(props) {
 		super(props);

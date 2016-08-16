@@ -46,6 +46,8 @@ Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSetti
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+
+  	let RentalStore = Equipt.stores.RentalStore;
   	
   	switch(type) {
 		case Constants.CHANGED_RENTAL_DATES:

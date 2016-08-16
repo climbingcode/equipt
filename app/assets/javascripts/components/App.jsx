@@ -10,7 +10,7 @@ Equipt.App = class App extends React.Component {
 	}
 
 	componentDidMount() {
-		if (Equipt.stores.AuthStore.authenticated()) appInit();	
+		if (Equipt.stores.AuthStore.authenticated()) Equipt.actions.appInit();	
 	}
 
 	componentWillMount() {
@@ -24,10 +24,10 @@ Equipt.App = class App extends React.Component {
   	_onLoginChange() {
 
   		this.setState({
-			currentUser: AuthStore.currentUser()
+			currentUser: Equipt.stores.AuthStore.currentUser()
 		});
 
-		if (AuthStore.authenticated()) {
+		if (Equipt.stores.AuthStore.authenticated()) {
 			setTimeout(() => {
 				var path = this.context.router.getCurrentPathname();
 				if (path.indexOf('/equipment') > -1) {
@@ -45,11 +45,15 @@ Equipt.App = class App extends React.Component {
   	}
 
 	render() {
+
+		let Nav = Equipt.views.Nav;
+		let NoticeController = Equipt.controllers.NoticeController;
+
 		return (
 			<content>
 				<Nav currentUser={this.state.currentUser}/>
 				<div className="main-content col-xs-10 col-xs-offset-1">
-					<Equipt.controllers.NoticeController/>
+					<NoticeController/>
 					<RouteHandler currentUser={this.state.currentUser}/>
 				</div>
 			</content>

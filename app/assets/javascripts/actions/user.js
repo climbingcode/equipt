@@ -1,6 +1,6 @@
-function createUser(userData) {
+Equipt.actions.createUser = function(userData) {
 	
-	API.post('/users', userData).then(
+	Equipt.API.post('/users', userData).then(
 		(data) => {
 			dispatchAction(Constants.NEW_SESSION, data);
 		}, 

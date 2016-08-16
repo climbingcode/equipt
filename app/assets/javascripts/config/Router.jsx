@@ -15,6 +15,10 @@ this.Routes = (
 		<Route 	name="signup" 
 				handler={Equipt.controllers.SignupController} 
 				path="signup"/>
+		<Route  name="equipmentCreate"
+				handler={Equipt.controllers.EquipmentCreateController}
+				path="equipment/new"
+		/>
 		<Route 	name="equipmentIndex" 
 				handler={Equipt.controllers.EquipmentIndexController} 
 				path="equipment">
@@ -36,13 +40,12 @@ this.Routes = (
 				</Route>
 		</Route>
 		<Route  name="ownersIndex"
-			    handler={OwnersIndexController}
-				path="owner/:id">
-
-		</Route>
-		<Route  name="equipmentCreate"
-				handler={OwnersCreateController}
-				path="owner/:id/equipment/new">
+			    handler={Equipt.controllers.OwnersIndexController}
+				path="owner/:userId/equipment">
+				<Route 	name="ownersShow"
+					   	handler={Equipt.controllers.OwnersShowController}
+					   	path=":equipmentId"
+				/>
 		</Route>
 		<DefaultRoute handler={Home}/>
 	</Route>

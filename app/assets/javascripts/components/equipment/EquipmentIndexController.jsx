@@ -1,4 +1,4 @@
-Equipt.controllers.EquipmentIndexController = class EquipmentIndexController extends Equipt.controllers.MainController {
+Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
@@ -9,7 +9,7 @@ Equipt.controllers.EquipmentIndexController = class EquipmentIndexController ext
 	}
 
 	componentWillMount() {
-		getEquipment();
+		Equipt.actions.getEquipment();
 	}
 
   	dataChanged() {

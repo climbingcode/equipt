@@ -1,4 +1,4 @@
-Equipt.controllers.LoginFormView = class LoginFormView extends Equipt.helpers.FormHelper {
+Equipt.views.LoginFormView = class LoginFormView extends Equipt.helpers.FormHelper {
 
 	constructor(props) {
 		super(props);
@@ -7,7 +7,7 @@ Equipt.controllers.LoginFormView = class LoginFormView extends Equipt.helpers.Fo
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		createSession(this.formData);
+		Equipt.actions.createSession(this.formData);
 	}
 
 	render() {

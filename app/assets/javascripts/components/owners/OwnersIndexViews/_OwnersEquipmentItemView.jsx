@@ -1,4 +1,4 @@
-class OwnersEquipmentItemView extends React.Component {
+Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -7,10 +7,14 @@ class OwnersEquipmentItemView extends React.Component {
 	render() {
 
 		var equipment = this.props.equipment;
+		let userId = this.props.userId;
 
 		return(
 			<div className="equipment-container col-xs-4">
-				<Link to="equipmentAvailability" params={{ id: equipment.id }}>
+				<Link to="ownersShow" params={{
+												equipmentId: equipment.id,
+												userId: userId
+											 }}>
 					<div className="well">
 						<h2>{equipment.equipment_name.capitalize()}</h2>
 						<h4>{equipment.brand}</h4>

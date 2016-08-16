@@ -1,13 +1,13 @@
 const Link = ReactRouter.Link;
 
-class Nav extends React.Component {
+Equipt.views.Nav = class extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 
 	logout() {
-		endSession();
+		Equipt.actions.endSession();
 		if (FB.getAuthResponse()) {		
 			FB.logout((res) => {
 				facebookStatusChanged(false);
@@ -24,7 +24,7 @@ class Nav extends React.Component {
 
 			if (pathname.indexOf('/owner/') > -1) {
 				
-				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success"
+				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success equipment-owner-toggle"
 														to="equipmentIndex" 
 														ref="equipmentLink">
 														Rent Equipment
@@ -32,9 +32,9 @@ class Nav extends React.Component {
 
 			} else {
 
-				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success"
+				var ownersAndEquipmentLink = 	<Link 	className="btn btn-success equipment-owner-toggle"
 														to="ownersIndex" 
-														params={{ id: currentUser.id }}
+														params={{ userId: currentUser.id }}
 														ref="ownersLink">
 														Owned Equipment
 												</Link>
@@ -88,6 +88,6 @@ class Nav extends React.Component {
 
 }
 
-Nav.contextTypes = {
+Equipt.views.Nav.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };

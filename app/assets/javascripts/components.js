@@ -2,7 +2,8 @@ var Equipt = {
 	controllers: {},
 	views: {},
 	helpers: {},
-	stores: {}
+	stores: {},
+	actions: {}
 };
 
 //= require ./config/Utils

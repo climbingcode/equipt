@@ -5,7 +5,7 @@ Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Compo
 	}
 
 	_findBy(query) {
-		getEquipment(query);
+		Equipt.actions.getEquipment(query);
 	}
 
 	render() {

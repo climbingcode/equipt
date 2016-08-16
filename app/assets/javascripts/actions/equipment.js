@@ -2,11 +2,11 @@
 // GET ALL EQUIPMENT
 // =================
 
-function getEquipment(query) {
+Equipt.actions.getEquipment = function(query) {
 
 	var params = query ? serialize({query: query}) : '';
 
-	API.get(`/equipments?${params}`).then(
+	Equipt.API.get(`/equipments?${params}`).then(
 		(data) => {
 			dispatchAction(Constants.EQUIPMENT_INDEX, data);
 		},
@@ -21,9 +21,9 @@ function getEquipment(query) {
 // GET ONE EQUIPMENT
 // =================
 
-function showEquipment(id) {
+Equipt.actions.showEquipment = function(id) {
 
-		API.get(`/equipments/${id}`).then(
+		Equipt.API.get(`/equipments/${id}`).then(
 		(data) => {
 			dispatchAction(Constants.EQUIPMENT_SHOW, data);
 		},

@@ -16,7 +16,7 @@ Equipt.controllers.LoginController = class LoginController extends Equipt.contro
 
   	render() {
 
-  		let LoginFormView = Equipt.controllers.LoginFormView;
+  		let LoginFormView = Equipt.views.LoginFormView;
 
 		return (
 			<LoginFormView 	errors={this.state.errors} />

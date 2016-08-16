@@ -1,6 +1,6 @@
-function getOwnersEquipment() {
+Equipt.actions.getOwnersEquipment = function() {
 
-	API.get('/owner/equipments').then(
+	Equipt.API.get('/owner/equipments').then(
 		(data) => {
 			dispatchAction(Constants.OWNERS_EQUIPMENT_INDEX, data);
 		},
@@ -9,4 +9,4 @@ function getOwnersEquipment() {
 		}
 	);
 
-}
+};
