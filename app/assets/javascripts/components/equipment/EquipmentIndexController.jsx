@@ -1,24 +1,27 @@
-class EquipmentIndexController extends MainComponent {
+Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [EquipmentStore];
+		this.stores = [Equipt.stores.EquipmentStore];
 		this.state  = {
-			equipments: EquipmentStore.getEquipments()
+			equipments: Equipt.stores.EquipmentStore.getEquipments()
 		}
 	}
 
 	componentWillMount() {
-		getEquipment();
+		Equipt.actions.getEquipment();
 	}
 
   	dataChanged() {
   		return {
-  			equipments: EquipmentStore.getEquipments()
+  			equipments: Equipt.stores.EquipmentStore.getEquipments()
   		};
   	}
 
 	render() {
+
+		let EquipmentIndexView = Equipt.views.EquipmentIndexView;
+
 		return (
 			<div className="equiptment-wrapper">
 				<RouteHandler/>

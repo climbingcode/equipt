@@ -1,11 +1,11 @@
-class EquipmentSearchView extends React.Component {
+Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 
 	_findBy(query) {
-		getEquipment(query);
+		Equipt.actions.getEquipment(query);
 	}
 
 	render() {

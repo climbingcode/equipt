@@ -1,33 +1,33 @@
 var RouteHandler = ReactRouter.RouteHandler;
 
-class App extends React.Component {
+Equipt.App = class App extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentUser: AuthStore.currentUser()
+			currentUser: Equipt.stores.AuthStore.currentUser()
 		}
 	}
 
 	componentDidMount() {
-		if (AuthStore.authenticated()) appInit();	
+		if (Equipt.stores.AuthStore.authenticated()) Equipt.actions.appInit();	
 	}
 
 	componentWillMount() {
-		AuthStore.addChangeListener(this._onLoginChange.bind(this));
+		Equipt.stores.AuthStore.addChangeListener(this._onLoginChange.bind(this));
 	}
   	
   	componentWillUnmount() {
-    	AuthStore.removeChangeListener(this._onLoginChange.bind(this));
+    	Equipt.stores.AuthStore.removeChangeListener(this._onLoginChange.bind(this));
   	}
 
   	_onLoginChange() {
 
   		this.setState({
-			currentUser: AuthStore.currentUser()
+			currentUser: Equipt.stores.AuthStore.currentUser()
 		});
 
-		if (AuthStore.authenticated()) {
+		if (Equipt.stores.AuthStore.authenticated()) {
 			setTimeout(() => {
 				var path = this.context.router.getCurrentPathname();
 				if (path.indexOf('/equipment') > -1) {
@@ -45,6 +45,10 @@ class App extends React.Component {
   	}
 
 	render() {
+
+		let Nav = Equipt.views.Nav;
+		let NoticeController = Equipt.controllers.NoticeController;
+
 		return (
 			<content>
 				<Nav currentUser={this.state.currentUser}/>
@@ -58,6 +62,6 @@ class App extends React.Component {
 	
 }
 
-App.contextTypes = {
+Equipt.App.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };

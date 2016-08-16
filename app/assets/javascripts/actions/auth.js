@@ -2,9 +2,9 @@
 // NEW SESSION
 // ===============
 
-function createSession(userData) {
-
-	API.post('/session', userData).then(
+Equipt.actions.createSession = function(userData) {
+	
+	Equipt.API.post('/session', userData).then(
 		(data) => {
 			dispatchAction(Constants.NEW_SESSION, data);
 		}, 
@@ -13,13 +13,13 @@ function createSession(userData) {
 		}
 	);
 
-}
+};
 
 // ===============
 // END SESSION
 // ===============
 
-function endSession() {
+Equipt.actions.endSession = function() {
 	dispatchAction(Constants.END_SESSION, null);
 }
 
@@ -27,9 +27,9 @@ function endSession() {
 // IF SESSION, GET USER
 // =====================
 
-function appInit() {
+Equipt.actions.appInit = function() {
 
-	API.get('/users/' + AuthStore.getUserId()).then(
+	Equipt.API.get('/users/' + Equipt.stores.AuthStore.getUserId()).then(
 		(data) => {
 			dispatchAction(Constants.NEW_SESSION, data);
 		}, 
@@ -44,7 +44,7 @@ function appInit() {
 // IF 500 UNAUTH RESPONSE
 // ======================
 
-function unauthorizedUser() {
+Equipt.actions.unauthorizedUser = function() {
 	dispatchAction(Constants.END_SESSION, null);
 }
 
@@ -52,7 +52,7 @@ function unauthorizedUser() {
 // FACEBOOK LOGIN
 // ======================
 
-function facebookStatusChanged(isLoggedIn) {
+Equipt.actions.facebookStatusChanged = function(isLoggedIn) {
 	// Must be sent to exact path below to work
 	if (isLoggedIn) {	
 		$.post('/auth/facebook/callback').then(function(data) {

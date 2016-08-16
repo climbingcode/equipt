@@ -21,5 +21,6 @@
 //= require flux
 //= require eventemitter
 //= require_tree ./plugins
+//= require ./stores/StoreSettings
 //= require components
 //= require_tree .

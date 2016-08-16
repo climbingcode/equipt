@@ -1,4 +1,4 @@
-class OwnersIndexView extends React.Component {
+Equipt.views.OwnersIndexView = class extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -6,24 +6,24 @@ class OwnersIndexView extends React.Component {
 
 	render()  {
 
-		var equipmentListing = [];
+		let OwnersEquipmentItemView = Equipt.views.OwnersEquipmentItemView;
+
+		let equipmentListing = [];
+		let userId = Equipt.stores.AuthStore.getUserId();
 
 		for (var i = 0; i < this.props.equipment.length; i++) {
 			let equipment 	  = this.props.equipment[i];
 			let equipmentItem = <OwnersEquipmentItemView 
 									key={`equipment_${equipment.id}`} 
-									equipment={equipment}/>;
+									equipment={equipment}
+									userId={userId} />;
 			equipmentListing.push(equipmentItem);
 		}
 
 		return (
 			<div className="owners-equipment-wrapper">
 				<div>
-					<Link
-						to="equipmentCreate"
-						params={{id: AuthStore.getUserId()}}
-						>Add Equipment
-					</Link>
+					<Link to="equipmentCreate">Add Equipment</Link>
 				</div>
 				{equipmentListing}
 			</div>

@@ -4,50 +4,53 @@ const DefaultRoute = ReactRouter.DefaultRoute;
 
 this.Routes = (
 	<Route 	name="app" 
-			handler={App} 
+			handler={Equipt.App} 
 			path="/">
 		<Route 	name="home"  
 				handler={Home} 
 				path="home"/>
 		<Route 	name="login" 
-				handler={LoginController} 
+				handler={Equipt.controllers.LoginController} 
 				path="login"/>
 		<Route 	name="signup" 
-				handler={SignupController} 
+				handler={Equipt.controllers.SignupController} 
 				path="signup"/>
+		<Route  name="equipmentCreate"
+				handler={Equipt.controllers.EquipmentCreateController}
+				path="equipment/new"
+		/>
 		<Route 	name="equipmentIndex" 
-				handler={EquipmentIndexController} 
+				handler={Equipt.controllers.EquipmentIndexController} 
 				path="equipment">
 				<Route 	name="equipmentShow"
-						handler={EquipmentShowController}
+						handler={Equipt.controllers.EquipmentShowController}
 						path=":id">
 					<Route 	name="equipmentAvailability"
-							handler={EquipmentAvailabilityView}
+							handler={Equipt.views.EquipmentAvailabilityView}
 							path="availability"/>
 					<Route 	name="equipmentInfo"
-							handler={EquipmentInfoView}
+							handler={Equipt.views.EquipmentInfoView}
 							path="info"/>
 					<Route 	name="equipmentOwner"
-							handler={EquipmentOwnerView}
+							handler={Equipt.views.EquipmentOwnerView}
 							path="owner"/>
 					<Route  name="equipmentConfirmation"
-							handler={EquipmentConfirmation}
+							handler={Equipt.views.EquipmentConfirmationView}
 							path="confirmation"/>
 				</Route>
 		</Route>
 		<Route  name="ownersIndex"
-			    handler={OwnersIndexController}
-				path="owner/:id">
-
-		</Route>
-		<Route  name="equipmentCreate"
-				handler={OwnersCreateController}
-				path="owner/:id/equipment/new">
+			    handler={Equipt.controllers.OwnersIndexController}
+				path="owner/:userId/equipment">
+				<Route 	name="ownersShow"
+					   	handler={Equipt.controllers.OwnersShowController}
+					   	path=":equipmentId"
+				/>
 		</Route>
 		<DefaultRoute handler={Home}/>
 	</Route>
 ), document.getElementById('root');
 
-EquipmentIndexController.willTransitionTo = function(transition) {
-	if (!AuthStore.authenticated()) transition.redirect('/home');
+Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
+	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
 }

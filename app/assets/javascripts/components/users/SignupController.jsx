@@ -1,27 +1,25 @@
-class SignupController extends FormComponent {
+Equipt.controllers.SignupController = class SignupController extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [ErrorsStore];
+		this.stores = [Equipt.stores.ErrorsStore];
 		this.state = {
-			errors: ErrorsStore.getErrors()
+			errors: Equipt.stores.ErrorsStore.getErrors()
 		}
-	}
-
-	submit(formData) {
-		// submit functionality handled in mixins/FormComponent.submit
-		createUser({user: formData});
 	}
 
   	dataChanged() {
   		return {
-  			errors: ErrorsStore.getErrors()
+  			errors: Equipt.stores.ErrorsStore.getErrors()
   		};
   	}
 
 	render() {
+
+		let SignupFormView = Equipt.views.SignupFormView;
+
 		return (
-			<SignupForm errors={this.state.errors}/>
+			<SignupFormView errors={this.state.errors} />
 		)
 	}
 	

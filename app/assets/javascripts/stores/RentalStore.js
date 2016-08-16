@@ -3,7 +3,7 @@ var _rentalTime  	 = null;
 var _rentedEquipment = null;
 var _owner			 = null;
 
-const RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	getRentalDates() {
         return _rentalDates;
@@ -46,6 +46,8 @@ const RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+
+  	let RentalStore = Equipt.stores.RentalStore;
   	
   	switch(type) {
 		case Constants.CHANGED_RENTAL_DATES:

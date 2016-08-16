@@ -1,4 +1,4 @@
-class EquipmentTabsView extends React.Component {
+Equipt.views.EquipmentTabsView = class EquipmentTabsView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -7,7 +7,7 @@ class EquipmentTabsView extends React.Component {
 	render() {
 
 		let tabOptions  = ['Availability', 'Info', 'Owner'];
-		let equipmentId = EquipmentStore.getEquipment().id ?  EquipmentStore.getEquipment().id : 0;
+		let equipmentId = Equipt.stores.EquipmentStore.getEquipment().id ?  Equipt.stores.EquipmentStore.getEquipment().id : 0;
 
 		return (
 			<div className="equipment-info-tabs tabs">

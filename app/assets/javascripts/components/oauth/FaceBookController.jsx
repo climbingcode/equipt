@@ -1,10 +1,10 @@
-class FaceBookController extends MainComponent {
+Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [AuthStore];
+		this.stores = [Equipt.stores.AuthStore];
 		this.state = {
-			logginIn: AuthStore.isFacebookLogin(),
+			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
 			facebookLoaded: false
 		}
 		this.loadFacebook();
@@ -19,7 +19,7 @@ class FaceBookController extends MainComponent {
 	    	window.FB.getLoginStatus((response) => {
 	    		let loggedIn = response.status === 'connected' ? true : false;
 	    		this.setState({
-	    			logginIn: AuthStore.isFacebookLogin(),
+	    			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
 					facebookLoaded: true
 	    		});
 	    		this.forceUpdate();
@@ -30,7 +30,7 @@ class FaceBookController extends MainComponent {
 	componentWillMount() {
 		if (window.FB && window.FB.getAuthResponse()) {
 			this.setState({
-	    		logginIn: AuthStore.isFacebookLogin(),
+	    		logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
 				facebookLoaded: true
 	    	});	
 	    	this.forceUpdate();			
@@ -39,7 +39,7 @@ class FaceBookController extends MainComponent {
 
 	dataChanged() {
 		this.setState({
-			loggedIn: AuthStore.isFacebookLogin(),
+			loggedIn: Equipt.stores.AuthStore.isFacebookLogin(),
 			facebookLoaded: true
 		});
 	}

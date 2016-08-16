@@ -1,4 +1,4 @@
-const API = {
+Equipt.API = {
 
 	path: '/api',
 
@@ -43,14 +43,16 @@ const API = {
 	send: function(url, method, data) {
 
 		return new Promise((resolve, reject) => {
+
+			let ApiKey = Equipt.stores.AuthStore.getApiKey();
 		
 			var ajaxObj = {
-				url: API.path + url,
+				url: Equipt.API.path + url,
 				type: method,
 				dataType: 'json',
 				contentType: 'application/json',
 				beforeSend: (request) => {
-	            	request.setRequestHeader('AUTHORIZATION', AuthStore.getApiKey());
+	            	request.setRequestHeader('AUTHORIZATION', ApiKey);
 	        	}
 			};
 

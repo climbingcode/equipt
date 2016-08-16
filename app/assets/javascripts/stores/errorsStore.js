@@ -1,6 +1,6 @@
 var _errors = {};
 
-const ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+Equipt.stores.ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	getErrors() {
         return _errors;
@@ -15,10 +15,13 @@ const ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+
+  	let ErrorsStore = Equipt.stores.ErrorsStore;
+
   	switch(type) {
 		case Constants.HAS_ERRORS:
 			_errors = data || {};
-            ErrorsStore.emitChange();
+           	ErrorsStore.emitChange();
 		break; 
 	}
 

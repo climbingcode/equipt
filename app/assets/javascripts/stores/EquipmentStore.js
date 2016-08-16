@@ -1,7 +1,7 @@
 var _equipments = [];
 var	_equipment = {};
 
-const EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	getEquipments() {
         return _equipments;
@@ -16,6 +16,8 @@ const EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, 
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+
+  	let EquipmentStore = Equipt.stores.EquipmentStore;
   	
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:

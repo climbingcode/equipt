@@ -1,4 +1,4 @@
-class EquipmentItemView extends React.Component {
+Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -26,6 +26,6 @@ class EquipmentItemView extends React.Component {
 
 }
 
-EquipmentItemView.contextTypes = {
+Equipt.views.EquipmentItemView.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };

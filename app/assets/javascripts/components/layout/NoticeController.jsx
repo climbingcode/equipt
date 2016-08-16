@@ -1,12 +1,12 @@
 const NOTICE_DURATION = 5000;
 
-class NoticeController extends MainComponent {
+Equipt.controllers.NoticeController = class NoticeController extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [ErrorsStore];
+		this.stores = [ Equipt.stores.ErrorsStore ];
 		this.state = {
-			errors: ErrorsStore.getErrors(),
+			errors: Equipt.stores.ErrorsStore.getErrors(),
 			info: {}
 		}
 		this.timeout;
@@ -14,7 +14,7 @@ class NoticeController extends MainComponent {
 
 	_onChange() {	
 	    this.setState({
-	    	errors: ErrorsStore.getErrors()
+	    	errors: Equipt.stores.ErrorsStore.getErrors()
 	    });
 	    this.clearNotices();
   	}

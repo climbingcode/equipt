@@ -1,41 +1,48 @@
-class EquipmentShowController extends MainComponent {
+Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [EquipmentStore, RentalStore, ErrorsStore];
+		this.stores = 	[	
+							Equipt.stores.EquipmentStore, 
+							Equipt.stores.RentalStore, 
+							Equipt.stores.ErrorsStore
+						];
 		this.state = {
-			equipment: 	 EquipmentStore.getEquipment(),
-  			rentalDates: RentalStore.getRentalDates(),
-  			rentalTime:  RentalStore.getRentalTime(),
-  			rental: 	 RentalStore.getRental(),
-  			errors: 	 ErrorsStore.getErrors()
+			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
+  			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
+  			rentalTime:  Equipt.stores.RentalStore.getRentalTime(),
+  			rental: 	 Equipt.stores.RentalStore.getRental(),
+  			errors: 	 Equipt.stores.ErrorsStore.getErrors()
 		}
 	}
 
 	componentWillMount() {
 		let id = this.context.router.getCurrentParams().id;
-		showEquipment(id);
+		Equipt.actions.showEquipment(id);
 	}
 
   	dataChanged() {
 
-  		if (RentalStore.getRental()) {
+  		if (Equipt.stores.RentalStore.getRental()) {
 		    this.context.router.transitionTo('equipmentConfirmation', {
-		    	id: RentalStore.getRental().id
+		    	id: Equipt.stores.RentalStore.getRental().id
 		    });
     	}
   		
   		return {
-  			equipment: 	 EquipmentStore.getEquipment(),
-  			rentalDates: RentalStore.getRentalDates(),
-  			rentalTime:  RentalStore.getRentalTime(),
-  			rental: 	 RentalStore.getRental(),
-  			errors: 	 ErrorsStore.getErrors()
+  			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
+  			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
+  			rentalTime:  Equipt.stores.RentalStore.getRentalTime(),
+  			rental: 	 Equipt.stores.RentalStore.getRental(),
+  			errors: 	 Equipt.stores.ErrorsStore.getErrors()
   		}
 
   	}
 
 	render() {
+
+		let EquipmentShowView = Equipt.views.EquipmentShowView; 
+
 		return (
 			<EquipmentShowView  equipment={this.state.equipment}
 								rentalDates={this.state.rentalDates}
@@ -48,6 +55,6 @@ class EquipmentShowController extends MainComponent {
 
 }
 
-EquipmentShowController.contextTypes = {
+Equipt.controllers.EquipmentShowController.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };
