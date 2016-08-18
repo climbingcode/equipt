@@ -23,4 +23,5 @@
 //= require_tree ./plugins
 //= require ./stores/StoreSettings
 //= require components
+//= require_tree ./helpers
 //= require_tree .

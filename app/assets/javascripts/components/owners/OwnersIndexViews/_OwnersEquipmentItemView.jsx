@@ -16,7 +16,7 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 												userId: userId
 											 }}>
 					<div className="well">
-						<h2>{equipment.equipment_name.capitalize()}</h2>
+						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
 						<h4>{equipment.brand}</h4>
 						<img className="img-responsive center-block" src="/assets/equipment-default.png"/>
 						<h5>{equipment.model}</h5>

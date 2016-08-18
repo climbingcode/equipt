@@ -9,8 +9,10 @@ Equipt.controllers.EquipmentCreateController = class extends Equipt.controllers.
 
 		let EquipmentCreateView = Equipt.views.EquipmentCreateView;
 
+		let userId = Equipt.stores.AuthStore.getUserId();
+
 		return (
-			<EquipmentCreateView/>
+			<EquipmentCreateView userId={userId}/>
 		)
 		
 	}

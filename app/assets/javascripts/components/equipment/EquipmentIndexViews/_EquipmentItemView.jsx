@@ -12,7 +12,7 @@ Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component
 			<div className="equipment-container col-xs-4">
 				<Link to="equipmentAvailability" params={{ id: equipment.id }}>
 					<div className="well">
-						<h2>{equipment.equipment_name.capitalize()}</h2>
+						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
 						<h4>{equipment.brand}</h4>
 						<img className="img-responsive center-block" src="/assets/equipment-default.png"/>
 						<h5>{equipment.model}</h5>

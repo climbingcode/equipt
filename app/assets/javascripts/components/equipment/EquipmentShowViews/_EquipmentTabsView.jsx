@@ -7,7 +7,7 @@ Equipt.views.EquipmentTabsView = class EquipmentTabsView extends React.Component
 	render() {
 
 		let tabOptions  = ['Availability', 'Info', 'Owner'];
-		let equipmentId = Equipt.stores.EquipmentStore.getEquipment().id ?  Equipt.stores.EquipmentStore.getEquipment().id : 0;
+		let equipmentId = Equipt.stores.EquipmentStore.getEquipment().id || 0;
 
 		return (
 			<div className="equipment-info-tabs tabs">

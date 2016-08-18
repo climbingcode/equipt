@@ -23,7 +23,10 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 		return (
 			<div className="owners-equipment-wrapper">
 				<div>
-					<Link to="equipmentCreate">Add Equipment</Link>
+					<Link   to="equipmentCreate"
+							className="btn btn-success">
+							Add Equipment
+					</Link>
 				</div>
 				{equipmentListing}
 			</div>

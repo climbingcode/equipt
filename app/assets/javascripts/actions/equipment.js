@@ -15,7 +15,7 @@ Equipt.actions.getEquipment = function(query) {
 		}
 	);
 
-}
+};
 
 // =================
 // GET ONE EQUIPMENT
@@ -32,4 +32,21 @@ Equipt.actions.showEquipment = function(id) {
 		}
 	);
 		
-}
+};
+
+// =================
+// CREATE EQUIPMENT
+// =================
+
+Equipt.actions.addEquiptment = function(equipment) {
+
+	Equipt.API.post(`/equipments`, equipment).then(
+		(data) => {
+			dispatchAction(Constants.EQUIPMENT_CREATE, data);
+		},
+		(err) => {
+			console.log('Error Creating Equipment');
+		}
+	);
+
+};
