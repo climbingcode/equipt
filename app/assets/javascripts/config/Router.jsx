@@ -45,12 +45,11 @@ this.Routes = (
 		</Route>
 		<Route  name="ownersIndex"
 			    handler={Equipt.controllers.OwnersIndexController}
-				path="owner/:userId/equipment">
-				<Route 	name="ownersShow"
-					   	handler={Equipt.controllers.OwnersShowController}
-					   	path=":equipmentId"
-				/>
-		</Route>
+				path="owner/:userId/equipment"/>
+		<Route 	name="ownersShow"
+				handler={Equipt.controllers.OwnersShowController}
+				path="owner/:userId/equipment/:equipmentId"
+		/>
 		<DefaultRoute handler={Home}/>
 	</Route>
 ), document.getElementById('root');

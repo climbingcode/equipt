@@ -1,5 +1,9 @@
 Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 
+	static contextTypes = {
+		router: React.PropTypes.func.isRequired
+	}
+
 	constructor(props) {
 		super(props);
 	}
@@ -9,12 +13,14 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 		var equipment = this.props.equipment;
 		let userId = this.props.userId;
 
+		let linkParams = {	
+							equipmentId: equipment.id,
+							userId: userId
+						};
+
 		return(
 			<div className="equipment-container col-xs-4">
-				<Link to="ownersShow" params={{
-												equipmentId: equipment.id,
-												userId: userId
-											 }}>
+				<Link to="ownersShow" params={linkParams}>
 					<div className="well">
 						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
 						<h4>{equipment.brand}</h4>
@@ -22,6 +28,10 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 						<h5>{equipment.model}</h5>
 						<p>Price Per Day: ${ equipment.price_per_day }</p>
 						<p>Deposit: ${ equipment.desposit_amount }</p>
+						<span className="equipment-tools">
+							<i className="fa fa-pencil-square-o fa-3" aria-hidden="true"></i>
+							<i className="fa fa-trash fa-3" aria-hidden="true"></i>
+						</span>
 					</div>
 				</Link>
 			</div>

@@ -59,13 +59,6 @@ Equipt.views.EquipmentShowView = class EquipmentShowView extends React.Component
 						</button>
 					</div>
 					<h4 className="rental-dates-header col-sm-8">{rentalDates}</h4>
-					<div className="close col-sm-2">
-						<Link to="equipmentIndex">
-							<i className="fa fa-times-circle pull-right" 
-							   aria-hidden="true">
-							</i>
-						</Link>
-					</div>
 				</div>
 				<div className="modal-dialog">						
 					<EquipmentTabsView equipment={equipment}/>
