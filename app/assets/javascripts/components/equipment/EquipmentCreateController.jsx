@@ -2,7 +2,16 @@ Equipt.controllers.EquipmentCreateController = class extends Equipt.controllers.
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.EquipmentStore]
+		this.stores = [Equipt.stores.EquipmentStore, Equipt.stores.ErrorsStore]
+		this.state = {
+			errors: Equipt.stores.ErrorsStore.getErrors()
+		}
+	}
+
+	dataChanged() {
+		return {
+			errors: Equipt.stores.ErrorsStore.getErrors()
+		}
 	}
 
 	render() {
@@ -12,7 +21,7 @@ Equipt.controllers.EquipmentCreateController = class extends Equipt.controllers.
 		let userId = Equipt.stores.AuthStore.getUserId();
 
 		return (
-			<EquipmentCreateView userId={userId}/>
+			<EquipmentCreateView userId={userId} errors={this.state.errors}/>
 		)
 		
 	}

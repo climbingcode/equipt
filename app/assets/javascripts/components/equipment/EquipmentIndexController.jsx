@@ -4,7 +4,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		super(props);
 		this.stores = [Equipt.stores.EquipmentStore];
 		this.state  = {
-			equipments: Equipt.stores.EquipmentStore.getEquipments()
+			equipment: Equipt.stores.EquipmentStore.getEquipments()
 		}
 	}
 
@@ -14,7 +14,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 
   	dataChanged() {
   		return {
-  			equipments: Equipt.stores.EquipmentStore.getEquipments()
+  			equipment: Equipt.stores.EquipmentStore.getEquipments()
   		};
   	}
 
@@ -25,7 +25,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		return (
 			<div className="equiptment-wrapper">
 				<RouteHandler/>
-				<EquipmentIndexView equipments={this.state.equipments}/>
+				<EquipmentIndexView { ...this.state }/>
 			</div>
 		)
 	}

@@ -20,6 +20,9 @@ Equipt.views.Nav = class extends React.Component {
 		let currentUser = this.props.currentUser;
 		let pathname    = this.context.router.getCurrentPath();
 
+		let userName =  this.props.currentUser ? this.props.currentUser.firstname.capitalize() : "";
+		let userId =  this.props.currentUser ? this.props.currentUser.id : 0;
+
 		if (currentUser) {
 
 			if (pathname.indexOf('/owner/') > -1) {
@@ -47,7 +50,9 @@ Equipt.views.Nav = class extends React.Component {
 										{ownersAndEquipmentLink}
 									</span>
 									<span className="col-sm-6">
-										<h3 className="nav-title">{this.props.currentUser.firstname.capitalize()}</h3>
+										<Link to="profile" params={{ userId: userId }}>
+											<h3 className="nav-title">{ userName }</h3>
+										</Link>
 									</span>
 									<button className="logout-btn pull-right btn btn-success"
 											onClick={this.logout.bind(this)}>

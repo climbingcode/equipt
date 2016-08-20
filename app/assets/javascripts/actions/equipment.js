@@ -22,23 +22,20 @@ Equipt.actions.getEquipment = function(query) {
 // =================
 
 Equipt.actions.showEquipment = function(id) {
-
-		Equipt.API.get(`/equipments/${id}`).then(
-		(data) => {
-			dispatchAction(Constants.EQUIPMENT_SHOW, data);
-		},
-		(err) => {
-			console.log('Error Getting Equipment');
-		}
-	);
-		
+	Equipt.API.get(`/equipments/${id}`).then(
+	(data) => {
+		dispatchAction(Constants.EQUIPMENT_SHOW, data);
+	},
+	(err) => {
+		console.log('Error Getting Equipment');
+	});
 };
 
 // =================
 // CREATE EQUIPMENT
 // =================
 
-Equipt.actions.addEquiptment = function(equipment) {
+Equipt.actions.createEquiptment = function(equipment) {
 
 	Equipt.API.post(`/equipments`, equipment).then(
 		(data) => {

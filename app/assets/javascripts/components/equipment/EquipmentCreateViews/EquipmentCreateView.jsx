@@ -17,7 +17,7 @@ Equipt.views.EquipmentCreateView = class extends React.Component {
 					 	className="btn btn-success">
 						Your added Equipment
 				</Link>
-				<EquipmentCreateFormView/>
+				<EquipmentCreateFormView errors={ this.props.errors }/>
 			</div>
 		)
 

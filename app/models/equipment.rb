@@ -7,4 +7,6 @@ class Equipment < ActiveRecord::Base
 
 	scope :search, -> (query) { where(category: query[:category]) if query }
 
+  	validates :equipment_name, :brand, presence: true
+
 end

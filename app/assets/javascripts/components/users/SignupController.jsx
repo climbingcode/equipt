@@ -8,6 +8,10 @@ Equipt.controllers.SignupController = class SignupController extends Equipt.cont
 		}
 	}
 
+	submit(user) {
+		Equipt.actions.createUser({user: user});
+	}
+
   	dataChanged() {
   		return {
   			errors: Equipt.stores.ErrorsStore.getErrors()
@@ -17,9 +21,13 @@ Equipt.controllers.SignupController = class SignupController extends Equipt.cont
 	render() {
 
 		let SignupFormView = Equipt.views.SignupFormView;
+		let FaceBookController = Equipt.controllers.FaceBookController;
 
 		return (
-			<SignupFormView errors={this.state.errors} />
+			<div className="signup-wrapper">
+				<FaceBookController/>
+				<SignupFormView {...this.props} submit={this.submit.bind(this)} />
+			</div>
 		)
 	}
 	

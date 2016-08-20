@@ -29,7 +29,7 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	},
 
 	getUserId() {
-		return this.getSession() && JSON.parse(this.getSession()).id;
+		return this.getSession() && JSON.parse(this.getSession()).user_id;
 	},
 
 	isFacebookLogin() {

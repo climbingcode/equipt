@@ -26,7 +26,6 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 	}
 
 	render() {
-
 		return (
 			<NoticeView errors={this.state.errors.notice}/>
 		)

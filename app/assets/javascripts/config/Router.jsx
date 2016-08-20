@@ -15,6 +15,10 @@ this.Routes = (
 		<Route 	name="signup" 
 				handler={Equipt.controllers.SignupController} 
 				path="signup"/>
+		<Route  name="profile"
+				handler={Equipt.controllers.ProfileController}
+				path="users/:userId/edit"
+		/>
 		<Route  name="equipmentCreate"
 				handler={Equipt.controllers.EquipmentCreateController}
 				path="equipment/new"

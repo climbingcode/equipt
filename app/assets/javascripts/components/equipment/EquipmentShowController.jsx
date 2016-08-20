@@ -44,12 +44,7 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		let EquipmentShowView = Equipt.views.EquipmentShowView; 
 
 		return (
-			<EquipmentShowView  equipment={this.state.equipment}
-								rentalDates={this.state.rentalDates}
-								rentalTimes={this.state.rentalTime}
-								rental={this.state.rental}
-								errors={this.state.errors}
-			/>
+			<EquipmentShowView  { ...this.props }/>
 		)
 	}
 

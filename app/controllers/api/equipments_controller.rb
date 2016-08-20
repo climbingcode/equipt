@@ -19,12 +19,16 @@ class Api::EquipmentsController < ApplicationController
 	end
 
 	def create
-		equipment = current_user.equipments.create(equipment_params)
-
+		equipment = current_user.equipments.new(equipment_params)
+		if equipment.save
+			render json: { equipment: equipment }, status: 200
+		else
+			render json: { errors: equipment.errors }, status: 200
+		end
 	end
 
 	def equipment_params
-		params.require(:rental).permit(:category, :equipment_name, :brand, :model, :description, :years_old, :price_per_day, :price_per_week, :desposit_amount)
+		params.require(:equipment).permit(:category, :equipment_name, :brand, :model, :description, :years_old, :price_per_day, :price_per_week, :desposit_amount)
 	end
 
 end

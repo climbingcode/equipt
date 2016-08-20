@@ -13,9 +13,11 @@ Equipt.views.EquipmentAvailabilityView = class EquipmentAvailabilityView extends
 	}
 
 	render() {
-		const rentals = this.props.equipment.rentals;
+
+		const equipment  = this.props.equipment;
+		const rentals 	 = equipment ? equipment.rentals : null;
 		const rentalTime = Equipt.stores.RentalStore.getRentalTime()
-		let pickUpTimes = [];
+		let pickUpTimes  = [];
 
 		for (let i = 0; i <= 24; i++) {
 			let time = i.toFixed(2);

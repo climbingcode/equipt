@@ -26,8 +26,11 @@ Equipt.API = {
 
 	put: function(url, data) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'PUT', data).then((res) => {
-				
+			this.send(url, 'PUT', data)
+			.then((res) => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
 			});
 		});
 	},

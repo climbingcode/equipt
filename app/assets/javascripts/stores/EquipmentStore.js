@@ -1,14 +1,35 @@
-var _equipments = [];
-var	_equipment = {};
 
 Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
+	_equipments: [],
+	_equipment: {}, 
+
 	getEquipments() {
-        return _equipments;
+        return this._equipments;
 	},
 
 	getEquipment() {
-		return _equipment;	
+		return this._equipment;	
+	},
+
+	setEquipments(equipment) {
+		this._equipments = equipment;
+	},
+
+	setEquipment(equipment) {
+		this._equipment = equipment;
+	},
+
+	addEquipment(equipment) {
+		this._equipments.push(equipment);
+	},
+
+	findEquipment(id) {
+		let foundEquipment = false
+		this._equipments.forEach(function(equipment) {
+			if (equipment.id == id) foundEquipment = equipment;	
+		});
+		return foundEquipment;
 	}
 
 });
@@ -21,17 +42,19 @@ AppDispatcher.register(function(action) {
   	
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:
-			_equipments = data;
-            EquipmentStore.emitChange();
+			EquipmentStore.setEquipments(data);
 		break; 
 		case Constants.EQUIPMENT_SHOW:
-			_equipment = data;
-			EquipmentStore.emitChange();
+			EquipmentStore.setEquipment(data);
+		break;
+		case Constants.EQUIPMENT_CREATE:
+			EquipmentStore.addEquipment(data);
 		break;
 		case Constants.OWNERS_EQUIPMENT_INDEX:
-			_equipment = data;
-			EquipmentStore.emitChange();
+			EquipmentStore.setEquipment(data);
 		break;
 	}
+
+	EquipmentStore.emitChange();
 
 });
