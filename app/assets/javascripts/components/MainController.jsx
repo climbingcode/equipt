@@ -20,6 +20,12 @@ Equipt.controllers.MainController = class MainController extends React.Component
         Equipt.stores.ErrorsStore.clearErrors();
     }
 
+    willTransitionTo(transition) {
+        if (this.protected && !Equipt.stores.AuthStore.authenticated()) {
+            transition.redirect('/home');   
+        } 
+    }
+
     _onChange() {
         if (!this.dataChanged) return;
         this.mounted && this.setState(this.dataChanged());

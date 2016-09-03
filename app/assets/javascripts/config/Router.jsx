@@ -43,18 +43,24 @@ this.Routes = (
 							path="confirmation"/>
 				</Route>
 		</Route>
+		<Route 	name="equipmentEdit"
+				handler={Equipt.controllers.EquipmentEditController}
+				path="equipment/:id/edit"/>
 		<Route  name="ownersIndex"
 			    handler={Equipt.controllers.OwnersIndexController}
-				path="owner/:userId/equipment">
-				<Route 	name="ownersShow"
-					   	handler={Equipt.controllers.OwnersShowController}
-					   	path=":equipmentId"
-				/>
-		</Route>
+				path="owner/:userId/equipment"/>
+		<Route 	name="ownersShow"
+				handler={Equipt.controllers.OwnersShowController}
+				path="owner/:userId/equipment/:equipmentId"
+		/>
 		<DefaultRoute handler={Home}/>
 	</Route>
 ), document.getElementById('root');
 
-Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
-	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
-}
+Location.addChangeListener(function(){
+	Equipt.actions.clearNotice();
+})
+
+// Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
+// 	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
+// }

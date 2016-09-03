@@ -7,17 +7,16 @@ Equipt.views.EquipmentCreateView = class extends React.Component {
 	render() {
 
 		let EquipmentCreateFormView = Equipt.views.EquipmentCreateFormView;
-
-		let userId = this.props.userId;
+		let userId = this.props.currentUser ? this.props.currentUser.id : 0;
 
 		return (
 			<div className="add-equipment-wrapper">
 				<Link 	to="ownersIndex" 
-					 	params={{userId: userId}}
+					 	params={{userId: userId }}
 					 	className="btn btn-success">
 						Your added Equipment
 				</Link>
-				<EquipmentCreateFormView errors={ this.props.errors }/>
+				<EquipmentCreateFormView { ...this.props } />
 			</div>
 		)
 

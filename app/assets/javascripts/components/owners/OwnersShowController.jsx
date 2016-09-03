@@ -1,4 +1,4 @@
-Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.MainController {
+Equipt.controllers.OwnersShowController = class OwnersShowController extends Equipt.controllers.MainController {
 
 	static contextTypes = {
 		router: React.PropTypes.func.isRequired
@@ -20,19 +20,8 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		}
 	}
 
-	componentWillMount() {
-		let id = this.context.router.getCurrentParams().id;
-		Equipt.actions.showEquipment(id);
-	}
+	dataChanged() {
 
-  	dataChanged() {
-
-  		if (Equipt.stores.RentalStore.getRental()) {
-		    this.context.router.transitionTo('equipmentConfirmation', {
-		    	id: Equipt.stores.RentalStore.getRental().id
-		    });
-    	}
-  		
   		return {
   			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
   			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
@@ -43,13 +32,20 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 
   	}
 
+	componentWillMount() {
+		let id = this.context.router.getCurrentParams().equipmentId;
+		Equipt.actions.showEquipment(id);
+	}
+
 	render() {
 
-		let EquipmentShowView = Equipt.views.EquipmentShowView; 
+		const OwnersShowView = Equipt.views.OwnersShowView;
+		const userId = Equipt.stores.AuthStore.getUserId();
 
 		return (
-			<EquipmentShowView  { ...this.props } />
+			<OwnersShowView userId={userId} { ...this.state }/>
 		)
+
 	}
 
 }

@@ -4,6 +4,7 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 		super(props);
 		this.stores = [Equipt.stores.EquipmentStore];
 		this.state = this.dataChanged();
+		this.protected = true;
 	}
 
 	componentWillMount() {
@@ -12,7 +13,7 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 
 	dataChanged() {
 		return {
-			equipment: Equipt.stores.EquipmentStore.getEquipment()
+			equipment: Equipt.stores.EquipmentStore.getEquipments()
 		}
 	}
 

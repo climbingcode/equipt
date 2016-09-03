@@ -35,14 +35,50 @@ Equipt.actions.showEquipment = function(id) {
 // CREATE EQUIPMENT
 // =================
 
-Equipt.actions.createEquiptment = function(equipment) {
+Equipt.actions.createEquiptment = function(equipment, callback) {
 
 	Equipt.API.post(`/equipments`, equipment).then(
 		(data) => {
-			dispatchAction(Constants.EQUIPMENT_CREATE, data);
+			dispatchAction(Constants.EQUIPMENT_CREATE, data.equipment);
+			if (callback) callback();
 		},
 		(err) => {
 			console.log('Error Creating Equipment');
+		}
+	);
+
+};
+
+// =================
+// UPDATE EQUIPMENT
+// =================
+
+Equipt.actions.updateEquiptment = function(equipment, id, callback) {
+
+	Equipt.API.put(`/equipments/${ id }`, equipment).then(
+		(data) => {
+			dispatchAction(Constants.EQUIPMENT_UPDATE, data);
+			if (callback) callback();
+		},
+		(err) => {
+			console.log('Error Updating Equipment');
+		}
+	);
+
+};
+
+// =================
+// DELETE EQUIPMENT
+// =================
+
+Equipt.actions.deleteEquipment = function(id) {
+
+	Equipt.API.delete(`/equipments/${id}`).then(
+		(data) => {
+			dispatchAction(Constants.EQUIPMENT_DELETE, data.equipment);
+		},
+		(err) => {
+			console.log('Error Deleting Equipment');
 		}
 	);
 

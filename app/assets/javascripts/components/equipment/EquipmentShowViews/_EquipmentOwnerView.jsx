@@ -6,7 +6,9 @@ Equipt.views.EquipmentOwnerView = class EquipmentOwnerView extends React.Compone
 
 	render() {
 
-		var owner = this.props.equipment.user;
+		let equipment = this.props.equipment || {};
+		let owner 	  = equipment.owner;
+
 		if (!owner) return(<div></div>);
 
 		return (

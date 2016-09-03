@@ -141,7 +141,7 @@ admin = User.create(
 	password_confirmation: 'tom'
 )
 
-2.times do |i|
+10.times do |i|
 	create_equipment(admin)
 end
 
