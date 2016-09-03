@@ -33,6 +33,9 @@ gem 'figaro'
 # o-auth 
 gem 'omniauth-facebook'
 
+# uploads
+gem 'carrierwave'
+
 # front end gems
 gem 'react-rails', '~>1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'
