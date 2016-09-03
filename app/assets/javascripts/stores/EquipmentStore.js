@@ -24,24 +24,33 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 		this._equipments.push(equipment);
 	},
 
-	findEquipment(id) {
-		let foundEquipment = false
-		this._equipments.forEach(function(equipment) {
-			if (equipment.id == id) foundEquipment = equipment;	
+	removeEquipment(equipment) {
+		let id = equipment.id;
+		let equipments = this._equipments.filter((equipment, index) => {		
+			if (equipment.id !== id) return this._equipment;
 		});
-		return foundEquipment;
+		this.setEquipments(equipments);
+	},
+
+	findEquipment(id) {
+		let id = equipment.id;
+		return this._equipments.each((equipment, index) => {		
+			if (equipment.id === id) return this._equipment;
+		});
 	}
 
 });
 
+
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
+	
+	let EquipmentStore = Equipt.stores.EquipmentStore;
 
-  	let EquipmentStore = Equipt.stores.EquipmentStore;
-  	
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:
+		case Constants.OWNERS_EQUIPMENT_INDEX:
 			EquipmentStore.setEquipments(data);
 		break; 
 		case Constants.EQUIPMENT_SHOW:
@@ -50,8 +59,8 @@ AppDispatcher.register(function(action) {
 		case Constants.EQUIPMENT_CREATE:
 			EquipmentStore.addEquipment(data);
 		break;
-		case Constants.OWNERS_EQUIPMENT_INDEX:
-			EquipmentStore.setEquipment(data);
+		case Constants.EQUIPMENT_DELETE:
+			EquipmentStore.removeEquipment(data);
 		break;
 	}
 

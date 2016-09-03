@@ -8,10 +8,26 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 		super(props);
 	}
 
+	delete(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		let equipment = this.props.equipment;		
+		Equipt.actions.deleteEquipment(equipment.id);
+	}
+
+	edit(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		let equipment = this.props.equipment;
+		this.context.router.transitionTo('equipmentEdit', {
+			id: equipment.id
+		});
+	}
+
 	render() {
 
 		var equipment = this.props.equipment;
-		let userId = this.props.userId;
+		let userId 	  = this.props.userId;
 
 		let linkParams = {	
 							equipmentId: equipment.id,
@@ -28,10 +44,12 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 						<h5>{equipment.model}</h5>
 						<p>Price Per Day: ${ equipment.price_per_day }</p>
 						<p>Deposit: ${ equipment.desposit_amount }</p>
-						<span className="equipment-tools">
-							<i className="fa fa-pencil-square-o fa-3" aria-hidden="true"></i>
-							<i className="fa fa-trash fa-3" aria-hidden="true"></i>
-						</span>
+						<i  className="fa fa-pencil-square-o fa-3" 
+							aria-hidden="true"
+							onClick={ this.edit.bind(this) }></i>
+						<i 	className="fa fa-trash fa-3" 
+							aria-hidden="true"
+							onClick={ this.delete.bind(this) }></i>
 					</div>
 				</Link>
 			</div>

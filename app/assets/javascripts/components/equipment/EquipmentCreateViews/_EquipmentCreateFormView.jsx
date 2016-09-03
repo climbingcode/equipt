@@ -1,21 +1,37 @@
 Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 
+	static propType = {
+		equipment: React.PropTypes.object.isRequired
+	}
+
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		Equipt.actions.createEquiptment(this.formData);
+		this.props.submittedForm(this.formData, this.props.equipment.id);
 	}
 
 	setType(value) {
 		this.refs.category.value = value;
 	}
 
+	setImages(images) {
+		this.images = images;
+	}
+
+	valueChanged(name, event) {
+		let input 	  = event.target
+		let newValue  = input.value;
+		if (this.props.updateValue) this.props.updateValue(this, name, newValue);
+	}
+
 	render() {
 
-		let OptionsHelper = Equipt.helpers.OptionsHelper;
+		let OptionsHelper 		  = Equipt.helpers.OptionsHelper;
 		let EquipmentUploaderView = Equipt.views.EquipmentUploaderView;
+		let equipment 			  = this.props.equipment;
 
-		let options = ['tent', 'stove', 'sleeping bag', 'mat']
+		let options = Equipt.content.createEquipment.typeOptions;
+		let inputs =  Equipt.content.createEquipment.formInputs; 
 
 		return (
 			<form 	onSubmit={this.submit.bind(this)}
@@ -24,66 +40,39 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 				<OptionsHelper 	selectedOption={this.setType.bind(this)} 
 								name="type" 
 								ref="category"
-								options={options}/>
+								name="category"
+								options={options}
+								value={ equipment &&  equipment.category }
+								onChange={ this.valueChanged.bind(this, 'category') }/>
 				<div className="text-fields col-sm-6 row">
-					<br/>
-					{ this.renderError.call(this, 'equipment_name') }
-					<input 	type="text" 
-							ref="equipment_name"
-							className="form-control"
-							placeholder="Title"
-					/>
-					<br/>
-					{ this.renderError.call(this, 'brand') }
-					<input 	type="text" 
-							ref="brand"
-							className="form-control"
-							placeholder="brand"
-					/>
-					<br/>
-					{ this.renderError.call(this, 'model') }
-					<input 	type="text" 
-							ref="model"
-							className="form-control"
-							placeholder="model"
-					/>
-					<br/>
-					{ this.renderError.call(this, 'description') }
-					<input 	type="text" 
-							ref="description"
-							className="form-control"
-							placeholder="description"
-					/>
-					<br/>
-					<label>years old</label>
-					{ this.renderError.call(this, 'years_old') }
-					<input 	type="number" 
-							ref="years_old"
-							className="form-control"/>
-					<br/>
-					<label>price per day</label>
-					{ this.renderError.call(this, 'price_per_day') }
-					<input 	type="input" 
-							ref="price_per_day"
-							className="form-control"/>
-					<br/>
-					<label>price per week</label>
-					{ this.renderError.call(this, 'price_per_week') }
-					<input 	type="input" 
-							ref="price_per_week"
-							className="form-control"/>
-					<br/>
-					<label>desposit amount</label>
-					{ this.renderError.call(this, 'desposit_amount') }
-					<input 	type="input" 
-							ref="desposit_amount"
-							className="form-control"/>
-					<br/>
+
+					{
+
+						inputs.map((obj, i) => {
+
+							let Tag = obj.tag;	
+							return <form-field key={`create_form_${i}`}> 
+										<br/>
+										{ this.renderError.call(this, obj.name) }
+										<Tag 	type="text" 
+												ref={obj.name}
+												type={obj.type}
+												name={obj.name}
+												className="form-control"
+												placeholder={ obj.placeholder }
+												value={ equipment && equipment[obj.name] }
+												onChange={ this.valueChanged.bind(this, obj.name) }
+										/>
+									</form-field>
+						})
+
+					}
+
 				</div>
-				<EquipmentUploaderView/>
+				<EquipmentUploaderView setImages={ this.setImages.bind(this) }/>
 				<button type="submit"
 						className="btn btn-primary col-sm-12">
-						Add Item
+						{ equipment ? 'Update Equipment' : 'Add Equipment'}
 				</button>
 			</form>
 		)

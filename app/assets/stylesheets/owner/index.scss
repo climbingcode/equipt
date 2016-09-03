@@ -1,19 +1,20 @@
 .owners-equipment-wrapper {
 
+	.equipment-create-btn-container {
+		padding: 0px 15px 15px;
+	}
+
 	.equipment-container {
 		height: 500px;
-
-		.equipment-tools {
+		
+		i {
+			margin-right: 10px;
 			font-size: 25px;
-
-			i {
-				margin-right: 10px;
-				&:first-child:hover {
-					color: blue;
-				}
-				&:last-child:hover {
-					color: red;
-				}
+			&:first-child:hover {
+				color: blue;
+			}
+			&:last-child:hover {
+				color: red;
 			}
 
 		}

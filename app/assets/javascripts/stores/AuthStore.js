@@ -12,7 +12,11 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	},
 
 	setSession(apiKey) {
-		localStorage['equiptSession'] = JSON.stringify(apiKey);
+		try {
+			localStorage['equiptSession'] = JSON.stringify(apiKey);
+		} catch(err) {
+			this.deleteSession();
+		}
 	},
 
 	getSession() {
@@ -25,11 +29,19 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	},
 
 	getApiKey() {
-		return this.getSession() && JSON.parse(this.getSession()).access_token;
+		try {
+			return this.getSession() && JSON.parse(this.getSession()).access_token;
+		} catch(err) {
+			this.deleteSession();
+		}
 	},
 
 	getUserId() {
-		return this.getSession() && JSON.parse(this.getSession()).user_id;
+		try {
+			return this.getSession() && JSON.parse(this.getSession()).user_id;
+		} catch(err) {
+			this.deleteSession();
+		}
 	},
 
 	isFacebookLogin() {

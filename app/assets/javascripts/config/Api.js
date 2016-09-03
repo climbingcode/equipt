@@ -37,8 +37,11 @@ Equipt.API = {
 
 	delete: function(url) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'DELETE')((res) => {
-				
+			this.send(url, 'DELETE')
+			.then((res) => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
 			});
 		});
 	},
@@ -52,23 +55,26 @@ Equipt.API = {
 			var ajaxObj = {
 				url: Equipt.API.path + url,
 				type: method,
+				contentType: false,
+ 				cache: false,
+  				processData: false,
 				dataType: 'json',
-				contentType: 'application/json',
 				beforeSend: (request) => {
 	            	request.setRequestHeader('AUTHORIZATION', ApiKey);
 	        	}
 			};
 
-			if (data) ajaxObj.data = JSON.stringify(data);
+			if (data) ajaxObj.data = data;
 
 			$.ajax(ajaxObj)
 			.success((res) => {
-				if (res.errors) hasErrors(res.errors);
-				else resolve(res);
+				if (res.errors) return hasErrors(res.errors);
+				else if (res.notice) hasNotice(res.notice)
+				resolve(res);
 			})
 			.error((err) => {
 				if (err.status === 500 || err.status === 401) {
-					unauthorizedUser();
+					Equipt.actions.unauthorizedUser();
 				}
 				reject(err);
 			});

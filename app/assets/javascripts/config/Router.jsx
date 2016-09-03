@@ -43,6 +43,9 @@ this.Routes = (
 							path="confirmation"/>
 				</Route>
 		</Route>
+		<Route 	name="equipmentEdit"
+				handler={Equipt.controllers.EquipmentEditController}
+				path="equipment/:id/edit"/>
 		<Route  name="ownersIndex"
 			    handler={Equipt.controllers.OwnersIndexController}
 				path="owner/:userId/equipment"/>
@@ -54,6 +57,10 @@ this.Routes = (
 	</Route>
 ), document.getElementById('root');
 
-Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
-	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
-}
+Location.addChangeListener(function(){
+	Equipt.actions.clearNotice();
+})
+
+// Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
+// 	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
+// }

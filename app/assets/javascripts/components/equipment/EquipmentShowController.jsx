@@ -1,5 +1,9 @@
 Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.MainController {
 
+	static contextTypes = {
+		router: React.PropTypes.func.isRequired
+	}
+
 	constructor(props) {
 		super(props);
 		this.stores = 	[	
@@ -44,12 +48,8 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		let EquipmentShowView = Equipt.views.EquipmentShowView; 
 
 		return (
-			<EquipmentShowView  { ...this.props }/>
+			<EquipmentShowView  { ...this.props } />
 		)
 	}
 
 }
-
-Equipt.controllers.EquipmentShowController.contextTypes = {
-	router: React.PropTypes.func.isRequired
-};

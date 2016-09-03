@@ -6,7 +6,7 @@ Equipt.views.EquipmentInfoView = class EquipmentInfoView extends React.Component
 
 	render() {
 
-		var equipment = this.props.equipment;
+		var equipment = this.props.equipment || {};
 
 		return (
 			<h5>{equipment.brand}</h5>

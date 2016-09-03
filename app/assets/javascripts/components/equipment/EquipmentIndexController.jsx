@@ -8,6 +8,12 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		}
 	}
 
+	willTransitionTo(transition) {
+		if (!Equipt.stores.AuthStore.authenticated()) {
+			transition.redirect('/home');	
+		} 
+	}
+
 	componentWillMount() {
 		Equipt.actions.getEquipment();
 	}
@@ -25,7 +31,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		return (
 			<div className="equiptment-wrapper">
 				<RouteHandler/>
-				<EquipmentIndexView { ...this.state }/>
+				<EquipmentIndexView { ...this.state } />
 			</div>
 		)
 	}

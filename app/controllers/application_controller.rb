@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def render_notice(notice)
-		render json: { errors: { notice: notice} }, status: 200
+		render json: { notice: notice }, status: 200
 	end
 
 	helper_method :current_user

@@ -1,13 +1,17 @@
-var _errors = {};
-
 Equipt.stores.ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
+	_errors: null,
+	
 	getErrors() {
-        return _errors;
+        return this._errors;
+	},
+
+	setErrors(errors) {
+		this._errors = errors || null;
 	},
 
 	clearErrors() {
-		_errors = {};
+		this._errors = null;
 	}
 
 });
@@ -20,9 +24,10 @@ AppDispatcher.register(function(action) {
 
   	switch(type) {
 		case Constants.HAS_ERRORS:
-			_errors = data || {};
-           	ErrorsStore.emitChange();
-		break; 
+			ErrorsStore.setErrors(data);
+		break;
 	}
+    
+    ErrorsStore.emitChange();
 
 });
