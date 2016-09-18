@@ -23,8 +23,8 @@ Equipt.controllers.EquipmentEditController = class EquipmentEditController exten
 		Equipt.actions.showEquipment(equipmentId);
 	}
 
-	updateEquipment(equipment, id) {
-		Equipt.actions.updateEquiptment(equipment, id, () => {		
+	updateEquipment(equipment, images, id) {
+		Equipt.actions.updateEquiptment(equipment, images, id, () => {
 			this.context.router.transitionTo('ownersIndex', {
 				userId: this.props.currentUser.id
 			});

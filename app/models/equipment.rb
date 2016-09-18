@@ -10,4 +10,10 @@ class Equipment < ActiveRecord::Base
 
   	validates :equipment_name, :brand, presence: true
 
+  	def addImages(images)
+  		images.each do |image|
+  			self.images.create(file: image)
+  		end
+  	end
+
 end

@@ -7,7 +7,8 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		this.props.submittedForm(this.formData, this.props.equipment.id);
+		let id = this.props.equipment && this.props.equipment.id;
+		this.props.submittedForm(this.formData, this.images, id);
 	}
 
 	setType(value) {
@@ -31,7 +32,7 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 		let equipment 			  = this.props.equipment;
 
 		let options = Equipt.content.createEquipment.typeOptions;
-		let inputs =  Equipt.content.createEquipment.formInputs; 
+		let inputs  = Equipt.content.createEquipment.formInputs; 
 
 		return (
 			<form 	onSubmit={this.submit.bind(this)}

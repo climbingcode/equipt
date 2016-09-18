@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 	namespace :api do
 		
 		resources :users
+
+		resources :images
 		
 		resources :equipments do 
 			resources :rentals

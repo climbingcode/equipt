@@ -5,7 +5,11 @@ class Api::EquipmentsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		render json: Equipment.search(params[:query]), status: 200
+		render json: Equipment.search(params[:query]),
+									include: [
+										:images
+									],
+									status: 200
 	end
 
 	def show
@@ -16,16 +20,6 @@ class Api::EquipmentsController < ApplicationController
 													user: { include: :ratings }
 												], 
 									status: 200
-	end
-
-	def update
-		binding.pry
-		equipment = current_user.equipments.find(params[:id])
-		if equipment.update(equipment_params)
-			render json: { equipment: equipment, notice: { error: "#{equipment.equipment_name} has been updated"} }, status: 200
-		else 
-			render json: { notice: { error: "Error updating #{equipment.equipment_name}" } }, status: 200
-		end
 	end
 
 	def create
@@ -42,6 +36,16 @@ class Api::EquipmentsController < ApplicationController
 		end
 	end
 
+	def update
+		equipment = current_user.equipments.find(params[:id])
+		if equipment.update(equipment_params)
+			equipment.addImages(params[:equipment][:images])
+			render json: { equipment: equipment, notice: { error: "#{equipment.equipment_name} has been updated"} }, status: 200
+		else 
+			render json: { notice: { error: "Error updating #{equipment.equipment_name}" } }, status: 200
+		end
+	end
+
 	def destroy 
 		equipment = current_user.equipments.find(params[:id])
 		if equipment.destroy
@@ -51,8 +55,9 @@ class Api::EquipmentsController < ApplicationController
 		end
 	end
 
+	private
+
 	def equipment_params
-		binding.pry
 		params.require(:equipment).permit(:category, :equipment_name, :brand, :model, :description, :years_old, :price_per_day, :price_per_week, :desposit_amount)
 	end
 

@@ -22,6 +22,7 @@ Equipt.actions.getEquipment = function(query) {
 // =================
 
 Equipt.actions.showEquipment = function(id) {
+
 	Equipt.API.get(`/equipments/${id}`).then(
 	(data) => {
 		dispatchAction(Constants.EQUIPMENT_SHOW, data);
@@ -29,6 +30,7 @@ Equipt.actions.showEquipment = function(id) {
 	(err) => {
 		console.log('Error Getting Equipment');
 	});
+
 };
 
 // =================
@@ -37,15 +39,31 @@ Equipt.actions.showEquipment = function(id) {
 
 Equipt.actions.createEquiptment = function(equipment, callback) {
 
-	Equipt.API.post(`/equipments`, equipment).then(
-		(data) => {
-			dispatchAction(Constants.EQUIPMENT_CREATE, data.equipment);
-			if (callback) callback();
-		},
-		(err) => {
-			console.log('Error Creating Equipment');
-		}
-	);
+	// settings for content type
+	let formData = new FormData();
+	let xhr = new XMLHttpRequest();
+	let apiKey = Equipt.stores.AuthStore.getApiKey();
+
+	for (key in equipment) {
+		value = equipment[key] ? equipment[key] : '';
+		formData.append(`equipment[${key}]`, value);
+	}
+
+	for (key in images) {
+		formData.append('equipment[images][]', images[key]);
+	};
+
+	let options = {
+		contentType: '',
+		data: formData
+	}
+
+	xhr.open("POST", `/api/equipments`, true);
+	xhr.setRequestHeader('AUTHORIZATION', apiKey);
+	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    xhr.send(formData);
+
+    if (callback) callback();
 
 };
 
@@ -53,17 +71,33 @@ Equipt.actions.createEquiptment = function(equipment, callback) {
 // UPDATE EQUIPMENT
 // =================
 
-Equipt.actions.updateEquiptment = function(equipment, id, callback) {
+Equipt.actions.updateEquiptment = function(equipment = {}, images = {}, id, callback) {
 
-	Equipt.API.put(`/equipments/${ id }`, equipment).then(
-		(data) => {
-			dispatchAction(Constants.EQUIPMENT_UPDATE, data);
-			if (callback) callback();
-		},
-		(err) => {
-			console.log('Error Updating Equipment');
-		}
-	);
+	// settings for content type
+	let formData = new FormData();
+	let xhr = new XMLHttpRequest();
+	let apiKey = Equipt.stores.AuthStore.getApiKey();
+
+	for (key in equipment) {
+		value = equipment[key] ? equipment[key] : '';
+		formData.append(`equipment[${key}]`, value);
+	}
+
+	for (key in images) {
+		formData.append('equipment[images][]', images[key]);
+	};
+
+	let options = {
+		contentType: '',
+		data: formData
+	}
+
+	xhr.open("PUT", `/api/equipments/${ id }`, true);
+	xhr.setRequestHeader('AUTHORIZATION', apiKey);
+	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    xhr.send(formData);
+
+    if (callback) callback();
 
 };
 

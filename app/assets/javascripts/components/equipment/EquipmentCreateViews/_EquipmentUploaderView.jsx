@@ -55,8 +55,10 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 
 		let images = this.state.images;
 
+		images.splice(index, 1)
+
 		this.setState({
-			images: images.splice(index+1, 0)
+			images: images 
 		});
 
 	}
@@ -66,7 +68,7 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 		let ImageDrop = Equipt.controllers.ImageDrop;
 
 		let images = this.state.images;
-		let imagesLeftForUpload = this.state.maxUploads - images;
+		let imagesLeftForUpload = this.state.maxUploads - images.length;
 
 		return (
 			<div className="image-drop-container col-sm-6">
