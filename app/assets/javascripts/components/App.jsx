@@ -2,6 +2,10 @@ var RouteHandler = ReactRouter.RouteHandler;
 
 Equipt.App = class App extends React.Component {
 
+	static contextTypes = {
+		router: React.PropTypes.func.isRequired
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -60,12 +64,4 @@ Equipt.App = class App extends React.Component {
 		)
 	}
 	
-<<<<<<< Updated upstream
 }
-
-Equipt.App.contextTypes = {
-	router: React.PropTypes.func.isRequired
-};
-=======
-}
->>>>>>> Stashed changes
