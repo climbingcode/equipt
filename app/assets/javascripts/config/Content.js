@@ -3,7 +3,12 @@ Equipt.content = {
 	// EQUIPMENT 
 	createEquipment: {
 
-		typeOptions: ['tent', 'stove', 'sleeping bag', 'mat'],
+		typeOptions: {
+			'camp': ['tent', 'stove', 'sleeping bag', 'mat'],
+			'snow': ['snowboard', 'bindings', 'skis', 'boots', 'jacket'],
+			'lake': ['kayak', 'canone', 'row'],
+			'bike': ['mountain bike', 'road bike', 'helmet']
+		},
 		formInputs: [	
 			{
 				name: 'equipment_name',

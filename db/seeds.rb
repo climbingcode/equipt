@@ -31,6 +31,7 @@ end
 	]}
 ]
 
+@equipment_images = ['tmp/kayak.jpg', 'tmp/snowboard.jpg', 'tmp/tent.jpg', nil];
 
 def create_users
 
@@ -88,6 +89,14 @@ def create_equipment(user)
 		5.times do |i|
 			create_rentals(equipment, user) if equipment.save!
 			create_ratings(equipment) if equipment.save!
+		end
+
+		file = @equipment_images.sample
+
+		if file
+			image = equipment.images.new
+			image.file = File.open(file)
+			image.save!
 		end
 
 	end

@@ -26,12 +26,14 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 
 	render() {
 
-		var equipment = this.props.equipment;
-		let userId 	  = this.props.userId;
+		var equipment    = this.props.equipment;
+		let userId 	     = this.props.userId;
+		let images 		 = equipment.images || [];
+		let primaryImage = images.length ? images[0].file.url : '/assets/equipment-default.png';
 
 		let linkParams = {	
-							equipmentId: equipment.id,
-							userId: userId
+							equipmentId: equipment.id || 0,
+							userId: userId || 0
 						};
 
 		return(
@@ -40,7 +42,7 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 					<div className="well">
 						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
 						<h4>{equipment.brand}</h4>
-						<img className="img-responsive center-block" src="/assets/equipment-default.png"/>
+						<img className="img-responsive center-block" src={primaryImage}/>
 						<h5>{equipment.model}</h5>
 						<p>Price Per Day: ${ equipment.price_per_day }</p>
 						<p>Deposit: ${ equipment.desposit_amount }</p>

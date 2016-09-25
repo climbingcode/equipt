@@ -13,9 +13,9 @@ Equipt.API = {
 		});
 	},
 
-	post: function(url, data) {
+	post: function(url, data, options) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'POST', data)
+			this.send(url, 'POST', data, options)
 			.then((res) => {
 				resolve(res);
 			}, (err) => {
@@ -24,9 +24,9 @@ Equipt.API = {
 		});
 	},
 
-	put: function(url, data) {
+	put: function(url, data, options) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'PUT', data)
+			this.send(url, 'PUT', data, options)
 			.then((res) => {
 				resolve(res);
 			}, (err) => {
@@ -46,7 +46,7 @@ Equipt.API = {
 		});
 	},
 
-	send: function(url, method, data) {
+	send: function(url, method, data, options = {}) {
 
 		return new Promise((resolve, reject) => {
 
@@ -55,16 +55,14 @@ Equipt.API = {
 			var ajaxObj = {
 				url: Equipt.API.path + url,
 				type: method,
-				contentType: false,
+				contentType: options.isMultipart ? false : 'application/json',
  				cache: false,
   				processData: false,
-				dataType: 'json',
+				data: options.data ? options.data : JSON.stringify(data),
 				beforeSend: (request) => {
 	            	request.setRequestHeader('AUTHORIZATION', ApiKey);
 	        	}
 			};
-
-			if (data) ajaxObj.data = data;
 
 			$.ajax(ajaxObj)
 			.success((res) => {

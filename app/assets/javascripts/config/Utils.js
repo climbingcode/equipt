@@ -37,6 +37,7 @@ function formatKeys(oldObj, changeTo) {
 
 // Turn object in url param
 function serialize(obj, prefix) {
+
   	var str = [];
   	for(var p in obj) {
     	if (obj.hasOwnProperty(p)) {
@@ -47,4 +48,5 @@ function serialize(obj, prefix) {
     	}
   	}
   	return str.join("&");
-}
+
+ }

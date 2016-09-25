@@ -1,20 +1,22 @@
 Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.Component {
 
 	static propType = {
-		setImages: React.PropTypes.func.isRequired
+		setImages: React.PropTypes.func.isRequired,
+		equipment: React.PropTypes.object.isRequired
 	}
 
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			images: [],
 			maxUploads: 4
 		}
 	}
 
 	setImages(newImages) {
 
-		let currentImages = this.state.images;
+		let equipment 	  = this.props.equipment || {};
+		let currentImages = equipment.images ? equipment.images : [];
 		let allImages 	  = currentImages.concat(newImages);
 
 		this.setState({
@@ -26,28 +28,41 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 
 	showPreviews() {
 
-		let imgArr = [];
-
+		let previewElements = [];
 		let PreviewImage = Equipt.views.PreviewImage;
+		let images = this.state.images ? this.state.images : [];
 
-		this.state.images.forEach((image, index) => {
+		// set current images if exist
+		if (this.props.equipment && this.props.equipment.images) {
+			images = this.props.equipment.images.concat(images);
+		}
+
+		images.forEach((image, index) => {
 			
 			let reader = new FileReader();
 
-			reader.onload = function(e) {
-				$(`.preview_${index}`).attr('src', e.target.result);
+			if (image.file) {
+
+				$(`.preview_${index}`).attr('src', image.file.url);
+
+			} else  {
+
+				reader.onload = function(e) {
+					$(`.preview_${index}`).attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(image);
+
 			}
 
-			reader.readAsDataURL(image);
-
-			imgArr.push(<PreviewImage 	key={`preview_${index}`} 
+			previewElements.push(<PreviewImage 	key={`preview_${index}`} 
 										image={image}
 										imageIndex={index}
 										removeImage={this.removeImage.bind(this)}/>);
 
 		});
 
-		return imgArr;
+		return previewElements;
 
 	}
 
@@ -55,8 +70,10 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 
 		let images = this.state.images;
 
+		images.splice(index, 1);
+
 		this.setState({
-			images: images.splice(index+1, 0)
+			images: images 
 		});
 
 	}
@@ -65,8 +82,9 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 
 		let ImageDrop = Equipt.controllers.ImageDrop;
 
-		let images = this.state.images;
-		let imagesLeftForUpload = this.state.maxUploads - images;
+		let images = this.props.equipment ? this.props.equipment.images : [];
+
+		let imagesLeftForUpload = this.state.maxUploads - images ? images.length : 0;
 
 		return (
 			<div className="image-drop-container col-sm-6">

@@ -31,6 +31,7 @@ class Api::UsersController < ApplicationController
 	private
 
 	def user_params
+		binding.pry
 		params.require(:user).permit(:firstname ,:lastname ,:email, :email_confirmation ,:username ,:street_address ,:city ,:state ,:zip ,:country ,:lng ,:lat ,:password ,:password_confirmation ,:restricted_availiability, :provider, :uid, :oauth_token, :oauth_expires_at)
 	end
 

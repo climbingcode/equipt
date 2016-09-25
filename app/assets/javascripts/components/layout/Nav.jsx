@@ -8,7 +8,7 @@ Equipt.views.Nav = class extends React.Component {
 
 	logout() {
 		Equipt.actions.endSession();
-		if (FB.getAuthResponse()) {		
+		if (FB && FB.getAuthResponse()) {		
 			FB.logout((res) => {
 				facebookStatusChanged(false);
 			});
@@ -20,8 +20,8 @@ Equipt.views.Nav = class extends React.Component {
 		let currentUser = this.props.currentUser;
 		let pathname    = this.context.router.getCurrentPath();
 
-		let userName =  this.props.currentUser ? this.props.currentUser.firstname.capitalize() : "";
-		let userId =  this.props.currentUser ? this.props.currentUser.id : 0;
+		let userName =  currentUser ? currentUser.firstname.capitalize() : "";
+		let userId 	 =  currentUser ? currentUser.id : 0;
 
 		if (currentUser) {
 

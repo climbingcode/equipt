@@ -22,6 +22,7 @@ Equipt.actions.getEquipment = function(query) {
 // =================
 
 Equipt.actions.showEquipment = function(id) {
+
 	Equipt.API.get(`/equipments/${id}`).then(
 	(data) => {
 		dispatchAction(Constants.EQUIPMENT_SHOW, data);
@@ -29,23 +30,39 @@ Equipt.actions.showEquipment = function(id) {
 	(err) => {
 		console.log('Error Getting Equipment');
 	});
+
 };
 
 // =================
 // CREATE EQUIPMENT
 // =================
 
-Equipt.actions.createEquiptment = function(equipment, callback) {
+Equipt.actions.createEquiptment = function(equipment = {}, images = {}, callback) {
 
-	Equipt.API.post(`/equipments`, equipment).then(
-		(data) => {
-			dispatchAction(Constants.EQUIPMENT_CREATE, data.equipment);
-			if (callback) callback();
-		},
-		(err) => {
-			console.log('Error Creating Equipment');
-		}
-	);
+	let formData = new FormData();
+
+	for (key in equipment) {
+		value = equipment[key] ? equipment[key] : '';
+		formData.append(`equipment[${key}]`, value);
+	}
+
+	for (key in images) {
+		formData.append('equipment[images][]', images[key]);
+	};
+
+	let options = {
+		isMultipart: true,
+		data: formData
+	}
+
+    Equipt.API.post(`/equipments`, formData, options).then(
+	(data) => {
+		dispatchAction(Constants.EQUIPMENT_CREATE, data);
+		if (callback) callback();
+	},
+	(err) => {
+		console.log('Error Creating Equipment');
+	});
 
 };
 
@@ -53,17 +70,32 @@ Equipt.actions.createEquiptment = function(equipment, callback) {
 // UPDATE EQUIPMENT
 // =================
 
-Equipt.actions.updateEquiptment = function(equipment, id, callback) {
+Equipt.actions.updateEquiptment = function(equipment = {}, images = {}, id, callback) {
 
-	Equipt.API.put(`/equipments/${ id }`, equipment).then(
-		(data) => {
-			dispatchAction(Constants.EQUIPMENT_UPDATE, data);
-			if (callback) callback();
-		},
-		(err) => {
-			console.log('Error Updating Equipment');
-		}
-	);
+	let formData = new FormData();
+
+	for (key in equipment) {
+		value = equipment[key] ? equipment[key] : '';
+		formData.append(`equipment[${key}]`, value);
+	}
+
+	for (key in images) {
+		formData.append('equipment[images][]', images[key]);
+	};
+
+	let options = {
+		isMultipart: true,
+		data: formData
+	}
+
+	Equipt.API.put(`/equipments/${ id }`, formData, options).then(
+	(data) => {
+		dispatchAction(Constants.EQUIPMENT_UPDATE, data);
+		if (callback) callback();
+	},
+	(err) => {
+		console.log('Error Updating Equipment');
+	});
 
 };
 

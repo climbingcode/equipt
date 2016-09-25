@@ -4,14 +4,28 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 		equipment: React.PropTypes.object.isRequired
 	}
 
+	constructor(props) {
+		super(props)
+		this.state = {
+			category: 'camp'
+		}
+	}
+
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		this.props.submittedForm(this.formData, this.props.equipment.id);
+		let id = this.props.equipment && this.props.equipment.id;
+		this.props.submittedForm(this.formData, this.images, id);
 	}
 
 	setType(value) {
 		this.refs.category.value = value;
+	}
+
+	tabsChanged(tab) {
+		this.setState({
+			category: tab.category
+		});
 	}
 
 	setImages(images) {
@@ -26,17 +40,22 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 
 	render() {
 
-		let OptionsHelper 		  = Equipt.helpers.OptionsHelper;
-		let EquipmentUploaderView = Equipt.views.EquipmentUploaderView;
-		let equipment 			  = this.props.equipment;
+		let OptionsHelper 		    = Equipt.helpers.OptionsHelper;
+		let EquipmentUploaderView   = Equipt.views.EquipmentUploaderView;
+		let EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
+		let equipment 			    = this.props.equipment;
 
-		let options = Equipt.content.createEquipment.typeOptions;
-		let inputs =  Equipt.content.createEquipment.formInputs; 
+		let category 	= this.state.category;
+		let optionsJson = Equipt.content.createEquipment.typeOptions;
+
+		let options = category && optionsJson[category];
+		let inputs  = Equipt.content.createEquipment.formInputs; 
 
 		return (
 			<form 	onSubmit={this.submit.bind(this)}
 					className="form-group equipment-create-wrapper"
 					>
+				<EquipmentSearchTabsView selected={ this.tabsChanged.bind(this) }/>
 				<OptionsHelper 	selectedOption={this.setType.bind(this)} 
 								name="type" 
 								ref="category"
@@ -69,7 +88,7 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 					}
 
 				</div>
-				<EquipmentUploaderView setImages={ this.setImages.bind(this) }/>
+				<EquipmentUploaderView setImages={ this.setImages.bind(this) } equipment={ equipment }/>
 				<button type="submit"
 						className="btn btn-primary col-sm-12">
 						{ equipment ? 'Update Equipment' : 'Add Equipment'}
