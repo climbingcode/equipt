@@ -15,11 +15,9 @@
     border-left: 1px solid #000;
 }
 
-.equipment-search-wrapper {
-	.equipment-category-container {
-		@extend .tabs;
-		li {
-			@extend .tab;
-		}
+.equipment-category-container {
+	@extend .tabs;
+	li {
+		@extend .tab;
 	}
 }

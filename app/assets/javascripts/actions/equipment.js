@@ -37,12 +37,9 @@ Equipt.actions.showEquipment = function(id) {
 // CREATE EQUIPMENT
 // =================
 
-Equipt.actions.createEquiptment = function(equipment, callback) {
+Equipt.actions.createEquiptment = function(equipment = {}, images = {}, callback) {
 
-	// settings for content type
 	let formData = new FormData();
-	let xhr = new XMLHttpRequest();
-	let apiKey = Equipt.stores.AuthStore.getApiKey();
 
 	for (key in equipment) {
 		value = equipment[key] ? equipment[key] : '';
@@ -54,16 +51,18 @@ Equipt.actions.createEquiptment = function(equipment, callback) {
 	};
 
 	let options = {
-		contentType: '',
+		isMultipart: true,
 		data: formData
 	}
 
-	xhr.open("POST", `/api/equipments`, true);
-	xhr.setRequestHeader('AUTHORIZATION', apiKey);
-	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-    xhr.send(formData);
-
-    if (callback) callback();
+    Equipt.API.post(`/equipments`, formData, options).then(
+	(data) => {
+		dispatchAction(Constants.EQUIPMENT_CREATE, data);
+		if (callback) callback();
+	},
+	(err) => {
+		console.log('Error Creating Equipment');
+	});
 
 };
 
@@ -73,10 +72,7 @@ Equipt.actions.createEquiptment = function(equipment, callback) {
 
 Equipt.actions.updateEquiptment = function(equipment = {}, images = {}, id, callback) {
 
-	// settings for content type
 	let formData = new FormData();
-	let xhr = new XMLHttpRequest();
-	let apiKey = Equipt.stores.AuthStore.getApiKey();
 
 	for (key in equipment) {
 		value = equipment[key] ? equipment[key] : '';
@@ -88,16 +84,18 @@ Equipt.actions.updateEquiptment = function(equipment = {}, images = {}, id, call
 	};
 
 	let options = {
-		contentType: '',
+		isMultipart: true,
 		data: formData
 	}
 
-	xhr.open("PUT", `/api/equipments/${ id }`, true);
-	xhr.setRequestHeader('AUTHORIZATION', apiKey);
-	xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-    xhr.send(formData);
-
-    if (callback) callback();
+	Equipt.API.put(`/equipments/${ id }`, formData, options).then(
+	(data) => {
+		dispatchAction(Constants.EQUIPMENT_UPDATE, data);
+		if (callback) callback();
+	},
+	(err) => {
+		console.log('Error Updating Equipment');
+	});
 
 };
 

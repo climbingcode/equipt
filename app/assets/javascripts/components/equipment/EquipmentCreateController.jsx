@@ -14,11 +14,9 @@ Equipt.controllers.EquipmentCreateController = class extends Equipt.controllers.
 	}
 
 	createEquipment(equipment, images) {
-		Equipt.actions.createEquiptment(equipment, () => {
-			Equipt.actions.updateImages('equipment', id, images, () => {
-				this.context.router.transitionTo('ownersIndex', {
-					userId: this.props.currentUser.id
-				});
+		Equipt.actions.createEquiptment(equipment, images, () => {
+			this.context.router.transitionTo('ownersIndex', {
+				userId: this.props.currentUser.id
 			});
 		});
 	}

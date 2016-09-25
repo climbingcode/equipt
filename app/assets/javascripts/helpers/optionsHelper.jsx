@@ -5,7 +5,8 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 	}
 
 	hasChanged() {
-		let value = this.refs.type.value;
+		let type = this.refs.type;
+		let value = type ? type.value : '';
 		this.props.selectedOption(value);
 	}
 
@@ -23,6 +24,7 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 					options.map(function(option, i) {
 						return <option  key={`option_${i}`} 
 										value={option}>{option}
+
 								</option>
 					})
 				}

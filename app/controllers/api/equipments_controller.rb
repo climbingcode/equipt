@@ -6,10 +6,10 @@ class Api::EquipmentsController < ApplicationController
 
 	def index
 		render json: Equipment.search(params[:query]),
-									include: [
-										:images
-									],
-									status: 200
+										include: [
+											:images
+										],
+										status: 200
 	end
 
 	def show
@@ -17,6 +17,7 @@ class Api::EquipmentsController < ApplicationController
 									include: 	[
 													:rentals, 
 													:ratings,
+													:images,
 													user: { include: :ratings }
 												], 
 									status: 200
@@ -25,8 +26,10 @@ class Api::EquipmentsController < ApplicationController
 	def create
 		equipment = current_user.equipments.new(equipment_params)
 		if equipment.save
+			equipment.addImages(params[:equipment][:images])
 			render json: { 	
-							equipment: equipment,
+							equipment: equipment,  
+								include: [ :images ],
 							notice: {
 								info: "#{equipment.equipment_name} has been added to your inventory"
 							}
@@ -40,7 +43,13 @@ class Api::EquipmentsController < ApplicationController
 		equipment = current_user.equipments.find(params[:id])
 		if equipment.update(equipment_params)
 			equipment.addImages(params[:equipment][:images])
-			render json: { equipment: equipment, notice: { error: "#{equipment.equipment_name} has been updated"} }, status: 200
+			render json: { 
+							equipment: equipment, 
+								include: [ :images ], 
+							notice: { 
+								error: "#{equipment.equipment_name} has been updated"
+							} 
+						}, status: 200
 		else 
 			render json: { notice: { error: "Error updating #{equipment.equipment_name}" } }, status: 200
 		end

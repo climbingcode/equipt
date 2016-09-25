@@ -17,6 +17,7 @@ class Api::Owner::EquipmentsController < ApplicationController
 					include: 	[
 									:rentals, 
 									:ratings,
+									:images,
 									user: { include: :ratings }
 								], 
 					status: 200

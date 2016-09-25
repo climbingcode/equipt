@@ -55,7 +55,7 @@ Equipt.API = {
 			var ajaxObj = {
 				url: Equipt.API.path + url,
 				type: method,
-				contentType: options.contentType ? options.contentType : 'application/json',
+				contentType: options.isMultipart ? false : 'application/json',
  				cache: false,
   				processData: false,
 				data: options.data ? options.data : JSON.stringify(data),
