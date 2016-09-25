@@ -60,8 +60,12 @@ Equipt.App = class App extends React.Component {
 		)
 	}
 	
+<<<<<<< Updated upstream
 }
 
 Equipt.App.contextTypes = {
 	router: React.PropTypes.func.isRequired
 };
+=======
+}
+>>>>>>> Stashed changes

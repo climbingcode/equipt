@@ -59,6 +59,7 @@ this.Routes = (
 
 Location.addChangeListener(function(){
 	Equipt.actions.clearNotice();
+	Equipt.actions.showLoader();
 })
 
 // Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
