@@ -5,6 +5,7 @@ Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Compo
 	}
 
 	_findBy(query) {
+		Equipt.actions.showLoader();
 		Equipt.actions.getEquipment(query);
 	}
 

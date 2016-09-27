@@ -81,9 +81,7 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 	render() {
 
 		let ImageDrop = Equipt.controllers.ImageDrop;
-
 		let images = this.props.equipment ? this.props.equipment.images : [];
-
 		let imagesLeftForUpload = this.state.maxUploads - images ? images.length : 0;
 
 		return (

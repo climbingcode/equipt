@@ -5,6 +5,7 @@
     "browserify-incremental": "^3.0.1",
     "google-map-react": "^0.16.3",
     "react": "^15.2.1",
+    "react-css-transition-replace": "^2.0.1",
     "react-dom": "^15.3.1",
     "react-dropzone": "^3.5.3",
     "react-dropzone-component": "^0.6",

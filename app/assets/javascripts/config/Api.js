@@ -67,7 +67,7 @@ Equipt.API = {
 			$.ajax(ajaxObj)
 			.success((res) => {
 				if (res.errors) return hasErrors(res.errors);
-				else if (res.notice) hasNotice(res.notice)
+				else if (res.notice) hasNotice(res.notice);
 				resolve(res);
 			})
 			.error((err) => {
@@ -75,6 +75,9 @@ Equipt.API = {
 					Equipt.actions.unauthorizedUser();
 				}
 				reject(err);
+			})
+			.done(() => {
+				Equipt.actions.hideLoader();
 			});
 
 		});

@@ -10,6 +10,7 @@ Equipt.controllers.MainController = class MainController extends React.Component
         this.stores.forEach((store) => {
             store.addChangeListener(this._onChange.bind(this));
         });
+        Equipt.actions.hideLoader();
     }
     
     componentWillUnmount() {
@@ -18,6 +19,7 @@ Equipt.controllers.MainController = class MainController extends React.Component
             store.removeChangeListener(this._onChange.bind(this));
         });
         Equipt.stores.ErrorsStore.clearErrors();
+        Equipt.actions.hideLoader();
     }
 
     willTransitionTo(transition) {
