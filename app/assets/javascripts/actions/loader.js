@@ -3,5 +3,7 @@ Equipt.actions.showLoader = function() {
 };
 
 Equipt.actions.hideLoader = function() {
-	dispatchAction(Constants.HIDE_LOADER);
+	setTimeout(function() {
+		dispatchAction(Constants.HIDE_LOADER);
+	}, 2000);
 };

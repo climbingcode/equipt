@@ -52,9 +52,11 @@ Equipt.App = class App extends React.Component {
 
 		let Nav = Equipt.views.Nav;
 		let NoticeController = Equipt.controllers.NoticeController;
+		let AjaxLoader = Equipt.controllers.AjaxLoader;
 
 		return (
 			<content>
+				<AjaxLoader/>
 				<Nav currentUser={this.state.currentUser}/>
 				<div className="main-content col-xs-10 col-xs-offset-1">
 					<NoticeController/>

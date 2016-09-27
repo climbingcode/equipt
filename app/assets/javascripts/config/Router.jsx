@@ -57,7 +57,7 @@ this.Routes = (
 	</Route>
 ), document.getElementById('root');
 
-Location.addChangeListener(function(){
+Location.addChangeListener(function(pathName){
 	Equipt.actions.clearNotice();
 	Equipt.actions.showLoader();
 })

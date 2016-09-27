@@ -4,18 +4,6 @@ Equipt.views.EquipmentShowView = class EquipmentShowView extends React.Component
 		super(props);
 	}
 
-	componentDidMount() {
-		var componentContainer = ReactDOM.findDOMNode(this);
-        var loader = document.createElement('div');
-        loader.className = "loader";
-        componentContainer.appendChild(loader);
-	}
-
-	componentWillReceiveProps() {
-        var loader = document.getElementsByClassName('loader')[0];
-        if (loader) loader.parentNode.removeChild(loader);
-    }
-
     rentEquipment() {
     	
     	let equipmentId = this.props.equipment.id;
