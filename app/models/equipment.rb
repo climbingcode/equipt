@@ -10,6 +10,8 @@ class Equipment < ActiveRecord::Base
 
   	validates :equipment_name, :brand, presence: true
 
+    validates :sub_category, presence: { message: "Please Select a category" }
+
   	def addImages(images = [])
       images ||= []
   		self.images.delete_all

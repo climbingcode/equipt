@@ -18,11 +18,8 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 		this.props.submittedForm(this.formData, this.images, id);
 	}
 
-	setType(value) {
-		this.refs.category.value = value;
-	}
-
 	tabsChanged(tab) {
+		this.formData.category = tab.category;
 		this.setState({
 			category: tab.category
 		});
@@ -55,14 +52,14 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 			<form 	onSubmit={this.submit.bind(this)}
 					className="form-group equipment-create-wrapper"
 					>
-				<EquipmentSearchTabsView selected={ this.tabsChanged.bind(this) }/>
-				<OptionsHelper 	selectedOption={this.setType.bind(this)} 
-								name="type" 
-								ref="category"
-								name="category"
+				<EquipmentSearchTabsView selected={ this.tabsChanged.bind(this) }
+										 value={ equipment && equipment.category }
+				/>
+				{ this.renderError.call(this, 'sub_category') }
+				<OptionsHelper 	ref="sub_category"
+								name="sub_category"
 								options={options}
-								value={ equipment &&  equipment.category }
-								onChange={ this.valueChanged.bind(this, 'category') }/>
+								value={ equipment && equipment.sub_category }/>
 				<div className="text-fields col-sm-6 row">
 
 					{

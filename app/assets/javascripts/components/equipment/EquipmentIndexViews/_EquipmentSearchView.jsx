@@ -2,11 +2,17 @@ Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Compo
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			selected: undefined
+		}
 	}
 
 	_findBy(query) {
 		Equipt.actions.showLoader();
 		Equipt.actions.getEquipment(query);
+		this.setState({
+			selected: query.category
+		});
 	}
 
 	render() {
@@ -15,7 +21,8 @@ Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Compo
 
 		return (
 			<div className="equipment-search-wrapper">
-				<EquipmentSearchTabsView selected={ this._findBy.bind(this) }/>
+				<EquipmentSearchTabsView 	value={this.state.selected} 
+											selected={ this._findBy.bind(this) }/>
 			</div>
 		)
 	}

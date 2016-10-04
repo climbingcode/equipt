@@ -10,7 +10,7 @@ Equipt.views.Nav = class extends React.Component {
 		Equipt.actions.endSession();
 		if (FB && FB.getAuthResponse()) {		
 			FB.logout((res) => {
-				facebookStatusChanged(false);
+				Equipt.actions.facebookStatusChanged(false);
 			});
 		}
 	}
@@ -59,6 +59,10 @@ Equipt.views.Nav = class extends React.Component {
 											logout
 									</button>
 								</div>
+
+			var equipmentLogo = <Link to="equipmentIndex">
+									<div className="nav-logo"></div>
+								</Link>
 								
 		} else {
 
@@ -82,9 +86,7 @@ Equipt.views.Nav = class extends React.Component {
 		return (
 			<nav className="navbar">
 				<div className="container-fluid col-sm-10 col-sm-offset-1">
-					<Link to="equipmentIndex">
-						<div className="nav-logo"></div>
-					</Link>
+					{equipmentLogo}
 					{sessionBtns}
 				</div>
 			</nav>

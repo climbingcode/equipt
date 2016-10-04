@@ -7,34 +7,60 @@ Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.
 			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
 			facebookLoaded: false
 		}
-		this.loadFacebook();
 	}
 
-	loadFacebook() {
-		window.fbAsyncInit = () => {
-			window.FB.init({
-	      		appId: Keys.FACEBOOK_APP_ID,
-	      		cookie: true
-	    	});		
-	    	window.FB.getLoginStatus((response) => {
-	    		let loggedIn = response.status === 'connected' ? true : false;
-	    		this.setState({
-	    			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
-					facebookLoaded: true
-	    		});
-	    		this.forceUpdate();
-	    	});
+	loadFaceBook(callback) {
+		window.FB.init({
+      		appId: Keys.FACEBOOK_APP_ID,
+      		cookie: true
+    	});		
+    	window.FB.getLoginStatus((response) => {
+    		let loggedIn = response.status === 'connected' ? true : false;
+    		this.setState({
+    			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
+				facebookLoaded: true
+    		});
+    		if (callback) callback();
+    		this.forceUpdate();
+    	});
+	}
+
+	waitForFaceBook(callback) {
+		if (window.FB) {
+			this.loadFaceBook(callback);
+		} else {
+			window.fbAsyncInit = () => {
+				this.loadFaceBook(callback);
+			}
+		}
+	}
+
+	login() {
+		if (window.FB) {
+			window.FB.login((res) => {
+				Equipt.actions.facebookStatusChanged(true);
+			});	
+		}
+	}
+
+	logout() {
+		if (window.FB) {
+			window.FB.logout((res) => {
+				Equipt.actions.facebookStatusChanged(false);
+			});
 		}
 	}
 
 	componentWillMount() {
-		if (window.FB && window.FB.getAuthResponse()) {
-			this.setState({
-	    		logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
-				facebookLoaded: true
-	    	});	
-	    	this.forceUpdate();			
-		}
+		this.waitForFaceBook(() => {		
+			if (!!window.FB) {
+				this.setState({
+		    		logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
+					facebookLoaded: true
+		    	});	
+		    	this.forceUpdate();
+		    }
+		});	
 	}
 
 	dataChanged() {
@@ -46,8 +72,9 @@ Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.
 
 	render() {
 		return (
-			<FaceBookView 	facebookLoaded={this.state.facebookLoaded}
-							loggedIn={this.state.loggedIn}/>
+			<FaceBookView 	login={ this.login.bind(this) } 
+							logout={ this.logout.bind(this) }
+							{ ...this.state }/>
 		)
 	}
 

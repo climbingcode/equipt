@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710033156) do
+ActiveRecord::Schema.define(version: 20161002034921) do
 
   create_table "api_keys", force: :cascade do |t|
     t.integer  "user_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160710033156) do
     t.float    "desposit_amount", default: 0.0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "sub_category"
     t.index ["user_id"], name: "index_equipment_on_user_id"
   end
 

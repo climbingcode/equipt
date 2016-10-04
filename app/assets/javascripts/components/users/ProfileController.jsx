@@ -10,6 +10,7 @@ Equipt.controllers.ProfileController = class ProfileController extends Equipt.co
 	}
 
 	submit(user) {
+		debugger;
 		Equipt.actions.updateUser({user: user});
 	}
 

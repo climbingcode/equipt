@@ -67,7 +67,7 @@ class Api::EquipmentsController < ApplicationController
 	private
 
 	def equipment_params
-		params.require(:equipment).permit(:category, :equipment_name, :brand, :model, :description, :years_old, :price_per_day, :price_per_week, :desposit_amount)
+		params.require(:equipment).permit(:category, :sub_category, :equipment_name, :brand, :model, :description, :years_old, :price_per_day, :price_per_week, :desposit_amount)
 	end
 
 end

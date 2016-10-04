@@ -8,14 +8,22 @@ Equipt.views.EquipmentSearchTabsView = class EquipmentSearchTabsView extends Rea
 		super(props);
 	}
 
+	isStartingValue(category) {
+		if (!this.props.value) return false;
+		return category === this.props.value;
+	}
+
 	render() {
 
 		var equipmentCategory = ['camp', 'snow', 'bike', 'lake'];
 		var equipmentCategoryNodes = [];
 
 		for (var i = 0; i < equipmentCategory.length; i++) {
+			
 			let category = equipmentCategory[i];
-			equipmentCategoryNodes.push(<li className="col-xs-3" 
+			let className = this.isStartingValue(category) ? "col-xs-3 selected" : 'col-xs-3';
+
+			equipmentCategoryNodes.push(<li className={className} 
 											onClick={this.props.selected.bind(this, { category: category })}
 											key={`category_${i}`}>
 											{category}

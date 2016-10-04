@@ -1,13 +1,19 @@
 Equipt.helpers.OptionsHelper = class extends React.Component {
 
+	static propType = {
+		name: React.PropTypes.string.isRequired,
+		value: React.PropTypes.string.isRequired
+	}
+
 	constructor(props) {
 		super(props);
 	}
 
-	hasChanged() {
-		let type = this.refs.type;
-		let value = type ? type.value : '';
-		this.props.selectedOption(value);
+	selected() {
+		let dropDownName = this.props.name;
+		let element = this.refs[dropDownName];
+		let value = element ? element.value : '';
+		this.value = value;
 	}
 
 	render() {
@@ -15,17 +21,28 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 		let options = this.props.options;
 		let name  = this.props.name;
 
+		let startingValue = this.props.value;
+
 		return (
 
 			<select ref={name} 
-					onChange={this.hasChanged.bind(this)}
+					onChange={this.selected.bind(this)}
 					className="form-control col-sm-12">
+						<option value="" disabled selected>Select a category</option>
 				{
 					options.map(function(option, i) {
-						return <option  key={`option_${i}`} 
-										value={option}>{option}
-
-								</option>
+						if (option === startingValue) {
+							return <option  key={`option_${i}`} 
+											value={option}
+											selected>
+											{option}
+									</option>
+						} else {						
+							return 	<option  key={`option_${i}`} 
+											value={option}>
+											{option}
+									</option>
+						}
 					})
 				}
 			</select>
