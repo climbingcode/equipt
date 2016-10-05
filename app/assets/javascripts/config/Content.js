@@ -1,5 +1,13 @@
 Equipt.content = {
 
+	// HOME 
+	home: {
+		title: "Find Local Outdoor Equipment for your next adventure",
+		howItWorks: {
+			title: "How it Works"
+		}
+	},
+
 	// EQUIPMENT 
 	createEquipment: {
 

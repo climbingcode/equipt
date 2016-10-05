@@ -20,15 +20,19 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 			equipmentListing.push(equipmentItem);
 		}
 
+		var noProducts = 	<Link 	to="equipmentCreate">
+								<div className="equipment-container col-xs-4">
+									<div className="equipment-add well">
+										<i className="fa fa-plus fa-5"/>
+										<h4>Click to Add equipment</h4>
+									</div>
+								</div>
+							</Link>			
+
 		return (
 			<div className="owners-equipment-wrapper equipment-wrapper">
-				<div className="equipment-create-btn-container">
-					<Link   to="equipmentCreate"
-							className="btn btn-success">
-							Add Equipment
-					</Link>
-				</div>
-				{equipmentListing}
+				{ equipmentListing }
+				{ noProducts }
 			</div>
 		)
 

@@ -66,7 +66,7 @@ Equipt.views.Nav = class extends React.Component {
 								
 		} else {
 
-			var sessionBtns =   <ul className="navbar-right col-sm-2"
+			var sessionBtns =   <ul className="session-container navbar-right col-sm-3"
 									key="sessions">
 									<Link to="login">
 										<li key="login" 
@@ -80,7 +80,11 @@ Equipt.views.Nav = class extends React.Component {
 											Signup
 										</li>
 									</Link>
-								</ul>						
+								</ul>	
+
+			var equipmentLogo = <Link to="home">
+									<div className="nav-logo"></div>
+								</Link>					
 		}
 
 		return (

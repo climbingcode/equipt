@@ -21,30 +21,25 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 		let options = this.props.options;
 		let name  = this.props.name;
 
-		let startingValue = this.props.value;
+		let startingValue = this.props.value ? this.props.value : 'default';
 
 		return (
 
 			<select ref={name} 
 					onChange={this.selected.bind(this)}
-					className="form-control col-sm-12">
-						<option value="" disabled selected>Select a category</option>
-				{
-					options.map(function(option, i) {
-						if (option === startingValue) {
-							return <option  key={`option_${i}`} 
-											value={option}
-											selected>
-											{option}
-									</option>
-						} else {						
-							return 	<option  key={`option_${i}`} 
+					className="form-control col-sm-12"
+					value={ startingValue }>
+					<option value="default" disabled>Select a category</option>					
+					{
+						options.map(function(option, i) {
+							
+							return 	<option key={`option_${i}`} 
 											value={option}>
 											{option}
 									</option>
-						}
-					})
-				}
+							
+						})
+					}
 			</select>
 
 		)

@@ -5,9 +5,9 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 	}
 
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
-			category: 'camp'
+			category: null 
 		}
 	}
 
@@ -40,20 +40,19 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 		let OptionsHelper 		    = Equipt.helpers.OptionsHelper;
 		let EquipmentUploaderView   = Equipt.views.EquipmentUploaderView;
 		let EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
-		let equipment 			    = this.props.equipment;
-
-		let category 	= this.state.category;
+		
+		let equipment 	= this.props.equipment || {};
+		let category 	= this.state.category || equipment.category || 'camp';
 		let optionsJson = Equipt.content.createEquipment.typeOptions;
-
-		let options = category && optionsJson[category];
-		let inputs  = Equipt.content.createEquipment.formInputs; 
+		let options 	= category && optionsJson[category];
+		let inputs  	= Equipt.content.createEquipment.formInputs; 
 
 		return (
 			<form 	onSubmit={this.submit.bind(this)}
 					className="form-group equipment-create-wrapper"
 					>
 				<EquipmentSearchTabsView selected={ this.tabsChanged.bind(this) }
-										 value={ equipment && equipment.category }
+										 value={ this.state.category || equipment.category }
 				/>
 				{ this.renderError.call(this, 'sub_category') }
 				<OptionsHelper 	ref="sub_category"

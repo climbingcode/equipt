@@ -7,7 +7,7 @@ this.Routes = (
 			handler={Equipt.App} 
 			path="/">
 		<Route 	name="home"  
-				handler={Home} 
+				handler={Equipt.views.Home} 
 				path="home"/>
 		<Route 	name="login" 
 				handler={Equipt.controllers.LoginController} 
@@ -53,7 +53,7 @@ this.Routes = (
 				handler={Equipt.controllers.OwnersShowController}
 				path="owner/:userId/equipment/:equipmentId"
 		/>
-		<DefaultRoute handler={Home}/>
+		<DefaultRoute handler={Equipt.views.Home}/>
 	</Route>
 ), document.getElementById('root');
 
