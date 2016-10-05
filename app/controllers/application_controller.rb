@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
 		head :unauthorized unless current_user
 	end
 
+	def render_notice(notice)
+		render json: { notice: notice }, status: 200
+	end
+
 	helper_method :current_user
 
 end

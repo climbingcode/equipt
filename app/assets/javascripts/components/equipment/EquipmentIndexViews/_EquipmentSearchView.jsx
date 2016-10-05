@@ -1,32 +1,28 @@
-class EquipmentSearchView extends React.Component {
+Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			selected: undefined
+		}
 	}
 
 	_findBy(query) {
-		getEquipment(query);
+		Equipt.actions.showLoader();
+		Equipt.actions.getEquipment(query);
+		this.setState({
+			selected: query.category
+		});
 	}
 
 	render() {
 
-		var equipmentCategory = ['camp', 'snow', 'bike', 'lake'];
-		var equipmentCategoryNodes = [];
-
-		for (var i = 0; i < equipmentCategory.length; i++) {
-			let category = equipmentCategory[i];
-			equipmentCategoryNodes.push(<li className="col-xs-3" 
-											onClick={this._findBy.bind(this, { category: category })}
-											key={`category_${i}`}>
-											{category}
-										</li>);
-		}
+		let EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
 
 		return (
 			<div className="equipment-search-wrapper">
-				<ul className="equipment-category-container">
-					{equipmentCategoryNodes}
-				</ul>
+				<EquipmentSearchTabsView 	value={this.state.selected} 
+											selected={ this._findBy.bind(this) }/>
 			</div>
 		)
 	}

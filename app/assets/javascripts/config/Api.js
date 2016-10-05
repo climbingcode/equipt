@@ -1,4 +1,4 @@
-const API = {
+Equipt.API = {
 
 	path: '/api',
 
@@ -13,9 +13,9 @@ const API = {
 		});
 	},
 
-	post: function(url, data) {
+	post: function(url, data, options) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'POST', data)
+			this.send(url, 'POST', data, options)
 			.then((res) => {
 				resolve(res);
 			}, (err) => {
@@ -24,48 +24,60 @@ const API = {
 		});
 	},
 
-	put: function(url, data) {
+	put: function(url, data, options) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'PUT', data).then((res) => {
-				
+			this.send(url, 'PUT', data, options)
+			.then((res) => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
 			});
 		});
 	},
 
 	delete: function(url) {
 		return new Promise((resolve, reject) => {
-			this.send(url, 'DELETE')((res) => {
-				
+			this.send(url, 'DELETE')
+			.then((res) => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
 			});
 		});
 	},
 
-	send: function(url, method, data) {
+	send: function(url, method, data, options = {}) {
 
 		return new Promise((resolve, reject) => {
+
+			let ApiKey = Equipt.stores.AuthStore.getApiKey();
 		
 			var ajaxObj = {
-				url: API.path + url,
+				url: Equipt.API.path + url,
 				type: method,
-				dataType: 'json',
-				contentType: 'application/json',
+				contentType: options.isMultipart ? false : 'application/json',
+ 				cache: false,
+  				processData: false,
+				data: options.data ? options.data : JSON.stringify(data),
 				beforeSend: (request) => {
-	            	request.setRequestHeader('AUTHORIZATION', AuthStore.getApiKey());
+	            	request.setRequestHeader('AUTHORIZATION', ApiKey);
 	        	}
 			};
 
-			if (data) ajaxObj.data = JSON.stringify(data);
-
 			$.ajax(ajaxObj)
 			.success((res) => {
-				if (res.errors) hasErrors(res.errors);
-				else resolve(res);
+				if (res.errors) return hasErrors(res.errors);
+				else if (res.notice) hasNotice(res.notice);
+				resolve(res);
 			})
 			.error((err) => {
 				if (err.status === 500 || err.status === 401) {
-					unauthorizedUser();
+					Equipt.actions.unauthorizedUser();
 				}
 				reject(err);
+			})
+			.done(() => {
+				Equipt.actions.hideLoader();
 			});
 
 		});

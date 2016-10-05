@@ -1,0 +1,33 @@
+.owners-equipment-wrapper {
+
+
+	.equipment-container {
+		height: 500px;
+		
+		.equipment-add {
+			i {
+	    		display: block;
+				margin: 20px auto;
+	    		font-size: 40px;
+	    		width: 31px;
+			}
+			h4 {
+				text-align: center;
+			}
+		}
+
+		i {
+			margin-right: 10px;
+			font-size: 25px;
+			&:first-child:hover {
+				color: blue;
+			}
+			&:last-child:hover {
+				color: red;
+			}
+
+		}
+
+	}
+	
+}

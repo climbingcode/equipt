@@ -1,0 +1,41 @@
+.add-equipment-wrapper {
+	
+	> a {
+		margin-bottom: 20px;
+	}
+	 
+	.equipment-create-wrapper {
+
+		.image-drop-container {
+
+			.main-drop {
+				width: 100%;
+				height: 300px;
+				margin: 20px 0;
+				background: #ccc;
+			}
+
+		}	
+
+	}
+
+	.image-drop-container {
+
+		.image-previews {
+
+			padding: 0;
+
+			.image-preview {
+
+				display: inline-block;
+				width: 25%;
+				padding: 5px;
+				list-style-type: none;
+
+			}
+
+		}
+
+	}
+
+}

@@ -4,43 +4,64 @@ const DefaultRoute = ReactRouter.DefaultRoute;
 
 this.Routes = (
 	<Route 	name="app" 
-			handler={App} 
+			handler={Equipt.App} 
 			path="/">
 		<Route 	name="home"  
-				handler={Home} 
+				handler={Equipt.views.Home} 
 				path="home"/>
 		<Route 	name="login" 
-				handler={LoginController} 
+				handler={Equipt.controllers.LoginController} 
 				path="login"/>
 		<Route 	name="signup" 
-				handler={SignupController} 
+				handler={Equipt.controllers.SignupController} 
 				path="signup"/>
+		<Route  name="profile"
+				handler={Equipt.controllers.ProfileController}
+				path="users/:userId/edit"
+		/>
+		<Route  name="equipmentCreate"
+				handler={Equipt.controllers.EquipmentCreateController}
+				path="equipment/new"
+		/>
 		<Route 	name="equipmentIndex" 
-				handler={EquipmentIndexController} 
+				handler={Equipt.controllers.EquipmentIndexController} 
 				path="equipment">
 				<Route 	name="equipmentShow"
-						handler={EquipmentShowController}
+						handler={Equipt.controllers.EquipmentShowController}
 						path=":id">
 					<Route 	name="equipmentAvailability"
-							handler={EquipmentAvailabilityView}
+							handler={Equipt.views.EquipmentAvailabilityView}
 							path="availability"/>
 					<Route 	name="equipmentInfo"
-							handler={EquipmentInfoView}
+							handler={Equipt.views.EquipmentInfoView}
 							path="info"/>
 					<Route 	name="equipmentOwner"
-							handler={EquipmentOwnerView}
+							handler={Equipt.views.EquipmentOwnerView}
 							path="owner"/>
+					<Route  name="equipmentConfirmation"
+							handler={Equipt.views.EquipmentConfirmationView}
+							path="confirmation"/>
 				</Route>
 		</Route>
-		<DefaultRoute handler={Home}/>
+		<Route 	name="equipmentEdit"
+				handler={Equipt.controllers.EquipmentEditController}
+				path="equipment/:id/edit"/>
+		<Route  name="ownersIndex"
+			    handler={Equipt.controllers.OwnersIndexController}
+				path="owner/:userId/equipment"/>
+		<Route 	name="ownersShow"
+				handler={Equipt.controllers.OwnersShowController}
+				path="owner/:userId/equipment/:equipmentId"
+		/>
+		<DefaultRoute handler={Equipt.views.Home}/>
 	</Route>
 ), document.getElementById('root');
 
-// // Location listerner
-Location.addChangeListener(function(location) {
-	hasErrors(null);
-});
+Location.addChangeListener(function(pathName){
+	Equipt.actions.clearNotice();
+	Equipt.actions.showLoader();
+})
 
-EquipmentIndexController.willTransitionTo = function(transition) {
-	if (!AuthStore.authenticated()) transition.redirect('/home');
-}
+// Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
+// 	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
+// }

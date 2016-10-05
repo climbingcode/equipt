@@ -1,15 +1,20 @@
-class EquipmentIndexView extends React.Component {
+Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
+		
+		const equipmentList = this.props.equipment || [];
 
+		let EquipmentItemView   = Equipt.views.EquipmentItemView;
+		let EquipmentSearchView = Equipt.views.EquipmentSearchView;
+		
 		var equipmentListing = [];
 
-		for (var i = 0; i < this.props.equipments.length; i++) {
-			let equipment 	  = this.props.equipments[i];
+		for (let i = 0; i < equipmentList.length; i++) {
+			let equipment 	  = equipmentList[i];
 			let equipmentItem = <EquipmentItemView 
 									key={`equipment_${equipment.id}`} 
 									equipment={equipment}/>;
@@ -17,6 +22,7 @@ class EquipmentIndexView extends React.Component {
 		}
 
 		return (
+
 			<div className="equipment-wrapper">
 				<EquipmentSearchView/>
 				{equipmentListing}
@@ -24,6 +30,5 @@ class EquipmentIndexView extends React.Component {
 		)
 		
 	}
-
 
 }

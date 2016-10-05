@@ -3,10 +3,36 @@
   "dependencies": {
     "browserify": "~10.2.4",
     "browserify-incremental": "^3.0.1",
+    "google-map-react": "^0.16.3",
+    "react": "^15.2.1",
+    "react-css-transition-replace": "^2.0.1",
+    "react-dom": "^15.3.1",
+    "react-dropzone": "^3.5.3",
+    "react-dropzone-component": "^0.6",
+    "react-google-maps": "^4.11.0",
     "react-router": "^2.5.2"
   },
   "license": "MIT",
   "engines": {
     "node": ">= 0.10"
-  }
+  },
+  "description": "# Summary # =======",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/climbingcode/equipt.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/climbingcode/equipt/issues"
+  },
+  "homepage": "https://github.com/climbingcode/equipt#readme"
 }

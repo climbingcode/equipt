@@ -1,5 +1,10 @@
-
 // MODAL
+
+$camping_green: #8FC485;
+
+body {
+    // overflow: hidden;
+}
 
 .modal {
     position: absolute;
@@ -24,19 +29,4 @@
     background: #000;
     opacity: 0.6;
     z-index: 1
-}
-
-// LOADER
-
-.loader {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    left: 50%;
-    top: 40vh;
-    margin-left: -50px;
-    margin-top: -50px;
-    z-index: 100;
-    background-image: url(loader.gif);
-    background-size: contain;
 }

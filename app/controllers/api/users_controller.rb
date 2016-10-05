@@ -17,6 +17,17 @@ class Api::UsersController < ApplicationController
 		render json: { user: current_user, api_key: current_user.session_api_key }, status: 200
 	end
 
+	def update 
+		user = User.find(params[:id])
+		if !user.authenticate(user_params[:password]) 
+			render_notice({ error: "Incorrect credentials, try again!" })
+		elsif user.update(user_params)
+			render json: { user: user, api_key: user.session_api_key }, status: 200
+		else
+			render json: { errors: user.errors }, status: 200
+		end
+	end
+
 	private
 
 	def user_params
