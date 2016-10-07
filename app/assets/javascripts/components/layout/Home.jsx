@@ -15,7 +15,6 @@ Equipt.views.Home = class Home extends React.Component {
 	}
 
 	scrollDown() {
-		debugger;
 		window.scrollTo(0, 500);
 	}
 
@@ -39,7 +38,7 @@ Equipt.views.Home = class Home extends React.Component {
 				<div className="how-it-works-container" ref="howItWorks">
 						<h3>{ content.howItWorks.title }</h3>
 						<div className="col-xs-3">
-							
+						
 						</div>
 						<div className="col-xs-3">
 							

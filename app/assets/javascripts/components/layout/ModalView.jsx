@@ -15,7 +15,9 @@ Equipt.views.ModalView = class extends React.Component {
 				</Link>
 				<div className="modal">
 					<div className="close col-sm-2">
-						<Link to={this.props.closeTo} params={params} >
+						<Link 	onClick={ this.props.closedModal } 
+								to={this.props.closeTo} 
+								params={params} >
 							<i className="fa fa-times-circle pull-right" 
 							   aria-hidden="true">
 							</i>

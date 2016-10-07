@@ -16,6 +16,7 @@ class FaceBookView extends React.Component {
 			var btn = 	<button className="btn btn-success" 
 								disabled={!this.props.facebookLoaded} 
 								onClick={ this.props.login }>
+								<i className="fa fa-facebook-official fa-2" aria-hidden="true"></i>
 								Login With Facebook
 						</button>
 		}

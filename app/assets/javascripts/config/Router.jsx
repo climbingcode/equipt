@@ -14,7 +14,8 @@ this.Routes = (
 				path="login"/>
 		<Route 	name="signup" 
 				handler={Equipt.controllers.SignupController} 
-				path="signup"/>
+				path="signup">
+		</Route>
 		<Route  name="profile"
 				handler={Equipt.controllers.ProfileController}
 				path="users/:userId/edit"

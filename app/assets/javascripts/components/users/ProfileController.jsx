@@ -10,7 +10,6 @@ Equipt.controllers.ProfileController = class ProfileController extends Equipt.co
 	}
 
 	submit(user) {
-		debugger;
 		Equipt.actions.updateUser({user: user});
 	}
 
@@ -26,7 +25,8 @@ Equipt.controllers.ProfileController = class ProfileController extends Equipt.co
 		let SignupForm = Equipt.views.SignupFormView;
 
 		return (
-			<SignupForm { ...this.props } submit={this.submit.bind(this)}/>
+			<SignupForm { ...this.props } 
+						submit={this.submit.bind(this)}/>
 		)
 
 	}
