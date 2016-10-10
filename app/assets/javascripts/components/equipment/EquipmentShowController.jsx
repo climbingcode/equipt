@@ -11,13 +11,11 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 							Equipt.stores.RentalStore, 
 							Equipt.stores.ErrorsStore
 						];
+
 		this.state = {
-			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
-  			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
-  			rentalTime:  Equipt.stores.RentalStore.getRentalTime(),
-  			rental: 	 Equipt.stores.RentalStore.getRental(),
-  			errors: 	 Equipt.stores.ErrorsStore.getErrors()
+			equipment: {}
 		}
+
 	}
 
 	componentWillMount() {
@@ -32,13 +30,9 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		    	id: Equipt.stores.RentalStore.getRental().id
 		    });
     	}
-  		
+  	
   		return {
-  			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
-  			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
-  			rentalTime:  Equipt.stores.RentalStore.getRentalTime(),
-  			rental: 	 Equipt.stores.RentalStore.getRental(),
-  			errors: 	 Equipt.stores.ErrorsStore.getErrors()
+  			equipment: Equipt.stores.EquipmentStore.getEquipment()
   		}
 
   	}
@@ -48,7 +42,7 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		let EquipmentShowView = Equipt.views.EquipmentShowView; 
 
 		return (
-			<EquipmentShowView  { ...this.props } />
+			<EquipmentShowView  { ...this.state } />
 		)
 	}
 

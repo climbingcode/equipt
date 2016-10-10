@@ -7,13 +7,15 @@ Equipt.views.EquipmentOwnerView = class EquipmentOwnerView extends React.Compone
 	render() {
 
 		let equipment = this.props.equipment || {};
-		let owner 	  = equipment.owner;
+		let owner 	  = equipment.user || {};
 
-		if (!owner) return(<div></div>);
+		console.log(equipment);
+
+		if (!owner.id) return(<div></div>);
 
 		return (
 			<div className="equipment-owner-container">
-				<h5>{`${owner.firstname.capitalize()} ${owner.lastname.capitalize()}`}</h5>
+				<h5>{`${owner.firstname} ${owner.lastname}`}</h5>
 				<h6>Owners Reviews</h6>
 				{owner.ratings.map(function(rating, i) {
 					return <div className="rating" key={`owners_rating_${i}`}>

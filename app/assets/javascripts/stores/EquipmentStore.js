@@ -33,6 +33,7 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	},
 
 	findEquipment(id) {
+		debugger;
 		let id = equipment.id;
 		return this._equipments.each((equipment, index) => {		
 			if (equipment.id === id) return this._equipment;

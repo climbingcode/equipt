@@ -14,5 +14,13 @@
 	}(document, 'script', 'facebook-jssdk'));
 </script>
 
+<script>
+
+	window.googleMapsLoaded = function() {
+		console.log('google maps has loaded');
+	};
+
+</script>
+
 <!-- Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS'] %>" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS'] %>&callback=googleMapsLoaded" async defer></script>

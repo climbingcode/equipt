@@ -4,7 +4,12 @@ Equipt.views.ModalView = class extends React.Component {
 		super(props);
 	}
 
+	componentDidMount() {
+		
+	}
+
 	render() {
+		let AjaxLoader = Equipt.controllers.AjaxLoader;
 
 		let params = this.props.params || {};
 
@@ -24,6 +29,7 @@ Equipt.views.ModalView = class extends React.Component {
 						</Link>
 					</div>
 					<div className="modal-top-container col-sm-12">
+						<AjaxLoader/>
 						{ this.props.children }
 					</div>
 				</div>

@@ -14,16 +14,13 @@ this.Routes = (
 				path="login"/>
 		<Route 	name="signup" 
 				handler={Equipt.controllers.SignupController} 
-				path="signup">
-		</Route>
+				path="signup"/>
 		<Route  name="profile"
 				handler={Equipt.controllers.ProfileController}
-				path="users/:userId/edit"
-		/>
+				path="users/:userId/edit"/>
 		<Route  name="equipmentCreate"
 				handler={Equipt.controllers.EquipmentCreateController}
-				path="equipment/new"
-		/>
+				path="equipment/new"/>
 		<Route 	name="equipmentIndex" 
 				handler={Equipt.controllers.EquipmentIndexController} 
 				path="equipment">
@@ -58,11 +55,7 @@ this.Routes = (
 	</Route>
 ), document.getElementById('root');
 
-Location.addChangeListener(function(pathName){
+Location.addChangeListener((pathName) => {
 	Equipt.actions.clearNotice();
 	Equipt.actions.showLoader();
-})
-
-// Equipt.controllers.EquipmentIndexController.willTransitionTo = function(transition) {
-// 	if (!Equipt.stores.AuthStore.authenticated()) transition.redirect('/home');
-// }
+});
