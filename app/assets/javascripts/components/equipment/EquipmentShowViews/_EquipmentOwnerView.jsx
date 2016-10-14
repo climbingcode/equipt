@@ -9,8 +9,6 @@ Equipt.views.EquipmentOwnerView = class EquipmentOwnerView extends React.Compone
 		let equipment = this.props.equipment || {};
 		let owner 	  = equipment.user || {};
 
-		console.log(equipment);
-
 		if (!owner.id) return(<div></div>);
 
 		return (

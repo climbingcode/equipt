@@ -11,7 +11,7 @@ class Api::RentalsController < ApplicationController
 		if rental.save
 			render json: rental, include: [ equipment: { include: :user } ], status: 200
 		else 
-			render json: { errors: rental.errors }, status: 200
+			render json: { notice: { errors: rental.errors } }, status: 200
 		end
 	end
 

@@ -12,7 +12,7 @@ Equipt.controllers.AjaxLoader = class AjaxLoader extends Equipt.controllers.Main
 		this.mounted && this.setState({
 			isLoaderShown: Equipt.stores.AjaxLoaderStore.isShown()
 		});
-		this.forceUpdate();
+		this.mounted && this.forceUpdate();
 	}
 
 	render() {

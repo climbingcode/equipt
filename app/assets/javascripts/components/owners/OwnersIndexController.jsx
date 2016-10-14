@@ -7,7 +7,7 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 		this.protected = true;
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		Equipt.actions.getOwnersEquipment();
 	}
 

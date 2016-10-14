@@ -1,26 +1,18 @@
-class Calendar extends React.Component {
+Equipt.views.Calendar = class Calendar extends React.Component {
 
 	constructor(props) {
 		super(props);
 	}
 
-	componentDidMount() {
-	  	var rentals	= this.props.rentals ? this.props.rentals : [];
-        this.buildCalendar(rentals);
-	}
+    componentWillReceiveProps() {
 
-  	componentWillReceiveProps() {
-  		var equipment = Equipt.stores.EquipmentStore.getEquipment() ? Equipt.stores.EquipmentStore.getEquipment() : [];
-        this.buildCalendar(equipment.rentals);
-  	}
-
-    buildCalendar(rentals) {
-
-        if (!rentals) return;
         const {calendar} = this.refs;
 
-        // Unavailiable Dates
-        var events = rentals.map(function(rental, i) {
+        let rental = this.props.rental;
+
+        // Unavailable Dates
+        var events = this.props.rentals.map(function(rental, i) {
+            if (!rental) debugger;
             return {
                 id: rental.id,
                 title: 'rented',
@@ -30,21 +22,39 @@ class Calendar extends React.Component {
             }
         });
 
-        // Selected Dates
-        if (Equipt.stores.RentalStore.getRentalDates()) {
+
+        if (rental.pickup_date && rental.dropoff_date) {   
+            
+            // Selected Dates
             events.push({
+                id: 1,
                 title: 'selected',
-                start: Equipt.stores.RentalStore.getRentalDates().start,
-                end: Equipt.stores.RentalStore.getRentalDates().end,
+                start: rental.pickup_date,
+                end: rental.dropoff_date,
                 color: '#8FC485'
             });
+
         }
+        
+        $(calendar).fullCalendar('removeEvents', 1); 
+        $(calendar).fullCalendar('addEventSource', events);    
+
+    }
+
+    buildCalendar(rentals) {
+
+        const {calendar} = this.refs;
 
         // Full Calendar settings
         var fullCalendarSettings = {
-            events: events,
+            // events: events,
             select: (start, end, allDay) => {
-                this.props.selectedDates(start, end);
+                setTimeout(() => {                
+                    this.props.selectedDates({
+                        pickup_date: start,
+                        dropoff_date: end
+                    });
+                }, 50);
             }, 
             eventLimit: true, // for all non-agenda views
             selectable: true,
@@ -62,19 +72,14 @@ class Calendar extends React.Component {
         $(calendar).fullCalendar('destroy');
         $(calendar).fullCalendar(fullCalendarSettings); 
 
-        // Move calendar to selected month
-        if (this.props.rentalDates) {
-            $(calendar).fullCalendar('gotoDate', Equipt.stores.RentalStore.getRentalDates().start);
-        }
-
     }
 
-  	componentWillUnmount() {
-  		const {calendar} = this.refs;
-  		$(calendar).fullCalendar('destroy');
-  	}
+    componentDidMount() {
+        let rentals = this.props.rentals;
+        this.buildCalendar(rentals);
+    }
 
-	render() {
+    render() {
 		return (
 			<div ref="calendar"></div>
 		);

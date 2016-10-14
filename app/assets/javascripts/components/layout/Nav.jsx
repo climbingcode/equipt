@@ -20,10 +20,10 @@ Equipt.views.Nav = class extends React.Component {
 		let currentUser = this.props.currentUser;
 		let pathname    = this.context.router.getCurrentPath();
 
-		let userName =  currentUser ? currentUser.firstname.capitalize() : "";
+		let userName =  currentUser.firstname ? currentUser.firstname.capitalize() : "";
 		let userId 	 =  currentUser ? currentUser.id : 0;
 
-		if (currentUser) {
+		if (currentUser.id) {
 
 			if (pathname.indexOf('/owner/') > -1) {
 				

@@ -12,6 +12,7 @@ const Constants = {
 	EQUIPMENT_CREATE: 'EQUIPMENT_CREATE',
 	EQUIPMENT_UPDATE: 'EQUIPMENT_UPDATE',
 	EQUIPMENT_DELETE: 'EQUIPMENT_DELETE',
+	RENTAL_INDEX: 'RENTAL_INDEX',
 	RENTED_EQUIPMENT: 'RENTED_EQUIPMENT',
 	CHANGED_RENTAL_DATES: 'CHANGED_RENTAL_DATES',
 	CHANGED_PICKUP_TIME: 'CHANGED_PICKUP_TIME',
@@ -22,6 +23,7 @@ const Constants = {
 		login: 'login',
 		equipmentIndex: 'equipmentIndex',
 		equipmentShow: 'equipmentShow',
-		ownersIndex: 'ownersIndex'
+		ownersIndex: 'ownersIndex',
+		rentalConfirmation: 'rentalConfirmation'
 	}
 };

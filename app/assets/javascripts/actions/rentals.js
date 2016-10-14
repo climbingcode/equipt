@@ -2,11 +2,8 @@
 // SELECTED / CHANGES RENTAL DATES
 // ===============================
 
-Equipt.actions.selectedRentalDates = function(startDate, endDate) {
-	dispatchAction(Constants.CHANGED_RENTAL_DATES, {
-		startDate: startDate,
-		endDate: endDate
-	});
+Equipt.actions.selectedRentalDates = function(dates) {
+	dispatchAction(Constants.CHANGED_RENTAL_DATES, dates);
 };
 
 // ==================================
@@ -14,9 +11,7 @@ Equipt.actions.selectedRentalDates = function(startDate, endDate) {
 // ==================================
 
 Equipt.actions.selectedPickUpTime = function(time) {
-	dispatchAction(Constants.CHANGED_PICKUP_TIME, {
-		time: time	
-	});
+	dispatchAction(Constants.CHANGED_PICKUP_TIME, time);
 }
 
 // ===============================
@@ -26,10 +21,8 @@ Equipt.actions.selectedPickUpTime = function(time) {
 Equipt.actions.rentEquipment = function(equipmentId, params) {
 
 	Equipt.API.post(`/equipments/${equipmentId}/rentals`, params).then(
-	function(data) {
-		dispatchAction(Constants.RENTED_EQUIPMENT, {
-			rental: data
-		});
+	function(rental) {
+		dispatchAction(Constants.RENTED_EQUIPMENT, rental);
 	});
 	
 };

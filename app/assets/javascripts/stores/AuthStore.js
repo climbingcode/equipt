@@ -8,7 +8,7 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	},
 
 	authenticated() {
-		return this.getSession() && this.getSession().length;
+		return this.getSession().length > 0;
 	},
 
 	setSession(apiKey) {
@@ -20,7 +20,7 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	},
 
 	getSession() {
-		return localStorage['equiptSession'];
+		return localStorage['equiptSession'] || '';
 	},
 
 	deleteSession() {

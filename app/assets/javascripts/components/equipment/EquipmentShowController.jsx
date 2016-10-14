@@ -6,31 +6,20 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 
 	constructor(props) {
 		super(props);
-		this.stores = 	[	
-							Equipt.stores.EquipmentStore, 
-							Equipt.stores.RentalStore, 
-							Equipt.stores.ErrorsStore
-						];
+		this.stores = [ Equipt.stores.EquipmentStore ];
 
 		this.state = {
-			equipment: {}
+			equipment: Equipt.stores.EquipmentStore.getEquipment()
 		}
 
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		let id = this.context.router.getCurrentParams().id;
 		Equipt.actions.showEquipment(id);
 	}
 
   	dataChanged() {
-
-  		if (Equipt.stores.RentalStore.getRental()) {
-		    this.context.router.transitionTo('equipmentConfirmation', {
-		    	id: Equipt.stores.RentalStore.getRental().id
-		    });
-    	}
-  	
   		return {
   			equipment: Equipt.stores.EquipmentStore.getEquipment()
   		}

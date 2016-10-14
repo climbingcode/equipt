@@ -32,7 +32,7 @@ Equipt.controllers.OwnersShowController = class OwnersShowController extends Equ
 
   	}
 
-	componentWillMount() {
+	componentDidMount() {
 		let id = this.context.router.getCurrentParams().equipmentId;
 		Equipt.actions.showEquipment(id);
 	}

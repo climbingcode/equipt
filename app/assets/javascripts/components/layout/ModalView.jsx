@@ -4,10 +4,6 @@ Equipt.views.ModalView = class extends React.Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		
-	}
-
 	render() {
 		let AjaxLoader = Equipt.controllers.AjaxLoader;
 

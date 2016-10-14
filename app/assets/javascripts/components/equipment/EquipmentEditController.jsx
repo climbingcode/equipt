@@ -18,7 +18,7 @@ Equipt.controllers.EquipmentEditController = class EquipmentEditController exten
 		this.state  = this.getState();
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		let equipmentId = this.context.router.getCurrentParams().id;
 		Equipt.actions.showEquipment(equipmentId);
 	}

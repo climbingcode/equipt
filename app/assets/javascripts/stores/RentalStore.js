@@ -1,45 +1,44 @@
-var	_rentalDates 	 = null;
-var _rentalTime  	 = null;
-var _rentedEquipment = null;
-var _owner			 = null;
-
 Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
-	getRentalDates() {
-        return _rentalDates;
-	},
+    rentals: [],
+    rental: {},
+    createdRental: false,
 
-	getRentalTime() {
-		return _rentalTime;
-	},
+    setRentals(rentals) {
+    	this.rentals = rentals;
+    },
 
-	getRental() {
-		return _rentedEquipment;
-	},
+    getRentals() {
+        return this.rentals;
+    },
 
-	getOwner() {
-		return _owner
-	},
+    setDates(dates) {
+        this.rental.pickup_date = dates.pickup_date;
+        this.rental.dropoff_date = dates.dropoff_date;
+    },
 
-	setRentalDates(start, end) {
-		_rentalDates = {start: start, end: end};
-	},
+    setTimes(times) {
+        this.rental.times = times;
+    },
 
-	setRentalTime(time) {
-		_rentalTime = time;
-	},
+    getRental() {
+        return this.rental;
+    },
 
-	setRental(rental) {
-		_rentedEquipment = rental;
-	},
+    rentalConfirmed(rental) {
+        this.rentals.push(rental);
+        this.rental     = rental;
+        this.createdRental = true;
+    },
 
-	setOwner(owner) {
-		_owner = owner;
-	},
+    clearRental() {
+        this.rental = {};
+        this.createdRental = false;
+    },
 
-	clearRental() {
-		_rentedEquipment = null;
-	}
+    hasCreatedRental() {
+        return this.createdRental;
+    }
 
 });
 
@@ -47,22 +46,23 @@ AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
 
-  	let RentalStore = Equipt.stores.RentalStore;
+  	const RentalStore = Equipt.stores.RentalStore;
   	
   	switch(type) {
-		case Constants.CHANGED_RENTAL_DATES:
-			RentalStore.setRentalDates(data.startDate, data.endDate);
-            RentalStore.emitChange();
-		break; 
-		case Constants.CHANGED_PICKUP_TIME:
-			RentalStore.setRentalTime(data.time);
-			RentalStore.emitChange();
-		break;
-		case Constants.RENTED_EQUIPMENT:
-			RentalStore.setRental(data.rental);
-			RentalStore.setOwner(data.owner);
-			RentalStore.emitChange();
-		break;
+  		case Constants.RENTAL_INDEX:
+  			RentalStore.setRentals(data);
+  		break;
+        case Constants.CHANGED_RENTAL_DATES:
+            RentalStore.setDates(data);
+        break;
+        case Constants.CHANGED_PICKUP_TIME:
+            RentalStore.setTimes(data);
+        break;
+        case Constants.RENTED_EQUIPMENT:
+            RentalStore.rentalConfirmed(data);
+        break;
 	}
+
+    RentalStore.emitChange();
 
 });

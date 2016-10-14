@@ -14,14 +14,4 @@ $camping_green: #8FC485;
 
 		}
 	}
-	.pick-up-time-container {
-		div {
-			border: 1px solid #000;
-			padding: 0;
-			text-align: center;
-			&.selected {
-				background: $camping_green;
-			}
-		}
-	}
 }

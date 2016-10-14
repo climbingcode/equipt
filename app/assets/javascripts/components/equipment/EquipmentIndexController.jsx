@@ -14,7 +14,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		} 
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		Equipt.actions.getEquipment();
 	}
 
@@ -30,7 +30,6 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 
 		return (
 			<div className="equiptment-wrapper">
-				<RouteHandler/>
 				<EquipmentIndexView { ...this.state } />
 			</div>
 		)

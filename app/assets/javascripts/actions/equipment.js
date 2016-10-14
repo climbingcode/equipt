@@ -18,7 +18,7 @@ Equipt.actions.getEquipment = function(query) {
 };
 
 // =================
-// GET ONE EQUIPMENT
+// SHOW EQUIPMENT
 // =================
 
 Equipt.actions.showEquipment = function(id) {
@@ -26,6 +26,7 @@ Equipt.actions.showEquipment = function(id) {
 	Equipt.API.get(`/equipments/${id}`).then(
 	(data) => {
 		dispatchAction(Constants.EQUIPMENT_SHOW, data);
+		dispatchAction(Constants.RENTAL_INDEX, data.rentals);
 	},
 	(err) => {
 		console.log('Error Getting Equipment');

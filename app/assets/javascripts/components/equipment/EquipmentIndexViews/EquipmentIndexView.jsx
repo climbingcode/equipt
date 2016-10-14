@@ -26,6 +26,7 @@ Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Compone
 			<div className="equipment-wrapper">
 				<EquipmentSearchView/>
 				{equipmentListing}
+				<RouteHandler/>	
 			</div>
 		)
 		

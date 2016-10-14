@@ -5,7 +5,7 @@ Equipt.controllers.MainController = class MainController extends React.Component
         this.mounted = false;
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.mounted = true;
         this.stores.forEach((store) => {
             store.addChangeListener(this._onChange.bind(this));
@@ -30,7 +30,8 @@ Equipt.controllers.MainController = class MainController extends React.Component
 
     _onChange() {
         if (!this.dataChanged) return;
-        this.mounted && this.setState(this.dataChanged());
+        let data = this.dataChanged() || [];
+        this.mounted && this.setState(data);
     }
 
 }
