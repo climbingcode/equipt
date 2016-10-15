@@ -6,6 +6,8 @@ Equipt.actions.getEquipment = function(query) {
 
 	var params = query ? serialize({query: query}) : '';
 
+	dispatchAction(Constants.SEARCH_EQUIPMENT, query);
+
 	Equipt.API.get(`/equipments?${params}`).then(
 		(data) => {
 			dispatchAction(Constants.EQUIPMENT_INDEX, data);

@@ -8,26 +8,27 @@ end
 @rentable_equipment_amount = (1..5).to_a
 @equipment_category = [
 	{camp: [
-		'tent',
-		'stove',
-		'sleeping pad',
-		'backpack'
+		'tent', 
+		'stove', 
+		'sleeping bag', 
+		'mat'
 	]}, 
 	{lake: [
-		'kayak',
-		'paddle board',
-		'surf board',
-		'canoe'
+		'kayak', 
+		'canone',
+		'row'
 	]}, 
 	{bike: [
-		'mountain bike',
-		'road bike',
-		'childrens trailer'
+		'mountain bike', 
+		'road bike', 
+		'helmet'
 	]},
 	{snow: [
-		'snowboard',
-		'skies',
-		'helmet'
+		'snowboard', 
+		'bindings', 
+		'skis', 
+		'boots', 
+		'jacket'
 	]}
 ]
 
@@ -71,12 +72,14 @@ def create_equipment(user)
 
 	@rentable_equipment_amount.sample.times do |i|
 
-		category = @equipment_category.sample
-		key = category.keys[0]
+		category_list = @equipment_category.sample
+		category_key  = category_list.keys[0]
+		sub_category  = category_list[category_key].sample
 
 		equipment = user.equipments.create(
-			category: key.to_s,
-			equipment_name: category[key].sample,
+			category: category_key.to_s,
+			sub_category: sub_category.to_s,
+			equipment_name: Faker::Commerce.product_name,
 			brand: Faker::Commerce.product_name,
 			model: Faker::Commerce.product_name,
 			description: Faker::Lorem.paragraph(2),

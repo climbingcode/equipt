@@ -1,8 +1,8 @@
 Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
+	static propType = {
+		equipment: React.PropTypes.object.isRequired
+	}	
 
 	render() {
 
@@ -16,10 +16,11 @@ Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component
 					<div className="well">
 						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
 						<h4>{equipment.brand}</h4>
-						<img className="img-responsive center-block" src={image}/>
 						<h5>{equipment.model}</h5>
-						<p>Price Per Day: ${ equipment.price_per_day }</p>
+						<img className="img-responsive center-block" src={image}/>
 						<p>Deposit: ${ equipment.desposit_amount }</p>
+						<p>Price Per Day: ${ equipment.price_per_day }</p>
+						<p>Price Per Week: ${ equipment.proce_per_week }</p>
 					</div>
 				</Link>	
 			</div>

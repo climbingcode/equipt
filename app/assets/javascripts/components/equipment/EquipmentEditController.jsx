@@ -37,7 +37,6 @@ Equipt.controllers.EquipmentEditController = class EquipmentEditController exten
 	}
 
 	dataChanged() {
-		let equipmentId = this.context.router.getCurrentParams().id;
 		return this.getState();
 	}
 

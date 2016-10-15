@@ -4,7 +4,8 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		super(props);
 		this.stores = [Equipt.stores.EquipmentStore];
 		this.state  = {
-			equipment: Equipt.stores.EquipmentStore.getEquipments()
+			equipment: Equipt.stores.EquipmentStore.getEquipments(),
+			search: Equipt.stores.EquipmentStore.getSearchQuery()
 		}
 	}
 
@@ -15,7 +16,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 	}
 
 	componentDidMount() {
-		Equipt.actions.getEquipment();
+		Equipt.actions.getEquipment(this.state.search);
 	}
 
   	dataChanged() {

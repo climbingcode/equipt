@@ -1,28 +1,33 @@
 Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			selected: undefined
-		}
+	static propType = {
+		search: React.PropTypes.object.isRequired
 	}
 
-	_findBy(query) {
-		Equipt.actions.showLoader();
-		Equipt.actions.getEquipment(query);
-		this.setState({
-			selected: query.category
-		});
+	selected(searchObj) {
+		Equipt.actions.getEquipment(searchObj);
 	}
 
 	render() {
 
-		let EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
+		const EquipmentSearchTabsView  = Equipt.views.EquipmentSearchTabsView;
+		const EquiptmentSearchDropDown = Equipt.views.EquipmentSearchDropDown;
+		const EquiptmentSearchInput    = Equipt.views.EquipmentSearchInput;
 
 		return (
 			<div className="equipment-search-wrapper">
-				<EquipmentSearchTabsView 	value={this.state.selected} 
-											selected={ this._findBy.bind(this) }/>
+				<EquipmentSearchTabsView 	search={ this.props.search }
+											selected={ this.selected }/>
+				<div className="col-xs-4">											
+					<EquiptmentSearchDropDown 	search={ this.props.search }
+												selected={ this.selected }/>
+				</div>
+				<div className="col-xs-3">
+					<EquiptmentSearchInput 	search={ this.props.search }
+											selected={ this.selected }/>
+				</div>
+
+				<div className="clearfix"/>
 			</div>
 		)
 	}

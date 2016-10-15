@@ -3,7 +3,7 @@ class Rental < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :equipment
 
-	validate :dates_are_vacant
+	# validate :dates_are_vacant
 
 	before_save :set_total_days, :set_rental_cost  
 

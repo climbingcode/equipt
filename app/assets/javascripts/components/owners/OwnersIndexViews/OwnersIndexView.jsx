@@ -6,7 +6,7 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 
 	render()  {
 
-		let OwnersEquipmentItemView = Equipt.views.OwnersEquipmentItemView;
+		const OwnersEquipmentItemView = Equipt.views.OwnersEquipmentItemView;
 
 		let equipmentListing = [];
 		let userId = Equipt.stores.AuthStore.getUserId();
@@ -20,7 +20,7 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 			equipmentListing.push(equipmentItem);
 		}
 
-		var noProducts = 	<Link 	to="equipmentCreate">
+		var noProducts = 	<Link to="equipmentCreate">
 								<div className="equipment-container col-xs-4">
 									<div className="equipment-add well">
 										<i className="fa fa-plus fa-5"/>
