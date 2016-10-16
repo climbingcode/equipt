@@ -4,8 +4,12 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	_equipments: [],
 	_equipment: {}, 
 	_search: {
-		category: 'camp',
-		sub_category: ''
+		category: '',
+		sub_category: '',
+		dates: {
+			pickup: "",
+			dropoff: ""
+		}
 	},
 
 	getEquipments() {
@@ -49,7 +53,11 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	clearSearch() {
 		this._search = {
 			category: '',
-			sub_category: ''
+			sub_category: '',
+			dates: {
+				pickup: "",
+				dropoff: ""
+			}			
 		};
 	}
 

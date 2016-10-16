@@ -11,6 +11,12 @@ Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Compone
 		
 		let equipment = this.props.equipment || [];
 
+		let noMatchingEquipment;
+
+		if (!equipment.length) {
+			noMatchingEquipment = <h3>No Matching Equipment Found</h3>
+		}
+
 		return (
 
 			<div className="equipment-wrapper">
@@ -22,6 +28,7 @@ Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Compone
 									equipment={equipment}/>
 					})
 				}
+				{ noMatchingEquipment }
 				<RouteHandler/>	
 			</div>
 		)

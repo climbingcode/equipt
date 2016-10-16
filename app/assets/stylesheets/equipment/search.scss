@@ -20,12 +20,33 @@
 }
 
 .equipment-category-container {
-	@extend .tabs;
-	li {
-		@extend .tab;
-	}
+    @extend .tabs;
+    li {
+        @extend .tab;
+    }
 }
 
 .equipment-search-wrapper {
     margin-bottom: 20px;
+    .search-form-container {
+        .search-input {
+            width: 80%;
+            float: left;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .search-btn {
+            width: 20%;
+            float: right;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+    .equipment-date-search-container {
+        .equipment-date-input-container {
+            display: inline-block;
+            width: 45%;
+            margin-right: 5%;
+        }
+    }
 }

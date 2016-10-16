@@ -15,14 +15,16 @@ Equipt.views.EquipmentSearchDropDown = class EquiptmentSearchDropDown extends Re
 
 		let search 		= this.props.search;
 		let optionsJson = Equipt.content.createEquipment.typeOptions;
-		let options     = optionsJson[search.category];
+		let options     = optionsJson[search.category] || [];
 
 		return (
+			<div className="col-xs-3">	
 			<OptionsHelper 	ref="sub_category"
 							name="sub_category"
 							options={options}
-							value={ search.sub_category }
+							value={ search.sub_category || '' }
 							onChange={ this.subCategorySelected.bind(this) }/>
+			</div>
 		)
 	}
 
