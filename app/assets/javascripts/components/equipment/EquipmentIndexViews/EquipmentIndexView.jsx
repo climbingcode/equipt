@@ -1,31 +1,34 @@
 Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
+	static propType = {
+		equipment: React.PropTypes.object.isRequired
+	}	
 
 	render() {
 		
-		const equipmentList = this.props.equipment || [];
-
-		let EquipmentItemView   = Equipt.views.EquipmentItemView;
-		let EquipmentSearchView = Equipt.views.EquipmentSearchView;
+		const EquipmentItemView   = Equipt.views.EquipmentItemView;
+		const EquipmentSearchView = Equipt.views.EquipmentSearchView;
 		
-		var equipmentListing = [];
+		let equipment = this.props.equipment || [];
 
-		for (let i = 0; i < equipmentList.length; i++) {
-			let equipment 	  = equipmentList[i];
-			let equipmentItem = <EquipmentItemView 
-									key={`equipment_${equipment.id}`} 
-									equipment={equipment}/>;
-			equipmentListing.push(equipmentItem);
+		let noMatchingEquipment;
+
+		if (!equipment.length) {
+			noMatchingEquipment = <h3>No Matching Equipment Found</h3>
 		}
 
 		return (
 
 			<div className="equipment-wrapper">
-				<EquipmentSearchView/>
-				{equipmentListing}
+				<EquipmentSearchView search={ this.props.search }/>
+				{
+					equipment.map((equipment, index) => {
+						return <EquipmentItemView 
+									key={`equipment_${index}`} 
+									equipment={equipment}/>
+					})
+				}
+				{ noMatchingEquipment }
 				<RouteHandler/>	
 			</div>
 		)

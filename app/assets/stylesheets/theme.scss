@@ -2,8 +2,31 @@
 
 $camping_green: #8FC485;
 
+// FONTS
+
+@font-face {
+    font-family: 'Lumberjack Inline Rough';
+    src:url('Lumberjack Inline Rough.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lumberjack Shadow';
+    src:url('Lumberjack Rough Shadow.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lumberjack Rough';
+    src:url('Lumberjack Rough.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    // overflow: hidden;
+   font-family: 'Lumberjack Inline Rough';
 }
 
 .modal {

@@ -1,28 +1,37 @@
 Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			selected: undefined
-		}
+	static propType = {
+		search: React.PropTypes.object.isRequired
 	}
 
-	_findBy(query) {
-		Equipt.actions.showLoader();
-		Equipt.actions.getEquipment(query);
-		this.setState({
-			selected: query.category
-		});
+	selected(searchObj) {
+		Equipt.actions.getEquipment(searchObj);
 	}
 
 	render() {
 
-		let EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
+		const EquipmentSearchTabsView  = Equipt.views.EquipmentSearchTabsView;
+		const EquiptmentSearchDropDown = Equipt.views.EquipmentSearchDropDown;
+		const EquiptmentSearchInput    = Equipt.views.EquipmentSearchInput;
+		const EquiptmentSearchDate	   = Equipt.views.EquiptmentSearchDate;
 
 		return (
 			<div className="equipment-search-wrapper">
-				<EquipmentSearchTabsView 	value={this.state.selected} 
-											selected={ this._findBy.bind(this) }/>
+				<EquipmentSearchTabsView 	search={ this.props.search }
+											selected={ this.selected }/>										
+				<EquiptmentSearchDropDown 	search={ this.props.search }
+											selected={ this.selected }/>
+				<EquiptmentSearchInput 	search={ this.props.search }
+										selected={ this.selected }/>
+				<EquiptmentSearchDate 	search={ this.props.search }
+										selected={ this.selected }/>
+				<button className="btn btn-success col-xs-2"
+						onClick={this.selected.bind(this, {
+							category: '',
+							sub_category: '',
+							fuzzy_search: ''
+						})}>All Equipment</button>
+				<div className="clearfix"/>
 			</div>
 		)
 	}

@@ -1,8 +1,16 @@
-
 Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	_equipments: [],
 	_equipment: {}, 
+	_search: {
+		category: '',
+		sub_category: '',
+		fuzzy_search: '',
+		dates: {
+			pickup: "",
+			dropoff: ""
+		}
+	},
 
 	getEquipments() {
         return this._equipments;
@@ -32,12 +40,25 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 		this.setEquipments(equipments);
 	},
 
-	findEquipment(id) {
-		debugger;
-		let id = equipment.id;
-		return this._equipments.each((equipment, index) => {		
-			if (equipment.id === id) return this._equipment;
-		});
+	getSearchQuery() {
+		return this._search;
+	},
+
+	searchEquipment(query) {
+		for (searchType in query) {
+			this._search[searchType] = query[searchType];
+		}
+	},
+
+	clearSearch() {
+		this._search = {
+			category: '',
+			sub_category: '',
+			dates: {
+				pickup: "",
+				dropoff: ""
+			}			
+		};
 	}
 
 });
@@ -62,6 +83,12 @@ AppDispatcher.register(function(action) {
 		break;
 		case Constants.EQUIPMENT_DELETE:
 			EquipmentStore.removeEquipment(data);
+		break;
+		case Constants.SEARCH_EQUIPMENT:
+			EquipmentStore.searchEquipment(data);
+		break;
+		case Constants.CLEAR_SEARCH: 
+			EquipmentStore.clearSearch();
 		break;
 	}
 

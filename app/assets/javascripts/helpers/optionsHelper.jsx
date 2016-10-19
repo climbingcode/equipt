@@ -14,6 +14,7 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 		let element = this.refs[dropDownName];
 		let value = element ? element.value : '';
 		this.value = value;
+		this.props.onChange && this.props.onChange(this.value); 
 	}
 
 	render() {

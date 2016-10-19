@@ -41,7 +41,6 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 			)
 		}
 
-
 		return (
 			<div className="rentals-create-container">
 				<Calendar 	rentals={ this.props.rentals }

@@ -4,32 +4,25 @@ Equipt.controllers.OwnersShowController = class OwnersShowController extends Equ
 		router: React.PropTypes.func.isRequired
 	}
 
+	getState = function() {
+		return {
+  			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
+  			rental: 	 Equipt.stores.RentalStore.getRental()
+  		}
+	}
+
 	constructor(props) {
 		super(props);
 		this.stores = 	[	
 							Equipt.stores.EquipmentStore, 
 							Equipt.stores.RentalStore, 
-							Equipt.stores.ErrorsStore
+							Equipt.stores.ErrorsStore 
 						];
-		this.state = {
-			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
-  			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
-  			rentalTime:  Equipt.stores.RentalStore.getRentalTime(),
-  			rental: 	 Equipt.stores.RentalStore.getRental(),
-  			errors: 	 Equipt.stores.ErrorsStore.getErrors()
-		}
+		this.state = this.getState();
 	}
 
 	dataChanged() {
-
-  		return {
-  			equipment: 	 Equipt.stores.EquipmentStore.getEquipment(),
-  			rentalDates: Equipt.stores.RentalStore.getRentalDates(),
-  			rentalTime:  Equipt.stores.RentalStore.getRentalTime(),
-  			rental: 	 Equipt.stores.RentalStore.getRental(),
-  			errors: 	 Equipt.stores.ErrorsStore.getErrors()
-  		}
-
+		return this.getState();
   	}
 
 	componentDidMount() {

@@ -4,13 +4,17 @@ Equipt.controllers.EquipmentCreateController = class extends Equipt.controllers.
 		router: React.PropTypes.func.isRequired
 	}
 
+	getState = function() {
+		return {
+			errors: Equipt.stores.ErrorsStore.getErrors(),
+			currentUser: Equipt.stores.AuthStore.currentUser()		
+		}
+	}
+
 	constructor(props) {
 		super(props);
 		this.stores = [Equipt.stores.ErrorsStore]
-		this.state = {
-			errors: Equipt.stores.ErrorsStore.getErrors(),
-			currentUser: Equipt.stores.AuthStore.currentUser()
-		}
+		this.state = this.getState();
 	}
 
 	createEquipment(equipment, images) {
@@ -22,10 +26,7 @@ Equipt.controllers.EquipmentCreateController = class extends Equipt.controllers.
 	}
 
 	dataChanged() {
-		return {
-			errors: Equipt.stores.ErrorsStore.getErrors(),
-			currentUser: Equipt.stores.AuthStore.currentUser()
-		}
+		return this.getState();
 	}
 
 	render() {

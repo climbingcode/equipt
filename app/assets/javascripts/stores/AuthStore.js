@@ -13,7 +13,7 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 
 	setSession(apiKey) {
 		try {
-			localStorage['equiptSession'] = JSON.stringify(apiKey);
+			if (apiKey) localStorage['equiptSession'] = JSON.stringify(apiKey);
 		} catch(err) {
 			this.deleteSession();
 		}

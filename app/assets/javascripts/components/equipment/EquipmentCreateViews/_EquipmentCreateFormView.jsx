@@ -37,9 +37,9 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 
 	render() {
 
-		let OptionsHelper 		    = Equipt.helpers.OptionsHelper;
-		let EquipmentUploaderView   = Equipt.views.EquipmentUploaderView;
-		let EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
+		const OptionsHelper 		  = Equipt.helpers.OptionsHelper;
+		const EquipmentUploaderView   = Equipt.views.EquipmentUploaderView;
+		const EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
 		
 		let equipment 	= this.props.equipment || {};
 		let category 	= this.state.category || equipment.category || 'camp';
@@ -52,7 +52,10 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 					className="form-group equipment-create-wrapper"
 					>
 				<EquipmentSearchTabsView selected={ this.tabsChanged.bind(this) }
-										 value={ this.state.category || equipment.category }
+										 search={{ 
+										 	category: category
+										}}
+										 
 				/>
 				{ this.renderError.call(this, 'sub_category') }
 				<OptionsHelper 	ref="sub_category"
