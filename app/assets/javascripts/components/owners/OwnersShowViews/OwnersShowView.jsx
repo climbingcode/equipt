@@ -6,10 +6,10 @@ Equipt.views.OwnersShowView = class OwnersShowView extends React.Component {
 
 	render() {
 
-		const EquipmentAvailabilityView = Equipt.views.EquipmentAvailabilityView;
+		const OwnersEquipmentScheduleView = Equipt.views.OwnersEquipmentScheduleView;
 			
 		return (
-			<EquipmentAvailabilityView { ...this.props }/>
+			<OwnersEquipmentScheduleView { ...this.props }/>
 		)
 	}
 

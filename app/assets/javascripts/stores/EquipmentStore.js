@@ -1,4 +1,3 @@
-
 Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
 	_equipments: [],
@@ -6,6 +5,7 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	_search: {
 		category: '',
 		sub_category: '',
+		fuzzy_search: '',
 		dates: {
 			pickup: "",
 			dropoff: ""

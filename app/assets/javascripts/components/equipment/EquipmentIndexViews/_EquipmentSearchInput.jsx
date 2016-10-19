@@ -8,10 +8,15 @@ Equipt.views.EquipmentSearchInput = class EquipmentSearchInput extends React.Com
 	submit(e) {
 		e.preventDefault();
 		let searchInput = this.refs.searchInput.value;
-		this.props.search.category = '';
-		this.props.search.sub_category = '';
 		this.props.search.fuzzy_search = searchInput;
 		this.props.selected(this.props.search);
+	}
+
+	componentWillReceiveProps() {
+		let searchInput = this.refs.searchInput;
+		if (!this.props.search.fuzzy_search.length) {
+			searchInput.value = '';
+		}
 	}
 
 	render() {
