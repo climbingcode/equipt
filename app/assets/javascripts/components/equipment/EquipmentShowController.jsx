@@ -14,7 +14,6 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		super(props);
 		this.stores = [ Equipt.stores.EquipmentStore ];
 		this.state = this.getState();
-
 	}
 
 	componentDidMount() {
@@ -28,7 +27,7 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 
 	render() {
 
-		let EquipmentShowView = Equipt.views.EquipmentShowView; 
+		let EquipmentShowView = Equipt.views.EquipmentShowView;
 
 		return (
 			<EquipmentShowView  { ...this.state } />

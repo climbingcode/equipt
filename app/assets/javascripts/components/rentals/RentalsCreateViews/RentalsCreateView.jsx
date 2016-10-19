@@ -29,8 +29,7 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 
 		const Calendar 				  = Equipt.views.Calendar;
 		const RentalsPickUpTimeView   = Equipt.views.RentalsPickUpTimeView;
-		const RentalsConfirmationView = Equipt.views.RentalsConfirmationView;	
-		const selectedRentalDates  	  = Equipt.actions.selectedRentalDates;
+		const RentalsConfirmationView = Equipt.views.RentalsConfirmationView;
 
 		if (this.props.hasCreatedRental) {
 			return (
@@ -44,8 +43,7 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 		return (
 			<div className="rentals-create-container">
 				<Calendar 	rentals={ this.props.rentals }
-							rental={ this.props.rental }
-							selectedDates={ selectedRentalDates } />
+							rental={ this.props.rental } />
 				<h4>Pick Up Time</h4>
 				<RentalsPickUpTimeView 	availability={ this.props.owner.availability || [] } 
 										rental={ this.props.rental }

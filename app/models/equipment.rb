@@ -10,7 +10,7 @@ class Equipment < ActiveRecord::Base
     scope :search_sub_category, -> (query) { where("sub_category LIKE ?", "#{query[:sub_category]}%") }
     scope :fuzzy_search, -> (query) { where("equipment_name LIKE ?", "%#{query[:fuzzy_search]}%") }
     scope :search_dates_available, -> (query) do
-        # joins(:rentals).where.not("pickup_date >= ? AND dropoff_date <= ?", query[:dates][:pickup], query[:dates][:dropoff])  
+
     end
 
   	validates :equipment_name, :brand, presence: true

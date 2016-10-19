@@ -36,6 +36,10 @@ Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSetti
         this.createdRental = false;
     },
 
+    clearRentals() {
+        this.rentals = [];
+    },
+
     hasCreatedRental() {
         return this.createdRental;
     }
