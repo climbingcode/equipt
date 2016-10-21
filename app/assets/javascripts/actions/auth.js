@@ -21,7 +21,7 @@ Equipt.actions.createSession = function(userData) {
 
 Equipt.actions.endSession = function() {
 	dispatchAction(Constants.END_SESSION, null);
-}
+};
 
 // =====================
 // IF SESSION, GET USER
@@ -38,7 +38,7 @@ Equipt.actions.appInit = function() {
 		}
 	);
 
-}
+};
 
 // ======================
 // IF 500 UNAUTH RESPONSE
@@ -46,7 +46,7 @@ Equipt.actions.appInit = function() {
 
 Equipt.actions.unauthorizedUser = function() {
 	dispatchAction(Constants.END_SESSION, null);
-}
+};
 
 // ======================
 // FACEBOOK LOGIN

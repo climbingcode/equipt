@@ -25,3 +25,12 @@ Equipt.actions.updateUser = function(user) {
 	)
 
 };
+
+// ======================
+// FORGOT PASSWORD
+// ======================
+
+Equipt.actions.forgotPassword = function(email) {
+	dispatchAction(Constants.FORGOT_PASSWORD, true);
+	Equipt.API.post('/password_resets', email);
+};

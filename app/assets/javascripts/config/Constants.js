@@ -21,6 +21,7 @@ const Constants = {
 	OWNERS_EQUIPMENT_INDEX: 'OWNERS_EQUIPMENT_INDEX',
 	SHOW_LOADER: 'SHOW_LOADER',
 	HIDE_LOADER: 'HIDE_LOADER',
+	FORGOT_PASSWORD: 'FORGOT_PASSWORD',
 	links: {
 		login: 'login',
 		equipmentIndex: 'equipmentIndex',

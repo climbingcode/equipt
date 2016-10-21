@@ -16,4 +16,8 @@ class Api::SessionController < ApplicationController
     	render json: { user: user, api_key: user.session_api_key }, status: 200
 	end
 
+	def forgot_password
+		render json: {notice: { info: "Sent a link to reset your password to your email" }}
+	end
+
 end

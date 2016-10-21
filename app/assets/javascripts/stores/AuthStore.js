@@ -3,6 +3,8 @@ var _facebookLogin = false;
 
 Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
+	passwordNeedsUpdating: false,
+
 	currentUser() {
         return _currentUser;
 	},
@@ -46,6 +48,14 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 
 	isFacebookLogin() {
 		return _facebookLogin;
+	},
+
+	forgotPassword() {
+		this.passwordNeedsUpdating = true;
+	},
+
+	hasForgotPassword() {
+		return this.passwordNeedsUpdating;
 	}
 
 });
@@ -75,6 +85,10 @@ AppDispatcher.register(function(action) {
 				_facebookLogin = false;
 				AuthStore.deleteSession();
 			} 
+			AuthStore.emitChange();
+		break;
+		case Constants.FORGOT_PASSWORD:
+			AuthStore.forgotPassword();
 			AuthStore.emitChange();
 		break;
 	}
