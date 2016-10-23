@@ -18,7 +18,7 @@ Equipt.views.EquipmentSearchDropDown = class EquiptmentSearchDropDown extends Re
 		let options     = optionsJson[search.category] || [];
 
 		return (
-			<div className="col-xs-3">	
+			<div className="col-lg-3 col-xs-12">	
 			<OptionsHelper 	ref="sub_category"
 							name="sub_category"
 							options={options}

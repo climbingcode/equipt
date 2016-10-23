@@ -25,7 +25,7 @@ Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Compo
 										selected={ this.selected }/>
 				<EquiptmentSearchDate 	search={ this.props.search }
 										selected={ this.selected }/>
-				<button className="btn btn-success col-xs-2"
+				<button className="btn btn-success col-lg-2 col-xs-12"
 						onClick={this.selected.bind(this, {
 							category: '',
 							sub_category: '',

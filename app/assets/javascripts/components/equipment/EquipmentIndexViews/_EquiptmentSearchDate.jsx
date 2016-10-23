@@ -56,7 +56,7 @@ Equipt.views.EquiptmentSearchDate = class EquiptmentSearchDate extends React.Com
 
 	render() {
 		return (
-			<div className="col-xs-4 equipment-date-search-container">
+			<div className="col-lg-4 col-xs-12 equipment-date-search-container">
 
 				<div className="form-group equipment-date-input-container">
 	                <div className='input-group date' ref='pickupDatePicker'>

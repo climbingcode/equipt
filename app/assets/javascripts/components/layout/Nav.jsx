@@ -46,18 +46,18 @@ Equipt.views.Nav = class extends React.Component {
 
 			var sessionBtns = 	<div className="col-sm-6 pull-right"
 									key="currentUser.email">
-									<span className="col-sm-4">
+									<span className="col-sm-4 pull-left">
 										{ownersAndEquipmentLink}
-									</span>
-									<span className="col-sm-6">
-										<Link to="profile" params={{ userId: userId }}>
-											<h3 className="nav-title">{ userName }</h3>
-										</Link>
 									</span>
 									<button className="logout-btn pull-right btn btn-success"
 											onClick={this.logout.bind(this)}>
 											logout
 									</button>
+									<span className="col-sm-4 pull-right">
+										<Link to="profile" params={{ userId: userId }}>
+											<h3 className="nav-title">{ userName }</h3>
+										</Link>
+									</span>
 								</div>
 
 			var equipmentLogo = <Link to="equipmentIndex">

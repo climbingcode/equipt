@@ -21,7 +21,7 @@ Equipt.views.EquipmentSearchInput = class EquipmentSearchInput extends React.Com
 
 	render() {
 		return (
-			<div className="search-form-container col-xs-3">
+			<div className="search-form-container col-lg-3 col-xs-12">
 				<form onSubmit={ this.submit.bind(this) }>
 					<input  className="form-control search-input"
 							ref="searchInput"

@@ -11,7 +11,7 @@ Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component
 		let image = equipment.images.length ? equipment.images[0].file.url : '/assets/equipment-default.png';
 
 		return(
-			<div className="equipment-container col-xs-4">
+			<div className="equipment-container col-lg-4 col-md-6 col-xs-12">
 				<Link to="equipmentAvailability" params={{ id: equipment.id }}>
 					<div className="well">
 						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
