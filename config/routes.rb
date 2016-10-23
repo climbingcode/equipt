@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 	
+  get 'password_resets/new'
+
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	namespace :api do
 		
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
 		end
 
 		resources :session, only: ['create', 'destroy']
+
+		resources :password_resets
 		
 	end
 

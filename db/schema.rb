@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002034921) do
+ActiveRecord::Schema.define(version: 20161021043955) do
 
   create_table "api_keys", force: :cascade do |t|
     t.integer  "user_id"
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 20161002034921) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

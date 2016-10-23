@@ -8,7 +8,6 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 		this.state = {
 			notice: Equipt.stores.NoticeStore.getNotice()
 		}
-		this.timeout;
 	}
 
 	_onChange() {	
