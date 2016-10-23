@@ -17,12 +17,11 @@ Equipt.controllers.LoginController = class LoginController extends Equipt.contro
   	render() {
 
   		const LoginFormView = Equipt.views.LoginFormView;
-  		const ForgotPasswordView = Equipt.views.ForgotPasswordView;
 
 		return (
 			<div>
 				<LoginFormView 	errors={this.state.errors} />
-				<Link to="forgotPassword">Forgot Password</Link>
+				<Link to="forgotPasswordCreate">Forgot Password</Link>
 			</div>
 		)
 	}

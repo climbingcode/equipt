@@ -12,16 +12,18 @@ Equipt.views.ForgotPasswordView = class ForgotPasswordView extends React.Compone
 
 	render() {
 		return (
-			<div className="col-sm-12">
+			<div className="password-reset-request-form col-sm-12">
 				<form onSubmit={ this.submit.bind(this) }>
 					<input 	ref="email"  
 							type="text"
 							className="form-control"
 							placeholder="please enter you email here"/>
+					<br/>
 					<input 	ref="emailConfirmation"  
 							type="text"
 							className="form-control"
 							placeholder="Please enter you email confirmation here"/>
+					<br/>
 					<button type="submit"
 							className="col-sm-12 btn btn-success">Get Password</button>
 				</form>
