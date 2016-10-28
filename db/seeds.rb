@@ -54,7 +54,7 @@ def create_users
 			country: Faker::Address.country,
 			lat: Faker::Address.latitude,
 			lng: Faker::Address.longitude,
-			restricted_availiability: [true, false].sample,
+			restricted_availability: [true, false].sample,
 			password: 'password',
 			password_confirmation: 'password'
 		)
@@ -148,7 +148,7 @@ admin = User.create(
 	country: 'Canada',
 	lat: '-123.1280044',
 	lng: '49.2841339',
-	restricted_availiability: [true, false].sample,
+	restricted_availability: [true, false].sample,
 	password: 'tom',
 	password_confirmation: 'tom'
 )

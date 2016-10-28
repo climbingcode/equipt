@@ -14,24 +14,29 @@ class Api::UsersController < ApplicationController
 	end
 
 	def show
+		user_obj = JSON.parse(current_user.to_json({include: { availabilities: { only: :hour }}}))
 		render json: { user: current_user, api_key: current_user.session_api_key }, status: 200
 	end
 
 	def update 
-		user = User.find(params[:id])
-		if !user.authenticate(user_params[:password]) 
+		if !current_user.authenticate(user_params[:password]) 
 			render_notice({ error: "Incorrect credentials, try again!" })
-		elsif user.update(user_params)
-			render json: { user: user, api_key: user.session_api_key }, status: 200
+		elsif current_user.update(user_params)
+			current_user.save_availabilities(params[:user][:availability])
+			user_obj = JSON.parse(current_user.to_json({include: { availabilities: { only: :hour }}}))
+			render 	json: {
+							user: user_obj,
+							notice: { info: "Your profile has been updated, #{ current_user.firstname.capitalize }" }
+						}
 		else
-			render json: { errors: user.errors }, status: 200
+			render json: { errors: current_user.errors }, status: 200
 		end
 	end
 
 	private
 
 	def user_params
-		params.require(:user).permit(:firstname ,:lastname ,:email, :email_confirmation ,:username ,:street_address ,:city ,:state ,:zip ,:country ,:lng ,:lat ,:password ,:password_confirmation ,:restricted_availiability, :provider, :uid, :oauth_token, :oauth_expires_at)
+		params.require(:user).permit(:firstname ,:lastname ,:email, :email_confirmation ,:username ,:street_address ,:city ,:state ,:zip ,:country ,:lng ,:lat ,:password ,:password_confirmation, :provider, :uid, :oauth_token, :oauth_expires_at)
 	end
 
 end

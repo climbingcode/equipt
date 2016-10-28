@@ -46,6 +46,10 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 
 	isFacebookLogin() {
 		return _facebookLogin;
+	},
+
+	setUser(user) {
+		_currentUser = user;	
 	}
 
 });
@@ -58,12 +62,16 @@ AppDispatcher.register(function(action) {
   	
  	switch(type) {
 		case Constants.NEW_SESSION:
-			_currentUser = data.user;
+			AuthStore.setUser(data.user);
 			AuthStore.setSession(data.api_key);
 			AuthStore.emitChange();
 		break;
 		case Constants.END_SESSION:
 			AuthStore.deleteSession();
+			AuthStore.emitChange();
+		break;
+		case Constants.UPDATE_USER:
+			AuthStore.setUser(data.user);
 			AuthStore.emitChange();
 		break;
 		case Constants.FACEBOOK_STATUS_CHANGED:

@@ -1,11 +1,13 @@
 Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 
 	static propType = {
-		position: React.PropTypes.object.isRequired
+		position: React.PropTypes.object.isRequired,
+		showLocationSearch: React.PropTypes.bool
 	}
 
 	constructor(props) {
 		super(props);
+		this.initPositionSet = false;
 		this.stores = [];
 	}
 
@@ -24,7 +26,7 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 
 	}
 
-	initMap(callback) {
+	buildMap(callback) {
 
 		let mapElement = this.refs.map;
 
@@ -39,7 +41,7 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 
 	}
 
-	initMarker(map) {
+	buildMarker(map) {
 
 		// create marker
 	    this.marker = new google.maps.Marker({
@@ -57,40 +59,104 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 
 	}
 
+	buildLocationSearch(map) {
+		let input 	  = this.refs.searchBar;
+        let searchBox = new google.maps.places.SearchBox(input);
+        let bounds 	  = new google.maps.LatLngBounds();
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Adds current map bounds to search bar
+        map.addListener('bounds_changed', function() {
+        	searchBox.setBounds(map.getBounds());
+        });
+
+        // Location was changed 
+        searchBox.addListener('places_changed', () => {
+        	let place = searchBox.getPlaces()[0];
+
+        	if (place.length === 0) return;
+
+	        if (!place.geometry) {
+	             console.log("Returned place contains no geometry");
+	             return;
+	        };
+
+			if (place.geometry.viewport) {
+				bounds.union(place.geometry.viewport);
+			} else {
+				bounds.extend(place.geometry.location);
+			}
+
+			map.fitBounds(bounds);
+
+			var latlng = new google.maps.LatLng({
+        		lat: place.geometry.location.lat(),
+        		lng: place.geometry.location.lng()
+        	});
+
+			this.marker.setPosition(latlng);
+
+        	this.props.setPosition({
+        		lat: place.geometry.location.lat(),
+        		lng: place.geometry.location.lng()
+        	});
+
+        });
+
+	};
+
 	init() {
-
 		this.getPosition();
-		this.initMap((map) => {
-			this.initMarker(map);
+		this.buildMap((map) => {
+			this.buildMarker(map);
+			if (this.props.showLocationSearch) this.buildLocationSearch.call(this, map);
 		});
-
 	}
 
 	componentDidMount() {
-
 		if (window.google) {
 			this.init();
 		} else {
 			window.googleMapsLoaded = () => {
 				this.init();
 			}
-
 		}
-
 	}
 
-	componentWillReceiveProps() {
-		if (this.marker && this.map) {	
+	shouldComponentUpdate() {
+		return !this.initPositionSet;
+	}
+
+	componentWillUpdate() {
+		if (this.marker && this.map && this.props.position.lat > 0) {	
 			this.marker.setPosition(this.props.position);
 			this.map.panTo(this.props.position);
+			this.initPositionSet = true;
 		}
+	}
+
+	componentWillUnmount() {
+		this.initPositionSet = false;
 	}
 
 	render() {
 
+		let searchBar;
+
+		if (this.props.showLocationSearch) {				
+			searchBar = <input 	ref="searchBar" 
+								placeholder="Search a Location"
+								className="search-bar form-control"/>
+		}
+
 		return (
-			<div className="map" ref="map" style={{ width: '100%', height: '350px' }}></div>
+			<div className="google-map-container">
+				{searchBar}
+				<div className="map" ref="map" style={{ width: '100%', height: '350px' }}/>
+			</div>
 		)
+
 	}
 
 }

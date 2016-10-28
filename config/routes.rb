@@ -27,5 +27,6 @@ Rails.application.routes.draw do
 	match '*path', to: 'home#index', via: 'GET'
 
 	match 'auth/:provider/callback', to: 'api/session#facebook_auth', via: 'POST'
+	match 'api/users/:id/add_availabilities', to: 'api/availability#add_availabilities', via: 'POST'
 
 end

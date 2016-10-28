@@ -12,6 +12,10 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 		owner: React.PropTypes.object.required
 	}	
 
+	selectedTime(time) {
+		Equipt.actions.selectedPickUpTime(time);
+	}
+
 	rent() {
 
 		let equipmentId = this.props.equipment.id;
@@ -45,8 +49,9 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 				<Calendar 	rentals={ this.props.rentals }
 							rental={ this.props.rental } />
 				<h4>Pick Up Time</h4>
-				<RentalsPickUpTimeView 	availability={ this.props.owner.availability || [] } 
-										rental={ this.props.rental }
+				<RentalsPickUpTimeView 	selectedTime={ this.selectedTime }
+										availability={ this.props.owner.availability || [] } 
+										times={ [ this.props.rental.times ] }
 				/>
 				<div className="clearfix"></div>
 				<button className="btn btn-success col-sm-12" 

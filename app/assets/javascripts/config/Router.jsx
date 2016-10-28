@@ -58,6 +58,6 @@ this.Routes = (
 ), document.getElementById('root');
 
 Location.addChangeListener((pathName) => {
-	Equipt.actions.clearNotice();
+	// Equipt.actions.clearNotice();
 	Equipt.actions.showLoader();
 });

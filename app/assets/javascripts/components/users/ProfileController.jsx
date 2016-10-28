@@ -1,12 +1,16 @@
 Equipt.controllers.ProfileController = class ProfileController extends Equipt.controllers.MainController {
 
-	constructor(props) {
-		super(props);
-		this.stores = [Equipt.stores.ErrorsStore, Equipt.stores.AuthStore];
-		this.state = {
+	getState = function() {
+		return {
 			errors: Equipt.stores.ErrorsStore.getErrors(),
 			currentUser: Equipt.stores.AuthStore.currentUser()
 		}
+	}
+
+	constructor(props) {
+		super(props);
+		this.stores = [Equipt.stores.ErrorsStore, Equipt.stores.AuthStore];
+		this.state  = this.getState();
 	}
 
 	submit(user) {
@@ -14,10 +18,7 @@ Equipt.controllers.ProfileController = class ProfileController extends Equipt.co
 	}
 
   	dataChanged() {
-  		return {
-  			errors: Equipt.stores.ErrorsStore.getErrors(),
-  			currentUser: Equipt.stores.AuthStore.currentUser()
-  		};
+  		return this.getState();
   	}
 
 	render() {
