@@ -11,13 +11,14 @@ Equipt.actions.createUser = function(user) {
 
 };
 
-Equipt.actions.updateUser = function(user) {
+Equipt.actions.updateUser = function(user, callback) {
 
 	let userId = Equipt.stores.AuthStore.getUserId();
 
 	Equipt.API.put(`/users/${userId}`, user).then(
 		(data) => {
-			dispatchAction(Constants.UPDATE_USER, data);
+			if (!data.notice) dispatchAction(Constants.UPDATE_USER, data);
+			if (callback) callback();
 		}, 
 		(err) => {
 			console.log(err.responseText);

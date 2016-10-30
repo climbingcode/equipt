@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20161021043955) do
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
-  create_table "availiabilities", force: :cascade do |t|
+  create_table "availabilities", force: :cascade do |t|
     t.integer "user_id"
     t.string  "weekday"
     t.integer "hour"
-    t.index ["user_id"], name: "index_availiabilities_on_user_id"
+    t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -105,9 +105,9 @@ ActiveRecord::Schema.define(version: 20161021043955) do
     t.float    "lat"
     t.string   "password"
     t.string   "password_digest"
-    t.boolean  "restricted_availiability"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.boolean  "restricted_availability", default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"

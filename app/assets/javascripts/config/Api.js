@@ -2,10 +2,12 @@ Equipt.API = {
 
 	path: '/api',
 
+	apiKey: null,
+
 	get: function(url) {
 		return new Promise((resolve, reject) => {
 			this.send(url, 'GET')
-			.then((res) => {
+			.then((res, apiKey) => {
 				resolve(res);
 			}, (err) => {
 				reject(err);
@@ -16,8 +18,8 @@ Equipt.API = {
 	post: function(url, data, options) {
 		return new Promise((resolve, reject) => {
 			this.send(url, 'POST', data, options)
-			.then((res) => {
-				resolve(res);
+			.then((res, apiKey) => {
+				resolve(res, apiKey);
 			}, (err) => {
 				reject(err);
 			});
@@ -27,8 +29,8 @@ Equipt.API = {
 	put: function(url, data, options) {
 		return new Promise((resolve, reject) => {
 			this.send(url, 'PUT', data, options)
-			.then((res) => {
-				resolve(res);
+			.then((res, apiKey) => {
+				resolve(res, apiKey);
 			}, (err) => {
 				reject(err);
 			});
@@ -38,8 +40,8 @@ Equipt.API = {
 	delete: function(url) {
 		return new Promise((resolve, reject) => {
 			this.send(url, 'DELETE')
-			.then((res) => {
-				resolve(res);
+			.then((res, apiKey) => {
+				resolve(res, apiKey);
 			}, (err) => {
 				reject(err);
 			});
@@ -51,7 +53,7 @@ Equipt.API = {
 		return new Promise((resolve, reject) => {
 
 			let ApiKey = Equipt.stores.AuthStore.getApiKey();
-		
+
 			var ajaxObj = {
 				url: Equipt.API.path + url,
 				type: method,
@@ -65,13 +67,16 @@ Equipt.API = {
 			};
 
 			$.ajax(ajaxObj)
-			.success((res) => {
+			.success((res, status, xhr) => {
+				Equipt.API.apiKey = xhr.getResponseHeader('AUTHORIZATION');
+				console.log(res, xhr);
 				if (res.errors) return hasErrors(res.errors);
 				else if (res.notice) hasNotice(res.notice);
 				resolve(res);
 			})
 			.error((err) => {
 				if (err.status === 500 || err.status === 401) {
+					Equipt.API.apiKey = null;
 					Equipt.actions.unauthorizedUser();
 				}
 				reject(err);

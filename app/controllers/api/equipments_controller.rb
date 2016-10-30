@@ -58,7 +58,7 @@ class Api::EquipmentsController < ApplicationController
 	def destroy 
 		equipment = current_user.equipments.find(params[:id])
 		if equipment.destroy
-			render json: { equipment: equipment, notice: { error: "#{equipment.equipment_name} has been removed"} }, status: 200
+			render json: { equipment: equipment, notice: { info: "#{equipment.equipment_name} has been removed"} }, status: 200
 		else 
 			render json: { notice: { error: "Error removing #{equipment.equipment_name}" } }, status: 200
 		end

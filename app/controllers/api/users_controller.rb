@@ -7,31 +7,31 @@ class Api::UsersController < ApplicationController
 	def create
 		user = User.new(user_params)
 		if user.save
-			render json: { user: user, api_key: user.session_api_key }, status: 200
+			render json: user, create_notice: true, send_api_token: true, status: 200
 		else
 			render json: { errors: user.errors }, status: 200
 		end
 	end
 
 	def show
-		render json: { user: current_user, api_key: current_user.session_api_key }, status: 200
+		render json: current_user, send_api_token: true, status: 200
 	end
 
 	def update 
-		user = User.find(params[:id])
-		if !user.authenticate(user_params[:password]) 
+		if !current_user.authenticate(user_params[:password]) 
 			render_notice({ error: "Incorrect credentials, try again!" })
-		elsif user.update(user_params)
-			render json: { user: user, api_key: user.session_api_key }, status: 200
+		elsif current_user.update(user_params)
+			current_user.save_availabilities(params[:user][:availability])
+			render json: current_user, send_api_token: true, status: 200
 		else
-			render json: { errors: user.errors }, status: 200
+			render json: { errors: current_user.errors }, status: 200
 		end
 	end
 
 	private
 
 	def user_params
-		params.require(:user).permit(:firstname ,:lastname ,:email, :email_confirmation ,:username ,:street_address ,:city ,:state ,:zip ,:country ,:lng ,:lat ,:password ,:password_confirmation ,:restricted_availiability, :provider, :uid, :oauth_token, :oauth_expires_at)
+		params.require(:user).permit(:firstname ,:lastname ,:email, :email_confirmation ,:username ,:street_address ,:city ,:state ,:zip ,:country ,:lng ,:lat ,:password ,:password_confirmation, :provider, :uid, :oauth_token, :oauth_expires_at)
 	end
 
 end

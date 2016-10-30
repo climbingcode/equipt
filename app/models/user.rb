@@ -8,7 +8,10 @@ class User < ActiveRecord::Base
 	has_many :equipments
 	has_many :rentals
   has_many :api_keys
+  has_many :availabilities
   has_many :ratings, :as => :rateable
+
+  after_create :session_api_key
 
 	# oAuth
 	def self.from_omniauth(auth)
@@ -42,6 +45,18 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  # Set Availability 
+
+  def save_availabilities(availabilities)
+    if availabilities.length > 0 
+      self.restricted_availability = true
+      self.availabilities.delete_all
+      Availability.add_availabilities(availabilities, self)
+    else 
+      self.restricted_availability = false
+    end
   end
 
 end

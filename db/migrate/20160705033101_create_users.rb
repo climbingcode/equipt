@@ -16,7 +16,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.float :lat
       t.string :password
       t.string :password_digest
-      t.boolean :restricted_availiability
+      t.boolean :restricted_availability, default: false
       t.timestamps
     end
   end
