@@ -1,19 +1,23 @@
-var _currentUser = null;
-var _facebookLogin = false;
+
 
 Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
 
+	_currentUser: null,
+	_facebookLogin: false,
+
 	currentUser() {
-        return _currentUser;
+        return this._currentUser;
 	},
 
 	authenticated() {
 		return this.getSession().length > 0;
 	},
 
-	setSession(apiKey) {
+	setSession(user) {
 		try {
-			if (apiKey) localStorage['equiptSession'] = JSON.stringify(apiKey);
+			if (user) {
+				localStorage['equiptSession'] = user.api_key;	
+			} 
 		} catch(err) {
 			this.deleteSession();
 		}
@@ -25,12 +29,12 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 
 	deleteSession() {
 		localStorage['equiptSession'] = '';
-		_currentUser = null;
+		this.setCurrentUser(null);
 	},
 
 	getApiKey() {
 		try {
-			return this.getSession() && JSON.parse(this.getSession()).access_token;
+			return this.getSession();
 		} catch(err) {
 			this.deleteSession();
 		}
@@ -38,18 +42,22 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 
 	getUserId() {
 		try {
-			return this.getSession() && JSON.parse(this.getSession()).user_id;
+			return this.currentUser().id;
 		} catch(err) {
 			this.deleteSession();
 		}
 	},
 
 	isFacebookLogin() {
-		return _facebookLogin;
+		return this._facebookLogin;
 	},
 
-	setUser(user) {
-		_currentUser = user;	
+	setFacebookLogin(status) {
+		this._facebookLogin = status;
+	},
+
+	setCurrentUser(user) {
+		this._currentUser = user;	
 	}
 
 });
@@ -62,8 +70,8 @@ AppDispatcher.register(function(action) {
   	
  	switch(type) {
 		case Constants.NEW_SESSION:
-			AuthStore.setUser(data.user);
-			AuthStore.setSession(data.api_key);
+			AuthStore.setCurrentUser(data);
+			AuthStore.setSession(data);
 			AuthStore.emitChange();
 		break;
 		case Constants.END_SESSION:
@@ -71,16 +79,16 @@ AppDispatcher.register(function(action) {
 			AuthStore.emitChange();
 		break;
 		case Constants.UPDATE_USER:
-			AuthStore.setUser(data.user);
+			AuthStore.setCurrentUser(data);
 			AuthStore.emitChange();
 		break;
 		case Constants.FACEBOOK_STATUS_CHANGED:
-			if (data.isLoggedIn) {
-				_facebookLogin 	= true;
-				_currentUser 	= data.user;
-				AuthStore.setSession(data.api_key);
+			if (user.isLoggedIn) {
+				AuthStore.setFacebookLogin(true);
+				AuthStore.setCurrentUser(data);
+				AuthStore.setSession(data);
 			} else {
-				_facebookLogin = false;
+				AuthStore.setFacebookLogin(false);
 				AuthStore.deleteSession();
 			} 
 			AuthStore.emitChange();

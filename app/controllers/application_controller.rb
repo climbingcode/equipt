@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 	
   	protect_from_forgery with: :exception
 
+  	serialization_scope :view_context
+
   	protected
 
 	#returns the active user associated with the access token

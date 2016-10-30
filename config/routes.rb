@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 		
 	end
 
+	match '/api/current_user', to: 'api/users#show', via: 'GET'
 	match '/', to: 'home#index', via: 'GET'
 	match '*path', to: 'home#index', via: 'GET'
 

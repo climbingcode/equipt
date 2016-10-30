@@ -3,7 +3,7 @@
 // ===============
 
 Equipt.actions.createSession = function(userData) {
-	
+
 	Equipt.API.post('/session', userData).then(
 		(data) => {
 			dispatchAction(Constants.NEW_SESSION, data);
@@ -28,8 +28,7 @@ Equipt.actions.endSession = function() {
 // =====================
 
 Equipt.actions.appInit = function() {
-
-	Equipt.API.get('/users/' + Equipt.stores.AuthStore.getUserId()).then(
+	Equipt.API.get('/current_user').then(
 		(data) => {
 			dispatchAction(Constants.NEW_SESSION, data);
 		}, 
@@ -59,7 +58,7 @@ Equipt.actions.facebookStatusChanged = function(isLoggedIn) {
 			dispatchAction(Constants.FACEBOOK_STATUS_CHANGED, {
 				isLoggedIn: true,
 				user: data.user,
-				api_key: data.api_key
+				fb_api_key: data.api_key
 			});
 		});
 	} else {

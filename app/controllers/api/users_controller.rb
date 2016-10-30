@@ -7,15 +7,14 @@ class Api::UsersController < ApplicationController
 	def create
 		user = User.new(user_params)
 		if user.save
-			render json: { user: user, api_key: user.session_api_key }, status: 200
+			render json: user, create_notice: true, send_api_token: true, status: 200
 		else
 			render json: { errors: user.errors }, status: 200
 		end
 	end
 
 	def show
-		user_obj = JSON.parse(current_user.to_json({include: { availabilities: { only: :hour }}}))
-		render json: { user: current_user, api_key: current_user.session_api_key }, status: 200
+		render json: current_user, send_api_token: true, status: 200
 	end
 
 	def update 
@@ -23,11 +22,7 @@ class Api::UsersController < ApplicationController
 			render_notice({ error: "Incorrect credentials, try again!" })
 		elsif current_user.update(user_params)
 			current_user.save_availabilities(params[:user][:availability])
-			user_obj = JSON.parse(current_user.to_json({include: { availabilities: { only: :hour }}}))
-			render 	json: {
-							user: user_obj,
-							notice: { info: "Your profile has been updated, #{ current_user.firstname.capitalize }" }
-						}
+			render json: current_user, send_api_token: true, status: 200
 		else
 			render json: { errors: current_user.errors }, status: 200
 		end

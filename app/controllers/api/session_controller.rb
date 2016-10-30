@@ -5,7 +5,7 @@ class Api::SessionController < ApplicationController
 	def create
 		user = User.find_by_email(params[:email])
 		if user && user.authenticate(params[:password])
-			render json: { user: user, api_key: user.session_api_key }, status: 200
+			render json: user, send_api_token: true, status: 200
 		else 
 			render json: {notice: { error: "Incorrect credentials, try again!" } }, status: 200
 		end
@@ -13,7 +13,7 @@ class Api::SessionController < ApplicationController
 
 	def facebook_auth
 		user = User.from_omniauth(request.env["omniauth.auth"])
-    	render json: { user: user, api_key: user.session_api_key }, status: 200
+    	render json: user, send_api_token: true, status: 200
 	end
 
 	def forgot_password

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :availabilities
   has_many :ratings, :as => :rateable
 
+  after_create :session_api_key
+
 	# oAuth
 	def self.from_omniauth(auth)
     where(auth.slice(provider: auth.provider, uid: auth.uid)).first_or_initialize.tap do |user|

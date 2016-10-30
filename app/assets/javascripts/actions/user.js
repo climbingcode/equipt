@@ -17,7 +17,7 @@ Equipt.actions.updateUser = function(user, callback) {
 
 	Equipt.API.put(`/users/${userId}`, user).then(
 		(data) => {
-			dispatchAction(Constants.UPDATE_USER, data);
+			if (!data.notice) dispatchAction(Constants.UPDATE_USER, data);
 			if (callback) callback();
 		}, 
 		(err) => {
