@@ -6,7 +6,7 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	_facebookLogin: false,
 
 	currentUser() {
-        return this._currentUser;
+        return this._currentUser || {};
 	},
 
 	authenticated() {
@@ -15,7 +15,7 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 
 	setSession(user) {
 		try {
-			if (user) {
+			if (user && user.api_key && user.api_key.length) {
 				localStorage['equiptSession'] = user.api_key;	
 			} 
 		} catch(err) {
@@ -33,19 +33,11 @@ Equipt.stores.AuthStore = Object.assign({}, EventEmitter.prototype, StoreSetting
 	},
 
 	getApiKey() {
-		try {
-			return this.getSession();
-		} catch(err) {
-			this.deleteSession();
-		}
+		return this.getSession();
 	},
 
 	getUserId() {
-		try {
-			return this.currentUser().id;
-		} catch(err) {
-			this.deleteSession();
-		}
+		return this.currentUser().id;
 	},
 
 	isFacebookLogin() {
@@ -83,7 +75,7 @@ AppDispatcher.register(function(action) {
 			AuthStore.emitChange();
 		break;
 		case Constants.FACEBOOK_STATUS_CHANGED:
-			if (user.isLoggedIn) {
+			if (data.isLoggedIn) {
 				AuthStore.setFacebookLogin(true);
 				AuthStore.setCurrentUser(data);
 				AuthStore.setSession(data);

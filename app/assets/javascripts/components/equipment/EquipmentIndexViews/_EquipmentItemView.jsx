@@ -8,7 +8,7 @@ Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component
 
 		let equipment = this.props.equipment;
 
-		let image = equipment.images.length ? equipment.images[0].file.url : '/assets/equipment-default.png';
+		let image = equipment.primary_image || '/assets/equipment-default.png';
 
 		return(
 			<div className="equipment-container col-lg-4 col-md-6 col-xs-12">

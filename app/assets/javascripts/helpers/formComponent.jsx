@@ -6,7 +6,7 @@ Equipt.helpers.FormHelper = class FormHelper extends React.Component {
 	}
 
 	serializeForm() {
-		for (var field in this.refs) {
+		for (let field in this.refs) {
 			this.formData[field] = this.refs[field].value;
 		}
 	}

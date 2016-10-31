@@ -7,13 +7,16 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 	constructor(props) {
 		super(props);
 		this.state = {
-			category: null 
+			category: null
 		}
 	}
 
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
+		if (!this.formData.sub_category && this.props.equipment) {
+			this.formData.sub_category = this.props.equipment.sub_category;	
+		} 
 		let id = this.props.equipment && this.props.equipment.id;
 		this.props.submittedForm(this.formData, this.images, id);
 	}
@@ -41,11 +44,11 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 		const EquipmentUploaderView   = Equipt.views.EquipmentUploaderView;
 		const EquipmentSearchTabsView = Equipt.views.EquipmentSearchTabsView;
 		
-		let equipment 	= this.props.equipment || {};
-		let category 	= this.state.category || equipment.category || 'camp';
-		let optionsJson = Equipt.content.createEquipment.typeOptions;
-		let options 	= category && optionsJson[category];
-		let inputs  	= Equipt.content.createEquipment.formInputs; 
+		let equipment 	 = this.props.equipment || {};
+		let category 	 = this.state.category || equipment.category || 'camp';
+		let optionsJson  = Equipt.content.createEquipment.typeOptions;
+		let options 	 = category && optionsJson[category];
+		let inputs  	 = Equipt.content.createEquipment.formInputs;
 
 		return (
 			<form 	onSubmit={this.submit.bind(this)}
@@ -69,7 +72,7 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 						inputs.map((obj, i) => {
 
 							let Tag = obj.tag;	
-							return <form-field key={`create_form_${i}`}> 
+							return  <form-field key={`create_form_${i}`}> 
 										<br/>
 										{ this.renderError.call(this, obj.name) }
 										<Tag 	type="text" 

@@ -5,35 +5,18 @@ class Api::EquipmentsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		render json: Equipment.search(params[:query]),
-										include: [
-											:images
-										],
-										status: 200
+		render json: Equipment.search(params[:query]), each_serializer: EquipmentsSerializer, status: 200
 	end
 
 	def show
-		render json: Equipment.find(params[:id]), 
-									include: 	[
-													:rentals, 
-													:ratings,
-													:images,
-													:user => { :include => :ratings }
-												], 
-									status: 200
+		render json: Equipment.find(params[:id]), status: 200
 	end
 
 	def create
 		equipment = current_user.equipments.new(equipment_params)
 		if equipment.save
 			equipment.addImages(params[:equipment][:images])
-			render json: { 	
-							equipment: equipment,  
-								include: [ :images ],
-							notice: {
-								info: "#{equipment.equipment_name} has been added to your inventory"
-							}
-						 }, status: 200
+			render json: equipment, create_notice: true, status: 200
 		else
 			render json: { errors: equipment.errors }, status: 200
 		end
@@ -43,22 +26,16 @@ class Api::EquipmentsController < ApplicationController
 		equipment = current_user.equipments.find(params[:id])
 		if equipment.update(equipment_params)
 			equipment.addImages(params[:equipment][:images])
-			render json: { 
-							equipment: equipment, 
-								include: [ :images ], 
-							notice: { 
-								error: "#{equipment.equipment_name} has been updated"
-							} 
-						}, status: 200
+			render json: equipment, update_notice: true, status: 200
 		else 
-			render json: { notice: { error: "Error updating #{equipment.equipment_name}" } }, status: 200
+			render json: { errors: equipment.errors }, status: 200
 		end
 	end
 
 	def destroy 
 		equipment = current_user.equipments.find(params[:id])
 		if equipment.destroy
-			render json: { equipment: equipment, notice: { info: "#{equipment.equipment_name} has been removed"} }, status: 200
+			render json: equipment, destroy_notice: true, status: 200
 		else 
 			render json: { notice: { error: "Error removing #{equipment.equipment_name}" } }, status: 200
 		end

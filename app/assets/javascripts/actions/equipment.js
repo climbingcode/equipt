@@ -110,7 +110,7 @@ Equipt.actions.deleteEquipment = function(id) {
 
 	Equipt.API.delete(`/equipments/${id}`).then(
 		(data) => {
-			dispatchAction(Constants.EQUIPMENT_DELETE, data.equipment);
+			dispatchAction(Constants.EQUIPMENT_DELETE, data);
 		},
 		(err) => {
 			console.log('Error Deleting Equipment');

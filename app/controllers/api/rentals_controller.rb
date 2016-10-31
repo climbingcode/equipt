@@ -9,7 +9,7 @@ class Api::RentalsController < ApplicationController
 		rental = equipment.rentals.new(rental_params)
 		rental.user = current_user
 		if rental.save
-			render json: rental, include: [ equipment: { include: :user } ], status: 200
+			render json: rental, include_owner: true, status: 200
 		else 
 			render json: { notice: { errors: rental.errors } }, status: 200
 		end

@@ -2,8 +2,6 @@ Equipt.API = {
 
 	path: '/api',
 
-	apiKey: null,
-
 	get: function(url) {
 		return new Promise((resolve, reject) => {
 			this.send(url, 'GET')
@@ -68,7 +66,6 @@ Equipt.API = {
 
 			$.ajax(ajaxObj)
 			.success((res, status, xhr) => {
-				Equipt.API.apiKey = xhr.getResponseHeader('AUTHORIZATION');
 				console.log(res, xhr);
 				if (res.errors) return hasErrors(res.errors);
 				else if (res.notice) hasNotice(res.notice);

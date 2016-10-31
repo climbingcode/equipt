@@ -1,7 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  	attributes 	:id, 
-  				:firstname, 
-  				:lastname, 
+  	
+    attributes 	:id, 
   				:firstname, 
   				:lastname, 
   				:email, 
@@ -25,7 +24,13 @@ class UserSerializer < ActiveModel::Serializer
   				:password_reset_token, 
   				:password_reset_sent_at,
   				:notice,
-          :api_key
+          :api_key,
+          :availabilities,
+          :ratings
+    
+    def ratings
+      @object.ratings
+    end
 
   	def notice
   		{ info: "Welcome, #{ @object.firstname.capitalize }" } if @instance_options[:create_notice]

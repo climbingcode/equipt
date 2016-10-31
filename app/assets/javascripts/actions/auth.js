@@ -36,7 +36,6 @@ Equipt.actions.appInit = function() {
 			console.log(err.responseText);
 		}
 	);
-
 };
 
 // ======================
@@ -55,16 +54,7 @@ Equipt.actions.facebookStatusChanged = function(isLoggedIn) {
 	// Must be sent to exact path below to work
 	if (isLoggedIn) {	
 		$.post('/auth/facebook/callback').then(function(data) {
-			dispatchAction(Constants.FACEBOOK_STATUS_CHANGED, {
-				isLoggedIn: true,
-				user: data.user,
-				fb_api_key: data.api_key
-			});
-		});
-	} else {
-		dispatchAction(Constants.FACEBOOK_STATUS_CHANGED, {
-			isLoggedIn: false,
-			user: null
+			dispatchAction(Constants.NEW_SESSION, data);
 		});
 	}
 };

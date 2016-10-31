@@ -12,15 +12,15 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 	selected() {
 		let dropDownName = this.props.name;
 		let element = this.refs[dropDownName];
-		let value = element ? element.value : '';
-		this.value = value;
+		let value   = element ? element.value : '';
+		this.value  = value;
 		this.props.onChange && this.props.onChange(this.value); 
 	}
 
 	render() {
 
 		let options = this.props.options;
-		let name  = this.props.name;
+		let name    = this.props.name;
 
 		let startingValue = this.props.value ? this.props.value : 'default';
 
@@ -28,9 +28,7 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 
 			<select ref={name} 
 					onChange={this.selected.bind(this)}
-					className="form-control col-sm-12"
-					value={ startingValue }>
-					<option value="default" disabled>Select a category</option>					
+					className="form-control col-sm-12">
 					{
 						options.map(function(option, i) {
 							
