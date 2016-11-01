@@ -17,7 +17,7 @@ class RentalSerializer < ActiveModel::Serializer
     belongs_to :equipment
 
     def owner
-    	OwnerSerializer.new(@object.equipment.user, root: false)
+    	OwnerSerializer.new(@object.equipment.user, root: false) if @object.equipment.user
     end
 
 end

@@ -9,7 +9,7 @@ class Api::EquipmentsController < ApplicationController
 	end
 
 	def show
-		render json: Equipment.find(params[:id]), status: 200
+		render json: Equipment.find(params[:id]), serializer: EquipmentSerializer, status: 200
 	end
 
 	def create
