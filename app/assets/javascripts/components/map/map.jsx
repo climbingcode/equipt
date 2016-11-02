@@ -2,28 +2,13 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 
 	static propType = {
 		position: React.PropTypes.object.isRequired,
+		setPosition: React.PropTypes.func,
 		showLocationSearch: React.PropTypes.bool
 	}
 
 	constructor(props) {
 		super(props);
-		this.initPositionSet = false;
 		this.stores = [];
-	}
-
-	getPosition() {
-
-		let showPosition = (position) => {
-			this.props.setPosition({
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			}); 
-		}
-
-		if (navigator.geolocation) {
-        	navigator.geolocation.getCurrentPosition(showPosition);
-    	}
-
 	}
 
 	buildMap(callback) {
@@ -60,6 +45,7 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 	}
 
 	buildLocationSearch(map) {
+		
 		let input 	  = this.refs.searchBar;
         let searchBox = new google.maps.places.SearchBox(input);
         let bounds 	  = new google.maps.LatLngBounds();
@@ -107,7 +93,6 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 	};
 
 	init() {
-		this.getPosition();
 		this.buildMap((map) => {
 			this.buildMarker(map);
 			if (this.props.showLocationSearch) this.buildLocationSearch.call(this, map);
@@ -125,19 +110,12 @@ Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
 	}
 
 	shouldComponentUpdate() {
-		return !this.initPositionSet;
+		return this.props.position.lat !== 0 && this.props.position.lng !== 0;
 	}
 
 	componentWillUpdate() {
-		if (this.marker && this.map && this.props.position.lat > 0) {	
-			this.marker.setPosition(this.props.position);
-			this.map.panTo(this.props.position);
-			this.initPositionSet = true;
-		}
-	}
-
-	componentWillUnmount() {
-		this.initPositionSet = false;
+		this.marker.setPosition(this.props.position);
+		this.map.panTo(this.props.position);
 	}
 
 	render() {
