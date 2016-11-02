@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
 	validates :email, confirmation: true
   validates :email_confirmation, presence: true
 
-	has_many :equipments
-	has_many :rentals
-  has_many :api_keys
-  has_many :availabilities
-  has_many :ratings, :as => :rateable
+	has_many :equipments, dependent: :destroy
+	has_many :rentals, dependent: :destroy
+  has_many :api_keys, dependent: :destroy
+  has_many :availabilities, dependent: :destroy
+  has_many :ratings, :as => :rateable, dependent: :destroy
 
   after_create :session_api_key
 

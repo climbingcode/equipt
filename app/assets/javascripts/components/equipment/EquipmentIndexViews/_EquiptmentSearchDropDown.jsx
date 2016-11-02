@@ -19,11 +19,12 @@ Equipt.views.EquipmentSearchDropDown = class EquiptmentSearchDropDown extends Re
 
 		return (
 			<div className="col-lg-3 col-xs-12">	
-			<OptionsHelper 	ref="sub_category"
-							name="sub_category"
-							options={options}
-							value={ search.sub_category || '' }
-							onChange={ this.subCategorySelected.bind(this) }/>
+				<OptionsHelper 	ref="sub_category"
+								name="sub_category"
+								options={options}
+								defaultOption="Please Select a Category"
+								value={ search.sub_category || '' }
+								onChange={ this.subCategorySelected.bind(this) }/>
 			</div>
 		)
 	}

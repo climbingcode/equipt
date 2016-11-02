@@ -14,7 +14,7 @@ class Api::UsersController < ApplicationController
 	end
 
 	def show
-		render json: current_user,, create_notice: true, send_api_token: true, status: 200
+		render json: current_user, create_notice: true, send_api_token: true, status: 200
 	end
 
 	def update 
