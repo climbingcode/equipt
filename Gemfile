@@ -46,7 +46,7 @@ gem 'flux-rails-assets'
 gem 'autoprefixer-rails'
 gem 'browserify-rails'
 gem "font-awesome-rails"
-gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
+gem 'bootstrap-daterangepicker-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

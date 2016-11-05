@@ -1,4 +1,4 @@
-const NOTICE_DURATION = 5000;
+const NOTICE_DURATION = 3000;
 
 Equipt.controllers.NoticeController = class NoticeController extends Equipt.controllers.MainController {
 
@@ -10,10 +10,16 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 		}
 	}
 
-	_onChange() {	
+	_onChange() {
 	    this.setState({
 	    	notice: Equipt.stores.NoticeStore.getNotice()
 	    });
+
+	    // clearTimeout(this.noticeTimeout);
+
+	    this.noticeTimeout = setTimeout(function() {
+	    	Equipt.actions.clearNotice();
+	    }, 5000);
   	}
 
 	render() {

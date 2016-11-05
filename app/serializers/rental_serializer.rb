@@ -11,13 +11,8 @@ class RentalSerializer < ActiveModel::Serializer
     			:rental_completed,
     			:rental_comfirmed,
     			:created_at,
-    			:updated_at,
-    			:owner
+    			:updated_at
 
     belongs_to :equipment
-
-    def owner
-    	OwnerSerializer.new(@object.equipment.user, root: false)
-    end
 
 end

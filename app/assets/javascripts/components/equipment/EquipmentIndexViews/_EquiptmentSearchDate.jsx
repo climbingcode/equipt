@@ -35,52 +35,25 @@ Equipt.views.EquiptmentSearchDate = class EquiptmentSearchDate extends React.Com
 
 	componentDidMount() {
 
-		let $pickupDatePicker  = $(this.refs.pickupDatePicker).datetimepicker();
-		let $dropoffDatePicker = $(this.refs.dropoffDatePicker).datetimepicker();
-		
-		$pickupDatePicker.on('dp.change', (pickup) => {
-			this.dateChanged({
-								pickup: $pickupDatePicker.data('date'),
-								dropoff: $dropoffDatePicker.data('date')
-							});
+		let $datepicker = $(this.refs.datePicker).daterangepicker();
+
+		$datepicker.on('apply.daterangepicker', (ev, picker) => {
+  			this.dateChanged({
+  				dropoff: picker.startDate.format('YYYY/MM/DD'),
+  				pickup: picker.endDate.format('YYYY/MM/DD')
+  			});
 		});
 
-		$dropoffDatePicker.on('dp.change', (dropoff) => {
-			this.dateChanged({
-								pickup: $pickupDatePicker.data('date'),
-								dropoff: $dropoffDatePicker.data('date')
-							});
-		});
-		
 	}
 
 	render() {
 		return (
-			<div className="col-lg-4 col-xs-12 equipment-date-search-container">
+			<div ref="datePicker" className="col-lg-1 col-xs-12 equipment-date-search-container">
+			    <i className="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+    			<span></span> 
+    			<b className="caret"></b>
+            </div>
 
-				<div className="form-group equipment-date-input-container">
-	                <div className='input-group date' ref='pickupDatePicker'>
-	                    <input 	type='text'
-	                    		placeholder="pickup date" 
-	                    		className="form-control" />
-	                    <span className="input-group-addon">
-	                        <span className="glyphicon glyphicon-calendar"></span>
-	                    </span>
-	                </div>
-            	</div>
-
-            	<div className="form-group equipment-date-input-container">
-	                <div className='input-group date' ref='dropoffDatePicker'>
-	                    <input 	type='text' 
-	                    		placeholder="dropoff date" 
-	                    		className="form-control" />
-	                    <span className="input-group-addon">
-	                        <span className="glyphicon glyphicon-calendar"></span>
-	                    </span>
-	                </div>
-            	</div>
-
-			</div>
 		)
 	}
 

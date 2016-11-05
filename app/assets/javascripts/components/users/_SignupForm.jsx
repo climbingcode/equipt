@@ -2,11 +2,24 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 
 	constructor(props) {
 		super(props);
+		
 		this.state = {
 			position: { lat: 0, lng: 0 },
+			changedPosition: false,
 			showTerms: false,
 			availability: []
 		}
+
+		this.geo = {};
+
+		let setPosition = (position) => {			
+			this.geo.lat = position.coords.latitude;
+			this.geo.lng = position.coords.longitude;
+		}.bind(this)
+
+		if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(setPosition);
+	    }
 	}
 
 	submit(e) {
@@ -16,14 +29,36 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		this.props.submit(this.formData);
 	}
 
+	getPosition(currentUser = {}) {
+
+		let position = {};
+
+		if (currentUser.lng && currentUser.lat) {
+			position.lat = currentUser.lat;
+			position.lng = currentUser.lng;
+		} else {
+			position.lat = this.geo.lat || 0;
+			position.lng = this.geo.lng || 0;
+		}
+
+		this.state.position = position;
+		this.setState(this.state); 
+		this.setPositionInputValues(position);
+
+	}
+
 	setPosition(posObj) {	
+		this.setPositionInputValues(posObj);
+		this.positionChanged = true;
+		this.state.position = posObj;
+		this.setState(this.state);
+	}
+
+	setPositionInputValues(posObj) {
 		if (this.refs.lat && this.refs.lng) {		
 			this.refs.lat.value = posObj.lat;
 			this.refs.lng.value = posObj.lng;
 		}
-		this.setState({
-			position: posObj
-		});
 	}
 
 	setAvailabilityTime(time) {
@@ -36,11 +71,36 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		this.setState(this.state);
 	}
 
+	setStartingAvailabilities(currentUser = {}) {
+		if (currentUser.availabilities) {
+			let availabilities = currentUser.availabilities.map(function(availability) {
+				return availability.hour + '.00';
+			});
+			this.state.availability = availabilities;
+			this.setState(this.state);
+		}
+	}
+
 	showTerms(state) {
 		this.setState({
 			showTerms: state
 		});
 		this.forceUpdate();
+	}
+
+	componentDidMount() {
+		this.getPosition(this.props.currentUser);
+		this.setStartingAvailabilities(this.props.currentUser);
+	}
+
+	componentWillReceiveProps() {
+		!this.positionChanged 
+		&& this.getPosition(this.props.currentUser)
+		&& this.setStartingAvailabilities(this.props.currentUser);
+	}
+
+	componentWillUnmount() {
+		this.positionChanged = false;
 	}
 
 	render() {
@@ -54,6 +114,8 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		let currentUser = this.props.currentUser;
 		let inputs 		= Equipt.content.createUser.formInputs;
 
+		console.log(this.state.availability);
+
 		if (!currentUser) {
 
 			var readTermsAndConditions = 	<span>
@@ -64,11 +126,11 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 												</label>
 											</span>
 
-			var submitBtn = <button className="btn btn-success pull-right" type="submit">Sign up</button>
+			var submitBtn = <button className="btn btn-success pull-right col-sm-12" type="submit">Sign up</button>
 
 		} else {
 
-			var submitBtn = <button className="btn btn-success pull-right" type="submit">Update Profile</button>
+			var submitBtn = <button className="btn btn-success pull-right col-sm-12" type="submit">Update Profile</button>
 
 		}
 
@@ -113,12 +175,8 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 				<div className="col-xs-6">
 					<h4>Your Owned Equipment Pick-Up location</h4>
 					<GoogleMapView  setPosition={ this.setPosition.bind(this) }
-									position={{ 
-												lng: currentUser.lng,
-												lat: currentUser.lat
-											}}
+									position={ this.state.position }
 									showLocationSearch={ true }
-									{ ...this.state }
 					/>
 				</div>
 				<div className="col-xs-6">

@@ -14,9 +14,6 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		if (!this.formData.sub_category && this.props.equipment) {
-			this.formData.sub_category = this.props.equipment.sub_category;	
-		} 
 		let id = this.props.equipment && this.props.equipment.id;
 		this.props.submittedForm(this.formData, this.images, id);
 	}
@@ -36,6 +33,10 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 		let input 	  = event.target
 		let newValue  = input.value;
 		if (this.props.updateValue) this.props.updateValue(this, name, newValue);
+	}
+
+	componentDidMount() {
+		this.formData.category = 'camp';
 	}
 
 	render() {
@@ -64,6 +65,7 @@ Equipt.views.EquipmentCreateFormView = class extends Equipt.helpers.FormHelper {
 				<OptionsHelper 	ref="sub_category"
 								name="sub_category"
 								options={options}
+								defaultOption="Please Select A Category"
 								value={ equipment && equipment.sub_category }/>
 				<div className="text-fields col-sm-6 row">
 

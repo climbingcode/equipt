@@ -14,10 +14,10 @@ class Api::UsersController < ApplicationController
 	end
 
 	def show
-		render json: current_user, send_api_token: true, status: 200
+		render json: current_user, create_notice: true, send_api_token: true, status: 200
 	end
 
-	def update 
+	def update
 		if !current_user.authenticate(user_params[:password]) 
 			render_notice({ error: "Incorrect credentials, try again!" })
 		elsif current_user.update(user_params)

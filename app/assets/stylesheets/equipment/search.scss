@@ -45,10 +45,12 @@
         }
     }
     .equipment-date-search-container {
-        .equipment-date-input-container {
-            display: inline-block;
-            width: 45%;
-            margin-right: 5%;
+        i {
+            font-size: 30px;
+        }
+        .caret {
+            vertical-align: top;
+            margin-top: 15px;
         }
     }
 }
