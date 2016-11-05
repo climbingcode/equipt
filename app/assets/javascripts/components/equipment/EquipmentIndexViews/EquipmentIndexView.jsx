@@ -8,13 +8,18 @@ Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Compone
 		
 		const EquipmentItemView   = Equipt.views.EquipmentItemView;
 		const EquipmentSearchView = Equipt.views.EquipmentSearchView;
+		const CampFireView 		  = Equipt.views.campFireView
 		
 		let equipment = this.props.equipment || [];
 
-		let noMatchingEquipment;
+		let waitingForOrLoading;
 
-		if (!equipment.length) {
-			noMatchingEquipment = <h3>No Matching Equipment Found</h3>
+		if (this.props.showLoader) {
+			waitingForOrLoading =   <div className="equipment-ajax-loader-wrapper">
+										<CampFireView/>
+									</div>;
+		} else if (!equipment.length) {
+			waitingForOrLoading = <h3>No Matching Equipment Found</h3>
 		}
 
 		return (
@@ -28,7 +33,7 @@ Equipt.views.EquipmentIndexView = class EquipmentIndexView extends React.Compone
 									equipment={equipment}/>
 					})
 				}
-				{ noMatchingEquipment }
+				{ waitingForOrLoading }
 				<RouteHandler/>	
 			</div>
 		)

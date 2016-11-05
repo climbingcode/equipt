@@ -19,6 +19,16 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 		return this.getState();
 	}
 
+	selectedDates(dates) {
+		setTimeout(() => {
+			Equipt.actions.selectedRentalDates(dates);
+		}, 50);
+	}
+
+	selectedTime(time) {
+		Equipt.actions.selectedPickUpTime(time);
+	}
+
 	render() {
 
 		const RentalsCreateView = Equipt.views.RentalsCreateView;
@@ -29,6 +39,8 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 								rental={ this.state.rental }
 								hasCreatedRental={ this.state.hasCreatedRental }
 								owner={ this.state.equipment.owner || {} }
+								selectedDates={ this.selectedDates }
+								selectedTime={ this.selectedTime }
 			/>
 		)
 

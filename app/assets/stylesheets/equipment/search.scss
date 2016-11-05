@@ -28,6 +28,15 @@
     }
 }
 
+.equipment-ajax-loader-wrapper {
+    width: 100px;
+    height: 90vh;
+    .page-loader {
+        @extend .loader;
+        z-index: 0;
+    }
+}
+
 .equipment-search-wrapper {
     margin-bottom: 20px;
     .search-form-container {

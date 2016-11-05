@@ -10,10 +10,6 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 		rental: React.PropTypes.object.required,
 		hasCreatedRental: React.PropTypes.bool.required,
 		owner: React.PropTypes.object.required
-	}	
-
-	selectedTime(time) {
-		Equipt.actions.selectedPickUpTime(time);
 	}
 
 	rent() {
@@ -46,10 +42,11 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 
 		return (
 			<div className="rentals-create-container">
-				<Calendar 	rentals={ this.props.rentals }
+				<Calendar 	selectedDates={ this.props.selectedDates }
+							rentals={ this.props.rentals }
 							rental={ this.props.rental } />
 				<h4>Pick Up Time</h4>
-				<RentalsPickUpTimeView 	selectedTime={ this.selectedTime }
+				<RentalsPickUpTimeView 	selectedTime={ this.props.selectedTime }
 										availability={ this.props.owner.availability || [] } 
 										times={ [ this.props.rental.times ] }
 				/>

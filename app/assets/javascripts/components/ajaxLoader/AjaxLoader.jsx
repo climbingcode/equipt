@@ -17,25 +17,14 @@ Equipt.controllers.AjaxLoader = class AjaxLoader extends Equipt.controllers.Main
 
 	render() {
 
+		const CampFireView = Equipt.views.campFireView;
+
 		let isLoaderShown = this.state.isLoaderShown;
 		let shownClass = isLoaderShown ? 'loader-wrapper show' : 'loader-wrapper';
 
 		return (
 			<div className={ shownClass }>
-				<div className="loader">
-					<div className="fire">
-                		<div className="flame"></div>
-                		<div className="flame"></div>
-                		<div className="flame"></div>
-                		<div className="flame"></div>
-                		<div className="flame"></div>
-                		<div className="logs">
-                			<div className="logOne"></div>
-                			<div className="logTwo"></div>
-                    		<div className="flicker"></div>
-                		</div>
-            		</div>
-				</div>
+				<CampFireView/>
 			</div>
 		)
 	}

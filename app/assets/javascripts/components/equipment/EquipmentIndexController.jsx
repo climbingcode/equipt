@@ -5,7 +5,8 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 		this.stores = [Equipt.stores.EquipmentStore];
 		this.state  = {
 			equipment: Equipt.stores.EquipmentStore.getEquipments(),
-			search: Equipt.stores.EquipmentStore.getSearchQuery()
+			search: Equipt.stores.EquipmentStore.getSearchQuery(),
+			showLoader: Equipt.stores.EquipmentStore.showLoader(),
 		}
 	}
 
@@ -21,7 +22,8 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 
   	dataChanged() {
   		return {
-  			equipment: Equipt.stores.EquipmentStore.getEquipments()
+  			equipment: Equipt.stores.EquipmentStore.getEquipments(),
+  			showLoader: Equipt.stores.EquipmentStore.showLoader()
   		};
   	}
 

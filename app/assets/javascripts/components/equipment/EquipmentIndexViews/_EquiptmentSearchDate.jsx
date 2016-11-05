@@ -13,26 +13,6 @@ Equipt.views.EquiptmentSearchDate = class EquiptmentSearchDate extends React.Com
 		}
 	}
 
-	componentWillReceiveProps() {
-
-		let $pickupDatePicker  = $(this.refs.pickupDatePicker);
-		let $dropoffDatePicker = $(this.refs.dropoffDatePicker);
-		let dates 			   = this.props.dates;
-
-		// if (dates && dates.pickup) {
-		// 	$pickupDatePicker.setDate('setDate', dates.pickup);	
-		// } else {
-		// 	$pickupDatePicker.setDate('setDate', null);
-		// }
-
-		// if (dates && dates.dropoff) {
-		// 	$pickupDatePicker.setDate('setDate', dates.dropoff);
-		// } else {
-		// 	$pickupDatePicker.setDate('setDate', null);
-		// }
-
-	}
-
 	componentDidMount() {
 
 		let $datepicker = $(this.refs.datePicker).daterangepicker();

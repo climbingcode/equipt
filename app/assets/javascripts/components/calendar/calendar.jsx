@@ -54,7 +54,9 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
         // Unavailable Dates
         var events = this.props.rentals.map((rental, i) => {
+
             this.loadedUnavailableDates = true;
+
             return {
                 id: rental.id,
                 title: 'rented',
@@ -62,6 +64,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
                 end: rental.dropoff_date,
                 color: 'red'
             }
+
         });
 
 
@@ -77,7 +80,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
         var fullCalendarSettings = {
             // events: events,
             select: (start, end, allDay) => {
-                Equipt.actions.selectedRentalDates({
+                this.props.selectedDates({
                     pickup_date: start,
                     dropoff_date: end
                 });

@@ -2,10 +2,15 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 
 	_equipments: [],
 	_equipment: {}, 
+	_showLoader: false,
 	_search: {
 		category: '',
 		sub_category: '',
 		fuzzy_search: '',
+		location: {
+			lat: "",
+			lng: ""
+		},
 		dates: {
 			pickup: "",
 			dropoff: ""
@@ -21,7 +26,12 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	},
 
 	setEquipments(equipment) {
+		this._showLoader = false;
 		this._equipments = equipment;
+	},
+
+	clearEquipments() {
+		this._equipments = [];	
 	},
 
 	setEquipment(equipment) {
@@ -45,20 +55,33 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	},
 
 	searchEquipment(query) {
+		
+		this._showLoader = true;
+		this.clearEquipments();
+
 		for (searchType in query) {
 			this._search[searchType] = query[searchType];
 		}
+
 	},
 
 	clearSearch() {
 		this._search = {
 			category: '',
 			sub_category: '',
+			location: {
+				lat: "",
+				lng: ""
+			},
 			dates: {
 				pickup: "",
 				dropoff: ""
 			}			
 		};
+	},
+
+	showLoader() {
+		return this._showLoader;
 	}
 
 });

@@ -12,9 +12,9 @@ Equipt.views.EquipmentTabsView = class EquipmentTabsView extends React.Component
 		return (
 			<div className="equipment-info-tabs tabs">
 				{tabOptions.map(function(tabName, i) {
-					return 	<Link to={`equipment${tabName}`}
+					return 	<Link to={ `equipment${tabName}` }
 								  params={{ id: equipmentId }}
-								  key={`equipment-tab-${i}`}>
+								  key={ `equipment-tab-${i}` }>
 								<div className="col-sm-4 tab">
 									{tabName}
 								</div>

@@ -6,10 +6,10 @@ Equipt.views.EquipmentShowView = class EquipmentShowView extends React.Component
 
 	render() {
 
-		let ModalView = Equipt.views.ModalView;
+		let ModalView 		  = Equipt.views.ModalView;
 		let EquipmentTabsView = Equipt.views.EquipmentTabsView;
-
-		let equipment   = this.props.equipment;
+		
+		let equipment   	  = this.props.equipment;
 
 		return (
 			<div className="col-sm-12">	

@@ -7,12 +7,19 @@ class Equipment < ActiveRecord::Base
 	has_many :images, :as => :imageable, dependent: :destroy
 
   scope :exclude_user, -> (user) { where.not(user_id: user.id) }
+
   scope :search_category, -> (query) { where("category LIKE ?", "#{query[:category]}%") }
   scope :search_sub_category, -> (query) { where("sub_category LIKE ?", "#{query[:sub_category]}%") }
   scope :fuzzy_search, -> (query) { where("equipment_name LIKE ?", "%#{query[:fuzzy_search]}%") }
+  
   scope :search_dates_available, -> (query) do 
     unless query[:dates] && query[:dates][:pickup].empty? && query[:dates][:dropoff].empty?
       # self.joins(:rentals).merge(Rental.where.not("pickup_date >= ? AND dropoff_date <= ?", query[:dates][:pickup], query[:dates][:dropoff] )).uniq
+    end
+  end
+
+  scope :search_location, -> (query) do
+    unless query[:location] && query[:location][:lat].empty? && query[:location][:lng].empty?
     end
   end
   
@@ -33,6 +40,7 @@ class Equipment < ActiveRecord::Base
   def self.search(query)
       query ||= []
       Equipment.all
+               .search_location(query)
                .search_category(query)
                .search_sub_category(query)
                .fuzzy_search(query)
