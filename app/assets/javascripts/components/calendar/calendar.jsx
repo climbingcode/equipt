@@ -5,6 +5,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 	}
 
     haveDatesChanged(nextProps) {
+        
         let oldDates = this.props.rental;
         let newDates = nextProps.rental;
 

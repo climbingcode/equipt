@@ -71,6 +71,16 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		this.setState(this.state);
 	}
 
+	setStartingAvailabilities(currentUser = {}) {
+		if (currentUser.availabilities) {
+			let availabilities = currentUser.availabilities.map(function(availability) {
+				return availability.hour + '.00';
+			});
+			this.state.availability = availabilities;
+			this.setState(this.state);
+		}
+	}
+
 	showTerms(state) {
 		this.setState({
 			showTerms: state
@@ -80,10 +90,13 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 
 	componentDidMount() {
 		this.getPosition(this.props.currentUser);
+		this.setStartingAvailabilities(this.props.currentUser);
 	}
 
 	componentWillReceiveProps() {
-		!this.positionChanged && this.getPosition(this.props.currentUser);
+		!this.positionChanged 
+		&& this.getPosition(this.props.currentUser)
+		&& this.setStartingAvailabilities(this.props.currentUser);
 	}
 
 	componentWillUnmount() {
@@ -101,7 +114,7 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		let currentUser = this.props.currentUser;
 		let inputs 		= Equipt.content.createUser.formInputs;
 
-		console.log(this.state.position);
+		console.log(this.state.availability);
 
 		if (!currentUser) {
 

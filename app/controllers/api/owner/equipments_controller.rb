@@ -5,21 +5,11 @@ class Api::Owner::EquipmentsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		render json: current_user.equipments, 	include: [
-													:images
-												],
-												status: 200
+		render json: current_user.equipments, status: 200
 	end
 
 	def show
-		render json: current_user.equipments.find(params[:id]), 
-					include: 	[
-									:rentals, 
-									:ratings,
-									:images,
-									user: { include: :ratings }
-								], 
-					status: 200
+		render json: current_user.equipments.find(params[:id]), serializer: EquipmentSerializer,  status: 200 					
 	end
 
 end

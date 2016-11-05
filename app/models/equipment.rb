@@ -12,7 +12,7 @@ class Equipment < ActiveRecord::Base
   scope :fuzzy_search, -> (query) { where("equipment_name LIKE ?", "%#{query[:fuzzy_search]}%") }
   scope :search_dates_available, -> (query) do 
     unless query[:dates] && query[:dates][:pickup].empty? && query[:dates][:dropoff].empty?
-      # self.joins(:rentals).where.not("pickup_date >= ? AND dropoff_date <= ?", query[:dates][:pickup], query[:dates][:dropoff] )
+      # self.joins(:rentals).merge(Rental.where.not("pickup_date >= ? AND dropoff_date <= ?", query[:dates][:pickup], query[:dates][:dropoff] )).uniq
     end
   end
   
