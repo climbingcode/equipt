@@ -12,7 +12,8 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 
 			searchObj.location = {
         		lat: place.geometry.location.lat(),
-        		lng: place.geometry.location.lng()
+        		lng: place.geometry.location.lng(),
+        		range: this.range || '0-5'
         	};
 
 			Equipt.actions.getEquipment(searchObj);
@@ -31,10 +32,40 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 		}
 	}
 
+	rangeUpdated(range) {
+		switch(range) {
+			case 'Within 0-5km':
+				this.range = '0-5';
+			break;
+			case 'Within 6-10km':
+				this.range = '6-10';
+			break;
+			case 'Within 11-15km':
+				this.range = '11-15';
+			break;
+			case '15km+':
+				this.range = '16+';
+			break;
+		}
+	}
+
 	render() {
+
+		const OptionsHelper = Equipt.helpers.OptionsHelper;
+
+		let options = ['Within 0-5km', 'Within 6-10km', 'Within 11-15km', '16km+'];
+
 		return (
-			<div className="search-form-container col-lg-3 col-xs-12">
-				<input ref="searchLocation" className="form-control"/>
+			<div className="location-search-container col-lg-3 col-xs-12">
+				<OptionsHelper 	ref="range"
+								name="range"
+								options={options}
+								defaultOption="Within"
+								onChange={this.rangeUpdated}/>
+				<span> OF </span>
+				<input  ref="searchLocation" 
+						placeholder="location"
+						className="form-control col-sm-3"/>
 			</div>
 		)
 	}

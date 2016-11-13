@@ -29,7 +29,7 @@ Equipt.helpers.OptionsHelper = class extends React.Component {
 			<select ref={name} 
 					onChange={this.selected.bind(this)}
 					className="form-control col-sm-12">
-					<option>{ this.props.defaultOption }</option>
+					<option value="">{ this.props.defaultOption }</option>
 					{
 						options.map(function(option, i) {
 							return 	<option key={`option_${i}`} 

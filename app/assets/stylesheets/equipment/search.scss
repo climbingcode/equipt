@@ -37,6 +37,25 @@
     }
 }
 
+.location-search-container {
+    select {
+        display: inline-block;
+        width: 30%;
+        float: none;
+    }
+    span {
+        display: inline-block;
+        text-align: center;
+        width: 9%;
+        float: none;
+    }
+    input {
+        display: inline-block;
+        width: 60%;
+        float: none;
+    }
+}
+
 .equipment-search-wrapper {
     margin-bottom: 20px;
     .search-form-container {

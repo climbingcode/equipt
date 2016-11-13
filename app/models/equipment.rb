@@ -8,18 +8,23 @@ class Equipment < ActiveRecord::Base
 
   scope :exclude_user, -> (user) { where.not(user_id: user.id) }
 
-  scope :search_category, -> (query) { where("category LIKE ?", "#{query[:category]}%") }
-  scope :search_sub_category, -> (query) { where("sub_category LIKE ?", "#{query[:sub_category]}%") }
-  scope :fuzzy_search, -> (query) { where("equipment_name LIKE ?", "%#{query[:fuzzy_search]}%") }
+  scope :search_category, -> (category) { where("category LIKE ?", "#{ category }%") }
+  scope :search_sub_category, -> (sub_category) { where("sub_category LIKE ?", "#{ sub_category }%") }
+  scope :fuzzy_search, -> (fuzzy_search) { where("equipment_name LIKE ?", "%#{ fuzzy_search }%") }
   
-  scope :search_dates_available, -> (query) do 
-    unless query[:dates] && query[:dates][:pickup].empty? && query[:dates][:dropoff].empty?
-      # self.joins(:rentals).merge(Rental.where.not("pickup_date >= ? AND dropoff_date <= ?", query[:dates][:pickup], query[:dates][:dropoff] )).uniq
+  scope :search_by_availability, -> (dates) do 
+    if dates && dates[:pickup].present? && dates[:dropoff].present?
+      pickup  = DateTime.parse(dates[:pickup]) 
+      dropoff = DateTime.parse(dates[:dropoff])
+      rentals = Rental.where.not("(pickup_date BETWEEN ? AND ? OR dropoff_date BETWEEN ? AND ?) OR (pickup_date <= ? AND dropoff_date >= ?)", pickup, dropoff, pickup, dropoff, pickup, dropoff)
+      self.joins(:rentals).merge(rentals).uniq
     end
   end
 
-  scope :search_location, -> (query) do
-    unless query[:location] && query[:location][:lat].empty? && query[:location][:lng].empty?
+  scope :search_location, -> (location) do
+    if location && location[:lat].present? && location[:lng].present?
+      users = User.within(50, :origin => [ location[:lat], location[:lng] ])
+      self.joins(:user).merge(users).uniq
     end
   end
   
@@ -37,14 +42,15 @@ class Equipment < ActiveRecord::Base
 
   # Search Methods
 
-  def self.search(query)
-      query ||= []
+  def self.search(query = [])
+
       Equipment.all
-               .search_location(query)
-               .search_category(query)
-               .search_sub_category(query)
-               .fuzzy_search(query)
-               .search_dates_available(query)
+               .search_location(query[:location])
+               .search_category(query[:category])
+               .search_sub_category(query[:sub_category])
+               .fuzzy_search(query[:fuzzy_search])
+               .search_by_availability(query[:dates])
+
   end
 
 end

@@ -37,6 +37,9 @@ gem 'omniauth-facebook'
 # uploads
 gem 'carrierwave'
 
+# geo location
+gem 'geokit-rails'
+
 # front end gems
 gem 'react-rails', '~>1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'
@@ -56,6 +59,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'faker'
+  gem 'factory_girl'
   gem 'react-rails-hot-loader'
 end
 
