@@ -4,6 +4,11 @@ class Api::RentalsController < ApplicationController
 
 	before_filter :ensure_authenticated_user
 
+	def index
+		rentals = Rental.joins(:equipment).merge(current_user.equipments)
+		render json: rentals, include_owner: true, status: 200
+	end
+
 	def create 
 		equipment = Equipment.find(params[:equipment_id])
 		rental = equipment.rentals.new(rental_params)
@@ -13,6 +18,10 @@ class Api::RentalsController < ApplicationController
 		else 
 			render json: { notice: { errors: rental.errors } }, status: 200
 		end
+	end
+
+	def destroy
+		
 	end
 
 	private

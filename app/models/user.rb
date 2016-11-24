@@ -65,4 +65,19 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  # Find all users in range
+
+  def self.users_in_range location
+    from = location['range']['from'].to_i
+    to = location['range']['to'].to_i
+    if from && to
+      User.in_range(from..to, :origin => [ location[:lat], location[:lng] ])
+    elsif to
+      User.within(to, :origin => [ location[:lat], location[:lng] ])
+    else 
+      User.in_range(0..5, :origin => [ location[:lat], location[:lng] ])
+    end
+  end
+
 end

@@ -54,7 +54,7 @@ Equipt.actions.facebookStatusChanged = function(isLoggedIn) {
 	// Must be sent to exact path below to work
 	if (isLoggedIn) {	
 		$.post('/auth/facebook/callback').then(function(data) {
-			dispatchAction(Constants.NEW_SESSION, data);
+			dispatchAction(Constants.FACEBOOK_LOGIN, data);
 		});
 	}
 };

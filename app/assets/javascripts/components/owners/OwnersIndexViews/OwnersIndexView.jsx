@@ -9,7 +9,7 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 		const OwnersEquipmentItemView = Equipt.views.OwnersEquipmentItemView;
 
 		let equipmentListing = [];
-		let userId = Equipt.stores.AuthStore.getUserId();
+		let userId = Equipt.stores.AuthStore.getUserId() || 0;
 
 		for (var i = 0; i < this.props.equipment.length; i++) {
 			let equipment 	  = this.props.equipment[i];
@@ -31,6 +31,11 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 
 		return (
 			<div className="owners-equipment-wrapper equipment-wrapper">
+				<div className="col-sm-12">
+					<Link 	to="rentalsIndex" 
+							className="pull-right" 
+							params={{userId: userId}}>All active rentals</Link>
+				</div>
 				{ equipmentListing }
 				{ noProducts }
 			</div>

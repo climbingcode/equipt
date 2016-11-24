@@ -26,8 +26,12 @@ Equipt.App = class App extends Equipt.controllers.MainController {
 
 		var path = this.context.router.getCurrentPathname();
 
+		// Change with onEnter in router on release of 
+		// newer version of react-rails-router 1.0
+
 		setTimeout(() => {
-			if (Equipt.stores.AuthStore.authenticated() && path.indexOf('/equipment') > -1) {	
+			if (Equipt.stores.AuthStore.authenticated() 
+				&& ((path.indexOf('/equipment') > -1) || (path.indexOf('/owner') > -1)) ) {	
 				this.context.router.transitionTo(path);
 			} else if (Equipt.stores.AuthStore.authenticated()) {
 				this.context.router.transitionTo(Constants.links.equipmentIndex);

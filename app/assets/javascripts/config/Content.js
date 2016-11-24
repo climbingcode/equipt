@@ -42,18 +42,6 @@ Equipt.content = {
 				placeholder: 'Email Confirmation'
 			},
 			{
-				name: 'password',
-				type: 'password',
-				tag: 'input',
-				placeholder: 'Password'
-			},
-			{
-				name: 'password_confirmation',
-				type: 'password',
-				tag: 'input',
-				placeholder: 'Password Confirmation'
-			},
-			{
 				name: 'lat',
 				type: 'hidden',
 				tag: 'input',
@@ -127,9 +115,9 @@ Equipt.content = {
 				placeholder: 'Deposit Amount'
 			}
 		]
-
 	},
 
+	// MAP
 	mapTheme: [
 	    {
 	        "featureType": "water",
@@ -320,6 +308,5 @@ Equipt.content = {
 	        ]
 	    }
 	]
-
 
 };

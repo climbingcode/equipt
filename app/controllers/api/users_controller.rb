@@ -18,7 +18,7 @@ class Api::UsersController < ApplicationController
 	end
 
 	def update
-		if !current_user.authenticate(user_params[:password]) 
+		if !authenticated_confirmed?(user_params[:password], user_params[:oauth_token])
 			render_notice({ error: "Incorrect credentials, try again!" })
 		elsif current_user.update(user_params)
 			current_user.save_availabilities(params[:user][:availability])

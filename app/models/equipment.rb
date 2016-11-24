@@ -23,11 +23,10 @@ class Equipment < ActiveRecord::Base
 
   scope :search_location, -> (location) do
     if location && location[:lat].present? && location[:lng].present?
-      users = User.within(50, :origin => [ location[:lat], location[:lng] ])
+      users = User.users_in_range location
       self.joins(:user).merge(users).uniq
     end
   end
-  
 
 	validates :equipment_name, :brand, :model, :description, :years_old, :price_per_day, :price_per_week, :desposit_amount, presence: true
   validates :sub_category, presence: { message: "Please Select a category" }

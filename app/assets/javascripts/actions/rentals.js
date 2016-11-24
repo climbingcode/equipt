@@ -1,4 +1,39 @@
 // ===============================
+// GET ALL RENTALS
+// ===============================
+
+Equipt.actions.getRentals = function() {
+	Equipt.API.get('/rentals')
+	.then(
+		(rentals) => {
+			dispatchAction(Constants.RENTAL_INDEX, rentals);
+		},
+		(error) => {
+			console.log(error);
+		}
+	);
+};
+
+
+// ===============================
+// DELETE RENTAL
+// ===============================
+
+Equipt.actions.deleteRental = (equipmentId, rentalId) => {
+
+	Equipt.API.delete(`/equipments/${equipmentId}/rentals/${rentalId}`)
+	.then(
+		(rental) => {
+			dispatchAction(Constants.RENTAL_DELETE, rental);
+		},
+		() => {
+			console.log('rental failed to delete');
+		}
+	)
+
+};
+
+// ===============================
 // SELECTED / CHANGES RENTAL DATES
 // ===============================
 

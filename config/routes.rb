@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 		resources :users
 
 		resources :images
+
+		resources :rentals, only: ['index']
 		
 		resources :equipments do 
 			resources :rentals

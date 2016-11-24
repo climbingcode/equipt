@@ -4,7 +4,6 @@ Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.
 		super(props);
 		this.stores = [Equipt.stores.AuthStore];
 		this.state = {
-			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
 			facebookLoaded: false
 		}
 	}
@@ -16,10 +15,7 @@ Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.
     	});		
     	window.FB.getLoginStatus((response) => {
     		let loggedIn = response.status === 'connected' ? true : false;
-    		this.setState({
-    			logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
-				facebookLoaded: true
-    		});
+    		this.dataChanged(true);
     		if (callback) callback();
     		this.forceUpdate();
     	});
@@ -54,19 +50,15 @@ Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.
 	componentWillMount() {
 		this.waitForFaceBook(() => {		
 			if (!!window.FB) {
-				this.setState({
-		    		logginIn: Equipt.stores.AuthStore.isFacebookLogin(),
-					facebookLoaded: true
-		    	});	
+				this.dataChanged(true);
 		    	this.forceUpdate();
 		    }
 		});	
 	}
 
-	dataChanged() {
+	dataChanged(loaded = false) {
 		this.setState({
-			loggedIn: Equipt.stores.AuthStore.isFacebookLogin(),
-			facebookLoaded: true
+			facebookLoaded: loaded
 		});
 	}
 

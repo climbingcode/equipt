@@ -27,7 +27,7 @@ this.Routes = (
 		<Route  name="equipmentCreate"
 				handler={Equipt.controllers.EquipmentCreateController}
 				path="equipment/new"/>
-		<Route 	name="equipmentIndex" 
+		<Route 	name="equipmentIndex"
 				handler={Equipt.controllers.EquipmentIndexController} 
 				path="equipment"/>
 		<Route 	name="equipmentShow"
@@ -53,11 +53,14 @@ this.Routes = (
 				handler={Equipt.controllers.OwnersShowController}
 				path="owner/:userId/equipment/:equipmentId"
 		/>
+		<Route  name="rentalsIndex"
+			    handler={Equipt.controllers.RentalsIndexController}
+				path="owner/:userId/rentals"
+		/>
 		<DefaultRoute handler={Equipt.views.Home}/>
 	</Route>
 ), document.getElementById('root');
 
 Location.addChangeListener((pathName) => {
-	// Equipt.actions.clearNotice();
 	Equipt.actions.showLoader();
 });

@@ -13,7 +13,7 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 	willTransitionTo(transition) {
 		if (!Equipt.stores.AuthStore.authenticated()) {
 			transition.redirect('/home');	
-		} 
+		}
 	}
 
 	componentDidMount() {

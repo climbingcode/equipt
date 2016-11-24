@@ -14,6 +14,8 @@ Equipt.controllers.ProfileController = class ProfileController extends Equipt.co
 	}
 
 	submit(user) {
+		let oAuthToken = Equipt.stores.AuthStore.getOauthToken();
+		if (oAuthToken.length) user.oauth_token = oAuthToken; 
 		Equipt.actions.updateUser({user: user});
 	}
 

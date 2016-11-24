@@ -13,7 +13,7 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 			searchObj.location = {
         		lat: place.geometry.location.lat(),
         		lng: place.geometry.location.lng(),
-        		range: this.range || '0-5'
+        		range: this.range || { from: 0, to: 5 }
         	};
 
 			Equipt.actions.getEquipment(searchObj);
@@ -35,16 +35,16 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 	rangeUpdated(range) {
 		switch(range) {
 			case 'Within 0-5km':
-				this.range = '0-5';
+				this.range = { from: 0, to: 5 };
 			break;
 			case 'Within 6-10km':
-				this.range = '6-10';
+				this.range = { from: 6, to: 10 };
 			break;
 			case 'Within 11-15km':
-				this.range = '11-15';
+				this.range = { from: 11, to: 15 };
 			break;
 			case '15km+':
-				this.range = '16+';
+				this.range = { from: 16 };
 			break;
 		}
 	}

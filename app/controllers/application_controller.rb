@@ -27,6 +27,15 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	# is authenticated w. password or oauth
+	def authenticated_confirmed?(password, oauth_token)
+		if oauth_token
+			oauth_token === current_user.oauth_token
+		else 
+			current_user.authenticate(password)
+		end
+	end
+
 	#render 401 status if user is not authorized
 	def ensure_authenticated_user
 		head :unauthorized unless current_user

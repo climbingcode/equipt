@@ -114,8 +114,6 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		let currentUser = this.props.currentUser;
 		let inputs 		= Equipt.content.createUser.formInputs;
 
-		console.log(this.state.availability);
-
 		if (!currentUser) {
 
 			var readTermsAndConditions = 	<span>
@@ -143,6 +141,35 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 
 		}
 
+		if (!currentUser.provider) {
+
+			var passwordConfirmationNeeded = 	<div className="password-confirmation-wrapper">
+													<form-field> 
+														<br/>
+														<label  htmlFor="password">Password</label>
+														<input 	ref="password"
+																type="password"
+																name="password"
+																className="form-control"
+																placeholder="password"
+														/>
+														{ this.renderError.call(this, 'password') }
+													</form-field>
+													<form-field> 
+														<br/>
+														<label  htmlFor="password-confirmation">Password Confirmation</label>
+														<input 	ref="password_confirmation"
+																type="password"
+																name="password_confirmation"
+																className="form-control"
+																placeholder="Password Confirmation"
+														/>
+														{ this.renderError.call(this, 'password_confirmation') }
+													</form-field>
+												</div>
+
+		}
+
 		return (			
 			<div className="user-create-edit-form col-xs-12">
 				<div className="col-xs-6">
@@ -151,11 +178,11 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 								inputs.map((obj, i) => {
 
 									let Tag = obj.tag;	
+
 									return <form-field key={`create_form_${i}`}> 
 												<br/>
 												<label htmlFor={obj.placeholder}>{obj.placeholder}</label>
-												<Tag 	type="text" 
-														ref={obj.name}
+												<Tag    ref={obj.name}
 														type={obj.type}
 														name={obj.name}
 														className="form-control"
@@ -164,11 +191,14 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 												/>
 												{ this.renderError.call(this, obj.name) }
 											</form-field>
+
 								})
 
 							}
+							{ passwordConfirmationNeeded }
 							{ readTermsAndConditions }
 							{ termsAndConditionsModal }
+							<br/>
 							{ submitBtn }
 					</form>
 				</div>

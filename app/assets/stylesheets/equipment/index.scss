@@ -2,6 +2,17 @@
 
 	.equipment-container {
 		height: 530px;
+		.well {
+			height: 500px;		
+			h2 {
+				white-space: nowrap;
+	  			overflow: hidden;
+	  			text-overflow: ellipsis;
+			}
+			img {
+				mix-blend-mode: multiply;
+			}
+		}
 	}
 	
 }
