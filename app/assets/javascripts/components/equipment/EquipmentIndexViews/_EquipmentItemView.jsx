@@ -6,6 +6,8 @@ Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component
 
 	render() {
 
+		const StarRating = Equipt.controllers.StarRating;
+
 		let equipment = this.props.equipment;
 
 		let image = equipment.primary_image || '/assets/equipment-default.png';
@@ -13,14 +15,29 @@ Equipt.views.EquipmentItemView = class EquipmentItemView extends React.Component
 		return(
 			<div className="equipment-container col-lg-4 col-md-6 col-xs-12">
 				<Link to="equipmentAvailability" params={{ id: equipment.id }}>
-					<div className="well">
-						<h2>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h2>
-						<h4>{equipment.brand}</h4>
-						<h5>{equipment.model}</h5>
-						<img className="img-responsive center-block" src={image}/>
-						<p>Deposit: ${ equipment.desposit_amount }</p>
-						<p>Price Per Day: ${ equipment.price_per_day }</p>
-						<p>Price Per Week: ${ equipment.proce_per_week }</p>
+					<div className="product-container">
+
+						<div className="primary-image-container">
+							<img className="img-responsive center-block" src={image}/>
+						</div>
+
+						<div className="product-info-container">
+							<h3>{equipment.equipment_name && equipment.equipment_name.capitalize()}</h3>
+							<h4>Brand: {equipment.brand}</h4>
+							<h4>Model: {equipment.model}</h4>
+
+							<div className="product-prices-container">
+								<p>Deposit: ${ equipment.desposit_amount }</p>
+								<p>Price Per Day: ${ equipment.price_per_day }</p>
+								<p>Price Per Week: ${ equipment.price_per_week }</p>
+							</div>
+
+							<div className="product-ratings-container">
+								<StarRating rating={ Math.round(equipment.review_score) }/>
+							</div>
+
+						</div>
+
 					</div>
 				</Link>	
 			</div>

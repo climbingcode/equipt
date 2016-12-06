@@ -11,10 +11,11 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
         if (!!oldDates.pickup_date && !!oldDates.dropoff_date) {
             return !oldDates.pickup_date.isSame(newDates.pickup_date)
-            || !oldDates.dropoff_date.isSame(newDates.dropoff_date);
+            && !oldDates.dropoff_date.isSame(newDates.dropoff_date);
         }
 
         return false;
+
     }
 
     shouldComponentUpdate(nextProps, state) { 
@@ -28,27 +29,26 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
         let rental = this.props.rental;
 
-        if (rental.pickup_date && rental.dropoff_date) {   
+        if (!rental.pickup_date || !rental.dropoff_date) return;
             
-            // Selected Dates
-            let event = {
-                id: 1,
-                title: 'selected',
-                start: rental.pickup_date,
-                end: rental.dropoff_date,
-                color: '#8FC485'
-            };
+        // Selected Dates
+        let event = {
+            id: 1,
+            title: 'selected',
+            start: rental.pickup_date,
+            end: rental.dropoff_date,
+            color: '#8FC485'
+        };
 
-            $(calendar).fullCalendar('removeEvents', 1);
-            $(calendar).fullCalendar('renderEvent', event);
-
-        }
+        $(calendar).fullCalendar('removeEvents', 1);
+        $(calendar).fullCalendar('renderEvent', event);
 
     }
 
     componentWillUpdate() {
 
         if (this.loadedUnavailableDates) return;
+        if (!this.props.rentals.length) return;
 
         const {calendar} = this.refs;
 
@@ -67,9 +67,12 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
         });
 
-
         $(calendar).fullCalendar('addEventSource', events);
 
+    }
+
+    selectedDatesString(start, end) {
+        return `${ start.format('dddd MM/DD/YYYY') } to ${ end.format('dddd MM/DD/YYYY') } selected`;
     }
 
     buildCalendar(rentals) {
@@ -78,17 +81,46 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
         // Full Calendar settings
         var fullCalendarSettings = {
+            header: {
+                left: 'prev,next today',
+                center: 'title'  
+            },
             // events: events,
             select: (start, end, allDay) => {
-                this.props.selectedDates({
-                    pickup_date: start,
-                    dropoff_date: end
-                });
+
+                let startDate = start;
+                let todaysDate = moment();
+                let tomorrowsDate = start.add(1);
+
+                if (tomorrowsDate >= todaysDate) {                
+                    this.props.selectedDates({
+                        pickup_date: startDate,
+                        dropoff_date: end
+                    });
+                    hasNotice({ info: this.selectedDatesString(start, end) });
+                } else {
+                    hasNotice({ error: Equipt.content.passedDate });
+                }
+
             }, 
+            viewRender: function(view) {
+                let now = new Date(); 
+                let end = new Date();
+                end.setMonth(now.getMonth() + 1); 
+                let cal_date_string = view.start.format('MM')+'/'+view.start.format('YYYY');
+                let cur_date_string = now.getMonth()+'/'+now.getFullYear();
+                let end_date_string = end.getMonth()+'/'+end.getFullYear();
+
+                if(cal_date_string == cur_date_string) { jQuery('.fc-prev-button').addClass("fc-state-disabled"); }
+                else { jQuery('.fc-prev-button').removeClass("fc-state-disabled"); }
+
+                if(end_date_string == cal_date_string) { jQuery('.fc-next-button').addClass("fc-state-disabled"); }
+                else { jQuery('.fc-next-button').removeClass("fc-state-disabled"); }
+
+            },
             eventLimit: true, // for all non-agenda views
             selectable: true,
-            selectOverlap: false,
-            selectHelper: true,
+            selectHelper: false,
             contentHeight: 400,
             views: {
                 agenda: {

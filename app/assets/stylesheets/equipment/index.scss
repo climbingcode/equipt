@@ -1,16 +1,55 @@
 .equipment-wrapper {
 
 	.equipment-container {
-		height: 530px;
-		.well {
-			height: 500px;		
-			h2 {
-				white-space: nowrap;
-	  			overflow: hidden;
-	  			text-overflow: ellipsis;
+		margin-bottom: 30px;
+		.product-container {
+			position: relative;
+			height: 450px;	
+			padding: 10px;
+			background: #fff;
+			border-radius: 5px;
+			@include box-shadow(0px, 0px, 6px, 0px, #ccc);
+			.primary-image-container {
+				position: relative;
+    			min-height: 225px;
+    			width: 100%;
+    			border: solid 1px $light_gray_text_color;
+				img {
+					top: 0;
+					right: 0;
+					left: 0;
+    				bottom: 0;
+					margin: auto;
+					position: absolute;
+					mix-blend-mode: multiply;
+				}
 			}
-			img {
-				mix-blend-mode: multiply;
+			.product-info-container {
+				position: absolute;
+				bottom: 0;
+				width: 93.7%;
+				.product-prices-container {
+					width: 150px;
+					float: left;
+					h3 {
+						color: $gray_text_color;
+						white-space: nowrap;
+			  			overflow: hidden;
+			  			text-overflow: ellipsis;
+					}
+					h4 {
+						color: $light_gray_text_color;
+						font-weight: normal;
+					}
+					p {
+						color: $gray_text_color;
+					}					
+				}
+				.product-ratings-container {
+    				position: absolute;
+    				bottom: 0;
+    				right: 0;
+				}
 			}
 		}
 	}

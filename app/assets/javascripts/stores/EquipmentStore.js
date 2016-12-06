@@ -3,6 +3,7 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	_equipments: [],
 	_equipment: {}, 
 	_showLoader: false,
+	_pages: 1,
 	_search: {
 		category: '',
 		sub_category: '',
@@ -14,7 +15,8 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 		dates: {
 			pickup: "",
 			dropoff: ""
-		}
+		},
+		page: 1
 	},
 
 	getEquipments() {
@@ -25,9 +27,9 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 		return this._equipment;	
 	},
 
-	setEquipments(equipment) {
-		this._showLoader = false;
-		this._equipments = equipment;
+	setEquipments(data) {
+		this._equipments = data.equipment;
+		this._pages = data.pages;
 	},
 
 	clearEquipments() {
@@ -65,7 +67,22 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 
 	},
 
+	showLoader() {
+		return this._showLoader;
+	},
+
+	hasLoaded() {
+		this._showLoader = false;	
+	},
+
+	getPages() {
+		return this._pages;
+	},
+
 	clearSearch() {
+		
+		this._pages = 1;
+
 		this._search = {
 			category: '',
 			sub_category: '',
@@ -76,12 +93,10 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 			dates: {
 				pickup: "",
 				dropoff: ""
-			}			
+			},
+			page: 1
 		};
-	},
 
-	showLoader() {
-		return this._showLoader;
 	}
 
 });
@@ -96,7 +111,8 @@ AppDispatcher.register(function(action) {
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:
 		case Constants.OWNERS_EQUIPMENT_INDEX:
-			EquipmentStore.setEquipments(data);
+			EquipmentStore.setEquipments(data);	
+			EquipmentStore.hasLoaded();	
 		break; 
 		case Constants.EQUIPMENT_SHOW:
 			EquipmentStore.setEquipment(data);
@@ -116,5 +132,4 @@ AppDispatcher.register(function(action) {
 	}
 
 	EquipmentStore.emitChange();
-
 });

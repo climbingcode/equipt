@@ -5,8 +5,9 @@
 Equipt.actions.getRentals = function() {
 	Equipt.API.get('/rentals')
 	.then(
-		(rentals) => {
-			dispatchAction(Constants.RENTAL_INDEX, rentals);
+		(data) => {
+			dispatchAction( Constants.RENTAL_INDEX, data.rentals );
+			dispatchAction( Constants.OWNERS_RENTAL_INDEX, data.rented );
 		},
 		(error) => {
 			console.log(error);

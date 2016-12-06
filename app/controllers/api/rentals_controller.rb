@@ -6,7 +6,11 @@ class Api::RentalsController < ApplicationController
 
 	def index
 		rentals = Rental.joins(:equipment).merge(current_user.equipments)
-		render json: rentals, include_owner: true, status: 200
+		rented = current_user.rentals
+		render json: {
+						rentals: RentalSerializer.collection_serialize(rentals),
+						rented: RentalSerializer.collection_serialize(rented)
+					}, status: 200
 	end
 
 	def create 

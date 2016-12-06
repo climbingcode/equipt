@@ -5,7 +5,11 @@ class Api::EquipmentsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		render json: Equipment.search(params[:query]).exclude_user(current_user), each_serializer: EquipmentsSerializer, status: 200
+		equipment = Equipment.search(params[:query]).exclude_user(current_user)
+		render json: {
+			equipment: EquipmentsSerializer.collection_serialize(equipment),
+			pages: equipment.total_pages
+		}, status: 200
 	end
 
 	def show

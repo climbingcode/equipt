@@ -307,6 +307,10 @@ Equipt.content = {
 	            }
 	        ]
 	    }
-	]
+	],
+
+	// Rentals and Dates
+
+	passedDate: "You can only select dates in the future"
 
 };

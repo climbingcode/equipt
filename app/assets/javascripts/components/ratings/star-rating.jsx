@@ -1,4 +1,8 @@
-class StarRating extends React.Component {
+Equipt.controllers.StarRating = class StarRating extends React.Component {
+
+	static propTypes = {
+		rating: React.PropTypes.number.isRequired
+	}
 
 	constructor(props) {
 		super(props);

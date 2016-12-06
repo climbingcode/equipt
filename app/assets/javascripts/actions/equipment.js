@@ -2,7 +2,11 @@
 // GET ALL EQUIPMENT
 // =================
 
+let inProcess = false;
+
 Equipt.actions.getEquipment = function(query) {
+
+	if (!query.page) query.page = 1;
 
 	var params = query ? serialize({query: query}) : '';
 

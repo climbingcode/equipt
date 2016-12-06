@@ -1,9 +1,5 @@
 Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Component {
 
-	shouldComponentUpdate(props) {
-		return !!props.rentals.length;
-	}
-
 	cancel(equipmentId, rentalId) {
 		Equipt.actions.deleteRental(equipmentId, rentalId);
 	}
@@ -12,25 +8,26 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 
 		let rentals = this.props.rentals || [];
 
+		let renterOrOwner = this.props.title === 'Rentals' ? 'Renter' : 'Owner';
+
 		return (
 			<div className="rentals-index">
-				<h3>Rentals</h3>
-				<Link to="equipmentIndex">Back to Equipment Index</Link>
+				<h3>{ this.props.title }</h3>
 				<table className="table table-striped">
 					<thead>
 						<tr>
 	   						<th>Equipment Name</th>
 	    					<th>Pickup date</th> 
 	    					<th>Dropoff Date</th>
-	    					<th>Renter</th>
-	    					<th>Renter Email</th>
+	    					<th>{ renterOrOwner }</th>
+	    					<th>{ renterOrOwner } Email</th>
 	    					<th>Cancel</th>
 	 				</tr>
 	 				</thead>
 	 				<tbody>
 		 				{
 		 					rentals.map((rental, index) => {
-		 						return 	(<tr key='rental_index_${ index }'>
+		 						return 	(<tr key={`${ this.props.title }_index_${ index }`}>
 	    									<td>{rental.equipment.equipment_name}</td>
 	    									<td>{rental.pickup_date}</td> 
 	    									<td>{rental.dropoff_date}</td>
