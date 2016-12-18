@@ -8,6 +8,7 @@ class Equipment < ActiveRecord::Base
 
   scope :exclude_user, -> (user) { where.not(user_id: user.id) }
 
+  scope :search_page, -> (page) { page(page.to_i) }
   scope :search_category, -> (category) { where("category LIKE ?", "#{ category }%") }
   scope :search_sub_category, -> (sub_category) { where("sub_category LIKE ?", "#{ sub_category }%") }
   scope :fuzzy_search, -> (fuzzy_search) { where("equipment_name LIKE ?", "%#{ fuzzy_search }%") }
@@ -24,7 +25,8 @@ class Equipment < ActiveRecord::Base
   scope :search_location, -> (location) do
     if location && location[:lat].present? && location[:lng].present?
       users = User.users_in_range location
-      self.joins(:user).merge(users).uniq
+      return self.joins(:user).merge(users).uniq if users.present?
+      self
     end
   end
 
@@ -43,12 +45,13 @@ class Equipment < ActiveRecord::Base
 
   def self.search(query = [])
 
-      Equipment.all
+      Equipment.all  
                .search_location(query[:location])
                .search_category(query[:category])
                .search_sub_category(query[:sub_category])
                .fuzzy_search(query[:fuzzy_search])
                .search_by_availability(query[:dates])
+               .search_page(query[:page])
 
   end
 

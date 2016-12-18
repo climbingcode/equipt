@@ -10,12 +10,17 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 		}
 	}
 
+	close() {
+		clearTimeout(this.noticeTimeout);
+		Equipt.actions.clearNotice();
+	}
+
 	_onChange() {
 	    this.setState({
 	    	notice: Equipt.stores.NoticeStore.getNotice()
 	    });
 
-	    // clearTimeout(this.noticeTimeout);
+	    clearTimeout(this.noticeTimeout);
 
 	    this.noticeTimeout = setTimeout(function() {
 	    	Equipt.actions.clearNotice();
@@ -26,7 +31,8 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 		let NoticeView = Equipt.views.NoticeView;
 
 		return (
-			<NoticeView notice={this.state.notice}/>
+			<NoticeView notice={ this.state.notice } 
+						close={ this.close }/>
 		)
 	}
 

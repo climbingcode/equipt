@@ -5,8 +5,9 @@
 Equipt.actions.getRentals = function() {
 	Equipt.API.get('/rentals')
 	.then(
-		(rentals) => {
-			dispatchAction(Constants.RENTAL_INDEX, rentals);
+		(data) => {
+			dispatchAction( Constants.RENTAL_INDEX, data.rentals );
+			dispatchAction( Constants.OWNERS_RENTAL_INDEX, data.rented );
 		},
 		(error) => {
 			console.log(error);
@@ -57,7 +58,9 @@ Equipt.actions.rentEquipment = function(equipmentId, params) {
 
 	Equipt.API.post(`/equipments/${equipmentId}/rentals`, params).then(
 	function(rental) {
-		dispatchAction(Constants.RENTED_EQUIPMENT, rental);
+		if (rental.id) {
+			dispatchAction(Constants.RENTED_EQUIPMENT, rental);
+		}
 	});
 	
 };

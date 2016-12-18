@@ -40,6 +40,9 @@ gem 'carrierwave'
 # geo location
 gem 'geokit-rails'
 
+# pagination
+gem 'will_paginate', '~> 3.1.0'
+
 # front end gems
 gem 'react-rails', '~>1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'

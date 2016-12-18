@@ -5,7 +5,10 @@ class Api::Owner::EquipmentsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		render json: current_user.equipments, status: 200
+		render json: {
+			equipment: EquipmentsSerializer.collection_serialize(current_user.equipments),
+			total: current_user.equipments.count
+		}, status: 200
 	end
 
 	def show

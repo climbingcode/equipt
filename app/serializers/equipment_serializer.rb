@@ -29,4 +29,8 @@ class EquipmentSerializer < ActiveModel::Serializer
     	OwnerSerializer.new(@object.user, root: false) if @object.user
     end
 
+    def self.collection_serialize(resources)
+		ActiveModelSerializers::SerializableResource.new(resources, each_serializer: self)
+	end
+
 end

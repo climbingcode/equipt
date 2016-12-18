@@ -66,7 +66,6 @@ Equipt.API = {
 
 			$.ajax(ajaxObj)
 			.success((res, status, xhr) => {
-				console.log(res, xhr);
 				if (res.errors) return hasErrors(res.errors);
 				else if (res.notice) hasNotice(res.notice);
 				resolve(res);

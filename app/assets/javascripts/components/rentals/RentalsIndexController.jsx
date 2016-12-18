@@ -3,12 +3,13 @@ Equipt.controllers.RentalsIndexController = class RentalsIndexController extends
 	getState = function() {
 		return {
 			rentals: Equipt.stores.RentalStore.getRentals(),
+			ownersRentals: Equipt.stores.OwnerStore.getRentals()
 		}
 	}
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.RentalStore];
+		this.stores = [ Equipt.stores.RentalStore, Equipt.stores.OwnerStore ];
 		this.state  = this.getState();
 	}
 
@@ -25,7 +26,11 @@ Equipt.controllers.RentalsIndexController = class RentalsIndexController extends
 		const RentalIndexView = Equipt.controllers.RentalIndexView;
 
 		return (
-			<RentalIndexView rentals={ this.state.rentals }/>
+			<div>
+				<Link to="equipmentIndex">Back to Equipment Index</Link>
+				<RentalIndexView rentals={ this.state.rentals } title="Rentals"/>
+				<RentalIndexView rentals={ this.state.ownersRentals } title="Rented"/>
+			</div>
 		)
 	}
 

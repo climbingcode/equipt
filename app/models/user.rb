@@ -73,11 +73,15 @@ class User < ActiveRecord::Base
     to = location['range']['to'].to_i
     if from && to
       User.in_range(from..to, :origin => [ location[:lat], location[:lng] ])
-    elsif to
-      User.within(to, :origin => [ location[:lat], location[:lng] ])
     else 
       User.in_range(0..5, :origin => [ location[:lat], location[:lng] ])
     end
+  end
+
+  # helper methods
+
+  def full_name
+    "#{ self.firstname } #{ self.lastname }"
   end
 
 end

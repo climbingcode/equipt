@@ -1,6 +1,9 @@
 // MODAL
 
 $camping_green: #8FC485;
+$body_color: #EDEDED;
+$gray_text_color: #676767;
+$light_gray_text_color: #CCC;
 
 // FONTS
 
@@ -26,7 +29,15 @@ $camping_green: #8FC485;
 }
 
 body {
-   font-family: 'Lumberjack Inline Rough';
+    background: $body_color;
+    font-family: 'Lumberjack Inline Rough';
+}
+
+a:hover {
+    text-decoration: none;
+    * {
+        text-decoration: none;
+    }
 }
 
 .modal {

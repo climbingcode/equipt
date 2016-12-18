@@ -9,7 +9,8 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 		super(props);
 
 		this.state = {
-			maxUploads: 4
+			maxUploads: 4,
+			images: []
 		}
 	}
 
@@ -17,9 +18,10 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 
 		let equipment 	  = this.props.equipment || {};
 		let currentImages = equipment.images ? equipment.images : [];
-		let allImages 	  = currentImages.concat(newImages);
+		let allImages 	  = this.state.images.concat(newImages);
 
 		this.setState({
+			maxUploads: 4,
 			images: allImages
 		});
 
@@ -78,18 +80,21 @@ Equipt.views.EquipmentUploaderView = class EquipmentUploaderView extends React.C
 
 	}
 
+	amountOfImagesLeftRemaining() {
+		return this.state.maxUploads - this.state.images.length;
+	}
+
 	render() {
 
 		let ImageDrop = Equipt.controllers.ImageDrop;
-		let images = this.props.equipment ? this.props.equipment.images : [];
-		let imagesLeftForUpload = this.state.maxUploads - images ? images.length : 0;
+		let images = this.props.equipment.images;
 
 		return (
 			<div className="image-drop-container col-sm-6">
 				<ImageDrop maxUploads={ this.props.maxUploads }
 						   setImages={ this.setImages.bind(this) }>
 					<div className="main-drop">
-						<h4>{ imagesLeftForUpload } images can be uploaded</h4>
+						<h4>{ this.amountOfImagesLeftRemaining.call(this) } images can be uploaded</h4>
 						<h2>Drop Equipment images here</h2>
 					</div>
 					<div className="add-image"></div>

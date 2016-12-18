@@ -1,10 +1,17 @@
+.fc-view-container {
+	background: #fff;
+}
+
 .rental-pickup-times-wrapper {
+	padding: 0;
+	margin-bottom: 10px;
 	li {
 		list-style-type: none;
 		border: 1px solid #000;
 		padding: 0;
-		margin: 2px;
+		margin: 5px 0;
 		text-align: center;
+		background: #fff;
 		&.selected {
 			background: $camping_green;
 		}

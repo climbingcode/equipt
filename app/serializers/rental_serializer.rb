@@ -15,4 +15,8 @@ class RentalSerializer < ActiveModel::Serializer
 
     belongs_to :equipment
 
+    def self.collection_serialize(resources)
+		ActiveModelSerializers::SerializableResource.new(resources, each_serializer: self)
+	end
+
 end
