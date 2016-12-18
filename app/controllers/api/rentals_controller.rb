@@ -8,9 +8,9 @@ class Api::RentalsController < ApplicationController
 		rentals = Rental.joins(:equipment).merge(current_user.equipments)
 		rented = current_user.rentals
 		render json: {
-						rentals: RentalSerializer.collection_serialize(rentals),
-						rented: RentalSerializer.collection_serialize(rented)
-					}, status: 200
+			rentals: RentalSerializer.collection_serialize(rentals),
+			rented: RentalSerializer.collection_serialize(rented)
+		}, status: 200
 	end
 
 	def create 
@@ -19,8 +19,8 @@ class Api::RentalsController < ApplicationController
 		rental.user = current_user
 		if rental.save
 			render json: rental, include_owner: true, status: 200
-		else 
-			render json: { notice: { errors: rental.errors } }, status: 200
+		else
+			render json: { notice: { error: rental.errors } }, status: 200
 		end
 	end
 

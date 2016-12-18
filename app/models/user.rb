@@ -78,4 +78,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  # helper methods
+
+  def full_name
+    "#{ self.firstname } #{ self.lastname }"
+  end
+
 end

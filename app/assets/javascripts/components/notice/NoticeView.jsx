@@ -27,6 +27,22 @@ Equipt.views.NoticeView = class NoticeView extends React.Component {
 						onClick={ this.props.close.bind(this) }></i>;
 		}
 
+		if (notice.error && typeof notice.error === 'object') {
+			
+			let errors = Object.keys( notice.error );
+				
+			notice.error =  <ul>
+							{
+								errors.map((key, index) => {
+									return <li 	key={ `error_${ key }_${ index }` }
+												className={key}>{ notice.error[ key ] }
+											</li>
+								})
+							}
+							</ul>
+
+		}
+
 		return (			
 			<div className={ this.getAlertClassName.call(this) }>
 				{ close }

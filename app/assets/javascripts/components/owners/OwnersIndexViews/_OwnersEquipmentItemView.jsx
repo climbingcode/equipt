@@ -29,7 +29,8 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 		var equipment    = this.props.equipment;
 		let userId 	     = this.props.userId;
 		let images 		 = equipment.images || [];
-		let primaryImage = images.length ? images[0].file.url : '/assets/equipment-default.png';
+
+		let primaryImage = equipment.primary_image ? equipment.primary_image : '/assets/equipment-default.png';
 
 		let linkParams = {	
 							equipmentId: equipment.id || 0,

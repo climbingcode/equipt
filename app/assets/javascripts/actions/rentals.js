@@ -58,7 +58,9 @@ Equipt.actions.rentEquipment = function(equipmentId, params) {
 
 	Equipt.API.post(`/equipments/${equipmentId}/rentals`, params).then(
 	function(rental) {
-		dispatchAction(Constants.RENTED_EQUIPMENT, rental);
+		if (rental.id) {
+			dispatchAction(Constants.RENTED_EQUIPMENT, rental);
+		}
 	});
 	
 };

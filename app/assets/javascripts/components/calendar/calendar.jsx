@@ -136,6 +136,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
     componentWillUnmount() {
         const {calendar} = this.refs;
+        Equipt.stores.RentalStore.clearRentals();
         this.loadedUnavailableDates = false;
         $(calendar).fullCalendar('destroy');
     }
