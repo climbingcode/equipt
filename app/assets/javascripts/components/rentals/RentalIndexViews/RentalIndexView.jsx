@@ -4,6 +4,12 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 		Equipt.actions.deleteRental(equipmentId, rentalId);
 	}
 
+	confirm(equipmentId, rentalId, rental) {
+		if (this.props.title === 'Rentals') return;
+		rental.rental_confimed ? rental.rental_confimed = false : rental.rental_confimed = true; 
+		Equipt.actions.confirmRental(equipmentId, rentalId);
+	}
+
 	render() {
 
 		let rentals = this.props.rentals || [];
@@ -21,6 +27,7 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	    					<th>Dropoff Date</th>
 	    					<th>{ renterOrOwner }</th>
 	    					<th>{ renterOrOwner } Email</th>
+	    					<th>{ renterOrOwner === 'Renter' ? "Confirm" : "Comfirmed" }</th>
 	    					<th>Cancel</th>
 	 				</tr>
 	 				</thead>
@@ -35,7 +42,12 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	    									<td>{rental.equipment.owner.email}</td>
 	    									<td>
 	    										<input  type="checkbox"
-	    												onChange={ this.cancel.bind(this, rental.equipment.id, rental.id) }/>
+	    												checked={ rental.rental_confirmed }
+	    												onChange={ this.confirm.bind(this, rental.equipment.id, rental.id, rental) }/>
+	    									</td>
+	    									<td>
+	    										<input  type="checkbox"
+	    												onChange={ this.cancel.bind(this, rental.equipment.id, rental.id, rental) }/>
 	    									</td>
 	  									</tr>);
 		 					})

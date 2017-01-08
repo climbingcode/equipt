@@ -65,6 +65,9 @@ AppDispatcher.register(function(action) {
         case Constants.RENTED_EQUIPMENT:
             RentalStore.rentalConfirmed(data);
         break;
+        case Constants.DELETE_RENTAL:
+
+        break;
 	}
 
     RentalStore.emitChange();

@@ -18,14 +18,16 @@ class Api::RentalsController < ApplicationController
 		rental = equipment.rentals.new(rental_params)
 		rental.user = current_user
 		if rental.save
-			render json: rental, include_owner: true, status: 200
+			render json: rental, create_notice: true, status: 200
 		else
 			render json: { notice: { error: rental.errors } }, status: 200
 		end
 	end
 
 	def destroy
-		
+		if current_user.rentals.find(params[:id]).destroy
+			render json: { notice: { info: 'removed rental' } }, status: 200
+		end
 	end
 
 	private

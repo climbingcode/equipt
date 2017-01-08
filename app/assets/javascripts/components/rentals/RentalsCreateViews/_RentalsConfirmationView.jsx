@@ -22,6 +22,8 @@ Equipt.views.RentalsConfirmationView = class RentalsConfirmationView extends Rea
 		let rental 	  = this.props.rental;
 		let owner 	  = this.props.owner;
 
+		let currentUserId = Equipt.stores.AuthStore.getUserId();
+
 		var ownerLocation = "";
 
 		if (owner.lat && owner.lng) {
@@ -36,6 +38,10 @@ Equipt.views.RentalsConfirmationView = class RentalsConfirmationView extends Rea
 		}
 
 		return (<div className="rental-confirmation">
+					<div className="alert alert-warning">
+						Waiting on Owners confirmation
+						<Link to="rentalsIndex" params={{ userId: currentUserId }}> click here to see if owner has confirmed rental </Link>
+					</div>
 					<div className="col-sm-6">
 						<h2>{ equipment.equipment_name }</h2>
 						<br/>

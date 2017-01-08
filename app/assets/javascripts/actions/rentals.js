@@ -50,6 +50,23 @@ Equipt.actions.selectedPickUpTime = function(time) {
 	dispatchAction(Constants.CHANGED_PICKUP_TIME, time);
 }
 
+// ================
+// RENTAL CONFIRMED
+// ================
+
+Equipt.actions.confirmRental = function(equipmentId, rentalId, rental) {
+
+	Equipt.API.put(`/equipments/${equipmentId}/rentals/${rentalId}`, rental).then(
+		function(rental) {
+			dispatchAction(Constants.RENTAL_UPDATED, rental);
+		},
+		() => {
+			console.log('rental failed to update');
+		}
+	);
+
+}
+
 // ===============================
 // RENTED EQUIPMENT
 // ===============================

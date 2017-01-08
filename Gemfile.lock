@@ -104,6 +104,7 @@ GEM
       activesupport (>= 4.1.0)
     hashie (3.4.4)
     http_parser.rb (0.6.0)
+    humanize (1.2.3)
     i18n (0.7.0)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -262,6 +263,7 @@ DEPENDENCIES
   flux-rails-assets
   font-awesome-rails
   geokit-rails
+  humanize
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -283,4 +285,4 @@ DEPENDENCIES
   will_paginate (~> 3.1.0)
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

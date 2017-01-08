@@ -10,9 +10,8 @@ class Rental < ActiveRecord::Base
 	def dates_are_vacant
 		pickup  = self.pickup_date
 		dropoff = self.dropoff_date
-		rentals = Rental.where.not("(pickup_date BETWEEN ? AND ? OR dropoff_date BETWEEN ? AND ?) OR (pickup_date <= ? AND dropoff_date >= ?)", pickup, dropoff, pickup, dropoff, pickup, dropoff)
-	
-		if rentals.any?
+		rentals = self.equipment.rentals
+		if rentals.where("(pickup_date BETWEEN ? AND ? OR dropoff_date BETWEEN ? AND ?) OR (pickup_date <= ? AND dropoff_date >= ?)", pickup, dropoff, pickup, dropoff, pickup, dropoff).any?
 			errors.add(:dates_are_taken, "It looks like #{self.equipment.model} is not free to rent during these dates")
 		end
 	end

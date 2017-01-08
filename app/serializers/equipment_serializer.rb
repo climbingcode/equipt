@@ -6,7 +6,7 @@ class EquipmentSerializer < ActiveModel::Serializer
 			    :brand,
 			    :model,
 			    :description,
-			    :years_old,
+			    :age,
 			    :price_per_day,
 			    :price_per_week,
 			    :desposit_amount,
@@ -27,6 +27,11 @@ class EquipmentSerializer < ActiveModel::Serializer
 
 	def owner
     	OwnerSerializer.new(@object.user, root: false) if @object.user
+    end
+
+    def age
+    	return "#{ @object.years_old.humanize } years old" if @object.years_old > 1
+    	return "one year old" if @object.years_old === 1
     end
 
     def self.collection_serialize(resources)

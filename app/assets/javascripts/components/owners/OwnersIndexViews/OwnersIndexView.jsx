@@ -30,15 +30,16 @@ Equipt.views.OwnersIndexView = class extends React.Component {
 							</Link>			
 
 		return (
+
 			<div className="owners-equipment-wrapper equipment-wrapper">
 				<div className="col-sm-12">
 					<Link 	to="rentalsIndex" 
-							className="pull-right" 
 							params={{userId: userId}}>All active rentals</Link>
 				</div>
 				{ equipmentListing }
 				{ noProducts }
 			</div>
+			
 		)
 
 	}

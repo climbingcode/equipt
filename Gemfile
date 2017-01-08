@@ -51,6 +51,7 @@ gem 'autoprefixer-rails'
 gem 'browserify-rails'
 gem "font-awesome-rails"
 gem 'bootstrap-daterangepicker-rails'
+gem 'humanize'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -11,9 +11,14 @@ class RentalSerializer < ActiveModel::Serializer
     			:rental_completed,
     			:rental_comfirmed,
     			:created_at,
-    			:updated_at
+    			:updated_at,
+    			:notice
 
     belongs_to :equipment
+
+    def notice 
+    	{ info: "#{ @object.equipment.equipment_name } has been rented" } if @instance_options[:create_notice]
+    end
 
     def self.collection_serialize(resources)
 		ActiveModelSerializers::SerializableResource.new(resources, each_serializer: self)

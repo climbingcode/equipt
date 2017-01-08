@@ -1,6 +1,39 @@
-.slider {
-	li {
-		display: inline-block;
-		width: 30%;
+.slider-wrapper {
+	
+	.arrow {
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		font-size: 50px;
+		top: 50%;
+		z-index: 1;
+		cursor: pointer;
+		&.left {
+			left: 0px;
+		}
+		&.right {
+			right: 0px;
+		}
 	}
+
+	.viewport {
+		
+		position: relative;
+		height: 500px;
+		margin: 0 auto;
+		overflow: hidden;
+		ul {
+			position: absolute;
+			padding: 0;
+			li {
+				display: inline-block;
+				img {
+					width: 100%;
+				}
+			}
+
+		}
+
+	}
+
 }

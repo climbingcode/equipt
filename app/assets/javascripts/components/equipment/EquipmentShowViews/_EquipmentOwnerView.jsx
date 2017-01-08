@@ -6,21 +6,21 @@ Equipt.views.EquipmentOwnerView = class EquipmentOwnerView extends React.Compone
 
 	render() {
 
-		let equipment = this.props.equipment || {};
-		let owner 	  = equipment.user || {};
+		const MapView = Equipt.views.mapView;
+		const EquipmentRatingView = Equipt.views.EquipmentRatingsView;
+		const StarRating = Equipt.controllers.StarRating;
 
-		if (!owner.id) return(<div></div>);
+		let equipment = this.props.equipment || {};
+		let owner 	  = equipment.owner || {};
+		let ratings   = owner.ratings || [];
 
 		return (
 			<div className="equipment-owner-container">
-				<h5>{`${owner.firstname} ${owner.lastname}`}</h5>
+				<MapView position={{ lat: owner.lat || 0, lng: owner.lng || 0 }}/>
+				<h6>{`${owner.firstname} ${owner.lastname}`}</h6>
+				<StarRating rating={ owner.review_score }/>
 				<h6>Owners Reviews</h6>
-				{owner.ratings.map(function(rating, i) {
-					return <div className="rating" key={`owners_rating_${i}`}>
-								<StarRating rating={rating.score}/>
-								<p>{rating.comment}</p>
-							</div>
-				})}
+				<EquipmentRatingView ratings={ ratings }/>
 			</div>
 		)
 	}

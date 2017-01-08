@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 		resources :password_resets
 		
 	end
-
+	
 	match '/api/current_user', to: 'api/users#show', via: 'GET'
 	match '/', to: 'home#index', via: 'GET'
 	match '*path', to: 'home#index', via: 'GET'

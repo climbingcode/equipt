@@ -8,6 +8,13 @@ class OwnerSerializer < ActiveModel::Serializer
   				:home_phone, 
   				:cell_phone, 
   				:lng, 
-  				:lat
+  				:lat,
+          :review_score
+      
+    has_many :ratings
+
+    def review_score
+      @object.ratings.average(:score)
+    end
 
 end
