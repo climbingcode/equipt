@@ -25,7 +25,7 @@ Equipt.actions.deleteRental = (equipmentId, rentalId) => {
 	Equipt.API.delete(`/equipments/${equipmentId}/rentals/${rentalId}`)
 	.then(
 		(rental) => {
-			dispatchAction(Constants.RENTAL_DELETE, rental);
+			dispatchAction(Constants.RENTAL_DESTROY, rental);
 		},
 		() => {
 			console.log('rental failed to delete');

@@ -42,6 +42,19 @@ Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSetti
 
     hasCreatedRental() {
         return this.createdRental;
+    },
+
+    removeRental(rentalId, callback) {
+
+        for (var i = 0; i < this.rentals.length; i++) {
+            let rental = this.rentals[i];
+            if ( rental.id === rentalId ) {
+                this.rentals.splice(i, 1);
+                callback();
+                break;
+            }
+        };
+
     }
 
 });
@@ -55,21 +68,24 @@ AppDispatcher.register(function(action) {
   	switch(type) {
   		case Constants.RENTAL_INDEX:
   			RentalStore.setRentals(data);
+            RentalStore.emitChange();
   		break;
         case Constants.CHANGED_RENTAL_DATES:
             RentalStore.setDates(data);
+            RentalStore.emitChange();
         break;
         case Constants.CHANGED_PICKUP_TIME:
             RentalStore.setTimes(data);
+            RentalStore.emitChange();
         break;
         case Constants.RENTED_EQUIPMENT:
             RentalStore.rentalConfirmed(data);
+            RentalStore.emitChange();
         break;
-        case Constants.DELETE_RENTAL:
-
+        case Constants.RENTAL_DESTROY:
+            RentalStore.removeRental(data.id, () => {
+                RentalStore.emitChange();
+            });
         break;
-	}
-
-    RentalStore.emitChange();
-
+    }
 });

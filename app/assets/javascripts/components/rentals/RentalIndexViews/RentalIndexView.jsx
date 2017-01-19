@@ -1,7 +1,13 @@
 Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Component {
 
-	cancel(equipmentId, rentalId) {
-		Equipt.actions.deleteRental(equipmentId, rentalId);
+	cancel(equipmentId, rentalId, renterOrOwner) {
+
+		if (renterOrOwner === 'Renter') {
+			Equipt.actions.deleteRental(equipmentId, rentalId);
+		} else {
+			Equipt.actions.deleteOwnerRental(equipmentId, rentalId);
+		}
+
 	}
 
 	confirm(equipmentId, rentalId, rental) {
@@ -47,7 +53,7 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	    									</td>
 	    									<td>
 	    										<input  type="checkbox"
-	    												onChange={ this.cancel.bind(this, rental.equipment.id, rental.id, rental) }/>
+	    												onChange={ this.cancel.bind(this, rental.equipment.id, rental.id, renterOrOwner ) }/>
 	    									</td>
 	  									</tr>);
 		 					})

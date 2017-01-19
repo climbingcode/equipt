@@ -5,8 +5,8 @@ class Api::RentalsController < ApplicationController
 	before_filter :ensure_authenticated_user
 
 	def index
-		rentals = Rental.joins(:equipment).merge(current_user.equipments)
-		rented = current_user.rentals
+		rentals = current_user.rentals
+		rented = Rental.joins(:equipment).merge(current_user.equipments)
 		render json: {
 			rentals: RentalSerializer.collection_serialize(rentals),
 			rented: RentalSerializer.collection_serialize(rented)
@@ -25,8 +25,9 @@ class Api::RentalsController < ApplicationController
 	end
 
 	def destroy
-		if current_user.rentals.find(params[:id]).destroy
-			render json: { notice: { info: 'removed rental' } }, status: 200
+		rental = current_user.rentals.find(params[:id])
+		if rental.destroy
+			render json: rental, destroy_notice: true, status: 200
 		end
 	end
 

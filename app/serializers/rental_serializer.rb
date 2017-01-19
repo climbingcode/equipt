@@ -24,4 +24,9 @@ class RentalSerializer < ActiveModel::Serializer
 		ActiveModelSerializers::SerializableResource.new(resources, each_serializer: self)
 	end
 
+	def notice
+		{ info: "#{ @object.equipment.equipment_name } rental has been canceled, #{ @object.user.firstname.capitalize } has been notified" } if @instance_options[:destroyed_by_owner_notice]
+  		{ info: "Rental of#{ @object.equipment.equipment_name } has been canceled. The owner has been notified" } if @instance_options[:destroy_notice]
+  	end
+
 end

@@ -10,6 +10,19 @@ Equipt.stores.OwnerStore = Object.assign({}, EventEmitter.prototype, StoreSettin
         return this.rentals;
     },
 
+    removeRental(rentalId, callback) {
+
+      for (var i = 0; i < this.rentals.length; i++) {
+        let rental = this.rentals[i];
+        if ( rental.id === rentalId ) {
+          this.rentals.splice(i, 1);
+          callback();
+          break;
+        }
+      };
+
+    }
+
 });
 
 AppDispatcher.register(function(action) {
@@ -21,9 +34,14 @@ AppDispatcher.register(function(action) {
   	switch(type) {
   		case Constants.OWNERS_RENTAL_INDEX:
   			OwnerStore.setRentals(data);
-  		break;
-	}
+        OwnerStore.emitChange();
+      break;
+      case Constants.OWNERS_DELETES_RENTAL:
+        OwnerStore.removeRental(data.id, () => {
+          OwnerStore.emitChange();
+        });
+      break;
+  }
 
-    OwnerStore.emitChange();
 
 });

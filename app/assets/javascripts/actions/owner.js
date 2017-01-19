@@ -10,3 +10,19 @@ Equipt.actions.getOwnersEquipment = function() {
 	);
 
 };
+
+
+// Delete rental of equipment owned by current user
+
+Equipt.actions.deleteOwnerRental = function(equipmentId, rentalId) {
+
+	Equipt.API.delete(`/owner/equipments/${equipmentId}/rentals/${rentalId}`).then(
+		(data) => {
+			dispatchAction(Constants.OWNERS_DELETES_RENTAL, data);
+		},
+		(err) => {
+			console.log('Error Getting Owners Equipment');
+		}
+	);
+
+};

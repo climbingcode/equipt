@@ -3,7 +3,7 @@ Equipt.controllers.RentalsIndexController = class RentalsIndexController extends
 	getState = function() {
 		return {
 			rentals: Equipt.stores.RentalStore.getRentals(),
-			ownersRentals: Equipt.stores.OwnerStore.getRentals()
+			ownersEquipmentRentals: Equipt.stores.OwnerStore.getRentals()
 		}
 	}
 
@@ -28,8 +28,8 @@ Equipt.controllers.RentalsIndexController = class RentalsIndexController extends
 		return (
 			<div>
 				<Link to="equipmentIndex">Back to Equipment Index</Link>
-				<RentalIndexView rentals={ this.state.ownersRentals } title="Rentals"/>
-				<RentalIndexView rentals={ this.state.rentals } title="Rented"/>
+				<RentalIndexView rentals={ this.state.ownersEquipmentRentals } title="Rented"/>
+				<RentalIndexView rentals={ this.state.rentals } title="Rentals"/>
 			</div>
 		)
 	}
