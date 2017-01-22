@@ -3,9 +3,7 @@ class Rental < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :equipment
 
-	validate :dates_are_vacant
-
-	before_save :set_total_days, :set_rental_cost, :send_create_emails
+	before_create :dates_are_vacant, :set_total_days, :set_rental_cost, :send_create_emails
 
 	def dates_are_vacant
 		pickup  = self.pickup_date

@@ -11,15 +11,14 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	}
 
 	confirm(equipmentId, rentalId, rental) {
-		if (this.props.title === 'Rentals') return;
-		rental.rental_confimed ? rental.rental_confimed = false : rental.rental_confimed = true; 
-		Equipt.actions.confirmRental(equipmentId, rentalId);
+		if (this.props.title === 'Rented') {
+			Equipt.actions.confirmRental(equipmentId, rentalId);
+		};
 	}
 
 	render() {
 
-		let rentals = this.props.rentals || [];
-
+		let rentals 	  = this.props.rentals || [];
 		let renterOrOwner = this.props.title === 'Rentals' ? 'Renter' : 'Owner';
 
 		return (
@@ -33,13 +32,24 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	    					<th>Dropoff Date</th>
 	    					<th>{ renterOrOwner }</th>
 	    					<th>{ renterOrOwner } Email</th>
-	    					<th>{ renterOrOwner === 'Renter' ? "Confirm" : "Comfirmed" }</th>
+	    					<th>{ renterOrOwner === 'Renter' ? "Confirmed" : "Confirm" }</th>
 	    					<th>Cancel</th>
 	 				</tr>
 	 				</thead>
 	 				<tbody>
 		 				{
 		 					rentals.map((rental, index) => {
+
+		 						let confirmInput = '';
+
+		 						if (renterOrOwner === 'Owner') {
+									confirmInput = 	<input  type="checkbox"
+	    													checked={ rental.rental_confirmed }
+	    													onChange={ this.confirm.bind(this, rental.equipment.id, rental.id, rental) }/>
+								} else {
+									confirmInput = <input type="checkbox" checked={ rental.rental_confirmed }/>
+	    						}
+
 		 						return 	(<tr key={`${ this.props.title }_index_${ index }`}>
 	    									<td>{rental.equipment.equipment_name}</td>
 	    									<td>{rental.pickup_date}</td> 
@@ -47,9 +57,7 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	    									<td>{rental.equipment.owner.firstname}</td>
 	    									<td>{rental.equipment.owner.email}</td>
 	    									<td>
-	    										<input  type="checkbox"
-	    												checked={ rental.rental_confirmed }
-	    												onChange={ this.confirm.bind(this, rental.equipment.id, rental.id, rental) }/>
+	    										{ confirmInput }
 	    									</td>
 	    									<td>
 	    										<input  type="checkbox"

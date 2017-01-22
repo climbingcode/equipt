@@ -54,9 +54,9 @@ Equipt.actions.selectedPickUpTime = function(time) {
 // RENTAL CONFIRMED
 // ================
 
-Equipt.actions.confirmRental = function(equipmentId, rentalId, rental) {
+Equipt.actions.confirmRental = function(equipmentId, rentalId) {
 
-	Equipt.API.put(`/equipments/${equipmentId}/rentals/${rentalId}`, rental).then(
+	Equipt.API.get(`/owner/equipments/${equipmentId}/rentals/${rentalId}/confirm`).then(
 		function(rental) {
 			dispatchAction(Constants.RENTAL_UPDATED, rental);
 		},
@@ -64,8 +64,8 @@ Equipt.actions.confirmRental = function(equipmentId, rentalId, rental) {
 			console.log('rental failed to update');
 		}
 	);
-
-}
+	
+};
 
 // ===============================
 // RENTED EQUIPMENT

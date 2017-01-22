@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 	end
 	
 	match '/api/current_user', to: 'api/users#show', via: 'GET'
+	match '/api/owner/equipments/:equipment_id/rentals/:id/confirm', to: 'api/owner/rentals#confirm', via: 'GET'
 	match '/', to: 'home#index', via: 'GET'
 	match '*path', to: 'home#index', via: 'GET'
 
