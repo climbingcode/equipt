@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 		end
 		
 		namespace :owner do 
-			resources :equipments
+			resources :equipments do 
+				resources :rentals
+			end
 		end
 
 		resources :session, only: ['create', 'destroy']

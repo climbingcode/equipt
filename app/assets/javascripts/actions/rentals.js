@@ -20,12 +20,23 @@ Equipt.actions.getRentals = function() {
 // DELETE RENTAL
 // ===============================
 
-Equipt.actions.deleteRental = (equipmentId, rentalId) => {
+Equipt.actions.deleteRental = (equipmentId, rentalId, canConfirm) => {
 
-	Equipt.API.delete(`/equipments/${equipmentId}/rentals/${rentalId}`)
+	let url;
+	let action;
+
+	if (canConfirm) {
+		url = `/owner/equipments/${equipmentId}/rentals/${rentalId}`;	
+		action = Constants.OWNERS_RENTAL_DELETE;
+	} else {
+		url = `/equipments/${equipmentId}/rentals/${rentalId}`;	
+		action = Constants.RENTAL_DELETE;
+	}
+
+	Equipt.API.delete(url)
 	.then(
 		(rental) => {
-			dispatchAction(Constants.RENTAL_DELETE, rental);
+			dispatchAction(action, rental);
 		},
 		() => {
 			console.log('rental failed to delete');
@@ -56,7 +67,7 @@ Equipt.actions.selectedPickUpTime = function(time) {
 
 Equipt.actions.confirmRental = function(equipmentId, rentalId, rental) {
 
-	Equipt.API.put(`/equipments/${equipmentId}/rentals/${rentalId}`, rental).then(
+	Equipt.API.put(`/owner/equipments/${equipmentId}/rentals/${rentalId}`, rental).then(
 		function(rental) {
 			dispatchAction(Constants.RENTAL_UPDATED, rental);
 		},

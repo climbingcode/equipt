@@ -28,8 +28,8 @@ Equipt.controllers.RentalsIndexController = class RentalsIndexController extends
 		return (
 			<div>
 				<Link to="equipmentIndex">Back to Equipment Index</Link>
-				<RentalIndexView rentals={ this.state.ownersRentals } title="Rentals"/>
-				<RentalIndexView rentals={ this.state.rentals } title="Rented"/>
+				<RentalIndexView canConfirm={ true } rentals={ this.state.ownersRentals } title="Others rented from you"/>
+				<RentalIndexView canConfirm={ false } rentals={ this.state.rentals } title="You Rented"/>
 			</div>
 		)
 	}

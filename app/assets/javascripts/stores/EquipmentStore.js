@@ -45,11 +45,7 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 	},
 
 	removeEquipment(equipment) {
-		let id = equipment.id;
-		let equipments = this._equipments.filter((equipment, index) => {		
-			if (equipment.id !== id) return this._equipment;
-		});
-		this.setEquipments(equipments);
+		this.setEquipments(this.removedRecord(equipment, this._equipments));
 	},
 
 	getSearchQuery() {
@@ -110,7 +106,6 @@ AppDispatcher.register(function(action) {
 
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:
-		case Constants.OWNERS_EQUIPMENT_INDEX:
 			EquipmentStore.setEquipments(data);	
 			EquipmentStore.hasLoaded();	
 		break; 

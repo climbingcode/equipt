@@ -112,7 +112,7 @@ def create_rentals(equipment, user)
 
 	rentals_amount.times do |i|
 
-		rental = equipment.rentals.create(
+		rental = equipment.rentals.new(
 			user_id: user.id,
 			pickup_date: Faker::Date.backward(10),
 			dropoff_date: Faker::Date.forward(5),
@@ -121,6 +121,8 @@ def create_rentals(equipment, user)
 			rental_deposit: (10..100).to_a.sample,
 			rental_completed: [true, false].sample
 		)
+
+		rental.save(:validate => false);
 
 	end
 

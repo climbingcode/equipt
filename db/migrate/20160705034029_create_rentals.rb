@@ -11,7 +11,7 @@ class CreateRentals < ActiveRecord::Migration[5.0]
       t.float :rental_total
       t.integer :total_rental_days
       t.boolean :rental_completed, default: false
-      t.boolean :rental_comfirmed, default: false
+      t.boolean :rental_confirmed, default: false
       t.timestamps
     end
   end

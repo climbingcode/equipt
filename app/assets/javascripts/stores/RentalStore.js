@@ -25,6 +25,10 @@ Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSetti
         return this.rental;
     },
 
+    deleteRental(rental) {
+        this.setRentals(this.removedRecord(rental, this.rentals));
+    },
+
     rentalConfirmed(rental) {
         this.rentals.push(rental);
         this.rental     = rental;
@@ -66,7 +70,7 @@ AppDispatcher.register(function(action) {
             RentalStore.rentalConfirmed(data);
         break;
         case Constants.DELETE_RENTAL:
-
+            RentalStore.deleteRental(data);
         break;
 	}
 

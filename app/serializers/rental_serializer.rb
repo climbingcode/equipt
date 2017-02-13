@@ -9,15 +9,22 @@ class RentalSerializer < ActiveModel::Serializer
 				:rental_total,
     			:total_rental_days,
     			:rental_completed,
-    			:rental_comfirmed,
+    			:rental_confirmed,
     			:created_at,
     			:updated_at,
-    			:notice
+    			:notice,
+                :renter
 
     belongs_to :equipment
 
-    def notice 
-    	{ info: "#{ @object.equipment.equipment_name } has been rented" } if @instance_options[:create_notice]
+    def renter
+        RenterSerializer.new(@object.user, root: false) if @object.user
+    end
+
+    def notice
+        equipment = object.equipment
+    	{ info: "#{ equipment.equipment_name } has been rented" } if @instance_options[:create_notice]
+        { info: "Rental of #{ equipment.equipment_name } has been canceled"} if @instance_options[:destroy_notice]
     end
 
     def self.collection_serialize(resources)

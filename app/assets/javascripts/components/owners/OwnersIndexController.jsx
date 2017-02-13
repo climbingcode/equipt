@@ -2,7 +2,7 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 
 	getState = function() {
 		return {
-			equipment: Equipt.stores.EquipmentStore.getEquipments()
+			equipments: Equipt.stores.OwnerStore.getEquipments()
 		}
 	}
 
@@ -10,7 +10,6 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 		super(props);
 		this.stores = [Equipt.stores.EquipmentStore];
 		this.state = this.getState();
-		this.protected = true;
 	}
 
 	componentDidMount() {
@@ -25,8 +24,10 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 
 		const OwnersIndexView = Equipt.views.OwnersIndexView;
 
+		let equipments = this.state.equipments || [];
+
 		return (
-			<OwnersIndexView equipment={this.state.equipment}/>
+			<OwnersIndexView equipment={ equipments }/>
 		)
 	}
 

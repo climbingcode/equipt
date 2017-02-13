@@ -10,3 +10,20 @@ Equipt.actions.getOwnersEquipment = function() {
 	);
 
 };
+
+// =================
+// DELETE EQUIPMENT
+// =================
+
+Equipt.actions.deleteOwnersEquipment = function(id) {
+
+	Equipt.API.delete(`/owner/equipments/${id}`).then(
+		(data) => {
+			dispatchAction(Constants.OWNERS_EQUIPMENT_DELETE, data);
+		},
+		(err) => {
+			console.log('Error Deleting Equipment');
+		}
+	);
+
+};

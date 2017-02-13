@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :availabilities, dependent: :destroy
   has_many :ratings, :as => :rateable, dependent: :destroy
 
+  has_many :owned_rentals, :through => :equipments, source: 'rentals'
+
   after_create :session_api_key
 
 	# oAuth

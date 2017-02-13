@@ -12,7 +12,7 @@ Equipt.views.OwnersEquipmentItemView = class extends React.Component {
 		e.preventDefault();
 		e.stopPropagation();
 		let equipment = this.props.equipment;		
-		Equipt.actions.deleteEquipment(equipment.id);
+		Equipt.actions.deleteOwnersEquipment(equipment.id);
 	}
 
 	edit(e) {

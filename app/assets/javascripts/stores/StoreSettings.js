@@ -12,6 +12,13 @@ const StoreSettings = {
 
 	removeChangeListener (callback) {
         this.removeListener(CHANGE_EVENT, callback);
+	},
+
+	removedRecord(record, records) {
+		let id = record.id;
+    	return records.filter((record) => {
+        	if (record.id !== id) return record;
+    	});
 	}
 
 };

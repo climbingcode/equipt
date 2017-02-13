@@ -15,4 +15,13 @@ class Api::Owner::EquipmentsController < ApplicationController
 		render json: current_user.equipments.find(params[:id]), serializer: EquipmentSerializer,  status: 200 					
 	end
 
+	def destroy 
+		equipment = current_user.equipments.find(params[:id])
+		if equipment.destroy
+			render json: equipment, destroy_notice: true, status: 200
+		else 
+			render json: { notice: { error: "Error removing #{equipment.equipment_name}" } }, status: 200
+		end
+	end
+
 end

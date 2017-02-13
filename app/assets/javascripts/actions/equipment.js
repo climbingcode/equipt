@@ -105,20 +105,3 @@ Equipt.actions.updateEquiptment = function(equipment = {}, images = {}, id, call
 	});
 
 };
-
-// =================
-// DELETE EQUIPMENT
-// =================
-
-Equipt.actions.deleteEquipment = function(id) {
-
-	Equipt.API.delete(`/equipments/${id}`).then(
-		(data) => {
-			dispatchAction(Constants.EQUIPMENT_DELETE, data);
-		},
-		(err) => {
-			console.log('Error Deleting Equipment');
-		}
-	);
-
-};
