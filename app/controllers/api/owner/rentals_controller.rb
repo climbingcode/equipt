@@ -2,7 +2,7 @@ class Api::Owner::RentalsController < ApplicationController
 
 	protect_from_forgery with: :exception
 
-	before_filter :ensure_authenticated_user
+	before_action :ensure_authenticated_user
 
 	def update
 		rental = current_user.equipments.find(params[:equipment_id]).rentals.find(params[:id])

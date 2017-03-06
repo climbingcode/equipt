@@ -16,6 +16,10 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 		this.state = this.getState();
 	}
 
+	shouldComponentUpdate() {
+		return Object.keys(this.state.equipment).length > 0;
+	}
+
 	componentDidMount() {
 		let id = this.context.router.getCurrentParams().id;
 		Equipt.actions.showEquipment(id);

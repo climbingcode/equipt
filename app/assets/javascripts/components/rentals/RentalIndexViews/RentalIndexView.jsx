@@ -25,9 +25,14 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 
 	}
 
+	pickupHasPassed() {
+
+	}
+
 	render() {
 
 		let rentals = this.props.rentals || [];
+		let userId 	= Equipt.stores.AuthStore.getUserId();
 		let renterOrOwner = this.props.canConfirm ? 'Renter' : 'Owner';
 
 		return (
@@ -36,6 +41,7 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 				<table className="table table-striped">
 					<thead>
 						<tr>
+							<th></th>
 	   						<th>Equipment Name</th>
 	    					<th>Pickup date</th> 
 	    					<th>Dropoff Date</th>
@@ -50,19 +56,26 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 		 					rentals.map((rental, index) => {
 
 		 						let userDetails = renterOrOwner === 'Renter' ? rental.renter : rental.equipment.owner;
+								let currentUserId = Equipt.stores.AuthStore.getUserId();
 
 		 						return 	(<tr key={`${ this.props.title }_index_${ index }`}>
+		 									<td>
+		 										<Link to="ownersShow" params={{userId: currentUserId, equipmentId: rental.equipment.id }}>
+		 											<i className="fa fa-info-circle" aria-hidden="true"></i>
+		 										</Link>
+		 									</td>
 	    									<td>{ rental.equipment.equipment_name }</td>
-	    									<td>{ rental.pickup_date }</td> 
-	    									<td>{ rental.dropoff_date }</td>
-	    									<td>{ userDetails.firstname }</td>
-	    									<td>{ userDetails.email }</td>
+	    									<td>{ moment(rental.pickup_date).format('MM/DD/YYYY') }</td> 
+	    									<td>{ moment(rental.dropoff_date).format('MM/DD/YYYY') }</td>
+	    									<td>{ userDetails.firstname.capitalize() }</td>
+	    									<td>{ userDetails.email.capitalize() }</td>
 	    									<td>{ this.confirmCheckBox.call(this, rental) }</td>
 	    									<td>
 	    										<input  type="checkbox"
 	    												onChange={ this.cancel.bind(this, rental.equipment.id, rental.id, rental) }/>
 	    									</td>
 	  									</tr>);
+		 						
 		 					})
 		 				}
 	 				</tbody>

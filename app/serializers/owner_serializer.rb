@@ -9,12 +9,17 @@ class OwnerSerializer < ActiveModel::Serializer
   				:cell_phone, 
   				:lng, 
   				:lat,
-          :review_score
+          :review_score,
+          :availabilities
       
-    has_many :ratings
+    has_many :ratings 
 
     def review_score
       @object.ratings.average(:score)
+    end
+
+    def availabilities 
+      @object.availabilities.pluck('hour')
     end
 
 end

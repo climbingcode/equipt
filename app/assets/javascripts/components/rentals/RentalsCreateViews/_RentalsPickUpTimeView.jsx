@@ -12,25 +12,39 @@ Equipt.views.RentalsPickUpTimeView = class RentalsPickUpTimeView extends React.C
 
 	render() {
 
-		let times = this.props.times || [];
-
 		return(
 			<ul className="rental-pickup-times-wrapper">
 				{
 					[...Array(24)].map((value, index) => {
-		
-						let time = (index+1).toFixed(2);
-						let klass = times.indexOf(time) > -1 ? 'col-sm-1 selected' : 'col-sm-1';
-						return <li  className={klass}
-								  	key={`${time}_selected`}
-								  	onClick={ this.props.selectedTime.bind(this, time) }>
-								  	{time}
+						
+						let klass = '';
+						let time  = (index+1);
+
+						return <li  className={ this.getClassName.call(this, time) }
+								  	key={`${time.toFixed(2)}_selected`}
+								  	onClick={ this.props.selectTime.bind(this, time) }>
+								  	{ time.toFixed(2) }
 								</li>;
 						
 					})
 				}
 			</ul>
 		)
+
+	}
+
+	getClassName(time) {
+
+		let availabilities = this.props.availabilities || [];
+		let selectedTime   = this.props.selectedTime;
+
+		if (availabilities.indexOf(time) > 1) {
+			return 'col-sm-1 unavailable';
+		} else if (selectedTime === time) {
+			return 'col-sm-1 selected';
+		} else {
+			return 'col-sm-1';
+		}
 
 	}
 

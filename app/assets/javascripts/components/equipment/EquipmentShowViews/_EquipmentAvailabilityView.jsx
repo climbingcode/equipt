@@ -4,14 +4,6 @@ Equipt.views.EquipmentAvailabilityView = class EquipmentAvailabilityView extends
 		super(props);
 	}
 
-	selectedDates(start, end) {
-		Equipt.actions.selectedRentalDates(start, end);
-	}
-
-	pickUpTimeSelected(time) {
-		Equipt.actions.selectedPickUpTime(time);
-	}
-
 	render() {
 
 		const RentalsCreateController = Equipt.controllers.RentalsCreateController;

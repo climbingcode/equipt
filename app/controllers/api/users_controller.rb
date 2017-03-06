@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
 
 	protect_from_forgery with: :exception
 
-	before_filter :ensure_authenticated_user, except: [:create]
+	before_action :ensure_authenticated_user, except: [:create]
 
 	def create
 		user = User.new(user_params)
@@ -20,7 +20,7 @@ class Api::UsersController < ApplicationController
 	def update
 		if !authenticated_confirmed?(user_params[:password], user_params[:oauth_token])
 			render_notice({ error: "Incorrect credentials, try again!" })
-		elsif current_user.update(user_params)
+		elsif current_user.update_attributes(user_params)
 			current_user.save_availabilities(params[:user][:availability])
 			render json: current_user, send_api_token: true, status: 200
 		else

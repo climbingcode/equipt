@@ -2,7 +2,7 @@ class Api::Owner::EquipmentsController < ApplicationController
 
 	protect_from_forgery with: :exception
 
-	before_filter :ensure_authenticated_user
+	before_action :ensure_authenticated_user
 
 	def index
 		render json: {

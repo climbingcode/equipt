@@ -32,8 +32,10 @@ Equipt.views.EquipmentSearchView = class EquipmentSearchView extends React.Compo
 						onClick={this.selected.bind(this, {
 							category: '',
 							sub_category: '',
-							fuzzy_search: ''
-						})}>All Equipment</button>
+							fuzzy_search: '',
+							location: {},
+							dates: {}
+						})}>Clear Search</button>
 				<div className="clearfix"/>
 			</div>
 		)

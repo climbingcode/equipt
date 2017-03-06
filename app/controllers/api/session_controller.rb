@@ -17,7 +17,7 @@ class Api::SessionController < ApplicationController
 	end
 
 	def forgot_password
-		render json: render_notice({ info: "Sent a link to reset your password to your email" }), status: 200
+		render_notice({ info: "Sent a link to reset your password to your email" })
 	end
 
 end

@@ -12,24 +12,13 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 		owner: React.PropTypes.object.required
 	}
 
-	rent() {
-
-		let equipmentId = this.props.equipment.id;
-		let rental 		= this.props.rental;
-
-    	Equipt.actions.rentEquipment(equipmentId, {
-    		pickup_date: rental.pickup_date,
-    		dropoff_date: rental.dropoff_date,
-    		pick_up_time: rental.times
-    	});
-    	
-	}
-
 	render() {
 
 		const Calendar 				  = Equipt.views.Calendar;
 		const RentalsPickUpTimeView   = Equipt.views.RentalsPickUpTimeView;
 		const RentalsConfirmationView = Equipt.views.RentalsConfirmationView;
+
+		let owner = this.props.equipment.owner || {};
 
 		if (this.props.hasCreatedRental) {
 			return (
@@ -42,22 +31,36 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 
 		return (
 			<div className="rentals-create-container">
-				<Calendar 	selectedDates={ this.props.selectedDates }
+				<Calendar 	selectedDates={ this.props.selectDates }
 							rentals={ this.props.rentals }
 							rental={ this.props.rental } />
 				<h4>Pick Up Time</h4>
-				<RentalsPickUpTimeView 	selectedTime={ this.props.selectedTime }
-										availability={ this.props.owner.availability || [] } 
-										times={ [ this.props.rental.times ] }
+				<RentalsPickUpTimeView 	selectTime={ this.props.selectTime }
+										availabilities={ owner.availabilities } 
+										selectedTime={ this.props.rental.times }
 				/>
 				<div className="clearfix"></div>
+				
+				<input  type="checkbox"
+						onChange={ this.props.agreedToTermsChanged }
+						defaultChecked={ this.props.agreedToTerms }
+				/>
+
+				<span>I agree to the rental terms and conditions</span>
+
 				<button className="btn btn-success col-sm-12" 
-						disabled={ this.props.rental.pickup_date ? false : true }
-						onClick={this.rent.bind(this)}>
+						disabled={ this.canRent() }
+						onClick={ this.props.rent.bind(this) }>
 						Rent
 				</button>
 			</div>
 		)
+	}
+
+	canRent() {
+		return 	this.props.rental.pickup_date
+				&& this.props.rental.times 
+				&& this.props.agreedToTerms;
 	}
 
 }

@@ -13,12 +13,17 @@ class RentalSerializer < ActiveModel::Serializer
     			:created_at,
     			:updated_at,
     			:notice,
-                :renter
+                :renter,
+                :has_pasted
 
     belongs_to :equipment
 
     def renter
         RenterSerializer.new(@object.user, root: false) if @object.user
+    end
+
+    def has_pasted
+        @object.pickup_date.past?
     end
 
     def notice

@@ -14,19 +14,17 @@ class Equipment < ActiveRecord::Base
     scope :fuzzy_search, -> (fuzzy_search) { where("equipment_name LIKE ?", "%#{ fuzzy_search }%") }
 
     scope :search_by_availability, -> (dates) do 
-        if dates && dates[:pickup].present? && dates[:dropoff].present?
-            pickup  = DateTime.parse(dates[:pickup]) 
-            dropoff = DateTime.parse(dates[:dropoff])
+        if Equipment.dates_present? dates
+            pickup, dropoff = DateTime.parse(dates[:pickup]), DateTime.parse(dates[:dropoff])
             rentals = Rental.where.not("(pickup_date BETWEEN ? AND ? OR dropoff_date BETWEEN ? AND ?) OR (pickup_date <= ? AND dropoff_date >= ?)", pickup, dropoff, pickup, dropoff, pickup, dropoff)
             self.joins(:rentals).merge(rentals).uniq
         end
     end
 
     scope :search_location, -> (location) do
-        if location && location[:lat].present? && location[:lng].present?
+        if Equipment.location_present? location
             users = User.users_in_range location
-            return self.joins(:user).merge(users).uniq if users.present?
-            self
+            self.joins(:user).merge(users).uniq
         end
     end
 
@@ -51,6 +49,14 @@ class Equipment < ActiveRecord::Base
             .fuzzy_search(query[:fuzzy_search])
             .search_by_availability(query[:dates])
             .search_page(query[:page])
+    end
+
+    def self.dates_present? dates
+        dates && dates[:pickup].present? && dates[:dropoff].present?
+    end
+
+    def self.location_present? location
+        location && location[:lat].present? && location[:lng].present?
     end
 
 end

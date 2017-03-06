@@ -2,7 +2,7 @@ class Api::RentalsController < ApplicationController
 
 	protect_from_forgery with: :exception
 
-	before_filter :ensure_authenticated_user
+	before_action :ensure_authenticated_user
 
 	def index
 		rentals = current_user.owned_rentals
@@ -14,13 +14,13 @@ class Api::RentalsController < ApplicationController
 	end
 
 	def create 
-		equipment = Equipment.find(params[:equipment_id])
-		rental = equipment.rentals.new(rental_params)
+		equipment 	= Equipment.find(params[:equipment_id])
+		rental 		= equipment.rentals.new(rental_params)
 		rental.user = current_user
 		if rental.save
 			render json: rental, create_notice: true, status: 200
 		else
-			render json: render_notice({error: rental.errors }), status: 200
+			render_notice({error: rental.errors })
 		end
 	end
 

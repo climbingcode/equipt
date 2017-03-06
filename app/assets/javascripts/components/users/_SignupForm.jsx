@@ -116,13 +116,13 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 
 		if (!currentUser) {
 
-			var readTermsAndConditions = 	<span>
+			var readTermsAndConditions = 	<div>
 												<input type="radio" ref="read_terms" name="read_terms"/>
 												<label>
 													Agree to the
 													<span onClick={ this.showTerms.bind(this, true) }>terms and conditions</span>
 												</label>
-											</span>
+											</div>
 
 			var submitBtn = <button className="btn btn-success pull-right col-sm-12" type="submit">Sign up</button>
 
@@ -211,8 +211,8 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 				</div>
 				<div className="col-xs-6">
 					<h4>When are you available to rent out your Equipment</h4>
-					<RentalsPickUpTimeView  selectedTime={ this.setAvailabilityTime.bind(this) }
-											times={ this.state.availability }/>
+					<RentalsPickUpTimeView  selectTime={ this.setAvailabilityTime.bind(this) }
+											selectedTime={ this.state.availability }/>
 				</div>
 			</div>
 		)

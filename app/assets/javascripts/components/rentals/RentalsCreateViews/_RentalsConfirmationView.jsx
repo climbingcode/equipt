@@ -29,6 +29,7 @@ Equipt.views.RentalsConfirmationView = class RentalsConfirmationView extends Rea
 		if (owner.lat && owner.lng) {
 
 			ownerLocation =	<div className="owner-location">
+								<h5>owner.email</h5>
 								<GoogleMapView  position={{
 									lat: owner.lat,
 									lng: owner.lng
@@ -47,6 +48,7 @@ Equipt.views.RentalsConfirmationView = class RentalsConfirmationView extends Rea
 						<br/>
 						<h5>Pick Up Time: { rental.pickup_date }</h5>
 						<h5>Drop Off Time: { rental.dropoff_date }</h5>
+						<h5>Pick Up Time: { rental.pick_up_time }</h5>
 						<br/>
 						<h3>Total</h3>
 						<h5>{ rental.total_rental_days }days * ${ equipment.price_per_day } = ${ rental.sub_total }</h5>

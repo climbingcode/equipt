@@ -6,19 +6,26 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 		let searchBox = new google.maps.places.SearchBox(input);
 
 		searchBox.addListener('places_changed', () => {
-
-			let place 	  = searchBox.getPlaces()[0];
-			let searchObj = this.props.search;
-
-			searchObj.location = {
-        		lat: place.geometry.location.lat(),
-        		lng: place.geometry.location.lng(),
-        		range: this.range || { from: 0, to: 5 }
-        	};
-
-			Equipt.actions.getEquipment(searchObj);
-
+			this.place = searchBox.getPlaces()[0];
+			this.searchLocation( searchBox );	
 		});
+
+	}
+
+	searchLocation() {
+
+		let searchObj = this.props.search;
+		let place = this.place;
+
+		if (!place) return;
+
+		searchObj.location = {
+    		lat: place.geometry.location.lat(),
+    		lng: place.geometry.location.lng(),
+    		range: this.range || { from: 0, to: 5 }
+    	};
+
+		Equipt.actions.getEquipment(searchObj);
 
 	}
 
@@ -33,6 +40,7 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 	}
 
 	rangeUpdated(range) {
+
 		switch(range) {
 			case 'Within 0-5km':
 				this.range = { from: 0, to: 5 };
@@ -47,6 +55,9 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 				this.range = { from: 16 };
 			break;
 		}
+
+		this.searchLocation();
+
 	}
 
 	render() {
@@ -61,7 +72,7 @@ Equipt.views.EquipmentSearchLocation = class EquipmentSearchLocation extends Rea
 								name="range"
 								options={options}
 								defaultOption="Within"
-								onChange={this.rangeUpdated}/>
+								onChange={this.rangeUpdated.bind(this)}/>
 				<span> OF </span>
 				<input  ref="searchLocation" 
 						placeholder="location"

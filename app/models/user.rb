@@ -2,11 +2,7 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
-  acts_as_mappable :default_units => :miles,
-                   :default_formula => :sphere,
-                   :distance_field_name => :distance,
-                   :lat_column_name => :lat,
-                   :lng_column_name => :lng
+  acts_as_mappable
 
 	validates :email, confirmation: true
   validates :email_confirmation, presence: true
@@ -67,17 +63,14 @@ class User < ActiveRecord::Base
     end
   end
 
-
   # Find all users in range
 
   def self.users_in_range location
-    from = location['range']['from'].to_i
-    to = location['range']['to'].to_i
-    if from && to
-      User.in_range(from..to, :origin => [ location[:lat], location[:lng] ])
-    else 
-      User.in_range(0..5, :origin => [ location[:lat], location[:lng] ])
-    end
+    from = location['range']['from'].to_i || 0
+    to = location['range']['to'].to_i || 5
+    lat = location[:lat].to_f
+    lng = location[:lng].to_f
+    User.in_range(from..to, :origin => [ lat, lng ])
   end
 
   # helper methods

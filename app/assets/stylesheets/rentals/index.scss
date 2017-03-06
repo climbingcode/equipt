@@ -15,5 +15,8 @@
 		&.selected {
 			background: $camping_green;
 		}
+		&.unavailable {
+			background: $fire_red;
+		}
 	}
 }

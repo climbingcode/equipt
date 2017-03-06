@@ -51,12 +51,10 @@ this.Routes = (
 				path="owner/:userId/equipment"/>
 		<Route 	name="ownersShow"
 				handler={Equipt.controllers.OwnersShowController}
-				path="owner/:userId/equipment/:equipmentId"
-		/>
+				path="owner/:userId/equipment/:equipmentId"/>
 		<Route  name="rentalsIndex"
 			    handler={Equipt.controllers.RentalsIndexController}
-				path="owner/:userId/rentals"
-		/>
+				path="owner/:userId/rentals"/>
 		<DefaultRoute handler={Equipt.views.Home}/>
 	</Route>
 ), document.getElementById('root');

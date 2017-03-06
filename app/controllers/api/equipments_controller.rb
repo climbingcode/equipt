@@ -2,7 +2,7 @@ class Api::EquipmentsController < ApplicationController
 
 	protect_from_forgery with: :exception
 
-	before_filter :ensure_authenticated_user
+	before_action :ensure_authenticated_user
 
 	def index
 		equipment = Equipment.search(params[:query]).exclude_user(current_user)

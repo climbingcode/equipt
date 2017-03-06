@@ -10,41 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021043955) do
+ActiveRecord::Schema.define(version: 20170301060125) do
 
-  create_table "api_keys", force: :cascade do |t|
+  create_table "api_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.string   "access_token"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["user_id"], name: "index_api_keys_on_user_id"
+    t.index ["user_id"], name: "index_api_keys_on_user_id", using: :btree
   end
 
-  create_table "availabilities", force: :cascade do |t|
+  create_table "availabilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.string  "weekday"
     t.integer "hour"
-    t.index ["user_id"], name: "index_availabilities_on_user_id"
+    t.index ["user_id"], name: "index_availabilities_on_user_id", using: :btree
   end
 
-  create_table "equipment", force: :cascade do |t|
+  create_table "equipment", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "category"
     t.integer  "user_id"
     t.string   "equipment_name"
     t.string   "brand"
     t.string   "model"
-    t.text     "description"
+    t.text     "description",     limit: 65535
     t.integer  "years_old"
-    t.float    "price_per_day"
-    t.float    "price_per_week"
-    t.float    "desposit_amount", default: 0.0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.float    "price_per_day",   limit: 24
+    t.float    "price_per_week",  limit: 24
+    t.float    "desposit_amount", limit: 24,    default: 0.0
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "sub_category"
-    t.index ["user_id"], name: "index_equipment_on_user_id"
+    t.index ["user_id"], name: "index_equipment_on_user_id", using: :btree
   end
 
-  create_table "images", force: :cascade do |t|
+  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.string   "file"
@@ -53,43 +53,34 @@ ActiveRecord::Schema.define(version: 20161021043955) do
     t.datetime "updated_at",                    null: false
   end
 
-  create_table "owners_usages", force: :cascade do |t|
-    t.integer  "equipment_id"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["equipment_id"], name: "index_owners_usages_on_equipment_id"
-  end
-
-  create_table "ratings", force: :cascade do |t|
+  create_table "ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "rateable_id"
     t.string   "rateable_type"
     t.integer  "score"
-    t.text     "comment"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.text     "comment",       limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  create_table "rentals", force: :cascade do |t|
+  create_table "rentals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "equipment_id"
     t.integer  "user_id"
     t.date     "pickup_date"
     t.date     "dropoff_date"
-    t.float    "pick_up_time"
-    t.float    "sub_total"
-    t.float    "rental_deposit",    default: 0.0
-    t.float    "rental_total"
+    t.float    "pick_up_time",      limit: 24
+    t.float    "sub_total",         limit: 24
+    t.float    "rental_deposit",    limit: 24, default: 0.0
+    t.float    "rental_total",      limit: 24
     t.integer  "total_rental_days"
-    t.boolean  "rental_completed",  default: false
-    t.boolean  "rental_confirmed",  default: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.index ["equipment_id"], name: "index_rentals_on_equipment_id"
-    t.index ["user_id"], name: "index_rentals_on_user_id"
+    t.boolean  "rental_completed",             default: false
+    t.boolean  "rental_confirmed",             default: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.index ["equipment_id"], name: "index_rentals_on_equipment_id", using: :btree
+    t.index ["user_id"], name: "index_rentals_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.string   "email"
@@ -101,13 +92,13 @@ ActiveRecord::Schema.define(version: 20161021043955) do
     t.string   "country"
     t.integer  "home_phone"
     t.integer  "cell_phone"
-    t.float    "lng"
-    t.float    "lat"
+    t.float    "lng",                     limit: 24
+    t.float    "lat",                     limit: 24
     t.string   "password"
     t.string   "password_digest"
-    t.boolean  "restricted_availability", default: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.boolean  "restricted_availability",            default: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"
@@ -116,4 +107,8 @@ ActiveRecord::Schema.define(version: 20161021043955) do
     t.datetime "password_reset_sent_at"
   end
 
+  add_foreign_key "availabilities", "users"
+  add_foreign_key "equipment", "users"
+  add_foreign_key "rentals", "equipment"
+  add_foreign_key "rentals", "users"
 end

@@ -5,7 +5,8 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 			rentals: Equipt.stores.RentalStore.getRentals(),
 			rental: Equipt.stores.RentalStore.getRental(),
 			hasCreatedRental: Equipt.stores.RentalStore.hasCreatedRental(),	
-			equipment: Equipt.stores.EquipmentStore.getEquipment()
+			equipment: Equipt.stores.EquipmentStore.getEquipment(),
+			agreedToTerms: false
 		}
 	}
 
@@ -19,14 +20,36 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 		return this.getState();
 	}
 
-	selectedDates(dates) {
+	shouldComponentUpdate() {
+		return Object.keys(this.state.equipment).length > 0;
+	}
+
+	selectDates(dates) {
 		setTimeout(() => {
 			Equipt.actions.selectedRentalDates(dates);
 		}, 50);
 	}
 
-	selectedTime(time) {
+	selectTime(time) {
 		Equipt.actions.selectedPickUpTime(time);
+	}
+
+	agreedToTermsChanged() {
+		this.state.agreedToTerms = this.state.agreedToTerms ? false : true;
+		this.setState(this.state);
+	}
+
+	rent() {
+
+		let equipmentId = this.props.equipment.id;
+		let rental 		= this.props.rental;
+
+    	Equipt.actions.rentEquipment(equipmentId, {
+    		pickup_date: rental.pickup_date,
+    		dropoff_date: rental.dropoff_date,
+    		pick_up_time: rental.times
+    	});
+    	
 	}
 
 	render() {
@@ -39,8 +62,10 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 								rental={ this.state.rental }
 								hasCreatedRental={ this.state.hasCreatedRental }
 								owner={ this.state.equipment.owner || {} }
-								selectedDates={ this.selectedDates }
-								selectedTime={ this.selectedTime }
+								selectDates={ this.selectDates }
+								selectTime={ this.selectTime }
+								rent={ this.rent }
+								agreedToTerms={ this.state.agreedToTerms }
 			/>
 		)
 
