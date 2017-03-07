@@ -9,7 +9,12 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 		rentals: React.PropTypes.array.required,
 		rental: React.PropTypes.object.required,
 		hasCreatedRental: React.PropTypes.bool.required,
-		owner: React.PropTypes.object.required
+		owner: React.PropTypes.object.required,
+		selectDates: React.PropTypes.object.required,
+		selectTime: React.PropTypes.object.required,
+		agreedToTerms: React.PropTypes.bool.required,
+		rent: React.PropTypes.func.required,
+		agreedToTermsChanged: React.PropTypes.func.required
 	}
 
 	render() {
@@ -34,11 +39,14 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 				<Calendar 	selectedDates={ this.props.selectDates }
 							rentals={ this.props.rentals }
 							rental={ this.props.rental } />
+				
 				<h4>Pick Up Time</h4>
+
 				<RentalsPickUpTimeView 	selectTime={ this.props.selectTime }
 										availabilities={ owner.availabilities } 
 										selectedTime={ this.props.rental.times }
 				/>
+
 				<div className="clearfix"></div>
 				
 				<input  type="checkbox"
@@ -50,7 +58,7 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 
 				<button className="btn btn-success col-sm-12" 
 						disabled={ this.canRent() }
-						onClick={ this.props.rent.bind(this) }>
+						onClick={ this.props.rent }>
 						Rent
 				</button>
 			</div>
@@ -58,9 +66,9 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 	}
 
 	canRent() {
-		return 	this.props.rental.pickup_date
-				&& this.props.rental.times 
-				&& this.props.agreedToTerms;
+		return 	!this.props.rental.pickup_date
+				|| !this.props.rental.times;
+				// || !this.props.agreedToTerms;
 	}
 
 }

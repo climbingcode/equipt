@@ -3,13 +3,15 @@ class Rental < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :equipment
 
-	validate :dates_are_vacant
+	validate :dates_are_vacant, :has_agreed_to_terms
 
 	before_save :set_total_days, :set_rental_cost
 
 	after_save :send_confirmation_email, if: :rental_confirmed_changed?
 	after_create :send_create_emails
 	after_destroy :send_destroy_email
+
+	# validates methods
 
 	def dates_are_vacant
 		pickup  = self.pickup_date
@@ -24,6 +26,12 @@ class Rental < ActiveRecord::Base
 
 	end
 
+	def has_agreed_to_terms
+		errors.add(:terms_not_agreed_to, "Please agree to the rental terms") unless self.agreed_to_terms
+	end
+
+	# before create methods
+
 	def set_total_days
 		self.total_rental_days = (self.dropoff_date - self.pickup_date).to_i
 	end
@@ -34,6 +42,7 @@ class Rental < ActiveRecord::Base
 		self.rental_total   = self.sub_total + equipment.desposit_amount
 		self.rental_deposit = equipment.desposit_amount
 	end
+
 
 	# =============
 	# EMAIL ALERTS

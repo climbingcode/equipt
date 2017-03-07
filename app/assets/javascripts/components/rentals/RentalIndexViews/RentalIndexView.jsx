@@ -26,13 +26,13 @@ Equipt.controllers.RentalIndexView = class RentalIndexView extends React.Compone
 	}
 
 	pickupHasPassed() {
-
+		
 	}
 
 	render() {
 
-		let rentals = this.props.rentals || [];
-		let userId 	= Equipt.stores.AuthStore.getUserId();
+		let rentals 	  = this.props.rentals || [];
+		let userId 		  = Equipt.stores.AuthStore.getUserId();
 		let renterOrOwner = this.props.canConfirm ? 'Renter' : 'Owner';
 
 		return (

@@ -41,13 +41,15 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 
 	rent() {
 
-		let equipmentId = this.props.equipment.id;
-		let rental 		= this.props.rental;
+		let equipmentId = this.state.equipment.id;
+		let rental 		= this.state.rental;
+		let agreedToTerms = this.state.agreedToTerms;
 
     	Equipt.actions.rentEquipment(equipmentId, {
     		pickup_date: rental.pickup_date,
     		dropoff_date: rental.dropoff_date,
-    		pick_up_time: rental.times
+    		pick_up_time: rental.times,
+    		agreed_to_terms: this.state.agreedToTerms
     	});
     	
 	}
@@ -61,11 +63,12 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 								rentals={ this.state.rentals }
 								rental={ this.state.rental }
 								hasCreatedRental={ this.state.hasCreatedRental }
+								agreedToTerms={ this.state.agreedToTerms }
 								owner={ this.state.equipment.owner || {} }
 								selectDates={ this.selectDates }
 								selectTime={ this.selectTime }
-								rent={ this.rent }
-								agreedToTerms={ this.state.agreedToTerms }
+								rent={ this.rent.bind(this) }
+								agreedToTermsChanged={ this.agreedToTermsChanged.bind(this) } 
 			/>
 		)
 

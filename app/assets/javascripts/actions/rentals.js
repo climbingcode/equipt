@@ -4,12 +4,10 @@
 
 Equipt.actions.getRentals = function() {
 	Equipt.API.get('/rentals')
-	.then(
-		(data) => {
+	.then(data => {
 			dispatchAction( Constants.RENTAL_INDEX, data.rentals );
 			dispatchAction( Constants.OWNERS_RENTAL_INDEX, data.rented );
-		},
-		(error) => {
+		}, error => {
 			console.log(error);
 		}
 	);
@@ -34,8 +32,7 @@ Equipt.actions.deleteRental = (equipmentId, rentalId, canConfirm) => {
 	}
 
 	Equipt.API.delete(url)
-	.then(
-		(rental) => {
+	.then(rental => {
 			dispatchAction(action, rental);
 		},
 		() => {
@@ -68,7 +65,7 @@ Equipt.actions.selectedPickUpTime = function(time) {
 Equipt.actions.confirmRental = function(equipmentId, rentalId, rental) {
 
 	Equipt.API.put(`/owner/equipments/${equipmentId}/rentals/${rentalId}`, rental).then(
-		function(rental) {
+		rental => {
 			dispatchAction(Constants.RENTAL_UPDATED, rental);
 		},
 		() => {
@@ -84,8 +81,8 @@ Equipt.actions.confirmRental = function(equipmentId, rentalId, rental) {
 
 Equipt.actions.rentEquipment = function(equipmentId, params) {
 
-	Equipt.API.post(`/equipments/${equipmentId}/rentals`, params).then(
-	function(rental) {
+	Equipt.API.post(`/equipments/${equipmentId}/rentals`, params)
+	.then(rental => {
 		if (rental.id) {
 			dispatchAction(Constants.RENTED_EQUIPMENT, rental);
 		}

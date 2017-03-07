@@ -32,7 +32,7 @@ class Api::RentalsController < ApplicationController
 	private
 
 	def rental_params
-		params.require(:rental).permit(:pickup_date, :dropoff_date, :pick_up_time)
+		params.require(:rental).permit(:pickup_date, :dropoff_date, :pick_up_time, :agreed_to_terms)
 	end
 
 end
