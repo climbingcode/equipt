@@ -20,14 +20,14 @@ class Rental < ActiveRecord::Base
 		
 		if (self.pickup_date_changed? || self.dropoff_date_changed?)
 			if rentals.where("(pickup_date BETWEEN ? AND ? OR dropoff_date BETWEEN ? AND ?) OR (pickup_date <= ? AND dropoff_date >= ?)", pickup, dropoff, pickup, dropoff, pickup, dropoff).any?
-				errors.add(:dates_are_taken, "It looks like #{self.equipment.model} is not free to rent during these dates")
+				errors.add(:dates_are_taken, I18n.t('errors.rentals.dates_are_taken', model: self.equipment.model))
 			end
 		end
 
 	end
 
 	def has_agreed_to_terms
-		errors.add(:terms_not_agreed_to, "Please agree to the rental terms") unless self.agreed_to_terms
+		errors.add(:terms_not_agreed_to, I18n.t('errors.rentals.terms_not_agreed_to')) unless self.agreed_to_terms
 	end
 
 	# before create methods
