@@ -99,6 +99,8 @@ GEM
       railties (>= 3.1)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
+    foreman (0.83.0)
+      thor (~> 0.19.1)
     geokit (1.10.0)
     geokit-rails (2.2.0)
       geokit (~> 1.5)
@@ -194,20 +196,17 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
-    react-rails (1.4.2)
+    react-rails (1.10.0)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
       connection_pool
       execjs
-      rails (>= 3.2)
+      railties (>= 3.2)
       tilt
     react-rails-hot-loader (0.7.0)
       em-websocket
       rails
       react-rails
-    react-router-rails (0.13.3.2)
-      rails (>= 3.1)
-      react-rails (~> 1.4.0)
     react_on_rails (6.8.0)
       addressable
       connection_pool
@@ -270,6 +269,7 @@ DEPENDENCIES
   figaro
   flux-rails-assets
   font-awesome-rails
+  foreman
   geokit-rails
   humanize
   jbuilder (~> 2.5)
@@ -282,9 +282,7 @@ DEPENDENCIES
   pry
   puma (~> 3.0)
   rails (~> 5.0.0)
-  react-rails (~> 1.4.0)
   react-rails-hot-loader
-  react-router-rails (~> 0.13.3.2)
   react_on_rails (~> 6)
   sass-rails (~> 5.0)
   spring
