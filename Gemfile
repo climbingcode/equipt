@@ -43,6 +43,7 @@ gem 'geokit-rails'
 gem 'will_paginate', '~> 3.1.0'
 
 # front end gems
+gem "react_on_rails", "~> 6"
 gem 'react-rails', '~>1.4.0'
 gem 'react-router-rails', '~>0.13.3.2'
 gem 'bootstrap-sass', '~> 3.2.0'
