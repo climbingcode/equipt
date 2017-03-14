@@ -18,6 +18,7 @@ const Constants = {
 	RENTED_EQUIPMENT: 'RENTED_EQUIPMENT',
 	CHANGED_PICKUP_TIME: 'CHANGED_PICKUP_TIME',
 	CHANGED_RENTAL_DATES: 'CHANGED_RENTAL_DATES',
+	CHANGED_AGREED_TO_RENTAL_TERMS: 'CHANGED_AGREED_TO_RENTAL_TERMS',
 	OWNERS_RENTAL_INDEX: 'OWNERS_RENTAL_INDEX',
 	OWNERS_RENTAL_DELETE: 'OWNERS_RENTAL_DELETE',
 	OWNERS_EQUIPMENT_INDEX: 'OWNERS_EQUIPMENT_INDEX',
@@ -30,5 +31,13 @@ const Constants = {
 		equipmentShow: 'equipmentShow',
 		ownersIndex: 'ownersIndex',
 		rentalConfirmation: 'rentalConfirmation'
+	},
+	styles: {
+		primary: '#8FC485',
+		secondary: '#ff6961',
+		backgroundGrey: '#EDEDED',
+		textGrey: '#676767',
+		lightTextGrey: '#CCC',
+		defaultEquiptmentImage: '/assets/equipment-default.png'
 	}
 };

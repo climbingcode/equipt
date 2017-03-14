@@ -8,7 +8,6 @@ Equipt.views.EquipmentShowView = class EquipmentShowView extends React.Component
 
 		let ModalView 		  = Equipt.views.ModalView;
 		let EquipmentTabsView = Equipt.views.EquipmentTabsView;
-		
 		let equipment   	  = this.props.equipment;
 
 		return (

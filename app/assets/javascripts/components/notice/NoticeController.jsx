@@ -1,6 +1,6 @@
-const NOTICE_DURATION = 3000;
-
 Equipt.controllers.NoticeController = class NoticeController extends Equipt.controllers.MainController {
+
+	NOTICE_DURATION: 5000
 
 	constructor(props) {
 		super(props);
@@ -16,18 +16,21 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 	}
 
 	_onChange() {
+
 	    this.setState({
 	    	notice: Equipt.stores.NoticeStore.getNotice()
 	    });
 
 	    clearTimeout(this.noticeTimeout);
 
-	    this.noticeTimeout = setTimeout(function() {
+	    this.noticeTimeout = setTimeout(() => {
 	    	Equipt.actions.clearNotice();
 	    }, 5000);
+	    
   	}
 
 	render() {
+
 		let NoticeView = Equipt.views.NoticeView;
 
 		return (

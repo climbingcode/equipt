@@ -58,6 +58,14 @@ Equipt.actions.selectedPickUpTime = function(time) {
 	dispatchAction(Constants.CHANGED_PICKUP_TIME, time);
 }
 
+// ==================================
+// SELECTED TIME TO PICK UP EQUIPMENT
+// ==================================
+
+Equipt.actions.agreedToRentalTermsChanged = function(hasAgreed) {
+	dispatchAction(Constants.CHANGED_AGREED_TO_RENTAL_TERMS, hasAgreed);
+};
+
 // ================
 // RENTAL CONFIRMED
 // ================

@@ -21,6 +21,10 @@ Equipt.stores.RentalStore = Object.assign({}, EventEmitter.prototype, StoreSetti
         this.rental.times = times;
     },
 
+    setAgreedToTerms(hasAgreed) {
+        this.rental.agreed_to_terms = hasAgreed;
+    },
+
     getRental() {
         return this.rental;
     },
@@ -71,6 +75,9 @@ AppDispatcher.register(function(action) {
         break;
         case Constants.DELETE_RENTAL:
             RentalStore.deleteRental(data);
+        break;
+        case Constants.CHANGED_AGREED_TO_RENTAL_TERMS:
+            RentalStore.setAgreedToTerms(data);
         break;
 	}
 

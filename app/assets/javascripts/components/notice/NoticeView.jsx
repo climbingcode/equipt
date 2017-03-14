@@ -4,53 +4,74 @@ Equipt.views.NoticeView = class NoticeView extends React.Component {
 		super(props);
 	}
 
-	close() {
-		Equipt.actions.clearNotice();
-	}
-
-	getAlertClassName() {
-		let notice = this.props.notice;
-		if (notice && notice.error) return "notice error";
-		else if (notice && notice.info) return "notice info";
-		else return "notice";
-	}
-
 	render() {
 
-		let noticeHtml = null;
-		let close      = null;
-		let notice     = this.props.notice;
-
-		if (notice.error || notice.info) {
-			close = <i 	className="pull-right fa fa-times" 
-						aria-hidden="true"
-						onClick={ this.props.close.bind(this) }></i>;
-		}
-
-		if (notice.error && typeof notice.error === 'object') {
-			
-			let errors = Object.keys( notice.error );
-				
-			notice.error =  <ul>
-							{
-								errors.map((key, index) => {
-									return <li 	key={ `error_${ key }_${ index }` }
-												className={key}>{ notice.error[ key ] }
-											</li>
-								})
-							}
-							</ul>
-
-		}
+		let styles = this.styles.call(this);
 
 		return (			
-			<div className={ this.getAlertClassName.call(this) }>
-				{ close }
-				{ notice.error ? notice.error : notice.info }
+			<div style={ styles }>
+				<i 	className="pull-right fa fa-times" 
+					style={ styles.i }
+					aria-hidden="true"
+					onClick={ this.props.close.bind(this) }></i>
+				<ul style={ styles.ul }>
+					{ this.getNotices.call(this, styles) }
+				</ul> 
 			</div>
 		)
 
 	}
 
+	close() {
+		Equipt.actions.clearNotice();
+	}
+
+	getNotices(styles) {
+		let notices = flattenObject(this.props.notice) || {};
+		let noticesListItems = [];
+		let index = 0;
+		for(let key in notices) {
+			noticesListItems.push(	<li key={ `${ key }_${ index }` }
+										style={ styles.li }
+									>
+										{ notices[ key ] }
+									</li>);
+			index++;
+		}
+		return noticesListItems;
+	}
+
+	styles() {
+		
+		let notice 	  = this.props.notice;
+		let hasNotice = notice.error || notice.info;
+
+		return {
+			display: !!hasNotice ? 'block' : 'none',
+			position: 'fixed',
+			bottom: '10px',
+			right: '10px',
+			padding: '20px',
+			color: '#fff',
+			fontSize: '16px',
+			zIndex: '2',
+			borderWidth: 1,
+			background: notice.error ? '#EF6565' : '#51C1DB',
+			borderColor: notice.error ? '#DE5152' : '#1BB1D2',
+			i: {
+				position: 'absolute',
+				top: '3px',
+				right: '5px'
+			},
+			ul: {
+				padding: '0'
+			},
+			li: {
+				paddingBottom: '10px',
+				listStyle: 'none',
+				color: '#ffffff'
+			}
+		}
+	}
 
 }

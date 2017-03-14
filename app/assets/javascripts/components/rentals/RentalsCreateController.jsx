@@ -5,8 +5,7 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 			rentals: Equipt.stores.RentalStore.getRentals(),
 			rental: Equipt.stores.RentalStore.getRental(),
 			hasCreatedRental: Equipt.stores.RentalStore.hasCreatedRental(),	
-			equipment: Equipt.stores.EquipmentStore.getEquipment(),
-			agreedToTerms: false
+			equipment: Equipt.stores.EquipmentStore.getEquipment()
 		}
 	}
 
@@ -25,31 +24,23 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 	}
 
 	selectDates(dates) {
-		setTimeout(() => {
-			Equipt.actions.selectedRentalDates(dates);
-		}, 50);
+		Equipt.actions.selectedRentalDates(dates);	
 	}
 
 	selectTime(time) {
 		Equipt.actions.selectedPickUpTime(time);
 	}
 
-	agreedToTermsChanged() {
-		this.state.agreedToTerms = this.state.agreedToTerms ? false : true;
-		this.setState(this.state);
-	}
-
 	rent() {
 
-		let equipmentId = this.state.equipment.id;
-		let rental 		= this.state.rental;
-		let agreedToTerms = this.state.agreedToTerms;
+		let equipmentId   = this.state.equipment.id;
+		let rental 		  = this.state.rental;
 
     	Equipt.actions.rentEquipment(equipmentId, {
     		pickup_date: rental.pickup_date,
     		dropoff_date: rental.dropoff_date,
     		pick_up_time: rental.times,
-    		agreed_to_terms: this.state.agreedToTerms
+    		agreed_to_terms: rental.agreed_to_terms
     	});
     	
 	}
@@ -58,9 +49,11 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 
 		const RentalsCreateView = Equipt.views.RentalsCreateView;
 
+		console.log( this.props.equipment.rentals );
+
 		return (
-			<RentalsCreateView 	equipment={ this.state.equipment }
-								rentals={ this.state.rentals }
+			<RentalsCreateView 	equipment={ this.props.equipment }
+								rentals={ this.props.equipment.rentals || [] }
 								rental={ this.state.rental }
 								hasCreatedRental={ this.state.hasCreatedRental }
 								agreedToTerms={ this.state.agreedToTerms }
@@ -68,7 +61,6 @@ Equipt.controllers.RentalsCreateController = class RentalsCreateController exten
 								selectDates={ this.selectDates }
 								selectTime={ this.selectTime }
 								rent={ this.rent.bind(this) }
-								agreedToTermsChanged={ this.agreedToTermsChanged.bind(this) } 
 			/>
 		)
 

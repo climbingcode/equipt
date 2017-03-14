@@ -47,6 +47,30 @@ function serialize(obj, prefix) {
         	encodeURIComponent(k) + "=" + encodeURIComponent(v));
     	}
   	}
+  	
   	return str.join("&");
 
- }
+};
+
+function flattenObject(ob) {
+	
+	var toReturn = {};
+	
+	for (var i in ob) {
+		if (!ob.hasOwnProperty(i)) continue;
+		
+		if ((typeof ob[i]) == 'object') {
+			var flatObject = flattenObject(ob[i]);
+			for (var x in flatObject) {
+				if (!flatObject.hasOwnProperty(x)) continue;
+				
+				toReturn[i + '.' + x] = flatObject[x];
+			}
+		} else {
+			toReturn[i] = ob[i];
+		}
+	}
+
+	return toReturn;
+
+};

@@ -19,8 +19,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, state) { 
-        return this.loadedUnavailableDates != true
-        || this.haveDatesChanged(nextProps)
+        return this.loadedUnavailableDates != true;
     }
   
     componentWillReceiveProps() {
@@ -29,12 +28,13 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
         let rental = this.props.rental;
 
+        // Return if date has not been choosen
         if (!rental.pickup_date || !rental.dropoff_date) return;
-            
+
         // Selected Dates
         let event = {
             id: 1,
-            title: 'selected',
+            title: 'SELECTED',
             start: rental.pickup_date,
             end: rental.dropoff_date,
             color: '#8FC485'
@@ -59,7 +59,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
 
             return {
                 id: rental.id,
-                title: 'rented',
+                title: 'RENTED',
                 start: rental.pickup_date,
                 end: rental.dropoff_date,
                 color: 'red'
@@ -72,7 +72,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
     }
 
     selectedDatesString(start, end) {
-        return `${ start.format('dddd MM/DD/YYYY') } to ${ end.format('dddd MM/DD/YYYY') } selected`;
+        return `${ start.format('dddd MM/DD/YYYY') } to ${ momentend.subtract(1, "days").format('dddd MM/DD/YYYY') } selected`;
     }
 
     buildCalendar(rentals) {
@@ -86,7 +86,7 @@ Equipt.views.Calendar = class Calendar extends React.Component {
                 center: 'title'  
             },
             // events: events,
-            select: (start, end, allDay) => {
+            select: (start, end, event) => {
 
                 let startDate = start;
                 let todaysDate = moment();

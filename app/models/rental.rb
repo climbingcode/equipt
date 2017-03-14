@@ -43,7 +43,6 @@ class Rental < ActiveRecord::Base
 		self.rental_deposit = equipment.desposit_amount
 	end
 
-
 	# =============
 	# EMAIL ALERTS
 	# =============

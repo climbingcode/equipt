@@ -18,7 +18,7 @@ Equipt.stores.NoticeStore = Object.assign({}, EventEmitter.prototype, StoreSetti
 
 AppDispatcher.register(function(action) {
   
-  	var {type, data} = action.payload;
+  	const {type, data} = action.payload;
 
   	let NoticeStore = Equipt.stores.NoticeStore;
 

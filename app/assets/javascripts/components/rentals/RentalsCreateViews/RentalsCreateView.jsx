@@ -50,7 +50,8 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 				<div className="clearfix"></div>
 				
 				<input  type="checkbox"
-						onChange={ this.props.agreedToTermsChanged }
+						ref="agreedToTerms"
+						onChange={ this.agreedToTermsClicked.bind(this) }
 						defaultChecked={ this.props.agreedToTerms }
 				/>
 
@@ -61,6 +62,7 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 						onClick={ this.props.rent }>
 						Rent
 				</button>
+				
 			</div>
 		)
 	}
@@ -68,7 +70,11 @@ Equipt.views.RentalsCreateView = class RentalsCreateView extends React.Component
 	canRent() {
 		return 	!this.props.rental.pickup_date
 				|| !this.props.rental.times;
-				// || !this.props.agreedToTerms;
+	}
+
+	agreedToTermsClicked() {
+		let input = this.refs.agreedToTerms || {};
+		Equipt.actions.agreedToRentalTermsChanged( input.checked );
 	}
 
 }

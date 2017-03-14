@@ -1,36 +1,36 @@
-.tabs {
-    clear: both;
-    padding: 0;
-    height: 55px;
-    background: #fff;
-    border: 1px solid #000;
-}
+// .tabs {
+//     clear: both;
+//     padding: 0;
+//     height: 55px;
+//     background: #fff;
+//     border: 1px solid #000;
+// }
 
-.tab {
-    height: 53px;
-    font-size: 20px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 30px;
-    line-height: 1.8;
-    text-align: center;
-    list-style-type: none;
-    border-left: 1px solid #000;
-    &:first-child {
-        border-left: none;    
-    }
-    &.selected {
-        color: #fff;
-        background: $camping_green;
-    }
-}
+// .tab {
+//     height: 53px;
+//     font-size: 20px;
+//     cursor: pointer;
+//     text-transform: uppercase;
+//     font-size: 30px;
+//     line-height: 1.8;
+//     text-align: center;
+//     list-style-type: none;
+//     border-left: 1px solid #000;
+//     &:first-child {
+//         border-left: none;    
+//     }
+//     &.selected {
+//         color: #fff;
+//         background: $camping_green;
+//     }
+// }
 
-.equipment-category-container {
-    @extend .tabs;
-    li {
-        @extend .tab;
-    }
-}
+// .equipment-category-container {
+//     @extend .tabs;
+//     li {
+//         @extend .tab;
+//     }
+// }
 
 .equipment-ajax-loader-wrapper {
     width: 100px;

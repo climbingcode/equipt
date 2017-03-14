@@ -4,6 +4,16 @@ Equipt.views.EquipmentInfoView = class EquipmentInfoView extends React.Component
 		super(props);
 	}
 
+	getDefaultImage() {
+		return [
+			{
+				file: {
+					url: Constants.styles.defaultEquiptmentImage
+				}
+			}
+		]
+	}
+
 	render() {
 
 		const Slider 			   = Equipt.views.Slider;
@@ -11,6 +21,9 @@ Equipt.views.EquipmentInfoView = class EquipmentInfoView extends React.Component
 
 		let equipment = this.props.equipment || {};
 		let images    = this.props.equipment.images || [];
+
+		if( !images.length ) images = this.getDefaultImage();
+			
 
 		return (
 			<div className="equipment-info-view">

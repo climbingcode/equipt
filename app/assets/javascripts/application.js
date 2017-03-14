@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require moment
+//= require full-calendar
 //= require daterangepicker
 //= require react
 //= require react_ujs
