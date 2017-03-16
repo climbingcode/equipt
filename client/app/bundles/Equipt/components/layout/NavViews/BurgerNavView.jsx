@@ -1,4 +1,6 @@
-Equipt.views.BurgerNavView = class extends React.Component {
+import React from 'react';
+
+class BurgerNavView extends React.Component {
 
 	iconClass() {
 		if (this.props.showDropDown) {
@@ -17,3 +19,5 @@ Equipt.views.BurgerNavView = class extends React.Component {
 	}
 
 }
+
+export { BurgerNavView };

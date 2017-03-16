@@ -1,4 +1,6 @@
-Equipt.views.NoticeView = class NoticeView extends React.Component {
+import React from 'react';
+
+class NoticeView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -75,3 +77,5 @@ Equipt.views.NoticeView = class NoticeView extends React.Component {
 	}
 
 }
+
+export { NoticeView };

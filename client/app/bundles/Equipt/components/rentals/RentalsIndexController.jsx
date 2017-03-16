@@ -1,4 +1,6 @@
-Equipt.controllers.RentalsIndexController = class RentalsIndexController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+
+class RentalsIndexController extends MainController {
 
 	getState = function() {
 		return {
@@ -35,3 +37,5 @@ Equipt.controllers.RentalsIndexController = class RentalsIndexController extends
 	}
 
 }
+
+export { RentalsIndexController };

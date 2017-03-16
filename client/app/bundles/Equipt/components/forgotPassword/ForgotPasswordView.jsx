@@ -1,4 +1,6 @@
-Equipt.views.ForgotPasswordView = class ForgotPasswordView extends React.Component {
+import React from 'react';
+
+class ForgotPasswordView extends React.Component {
 
 	submit(e) {
 		e.preventDefault();
@@ -32,3 +34,5 @@ Equipt.views.ForgotPasswordView = class ForgotPasswordView extends React.Compone
 	}
 
 }
+
+export { ForgotPasswordView };

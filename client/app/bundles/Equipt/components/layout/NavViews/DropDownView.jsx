@@ -1,4 +1,6 @@
-Equipt.views.DropDownView = class DropDownView extends React.Component {
+import React from 'react';
+
+class DropDownView extends React.Component {
 
 	showDropDownClasses() {
 		let visibleClass = this.props.showDropDown ? 'show' : 'hide';
@@ -13,3 +15,5 @@ Equipt.views.DropDownView = class DropDownView extends React.Component {
 		)
 	}
 }
+
+export { DropDownView };

@@ -1,23 +1,27 @@
-Equipt.controllers.AjaxLoader = class AjaxLoader extends Equipt.controllers.MainController {
+import React from 'react';
+
+import { MainController } from 'MainController';
+import { CampFireView } from 'components/ajaxLoader/CampFireView';
+import AjaxLoaderStore from 'stores/AjaxLoaderStore';
+
+class AjaxLoader extends MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.AjaxLoaderStore]
+		this.stores = [AjaxLoaderStore]
 		this.state = {
-			isLoaderShown: Equipt.stores.AjaxLoaderStore.isShown()
+			isLoaderShown: AjaxLoaderStore.isShown()
 		}
 	}
 
 	_onChange() {
 		this.mounted && this.setState({
-			isLoaderShown: Equipt.stores.AjaxLoaderStore.isShown()
+			isLoaderShown: AjaxLoaderStore.isShown()
 		});
 		this.mounted && this.forceUpdate();
 	}
 
 	render() {
-
-		const CampFireView = Equipt.views.campFireView;
 
 		let isLoaderShown = this.state.isLoaderShown;
 		let shownClass = isLoaderShown ? 'loader-wrapper show' : 'loader-wrapper';
@@ -30,3 +34,5 @@ Equipt.controllers.AjaxLoader = class AjaxLoader extends Equipt.controllers.Main
 	}
 
 }
+
+export { AjaxLoader }

@@ -1,4 +1,7 @@
-Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+import { RouteHandler } from 'react-router';
+
+class EquipmentIndexController extends MainController {
 
 	getState = function() {
 		return {
@@ -42,3 +45,5 @@ Equipt.controllers.EquipmentIndexController = class extends Equipt.controllers.M
 	}
 
 }
+
+export { EquipmentIndexController };

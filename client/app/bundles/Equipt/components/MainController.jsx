@@ -1,4 +1,7 @@
-Equipt.controllers.MainController = class MainController extends React.Component {
+import React from 'react';
+import loaderActions from 'actions/loader';
+
+class MainController extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,7 +13,7 @@ Equipt.controllers.MainController = class MainController extends React.Component
         this.stores.forEach((store) => {
             store.addChangeListener(this._onChange.bind(this));
         });
-        Equipt.actions.hideLoader();
+        loaderActions.hideLoader();
     }
     
     componentWillUnmount() {
@@ -19,7 +22,7 @@ Equipt.controllers.MainController = class MainController extends React.Component
             store.removeChangeListener(this._onChange.bind(this));
         });
         Equipt.stores.ErrorsStore.clearErrors();
-        Equipt.actions.hideLoader();
+        loaderActions.hideLoader();
     }
 
     willTransitionTo(transition) {
@@ -35,3 +38,5 @@ Equipt.controllers.MainController = class MainController extends React.Component
     }
 
 }
+
+export { MainController };

@@ -1,4 +1,6 @@
-Equipt.controllers.ProfileController = class ProfileController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+
+class ProfileController extends MainController {
 
 	getState = function() {
 		return {
@@ -35,3 +37,5 @@ Equipt.controllers.ProfileController = class ProfileController extends Equipt.co
 	}
 	
 }
+
+export { ProfileController };

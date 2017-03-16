@@ -1,4 +1,6 @@
-Equipt.views.campFireView = class CampFireView extends React.Component {
+import React from 'react';
+
+class CampFireView extends React.Component {
 
  	render() {
  		return (
@@ -20,3 +22,5 @@ Equipt.views.campFireView = class CampFireView extends React.Component {
  	}
 
 }
+
+export { CampFireView };

@@ -1,4 +1,6 @@
-Equipt.views.EquipmentOwnerView = class EquipmentOwnerView extends React.Component {
+import React from 'react';
+
+class EquipmentOwnerView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -25,3 +27,5 @@ Equipt.views.EquipmentOwnerView = class EquipmentOwnerView extends React.Compone
 		)
 	}
 }
+
+export { EquipmentOwnerView };

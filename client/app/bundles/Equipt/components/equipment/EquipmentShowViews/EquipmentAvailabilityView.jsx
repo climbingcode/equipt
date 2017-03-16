@@ -1,4 +1,6 @@
-Equipt.views.EquipmentAvailabilityView = class EquipmentAvailabilityView extends React.Component {
+import React from 'react';
+
+class EquipmentAvailabilityView extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -18,3 +20,5 @@ Equipt.views.EquipmentAvailabilityView = class EquipmentAvailabilityView extends
 	}
 
 }
+
+export { EquipmentAvailabilityView };

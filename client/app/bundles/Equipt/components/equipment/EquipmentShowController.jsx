@@ -1,8 +1,7 @@
-Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.MainController {
+import { RouteHandler } from 'react-router';
+import { MainController } from 'MainController';
 
-	static contextTypes = {
-		router: React.PropTypes.func.isRequired
-	}
+class EquiptmentShowController extends MainController {
 
 	getState = function() {
 		return {
@@ -39,3 +38,5 @@ Equipt.controllers.EquipmentShowController = class extends Equipt.controllers.Ma
 	}
 
 }
+
+export { EquiptmentShowController };

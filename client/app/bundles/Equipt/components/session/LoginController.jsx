@@ -1,4 +1,6 @@
-Equipt.controllers.LoginController = class LoginController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+
+class LoginController extends MainController {
 
 	constructor(props) {
 		super(props);
@@ -27,3 +29,5 @@ Equipt.controllers.LoginController = class LoginController extends Equipt.contro
 	}
 
 }
+
+export { LoginController };

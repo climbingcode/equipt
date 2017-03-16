@@ -1,4 +1,6 @@
-Equipt.controllers.SignupController = class SignupController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+
+class SignupController extends MainController {
 
 	constructor(props) {
 		super(props);

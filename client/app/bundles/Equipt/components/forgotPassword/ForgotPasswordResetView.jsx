@@ -1,4 +1,6 @@
-Equipt.views.ForgotPasswordResetView = class ForgotPasswordResetView extends React.Component {
+import React from 'react';
+
+class ForgotPasswordResetView extends React.Component {
 
 	static contextTypes = {
 		router: React.PropTypes.func.isRequired
@@ -42,3 +44,5 @@ Equipt.views.ForgotPasswordResetView = class ForgotPasswordResetView extends Rea
 	}
 
 }
+
+export { ForgotPasswordResetView };

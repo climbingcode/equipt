@@ -1,4 +1,6 @@
-Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+
+class OwnersIndexController extends MainController {
 
 	getState = function() {
 		return {
@@ -32,3 +34,5 @@ Equipt.controllers.OwnersIndexController = class extends Equipt.controllers.Main
 	}
 
 }
+
+export { OwnersIndexController };

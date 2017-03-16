@@ -1,25 +1,31 @@
-var RouteHandler = ReactRouter.RouteHandler;
+import React from 'react';
 
-export class Equipt extends Equipt.controllers.MainController {
+import { RouteHandler } from 'react-router';
+import { MainController } from './MainController';
 
-	static contextTypes = {
-		router: React.PropTypes.func.isRequired
-	}
+import AuthStore from 'stores/AuthStore';
+import loaderActions from 'actions/loader';
+
+import { Nav } from 'components/layout/Nav';
+import { NoticeController } from 'components/notice/NoticeController';
+import { AjaxLoader } from 'components/ajaxLoader/AjaxLoader';
+
+class Equipt extends MainController {
 
 	getState = function() {
 		return {
-			currentUser: Equipt.stores.AuthStore.currentUser() || {}
+			currentUser: AuthStore.currentUser() || {}
 		}
 	}
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.AuthStore];
+		this.stores = [ AuthStore ];
 		this.state = this.getState();
 	}
 
 	componentDidMount() {
-		if (Equipt.stores.AuthStore.authenticated()) Equipt.actions.appInit();	
+		if (AuthStore.authenticated()) Equipt.actions.appInit();	
 	}
 
 	changePath() {
@@ -30,10 +36,10 @@ export class Equipt extends Equipt.controllers.MainController {
 		// newer version of react-rails-router 1.0
 
 		setTimeout(() => {
-			if (Equipt.stores.AuthStore.authenticated() 
+			if (AuthStore.authenticated() 
 				&& ((path.indexOf('/equipment') > -1) || (path.indexOf('/owner') > -1)) ) {	
 				this.context.router.transitionTo(path);
-			} else if (Equipt.stores.AuthStore.authenticated()) {
+			} else if (AuthStore.authenticated()) {
 				this.context.router.transitionTo(Constants.links.equipmentIndex);
 			} else if (path.indexOf('/login') === -1) {			
 				this.context.router.transitionTo(Constants.links.login);
@@ -49,10 +55,6 @@ export class Equipt extends Equipt.controllers.MainController {
 
 	render() {
 
-		let Nav = Equipt.views.Nav;
-		let NoticeController = Equipt.controllers.NoticeController;
-		let AjaxLoader = Equipt.controllers.AjaxLoader;
-
 		return (
 			<content>
 				<AjaxLoader/>
@@ -66,3 +68,5 @@ export class Equipt extends Equipt.controllers.MainController {
 	}
 	
 }
+
+export { Equipt };

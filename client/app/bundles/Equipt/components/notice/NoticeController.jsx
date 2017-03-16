@@ -1,4 +1,7 @@
-Equipt.controllers.NoticeController = class NoticeController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+import { NoticeView } from 'components/notice/NoticeView';
+
+class NoticeController extends MainController {
 
 	NOTICE_DURATION: 5000
 
@@ -31,8 +34,6 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 
 	render() {
 
-		let NoticeView = Equipt.views.NoticeView;
-
 		return (
 			<NoticeView notice={ this.state.notice } 
 						close={ this.close }/>
@@ -40,3 +41,5 @@ Equipt.controllers.NoticeController = class NoticeController extends Equipt.cont
 	}
 
 }
+
+export { NoticeController };

@@ -1,4 +1,6 @@
-Equipt.views.Home = class Home extends React.Component {
+import React from 'react';
+
+class Home extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -53,3 +55,5 @@ Equipt.views.Home = class Home extends React.Component {
 	}
 
 }
+
+export { Home };

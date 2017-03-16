@@ -1,6 +1,11 @@
-const Link = ReactRouter.Link;
+import React from 'react';
 
-Equipt.views.Nav = class extends React.Component {
+import { RouteHandler, Link } from 'react-router';
+
+import { BurgerNavView } from 'components/layout/NavViews/BurgerNavView';
+import { DropDownView } from 'components/layout/NavViews/DropDownView';
+
+class Nav extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -9,11 +14,7 @@ Equipt.views.Nav = class extends React.Component {
 		}
 	}
 
-
 	render() {
-
-		const BurgerNavView = Equipt.views.BurgerNavView;
-		const DropDownView = Equipt.views.DropDownView;
 
 		return (
 			<nav className="navbar">
@@ -143,6 +144,4 @@ Equipt.views.Nav = class extends React.Component {
 
 }
 
-Equipt.views.Nav.contextTypes = {
-	router: React.PropTypes.func.isRequired
-};
+export { Nav };

@@ -1,8 +1,7 @@
-Equipt.controllers.OwnersShowController = class OwnersShowController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+import { RouteHandler } from 'react-router';
 
-	static contextTypes = {
-		router: React.PropTypes.func.isRequired
-	}
+class OwnersShowController extends MainController {
 
 	getState = function() {
 		return {
@@ -42,3 +41,5 @@ Equipt.controllers.OwnersShowController = class OwnersShowController extends Equ
 	}
 
 }
+
+export { OwnersShowController };
