@@ -1,4 +1,11 @@
-Equipt.views.LoginFormView = class LoginFormView extends Equipt.helpers.FormHelper {
+import React from 'react';
+
+import { FormComponent } from 'components/helpers/FormComponent';
+import { FaceBookController } from 'components/oauth/FaceBookController';
+
+import AuthActions from 'actions/AuthActions';
+
+export class LoginFormView extends FormComponent {
 
 	constructor(props) {
 		super(props);
@@ -7,16 +14,14 @@ Equipt.views.LoginFormView = class LoginFormView extends Equipt.helpers.FormHelp
 	submit(e) {
 		e.preventDefault();
 		this.serializeForm();
-		Equipt.actions.createSession(this.formData);
+		AuthActions.createSession(this.formData);
 	}
 
 	render() {
 
-		let FaceBookController = Equipt.controllers.FaceBookController;
-
 		return (
 			<div className="login-wrapper">
-				<FaceBookController/>
+				<FaceBookController facebookID={ this.props.facebookID }/>
 				<form onSubmit={this.submit.bind(this)}>
 					<label htmlFor="email">Email</label>
 					<input type="text" ref="email" className="form-control"/>

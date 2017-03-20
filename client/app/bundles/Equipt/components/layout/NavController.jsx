@@ -1,17 +1,23 @@
 import React from 'react';
 
-import { RouteHandler, Link } from 'react-router';
+import AuthStore from 'stores/AuthStore';
 
+import { MainController } from 'MainController';
+import { Link } from 'react-router-dom';
 import { BurgerNavView } from 'components/layout/NavViews/BurgerNavView';
 import { DropDownView } from 'components/layout/NavViews/DropDownView';
 
-class Nav extends React.Component {
+class NavController extends React.Component {
+
+	getState = () => {
+		return {
+			showDropDown: false,
+		}
+	}
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			showDropDown: false
-		}
+		this.state = this.getState();
 	}
 
 	render() {
@@ -45,23 +51,19 @@ class Nav extends React.Component {
 
 	ownersOrEquipmentBtn() {
 
-		let pathname = this.context.router.getCurrentPath();
 		let currentUser = this.props.currentUser;
 
-		if (pathname.indexOf('/owner/') > -1) {
+		if (currentUser) {
 			
 			return 	<Link 	className="btn btn-success equipment-owner-toggle"
-							to="equipmentIndex" 
-							ref="equipmentLink">
+							to="/equipment">
 							Rent Equipment
 					</Link>;
 
 		} else {
 
 			return 	<Link 	className="btn btn-success equipment-owner-toggle"
-							to="ownersIndex" 
-							params={{ userId: currentUser.id }}
-							ref="ownersLink">
+							to={ `/owner/${ currentUser.id }/equipment` }>
 							Owned Equipment
 					</Link>;
 
@@ -72,9 +74,8 @@ class Nav extends React.Component {
 	sessionBtns() {
 
 		let currentUser = this.props.currentUser;
-		let userName 	=  currentUser.firstname ? currentUser.firstname.capitalize() : "";
 
-		if (currentUser.id) {
+		if (currentUser) {
 
 			return	<div className="col-sm-10 col-md-8 col-lg-7 visible-lg pull-right"
 						key="currentUser.email">
@@ -82,13 +83,13 @@ class Nav extends React.Component {
 							{ this.ownersOrEquipmentBtn() }
 						</span>
 						<span className="col-sm-3">
-							<Link to="rentalsIndex" params={{ userId: currentUser.id }}>
+							<Link to={ `/owner/${ currentUser.id }/rentals` }>
 								<button className="logout-btn btn btn-success">Schedule</button>
 							</Link>
 						</span>
 						<span className="col-sm-3">
-							<Link to="profile" params={{ userId: currentUser.id }}>
-								<h3 className="nav-title">{ userName }</h3>
+							<Link to={ `/users/${ currentUser.id }/edit` }>
+								<h3 className="nav-title">{ currentUser.firstname.capitalize() }</h3>
 							</Link>
 						</span>
 						<span className="col-sm-2">
@@ -103,13 +104,13 @@ class Nav extends React.Component {
 
 			return	<ul className="session-container navbar-right col-sm-3"
 						key="sessions">
-						<Link to="login">
+						<Link to="/login">
 							<li key="login" 
 								className="btn btn-success">
 								Login
 							</li>
 						</Link>
-						<Link to="signup">
+						<Link to="/signup">
 							<li key="signup" 
 								className="btn btn-success">
 								Signup
@@ -125,7 +126,7 @@ class Nav extends React.Component {
 
 		let currentUser = this.props.currentUser;
 
-		if (currentUser.id) {
+		if (currentUser) {
 
 			return 	<Link to="equipmentIndex">
 						<div className="nav-logo"></div>
@@ -144,4 +145,4 @@ class Nav extends React.Component {
 
 }
 
-export { Nav };
+export { NavController };

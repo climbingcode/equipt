@@ -1,4 +1,11 @@
-Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper {
+import React from 'react';
+
+import { FormComponent } from 'components/helpers/FormComponent';
+import { GoogleMapView } from 'components/map/map';
+import { ModalView } from 'components/layout/ModalView';
+import { RentalsPickUpTimeView } from 'components/rentals/RentalsPickUpTimeView';
+
+export class SignupFormView extends FormComponent {
 
 	constructor(props) {
 		super(props);
@@ -15,7 +22,7 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 		let setPosition = (position) => {			
 			this.geo.lat = position.coords.latitude;
 			this.geo.lng = position.coords.longitude;
-		}.bind(this)
+		};
 
 		if (navigator.geolocation) {
 	        navigator.geolocation.getCurrentPosition(setPosition);
@@ -104,15 +111,9 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 	}
 
 	render() {
-
-		const FaceBookController    = Equipt.controllers.FaceBookController;
-		const GoogleMapView 	    = Equipt.views.mapView;
-		const ModalView 		    = Equipt.views.ModalView;
-		const RentalsPickUpTimeView = Equipt.views.RentalsPickUpTimeView;
-		const TermsAndConditions    = Equipt.views.TermsAndConditions;
 		
-		let currentUser = this.props.currentUser;
-		let inputs 		= Equipt.content.createUser.formInputs;
+		let currentUser = this.props.currentUser || {};
+		let inputs 		= SignupFormView.formInputs;
 
 		if (!currentUser) {
 
@@ -217,5 +218,51 @@ Equipt.views.SignupFormView = class SignupForm extends Equipt.helpers.FormHelper
 			</div>
 		)
 	}
+
+
+	static formInputs = [
+		{
+			name: 'firstname',
+			type: 'text',
+			tag: 'input',
+			placeholder: 'First Name'
+		},
+		{
+			name: 'lastname',
+			type: 'text',
+			tag: 'input',
+			placeholder: 'Last Name'
+		},
+		{
+			name: 'username',
+			type: 'text',
+			tag: 'input',
+			placeholder: 'User Name'
+		},
+		{
+			name: 'email',
+			type: 'text',
+			tag: 'input',
+			placeholder: 'Email'
+		},
+		{
+			name: 'email_confirmation',
+			type: 'text',
+			tag: 'input',
+			placeholder: 'Email Confirmation'
+		},
+		{
+			name: 'lat',
+			type: 'hidden',
+			tag: 'input',
+			placeholder: ''
+		},
+		{
+			name: 'lng',
+			type: 'hidden',
+			tag: 'input',
+			placeholder: ''
+		}
+	]
 
 }

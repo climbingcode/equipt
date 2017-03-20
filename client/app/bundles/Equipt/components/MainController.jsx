@@ -1,5 +1,7 @@
 import React from 'react';
-import loaderActions from 'actions/loader';
+
+import LoaderActions from 'actions/LoaderActions';
+import ErrorsStore from 'stores/ErrorsStore';
 
 class MainController extends React.Component {
 
@@ -13,7 +15,7 @@ class MainController extends React.Component {
         this.stores.forEach((store) => {
             store.addChangeListener(this._onChange.bind(this));
         });
-        loaderActions.hideLoader();
+        LoaderActions.hideLoader();
     }
     
     componentWillUnmount() {
@@ -21,8 +23,8 @@ class MainController extends React.Component {
         this.stores.forEach((store) => {
             store.removeChangeListener(this._onChange.bind(this));
         });
-        Equipt.stores.ErrorsStore.clearErrors();
-        loaderActions.hideLoader();
+        ErrorsStore.clearErrors();
+        LoaderActions.hideLoader();
     }
 
     willTransitionTo(transition) {

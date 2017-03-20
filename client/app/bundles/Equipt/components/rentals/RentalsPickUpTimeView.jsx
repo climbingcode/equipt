@@ -1,9 +1,38 @@
-Equipt.views.RentalsPickUpTimeView = class RentalsPickUpTimeView extends React.Component {
+import React from 'react';
+import Constants from 'Constants';
+
+export class RentalsPickUpTimeView extends React.Component {
 
 	static propType = {
 		unavailableTimes: React.PropTypes.array.isRequired,
 		times: React.PropTypes.object.isRequired,
 		selectedTime: React.PropTypes.func.isRequired
+	}
+
+	styles = {
+		ul: {
+			padding: 0,
+			marginBottom: '10px'
+		},
+		li: {
+			listStyle: 'none',
+			borderColor: '#000',
+			borderWidth: 1,
+			padding: 0,
+			marginTop: 5,
+			marginRight: 5,
+			marginLeft: 5,
+			textAlign: 'center',
+			background: '#fff'
+		},
+		selected: {
+			background: Constants.styles.primary,
+			color: '#fff'
+		},
+		unavailable: {
+			background: Constants.styles.secondary,
+			color: '#fff'
+		}
 	}
 
 	constructor(props) {
@@ -38,32 +67,6 @@ Equipt.views.RentalsPickUpTimeView = class RentalsPickUpTimeView extends React.C
 			</ul>
 		)
 
-	}
-
-	styles = {
-		ul: {
-			padding: 0,
-			marginBottom: '10px'
-		},
-		li: {
-			listStyle: 'none',
-			borderColor: '#000',
-			borderWidth: 1,
-			padding: 0,
-			marginTop: 5,
-			marginRight: 5,
-			marginLeft: 5,
-			textAlign: 'center',
-			background: '#fff'
-		},
-		selected: {
-			background: Constants.styles.primary,
-			color: '#fff'
-		},
-		unavailable: {
-			background: Constants.styles.secondary,
-			color: '#fff'
-		}
 	}	
 
 }

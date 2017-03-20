@@ -14,7 +14,9 @@ String.prototype.capitalize = function(){
 }
 	
 // to underCase
-function formatKeys(oldObj, changeTo) {
+let helpers = {};
+
+helpers.formatKeys = (oldObj, changeTo) => {
 
 	var newObj = {};
 		
@@ -36,7 +38,7 @@ function formatKeys(oldObj, changeTo) {
 };
 
 // Turn object in url param
-function serialize(obj, prefix) {
+helpers.serialize = (obj, prefix) => {
 
   	var str = [];
   	for(var p in obj) {
@@ -52,7 +54,7 @@ function serialize(obj, prefix) {
 
 };
 
-function flattenObject(ob) {
+helpers.flattenObject = (ob) => {
 	
 	var toReturn = {};
 	
@@ -74,3 +76,5 @@ function flattenObject(ob) {
 	return toReturn;
 
 };
+
+export default helpers;

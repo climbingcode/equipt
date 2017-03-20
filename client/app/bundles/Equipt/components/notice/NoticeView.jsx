@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Helpers from 'config/Helpers';
+
 class NoticeView extends React.Component {
 
 	constructor(props) {
@@ -29,7 +31,7 @@ class NoticeView extends React.Component {
 	}
 
 	getNotices(styles) {
-		let notices = flattenObject(this.props.notice) || {};
+		let notices = Helpers.flattenObject(this.props.notice) || {};
 		let noticesListItems = [];
 		let index = 0;
 		for(let key in notices) {

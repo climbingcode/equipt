@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ForgotPasswordResetView extends React.Component {
+export class ForgotPasswordResetView extends React.Component {
 
 	static contextTypes = {
 		router: React.PropTypes.func.isRequired
@@ -43,6 +43,4 @@ class ForgotPasswordResetView extends React.Component {
 		)
 	}
 
-}
-
-export { ForgotPasswordResetView };
+};

@@ -12,6 +12,7 @@
     "test": "rspec"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "foreman": "^2.0.0"
   }
 }

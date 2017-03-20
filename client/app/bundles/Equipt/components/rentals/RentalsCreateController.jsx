@@ -1,4 +1,6 @@
-Equipt.controllers.RentalsCreateController = class RentalsCreateController extends Equipt.controllers.MainController {
+import { MainController } from 'MainController';
+
+export class RentalsCreateController extends MainController {
 
 	getState = function() {
 		return {

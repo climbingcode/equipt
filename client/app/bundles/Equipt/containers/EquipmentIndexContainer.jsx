@@ -1,14 +1,16 @@
 import { MainController } from 'MainController';
 import { RouteHandler } from 'react-router';
 
-class EquipmentIndexController extends MainController {
+import EquipmentStore from 'stores/EquipmentStore';
+
+export class EquipmentIndexContainer extends MainController {
 
 	getState = function() {
 		return {
-			equipment: Equipt.stores.EquipmentStore.getEquipments(),
-			pages: Equipt.stores.EquipmentStore.getPages(),
-			search: Equipt.stores.EquipmentStore.getSearchQuery(),
-			showLoader: Equipt.stores.EquipmentStore.showLoader()
+			equipment: EquipmentStore.getEquipments(),
+			pages: EquipmentStore.getPages(),
+			search: EquipmentStore.getSearchQuery(),
+			showLoader: EquipmentStore.showLoader()
 		}
 	}
 
@@ -44,6 +46,4 @@ class EquipmentIndexController extends MainController {
 		)
 	}
 
-}
-
-export { EquipmentIndexController };
+};

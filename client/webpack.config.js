@@ -11,7 +11,7 @@ const config = {
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
-    './app/bundles/Equipt/startup/registration',
+    './app/bundles/Equipt/startup/app',
   ],
 
   output: {
@@ -23,6 +23,7 @@ const config = {
     extensions: ['.js', '.jsx'],
     alias: {
       components: path.resolve(__dirname, './app/bundles/Equipt/components'),
+      containers: path.resolve(__dirname, './app/bundles/Equipt/containers'),
       config: path.resolve(__dirname, './app/bundles/Equipt/config'),
       helpers: path.resolve(__dirname, './app/bundles/Equipt/helpers'),
       actions: path.resolve(__dirname, './app/bundles/Equipt/actions'),

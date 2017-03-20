@@ -1,8 +1,17 @@
-Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.controllers.MainController {
+import React from 'react';
+
+import { MainController } from 'MainController';
+import { FaceBookView } from './FaceBookView';
+
+import AuthStore from 'stores/AuthStore';
+
+// import Keys from 'config/Keys.js.erb';
+
+export class FaceBookController extends MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.AuthStore];
+		this.stores = [ AuthStore ];
 		this.state = {
 			facebookLoaded: false
 		}
@@ -10,7 +19,7 @@ Equipt.controllers.FaceBookController = class FaceBookController extends Equipt.
 
 	loadFaceBook(callback) {
 		window.FB.init({
-      		appId: Keys.FACEBOOK_APP_ID,
+      		appId: this.props.facebookID,
       		cookie: true
     	});		
     	window.FB.getLoginStatus((response) => {

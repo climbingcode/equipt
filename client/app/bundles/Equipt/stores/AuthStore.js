@@ -2,16 +2,16 @@ import Constants from 'Constants';
 import AppDispatcher from 'dispatcher';
 import StoreSettings from './StoreSettings';
 
+let _currentUser = null;
+
 const AuthStore = Object.assign({}, StoreSettings, {
 
-	_currentUser: null,
-
-	currentUser() {
-        return this._currentUser || {};
+	getCurrentUser() {
+        return _currentUser;
 	},
 
 	setCurrentUser(user) {
-		this._currentUser = user;	
+		_currentUser = user;	
 	},
 
 	authenticated() {

@@ -1,6 +1,8 @@
-Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+import Constants from 'Constants';
+import AppDispatcher from 'dispatcher';
+import StoreSettings from './StoreSettings';
 
-	_equipments: [],
+let _equipments: [],
 	_equipment: {}, 
 	_showLoader: false,
 	_pages: 1,
@@ -16,70 +18,72 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 			pickup: "",
 			dropoff: ""
 		},
-		page: 1
-	},
+		pages: 1
+	}
+
+const EquipmentStore = Object.assign({}, StoreSettings, {
 
 	getEquipments() {
-        return this._equipments;
+        return _equipments;
 	},
 
 	getEquipment() {
-		return this._equipment;	
+		return _equipment;	
 	},
 
 	setEquipments(data) {
-		this._equipments = data.equipment;
-		this._pages = data.pages;
+		_equipments = data.equipment;
+		_pages = data.pages;
 	},
 
 	clearEquipments() {
-		this._equipments = [];	
+		_equipments = [];	
 	},
 
 	setEquipment(equipment) {
-		this._equipment = equipment;
+		_equipment = equipment;
 	},
 
 	addEquipment(equipment) {
-		this._equipments.push(equipment);
+		_equipments.push(equipment);
 	},
 
 	removeEquipment(equipment) {
-		this.setEquipments(this.removedRecord(equipment, this._equipments));
+		this.setEquipments(this.removedRecord(equipment, _equipments));
 	},
 
 	getSearchQuery() {
-		return this._search;
+		return _search;
 	},
 
 	searchEquipment(query) {
 		
-		this._showLoader = true;
+		_showLoader = true;
 		this.clearEquipments();
 
 		for (searchType in query) {
-			this._search[searchType] = query[searchType];
+			_search[searchType] = query[searchType];
 		}
 
 	},
 
 	showLoader() {
-		return this._showLoader;
+		return _showLoader;
 	},
 
 	hasLoaded() {
-		this._showLoader = false;	
+		_showLoader = false;	
 	},
 
 	getPages() {
-		return this._pages;
+		return _pages;
 	},
 
 	clearSearch() {
 		
-		this._pages = 1;
+		_pages = 1;
 
-		this._search = {
+		_search = {
 			category: '',
 			sub_category: '',
 			location: {
@@ -101,8 +105,6 @@ Equipt.stores.EquipmentStore = Object.assign({}, EventEmitter.prototype, StoreSe
 AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
-	
-	let EquipmentStore = Equipt.stores.EquipmentStore;
 
   	switch(type) {
 		case Constants.EQUIPMENT_INDEX:
@@ -128,3 +130,5 @@ AppDispatcher.register(function(action) {
 
 	EquipmentStore.emitChange();
 });
+
+export default EquipmentStore;

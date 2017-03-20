@@ -1,4 +1,6 @@
-class FaceBookView extends React.Component {
+import React from 'react';
+
+export class FaceBookView extends React.Component {
 
 	constructor(props) {
 		super(props);

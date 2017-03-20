@@ -1,4 +1,8 @@
-Equipt.stores.ErrorsStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+import Constants from 'Constants';
+import AppDispatcher from 'dispatcher';
+import StoreSettings from './StoreSettings';
+
+const ErrorsStore = Object.assign({}, StoreSettings, {
 
 	_errors: null,
 	
@@ -20,8 +24,6 @@ AppDispatcher.register(function(action) {
   
   	var {type, data} = action.payload;
 
-  	let ErrorsStore = Equipt.stores.ErrorsStore;
-
   	switch(type) {
 		case Constants.HAS_ERRORS:
 			ErrorsStore.setErrors(data);
@@ -31,3 +33,5 @@ AppDispatcher.register(function(action) {
     ErrorsStore.emitChange();
 
 });
+
+export default ErrorsStore;

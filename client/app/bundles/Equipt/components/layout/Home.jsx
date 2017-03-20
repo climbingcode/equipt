@@ -22,7 +22,7 @@ class Home extends React.Component {
 
 	render() {
 
-		let content = Equipt.content.home;
+		let content = this.content();
 
 		return (
 			<div className="home-wrapper">
@@ -38,7 +38,7 @@ class Home extends React.Component {
 				<h1>{ content.title }</h1>
 
 				<div className="how-it-works-container" ref="howItWorks">
-						<h3>{ content.howItWorks.title }</h3>
+						<h3>{ content.title }</h3>
 						<div className="col-xs-3">
 						
 						</div>
@@ -52,6 +52,15 @@ class Home extends React.Component {
 
 			</div>
 		)
+	}
+
+	content() {
+		return {
+			title: "Find Local Outdoor Equipment for your next adventure",
+			howItWorks: {
+				title: "How it Works"
+			}
+		}
 	}
 
 }

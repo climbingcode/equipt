@@ -1,4 +1,6 @@
-Equipt.helpers.FormHelper = class FormHelper extends React.Component {
+import React from 'react';
+
+export class FormComponent extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -20,4 +22,4 @@ Equipt.helpers.FormHelper = class FormHelper extends React.Component {
 		}
 	}
 
-}
+};

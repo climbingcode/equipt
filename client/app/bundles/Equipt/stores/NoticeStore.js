@@ -1,4 +1,8 @@
-Equipt.stores.NoticeStore = Object.assign({}, EventEmitter.prototype, StoreSettings, {
+import Constants from 'Constants';
+import AppDispatcher from 'dispatcher';
+import StoreSettings from './StoreSettings';
+
+const NoticeStore = Object.assign({}, StoreSettings, {
 
 	_notice: {},
 
@@ -20,8 +24,6 @@ AppDispatcher.register(function(action) {
   
   	const {type, data} = action.payload;
 
-  	let NoticeStore = Equipt.stores.NoticeStore;
-
   	switch(type) {
 		case Constants.HAS_NOTICE:
 			NoticeStore.setNotice(data);
@@ -34,3 +36,5 @@ AppDispatcher.register(function(action) {
     NoticeStore.emitChange();
 
 });
+
+export default NoticeStore;

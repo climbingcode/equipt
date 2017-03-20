@@ -1,4 +1,9 @@
-Equipt.views.ModalView = class extends React.Component {
+import React from 'react';
+
+import { Link } from 'react-router-dom';
+import { AjaxLoader } from 'components/ajaxLoader/AjaxLoader';
+
+export class ModalView extends React.Component {
 
 	constructor(props) {
 		super(props);

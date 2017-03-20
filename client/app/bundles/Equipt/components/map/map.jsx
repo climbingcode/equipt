@@ -1,4 +1,8 @@
-Equipt.views.mapView = class Map extends Equipt.controllers.MainController {
+import React from 'react';
+
+import { MainController } from 'MainController';
+
+export class GoogleMapView extends MainController {
 
 	static propType = {
 		position: React.PropTypes.object.isRequired,

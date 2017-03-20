@@ -1,5 +1,9 @@
+import React from 'react';
+
 import { MainController } from 'MainController';
 import { NoticeView } from 'components/notice/NoticeView';
+
+import NoticeStore from 'stores/NoticeStore';
 
 class NoticeController extends MainController {
 
@@ -7,27 +11,27 @@ class NoticeController extends MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [ Equipt.stores.NoticeStore ];
+		this.stores = [ NoticeStore ];
 		this.state = {
-			notice: Equipt.stores.NoticeStore.getNotice()
+			notice: NoticeStore.getNotice()
 		}
 	}
 
 	close() {
 		clearTimeout(this.noticeTimeout);
-		Equipt.actions.clearNotice();
+		NoticeStore.clearNotice();
 	}
 
 	_onChange() {
 
 	    this.setState({
-	    	notice: Equipt.stores.NoticeStore.getNotice()
+	    	notice: NoticeStore.getNotice()
 	    });
 
 	    clearTimeout(this.noticeTimeout);
 
 	    this.noticeTimeout = setTimeout(() => {
-	    	Equipt.actions.clearNotice();
+	    	NoticeStore.clearNotice();
 	    }, 5000);
 	    
   	}

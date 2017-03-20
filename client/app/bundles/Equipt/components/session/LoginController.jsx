@@ -1,33 +1,35 @@
-import { MainController } from 'MainController';
+import React from 'react';
 
-class LoginController extends MainController {
+import { Link } from 'react-router-dom';
+import { MainController } from 'MainController';
+import { LoginFormView } from './LoginFormView';
+
+import ErrorsStore from 'stores/ErrorsStore';
+
+export class LoginController extends MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.ErrorsStore];
+		this.stores = [ ErrorsStore ];
 		this.state = {
-			errors: Equipt.stores.ErrorsStore.getErrors()
+			errors: ErrorsStore.getErrors()
 		}
 	}
 
   	dataChanged() {
   		return {
-  			errors: Equipt.stores.ErrorsStore.getErrors()
+  			errors: ErrorsStore.getErrors()
   		}
   	}
 
   	render() {
 
-  		const LoginFormView = Equipt.views.LoginFormView;
-
 		return (
 			<div>
-				<LoginFormView 	errors={this.state.errors} />
-				<Link to="forgotPasswordCreate">Forgot Password</Link>
+				<LoginFormView errors={this.state.errors} facebookId={ this.props.facebookID }/>
+				<Link to="/forgot">Forgot Password</Link>
 			</div>
 		)
 	}
 
-}
-
-export { LoginController };
+};

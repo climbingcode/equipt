@@ -1,20 +1,18 @@
 import React from 'react';
 
-import { RouteHandler } from 'react-router';
-import { MainController } from './MainController';
-
-import AuthStore from 'stores/AuthStore';
-import loaderActions from 'actions/loader';
-
-import { Nav } from 'components/layout/Nav';
-import { NoticeController } from 'components/notice/NoticeController';
+import { NavController } from 'components/layout/NavController';
 import { AjaxLoader } from 'components/ajaxLoader/AjaxLoader';
+import { MainController } from 'components/MainController';
 
-class Equipt extends MainController {
+import loaderActions from 'actions/LoaderActions';
+import authActions from 'actions/authActions';
+import AuthStore from 'stores/AuthStore';
 
-	getState = function() {
+export class Equipt extends MainController {
+
+  	getState = function() {
 		return {
-			currentUser: AuthStore.currentUser() || {}
+			currentUser: AuthStore.getCurrentUser() || null
 		}
 	}
 
@@ -22,51 +20,28 @@ class Equipt extends MainController {
 		super(props);
 		this.stores = [ AuthStore ];
 		this.state = this.getState();
-	}
 
-	componentDidMount() {
-		if (AuthStore.authenticated()) Equipt.actions.appInit();	
-	}
-
-	changePath() {
-
-		var path = this.context.router.getCurrentPathname();
-
-		// Change with onEnter in router on release of 
-		// newer version of react-rails-router 1.0
-
-		setTimeout(() => {
-			if (AuthStore.authenticated() 
-				&& ((path.indexOf('/equipment') > -1) || (path.indexOf('/owner') > -1)) ) {	
-				this.context.router.transitionTo(path);
-			} else if (AuthStore.authenticated()) {
-				this.context.router.transitionTo(Constants.links.equipmentIndex);
-			} else if (path.indexOf('/login') === -1) {			
-				this.context.router.transitionTo(Constants.links.login);
-			}
+		// Get Current User if any and redirect to equipment index
+		authActions.getSession(() => {
+			this.props.history.push({
+				pathname: '/equipment'
+			})
 		});
-
 	}
 
-  	dataChanged() {
-  		this.setState(this.getState());
-		this.changePath.call(this);
-  	}
+	dataChanged() {
+		return this.getState();
+	}
 
 	render() {
 
 		return (
-			<content>
+			<main>
+				<NavController { ...this.state }/>
 				<AjaxLoader/>
-				<Nav currentUser={this.state.currentUser}/>
-				<div className="main-content col-xs-10 col-xs-offset-1">
-					<NoticeController/>
-					<RouteHandler currentUser={this.state.currentUser}/>
-				</div>
-			</content>
+				{ this.props.children }
+			</main>
 		)
 	}
-	
-}
 
-export { Equipt };
+};

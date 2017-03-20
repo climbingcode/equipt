@@ -1,12 +1,18 @@
-import { MainController } from 'MainController';
+import React from 'react';
 
-class SignupController extends MainController {
+import { MainController } from 'MainController';
+import { FaceBookController } from 'components/oauth/FaceBookController';
+import { SignupFormView } from 'components/users/SignupFormView';
+
+import ErrorsStore from 'stores/ErrorsStore';
+
+export class SignupController extends MainController {
 
 	constructor(props) {
 		super(props);
-		this.stores = [Equipt.stores.ErrorsStore];
+		this.stores = [ ErrorsStore ];
 		this.state = {
-			errors: Equipt.stores.ErrorsStore.getErrors()
+			errors: ErrorsStore.getErrors()
 		}
 	}
 
@@ -16,15 +22,11 @@ class SignupController extends MainController {
 
   	dataChanged() {
   		return {
-  			errors: Equipt.stores.ErrorsStore.getErrors()
+  			errors: ErrorsStore.getErrors()
   		};
   	}
 
 	render() {
-
-		let SignupFormView = Equipt.views.SignupFormView;
-		let FaceBookController = Equipt.controllers.FaceBookController;
-
 		return (
 			<div className="signup-wrapper">
 				<FaceBookController/>

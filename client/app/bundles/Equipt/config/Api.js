@@ -1,4 +1,12 @@
-Equipt.API = {
+import axios from 'axios';
+
+import AuthStore from 'stores/AuthStore';
+import NoticeStore from 'stores/NoticeStore';
+
+import NoticeActions from 'actions/NoticeActions';
+import AuthActions from 'actions/AuthActions';
+
+export default {
 
 	path: '/api',
 
@@ -50,40 +58,35 @@ Equipt.API = {
 
 		return new Promise((resolve, reject) => {
 
-			let ApiKey = Equipt.stores.AuthStore.getApiKey();
+			let ApiKey = AuthStore.getApiKey();
 
 			var ajaxObj = {
-				url: Equipt.API.path + url,
-				type: method,
-				contentType: options.isMultipart ? false : 'application/json',
+				url: this.path + url,
+				method: method,
+				responseType: options.isMultipart ? false : 'application/json',
  				cache: false,
   				processData: false,
 				data: options.data ? options.data : JSON.stringify(data),
-				beforeSend: (request) => {
-	            	request.setRequestHeader('AUTHORIZATION', ApiKey);
-	        	}
+				headers: { 'AUTHORIZATION': ApiKey || null }	
 			};
 
-			$.ajax(ajaxObj)
-			.success((res, status, xhr) => {
-				if (res.errors) return hasErrors(res.errors);
-				else if (res.notice) hasNotice(res.notice);
+			axios(ajaxObj)
+			.then((res, status, xhr) => {
+				if (res.errors) return NoticeActions.hasErrors(res.errors);
+				else if (res.notice) NoticeActions.hasNotice(res.notice);
 				resolve(res);
 			})
-			.error((err) => {
+			.catch((err) => {
 				if (err.status === 500 || err.status === 401) {
-					Equipt.API.apiKey = null;
-					Equipt.actions.unauthorizedUser();
+					this.apiKey = null;
+					AuthActions.unauthorizedUser();
 				}
 				reject(err);
-			})
-			.done(() => {
-				Equipt.actions.hideLoader();
 			});
 
 		});
 
 	}
 
-}
+};
 
